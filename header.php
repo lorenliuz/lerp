@@ -63,15 +63,15 @@
                 <!-- Search Button -->
                 <li><a href="#" class="search-form-trigger"><i class="fa fa-search"></i></a></li>
                 <!-- Item With Dropdown -->
-                <li class="dropdown-toggle"><a href="#" class="flag-item"><img src="images/flag-usa.png" alt=""> <span>En</span></a>
+<!--                <li class="dropdown-toggle"><a href="#" class="flag-item"><img src="images/flag-usa.png" alt=""> <span>En</span></a>-->
                     <!-- Dropdown -->
-                    <ul class="dropdown-menu capitalize medium to-right">
+<!--                    <ul class="dropdown-menu capitalize medium to-right">-->
                         <!-- Item -->
-                        <li><a href="#" class="flag-item"><img src="images/flag-uk.png" alt=""> <span>UK</span></a></li>
+<!--                        <li><a href="#" class="flag-item"><img src="images/flag-uk.png" alt=""> <span>UK</span></a></li>-->
                         <!-- Item -->
-                        <li><a href="#" class="flag-item"><img src="images/flag-turkish.png" alt=""> <span>TR</span></a></li>
-                    </ul>
-                </li>
+<!--                        <li><a href="#" class="flag-item"><img src="images/flag-turkish.png" alt=""> <span>TR</span></a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
             </ul>
         </div>
         <!-- End Navigation Elements -->
