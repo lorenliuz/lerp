@@ -7,3 +7,8 @@
  * @package lerp
  */
 ?>
+
+
+<?php wp_footer(); ?>
+</body>
+</html>
