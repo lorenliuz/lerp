@@ -7,12 +7,12 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-    <meta charset="<?php bloginfo( 'charset' ); ?>" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
-    <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+    <meta charset="<?php bloginfo('charset'); ?>"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1"/>
+    <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 
     <!--Favicon -->
-    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="icon" type="image/png" href="images/favicon.png"/>
     <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
 
@@ -21,7 +21,7 @@
     <!-- Main Styles -->
     <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/style.css?v=2.2"/>
     <!-- Color Skins -->
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/assets/css/skins/default.css" />
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/assets/css/skins/default.css"/>
     <!-- End Page Styles -->
 
     <?php wp_head(); ?>
@@ -54,7 +54,8 @@
             <a href="index.html">
                 <img src="images/logos/logo_03.png" data-second-logo="images/logos/logo_01.png" alt="Logo">
                 <!-- Retina Logo -->
-                <img src="images/logos/logo_03@2x.png" data-second-logo="images/logos/logo_01@2x.png" class="retina-logo" alt="Logo">
+                <img src="images/logos/logo_03@2x.png" data-second-logo="images/logos/logo_01@2x.png"
+                     class="retina-logo" alt="Logo">
             </a>
         </div>
         <!-- Right Elements; Nav Button, Language Button, Search .etc -->
@@ -63,15 +64,15 @@
                 <!-- Search Button -->
                 <li><a href="#" class="search-form-trigger"><i class="fa fa-search"></i></a></li>
                 <!-- Item With Dropdown -->
-<!--                <li class="dropdown-toggle"><a href="#" class="flag-item"><img src="images/flag-usa.png" alt=""> <span>En</span></a>-->
-                    <!-- Dropdown -->
-<!--                    <ul class="dropdown-menu capitalize medium to-right">-->
-                        <!-- Item -->
-<!--                        <li><a href="#" class="flag-item"><img src="images/flag-uk.png" alt=""> <span>UK</span></a></li>-->
-                        <!-- Item -->
-<!--                        <li><a href="#" class="flag-item"><img src="images/flag-turkish.png" alt=""> <span>TR</span></a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
+                <!--                <li class="dropdown-toggle"><a href="#" class="flag-item"><img src="images/flag-usa.png" alt=""> <span>En</span></a>-->
+                <!-- Dropdown -->
+                <!--                    <ul class="dropdown-menu capitalize medium to-right">-->
+                <!-- Item -->
+                <!--                        <li><a href="#" class="flag-item"><img src="images/flag-uk.png" alt=""> <span>UK</span></a></li>-->
+                <!-- Item -->
+                <!--                        <li><a href="#" class="flag-item"><img src="images/flag-turkish.png" alt=""> <span>TR</span></a></li>-->
+                <!--                    </ul>-->
+                <!--                </li>-->
             </ul>
         </div>
         <!-- End Navigation Elements -->
@@ -81,10 +82,13 @@
                 <li><a href="index.html">Layouts</a></li>
                 <li class="dropdown-toggle"><a href="#" class="stay">Features</a>
                     <ul class="dropdown-menu to-right">
-                        <li class="dropdown-toggle"><a href="#" class="stay">Sliders <span class="mark bg-danger border-danger white">new</span></a>
+                        <li class="dropdown-toggle"><a href="#" class="stay">Sliders <span
+                                        class="mark bg-danger border-danger white">new</span></a>
                             <ul class="dropdown-menu to-right">
-                                <li><a href="slider-rs-premium-demos.html">Revolution Slider <span class="mark bg-danger border-danger white">new</span></a></li>
-                                <li class="dropdown-toggle"><a href="#" class="stay">Slick Slider <span class="mark bg-danger border-danger white">new</span></a>
+                                <li><a href="slider-rs-premium-demos.html">Revolution Slider <span
+                                                class="mark bg-danger border-danger white">new</span></a></li>
+                                <li class="dropdown-toggle"><a href="#" class="stay">Slick Slider <span
+                                                class="mark bg-danger border-danger white">new</span></a>
                                     <ul class="dropdown-menu to-right">
                                         <li><a href="slider-slick-1.html">Slick Slider 1</a></li>
                                         <li><a href="slider-slick-2.html">Slick Slider 2</a></li>
@@ -98,7 +102,8 @@
                                         <li><a href="slider-slick-10.html">Slick Slider 10</a></li>
                                         <li><a href="slider-slick-11.html">Slick Slider 11</a></li>
                                         <li><a href="slider-slick-12.html">Slick Slider 12</a></li>
-                                        <li><a href="slider-slick-13.html">Slick Slider 13 <span class="mark bg-danger border-danger white">new</span></a></li>
+                                        <li><a href="slider-slick-13.html">Slick Slider 13 <span
+                                                        class="mark bg-danger border-danger white">new</span></a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -185,9 +190,12 @@
                                 <li class="dropdown-toggle"><a href="navigation-side-mini.html">Mini Side Navigation</a>
                                     <ul class="dropdown-menu to-right">
                                         <li><a href="navigation-side-mini.html">Side Mini Navigation</a></li>
-                                        <li><a href="navigation-side-mini-right.html">Side Mini Navigation Right</a></li>
-                                        <li><a href="navigation-side-mini-styled.html">Side Mini Navigation Styled</a></li>
-                                        <li><a href="navigation-side-mini-white.html">Side Mini Navigation White</a></li>
+                                        <li><a href="navigation-side-mini-right.html">Side Mini Navigation Right</a>
+                                        </li>
+                                        <li><a href="navigation-side-mini-styled.html">Side Mini Navigation Styled</a>
+                                        </li>
+                                        <li><a href="navigation-side-mini-white.html">Side Mini Navigation White</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-toggle"><a href="navigation-side.html">Side Navigation</a>
@@ -198,7 +206,8 @@
                                         <li><a href="navigation-side-styled-2.html">Side Navigation Styled 2</a></li>
                                     </ul>
                                 </li>
-                                <li class="dropdown-toggle"><a href="navigation-side-type-2.html">Side Navigation Type 2</a>
+                                <li class="dropdown-toggle"><a href="navigation-side-type-2.html">Side Navigation Type
+                                        2</a>
                                     <ul class="dropdown-menu to-right">
                                         <li><a href="navigation-side-type-2.html">Side Navigation</a></li>
                                         <li><a href="navigation-side-type-2-right.html">Side Navigation Right</a></li>
@@ -206,12 +215,18 @@
                                         <li><a href="navigation-side-type-2-color-2.html">Warning Background</a></li>
                                         <li><a href="navigation-side-type-2-color-3.html">Default Background</a></li>
                                         <li><a href="navigation-side-type-2-color-4.html">Custom Background</a></li>
-                                        <li><a href="navigation-side-type-2-animate-1.html">Animated Background 1</a></li>
-                                        <li><a href="navigation-side-type-2-animate-2.html">Animated Background 2</a></li>
-                                        <li><a href="navigation-side-type-2-animate-3.html">Animated Background 3</a></li>
-                                        <li><a href="navigation-side-type-2-gradient-1.html">Gradient Background 1</a></li>
-                                        <li><a href="navigation-side-type-2-gradient-2.html">Gradient Background 2</a></li>
-                                        <li><a href="navigation-side-type-2-gradient-3.html">Gradient Background 3</a></li>
+                                        <li><a href="navigation-side-type-2-animate-1.html">Animated Background 1</a>
+                                        </li>
+                                        <li><a href="navigation-side-type-2-animate-2.html">Animated Background 2</a>
+                                        </li>
+                                        <li><a href="navigation-side-type-2-animate-3.html">Animated Background 3</a>
+                                        </li>
+                                        <li><a href="navigation-side-type-2-gradient-1.html">Gradient Background 1</a>
+                                        </li>
+                                        <li><a href="navigation-side-type-2-gradient-2.html">Gradient Background 2</a>
+                                        </li>
+                                        <li><a href="navigation-side-type-2-gradient-3.html">Gradient Background 3</a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
@@ -336,7 +351,9 @@
                                 <li><a href="pages-faqs-4.html">Faqs Layout 4</a></li>
                             </ul>
                         </li>
-                        <li><hr class="black"></li>
+                        <li>
+                            <hr class="black">
+                        </li>
                         <li class="dropdown-toggle"><a href="#" class="stay">Layouts</a>
                             <ul class="dropdown-menu to-right">
                                 <li><a href="pages-layout-fullwidth.html">Full Width</a></li>
@@ -377,8 +394,10 @@
                                 <li><a href="portfolio-grid-column-4.html">Column 4</a></li>
                                 <li><a href="portfolio-grid-column-5.html">Column 5</a></li>
                                 <li><a href="portfolio-grid-column-6.html">Column 6</a></li>
-                                <li><a href="portfolio-grid-infinity-scroll.html">Infinity Scroll<span class="mark bg-danger border-danger white">NEW</span></a></li>
-                                <li><a href="portfolio-grid-infinity-scroll-click.html">Infinity Scroll &amp; Click<span class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="portfolio-grid-infinity-scroll.html">Infinity Scroll<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="portfolio-grid-infinity-scroll-click.html">Infinity Scroll &amp; Click<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
                             </ul>
                         </li>
                         <li class="dropdown-toggle"><a href="#" class="stay">Masonry Portfolio</a>
@@ -390,8 +409,10 @@
                                 <li><a href="portfolio-masonry-column-4.html">Column 4</a></li>
                                 <li><a href="portfolio-masonry-column-5.html">Column 5</a></li>
                                 <li><a href="portfolio-masonry-column-6.html">Column 6</a></li>
-                                <li><a href="portfolio-masonry-infinity-scroll.html">Infinity Scroll<span class="mark bg-danger border-danger white">NEW</span></a></li>
-                                <li><a href="portfolio-masonry-infinity-scroll-click.html">Infinity Scroll &amp; Click<span class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="portfolio-masonry-infinity-scroll.html">Infinity Scroll<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="portfolio-masonry-infinity-scroll-click.html">Infinity Scroll &amp;
+                                        Click<span class="mark bg-danger border-danger white">NEW</span></a></li>
                             </ul>
                         </li>
                         <li class="dropdown-toggle"><a href="#" class="stay">Mosaic Portfolio</a>
@@ -402,8 +423,10 @@
                                 <li><a href="portfolio-mosaic-column-4.html">Column 4</a></li>
                                 <li><a href="portfolio-mosaic-column-5.html">Column 5</a></li>
                                 <li><a href="portfolio-mosaic-column-6.html">Column 6</a></li>
-                                <li><a href="portfolio-mosaic-infinity-scroll.html">Infinity Scroll<span class="mark bg-danger border-danger white">NEW</span></a></li>
-                                <li><a href="portfolio-mosaic-infinity-scroll-click.html">Infinity Scroll &amp; Click<span class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="portfolio-mosaic-infinity-scroll.html">Infinity Scroll<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="portfolio-mosaic-infinity-scroll-click.html">Infinity Scroll &amp;
+                                        Click<span class="mark bg-danger border-danger white">NEW</span></a></li>
                             </ul>
                         </li>
                         <li class="dropdown-toggle"><a href="#" class="stay">Justified Portfolio</a>
@@ -412,7 +435,8 @@
                                 <li><a href="portfolio-justified-boxed.html">Justified Boxed</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown-toggle"><a href="#" class="stay">Single Project <span class="mark bg-colored border-colored white">new</span></a>
+                        <li class="dropdown-toggle"><a href="#" class="stay">Single Project <span
+                                        class="mark bg-colored border-colored white">new</span></a>
                             <ul class="dropdown-menu to-right">
                                 <li><a href="portfolio-single-1.html">Single Project Page 1</a></li>
                                 <li><a href="portfolio-single-2.html">Single Project Page 2</a></li>
@@ -466,7 +490,8 @@
                                         <li><a href="portfolio-categories-column-3.html">Column 3</a></li>
                                         <li><a href="portfolio-categories-column-4.html">Column 4</a></li>
                                         <li><a href="portfolio-categories-column-5.html">Column 5</a></li>
-                                        <li><a href="portfolio-categories-centered-details.html">Centered Details</a></li>
+                                        <li><a href="portfolio-categories-centered-details.html">Centered Details</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-toggle"><a href="#" class="stay">Categories Style 2</a>
@@ -475,7 +500,8 @@
                                         <li><a href="portfolio-categories-style-2-column-3.html">Column 3</a></li>
                                         <li><a href="portfolio-categories-style-2-column-4.html">Column 4</a></li>
                                         <li><a href="portfolio-categories-style-2-column-5.html">Column 5</a></li>
-                                        <li><a href="portfolio-categories-style-2-centered-details.html">Centered Details</a></li>
+                                        <li><a href="portfolio-categories-style-2-centered-details.html">Centered
+                                                Details</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-toggle"><a href="#" class="stay">Categories Style 3</a>
@@ -484,7 +510,8 @@
                                         <li><a href="portfolio-categories-style-3-column-3.html">Column 3</a></li>
                                         <li><a href="portfolio-categories-style-3-column-4.html">Column 4</a></li>
                                         <li><a href="portfolio-categories-style-3-column-5.html">Column 5</a></li>
-                                        <li><a href="portfolio-categories-style-3-centered-details.html">Centered Details</a></li>
+                                        <li><a href="portfolio-categories-style-3-centered-details.html">Centered
+                                                Details</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="portfolio-categories-parallax.html">Categories Parallax</a></li>
@@ -539,8 +566,10 @@
                                 <li><a href="gallery-grid-column-6.html">Column 6</a></li>
                                 <li><a href="gallery-grid-with-texts.html">With Texts</a></li>
                                 <li><a href="gallery-grid-with-texts-untitle.html">With Texts Untitle</a></li>
-                                <li><a href="gallery-grid-infinity-scroll.html">Infinity Scroll<span class="mark bg-danger border-danger white">NEW</span></a></li>
-                                <li><a href="gallery-grid-infinity-scroll-click.html">Infinity Scroll &amp; Click<span class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="gallery-grid-infinity-scroll.html">Infinity Scroll<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="gallery-grid-infinity-scroll-click.html">Infinity Scroll &amp; Click<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
                             </ul>
                         </li>
                         <li class="dropdown-toggle"><a href="#" class="stay">Gallery Masonry</a>
@@ -552,8 +581,10 @@
                                 <li><a href="gallery-masonry-column-6.html">Column 6</a></li>
                                 <li><a href="gallery-masonry-with-texts.html">With Texts</a></li>
                                 <li><a href="gallery-masonry-with-texts-untitle.html">With Texts Untitle</a></li>
-                                <li><a href="gallery-masonry-infinity-scroll.html">Infinity Scroll<span class="mark bg-danger border-danger white">NEW</span></a></li>
-                                <li><a href="gallery-masonry-infinity-scroll-click.html">Infinity Scroll &amp; Click<span class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="gallery-masonry-infinity-scroll.html">Infinity Scroll<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="gallery-masonry-infinity-scroll-click.html">Infinity Scroll &amp;
+                                        Click<span class="mark bg-danger border-danger white">NEW</span></a></li>
                             </ul>
                         </li>
                         <li class="dropdown-toggle"><a href="#" class="stay">Gallery Mosaic</a>
@@ -564,8 +595,10 @@
                                 <li><a href="gallery-mosaic-column-6.html">Column 6</a></li>
                                 <li><a href="gallery-mosaic-with-texts.html">With Texts</a></li>
                                 <li><a href="gallery-mosaic-with-texts-untitle.html">With Texts Untitle</a></li>
-                                <li><a href="gallery-mosaic-infinity-scroll.html">Infinity Scroll<span class="mark bg-danger border-danger white">NEW</span></a></li>
-                                <li><a href="gallery-mosaic-infinity-scroll-click.html">Infinity Scroll &amp; Click<span class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="gallery-mosaic-infinity-scroll.html">Infinity Scroll<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="gallery-mosaic-infinity-scroll-click.html">Infinity Scroll &amp; Click<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
                             </ul>
                         </li>
                         <li class="dropdown-toggle"><a href="#" class="stay">Gallery Hovers</a>
@@ -591,7 +624,8 @@
                 </li>
                 <li class="dropdown-toggle"><a href="#" class="stay">Elements</a>
                     <!-- Dropdown - you can add background image to mega-menu. just add data-background="yourimage" code. -->
-                    <ul class="dropdown-menu to-center mega-menu bg-right bg-bottom" data-background="images/megamenu-bg.jpg">
+                    <ul class="dropdown-menu to-center mega-menu bg-right bg-bottom"
+                        data-background="images/megamenu-bg.jpg">
                         <li>
                             <ul class="column">
                                 <li class="column-title">Element Group</li>
@@ -617,7 +651,8 @@
                                 <li><a href="elements-data-tables.html">Data Tables</a></li>
                                 <li><a href="elements-dividers.html">Dividers</a></li>
                                 <li><a href="elements-dropcaps.html">Dropcaps</a></li>
-                                <li><a href="elements-form-elements.html">Form Elements <span class="mark bg-colored border-colored white">new</span></a></li>
+                                <li><a href="elements-form-elements.html">Form Elements <span
+                                                class="mark bg-colored border-colored white">new</span></a></li>
                                 <li><a href="elements-form-validations.html">Form Validations</a></li>
                                 <li><a href="elements-animated-gradients.html">Gradient Animations</a></li>
                                 <li><a href="elements-headings.html">Headings</a></li>
@@ -626,7 +661,8 @@
                             <ul class="column">
                                 <li class="column-title">Element Group</li>
                                 <li><a href="elements-icons.html">Icons</a></li>
-                                <li><a href="elements-infoboxes.html">Info Boxes <span class="mark bg-colored1 border-colored1 white">new</span></a></li>
+                                <li><a href="elements-infoboxes.html">Info Boxes <span
+                                                class="mark bg-colored1 border-colored1 white">new</span></a></li>
                                 <li><a href="elements-instagram.html">Instagram</a></li>
                                 <li><a href="elements-labels.html">Labels</a></li>
                                 <li><a href="elements-lightboxes.html">Lightboxes</a></li>
@@ -666,7 +702,8 @@
                                 <li><a href="elements-video-backgrounds.html">Video Backgrounds</a></li>
                                 <li><a href="elements-video-player.html">Video Players</a></li>
                                 <li><a href="elements-wishbox.html">Wish Box</a></li>
-                                <li><a href="elements-all.html">All Elements <span class="mark bg-colored border-colored white">ALL</span></a></li>
+                                <li><a href="elements-all.html">All Elements <span
+                                                class="mark bg-colored border-colored white">ALL</span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -680,8 +717,10 @@
                                 <li><a href="blog-grid-column-4.html">4 Column</a></li>
                                 <li><a href="blog-grid-column-5.html">5 Column</a></li>
                                 <li><a href="blog-grid-column-6.html">6 Column</a></li>
-                                <li><a href="blog-grid-infinity-scroll.html">Infinity Scroll<span class="mark bg-danger border-danger white">NEW</span></a></li>
-                                <li><a href="blog-grid-infinity-scroll-click.html">Infinity Scroll &amp; Click<span class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="blog-grid-infinity-scroll.html">Infinity Scroll<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="blog-grid-infinity-scroll-click.html">Infinity Scroll &amp; Click<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
                             </ul>
                         </li>
                         <li class="dropdown-toggle"><a href="#" class="stay">Blog Masonry</a>
@@ -691,8 +730,10 @@
                                 <li><a href="blog-masonry-column-4.html">4 Column</a></li>
                                 <li><a href="blog-masonry-column-5.html">5 Column</a></li>
                                 <li><a href="blog-masonry-column-6.html">6 Column</a></li>
-                                <li><a href="blog-masonry-infinity-scroll.html">Infinity Scroll<span class="mark bg-danger border-danger white">NEW</span></a></li>
-                                <li><a href="blog-masonry-infinity-scroll-click.html">Infinity Scroll &amp; Click<span class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="blog-masonry-infinity-scroll.html">Infinity Scroll<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="blog-masonry-infinity-scroll-click.html">Infinity Scroll &amp; Click<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
                             </ul>
                         </li>
                         <li class="dropdown-toggle"><a href="#" class="stay">Blog Styled</a>
@@ -703,8 +744,10 @@
                                 <li><a href="blog-styled-column-5.html">5 Column</a></li>
                                 <li><a href="blog-styled-column-6.html">6 Column</a></li>
                                 <li><a href="blog-styled-fullwidth.html">Fullwidth</a></li>
-                                <li><a href="blog-styled-infinity-scroll.html">Infinity Scroll<span class="mark bg-danger border-danger white">NEW</span></a></li>
-                                <li><a href="blog-styled-infinity-scroll-click.html">Infinity Scroll &amp; Click<span class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="blog-styled-infinity-scroll.html">Infinity Scroll<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
+                                <li><a href="blog-styled-infinity-scroll-click.html">Infinity Scroll &amp; Click<span
+                                                class="mark bg-danger border-danger white">NEW</span></a></li>
                             </ul>
                         </li>
                         <li class="dropdown-toggle"><a href="#" class="stay">Blog Landing</a>

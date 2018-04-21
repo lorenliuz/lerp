@@ -15,8 +15,9 @@ get_header();
                 <h1 class="normal-subtitle oswald gray2 uppercase translatez-sm">也许，你要找的页面在雾霾的深处</h1>
                 <h5 class="gray4 mini-mt semibold translatez-md"></h5>
                 <div class="xs-mt bold uppercase translatez-lg">
-                    <a href="index.html" class="lg-btn dark radius-lg font-12 bg-colored-hover white-hover bs-lg-hover slow bg-gray3">
-                        <?php echo __( '返回首页', 'lerp' ); ?>
+                    <a href="<?php echo home_url(); ?>"
+                       class="lg-btn dark radius-lg font-12 bg-colored-hover white-hover bs-lg-hover slow bg-gray3">
+                        <?php echo __('返回首页', 'lerp'); ?>
                     </a>
                 </div>
             </div>
