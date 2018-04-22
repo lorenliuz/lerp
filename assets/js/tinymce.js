@@ -15,5 +15,5 @@
 		},
 	});
 	// Register plugin
-	tinymce.PluginManager.add('uncodemarkbutton', tinymce.plugins.mark);
+	tinymce.PluginManager.add('lerpmarkbutton', tinymce.plugins.mark);
 })();
