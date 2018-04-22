@@ -45,7 +45,7 @@ function lerp_page_options()
 
 	$general_fields = array(
 		array(
-			'label' => '<i class="fa fa-globe3 fa-fw"></i> ' . esc_html__('General', 'lerp') ,
+			'label' => '<i class="fa fa-globe3 fa-fw"></i> ' . esc_html__('基本', 'lerp') ,
 			'id' => '_lerp_general_tab',
 			'type' => 'tab',
 		) ,
@@ -977,7 +977,7 @@ function lerp_page_options()
 
 	$header_fields = array(
 		array(
-			'label' => '<i class="fa fa-columns2 fa-fw"></i> ' . esc_html__('Header', 'lerp') ,
+			'label' => '<i class="fa fa-columns2 fa-fw"></i> ' . esc_html__('页眉', 'lerp') ,
 			'id' => '_lerp_header_tab',
 			'type' => 'tab',
 		) ,
@@ -1027,7 +1027,7 @@ function lerp_page_options()
 
 	$specific_style = array(
 		'id' => '_lerp_specific_style',
-		'label' => esc_html__('Skin', 'lerp') ,
+		'label' => esc_html__('皮肤', 'lerp') ,
 		'desc' => esc_html__('Override the content skin.', 'lerp') ,
 		'type' => 'select',
 		'choices' => array(
@@ -1048,7 +1048,7 @@ function lerp_page_options()
 
 	$specific_layout_width = array(
 		'id' => '_lerp_specific_layout_width',
-		'label' => esc_html__('Content width', 'lerp') ,
+		'label' => esc_html__('内容宽度', 'lerp') ,
 		'desc' => esc_html__('Override the content width.', 'lerp'),
 		'type' => 'select',
 		'choices' => array(
@@ -1077,7 +1077,7 @@ function lerp_page_options()
 
 	$specific_breadcrumb = array(
 		'id' => '_lerp_specific_breadcrumb',
-		'label' => esc_html__('Show breadcrumb', 'lerp') ,
+		'label' => esc_html__('显示面包屑', 'lerp') ,
 		'desc' => esc_html__('Override to show the navigation breadcrumb.','lerp'),
 		'type' => 'select',
 		'choices' => array(
@@ -1419,7 +1419,7 @@ function lerp_page_options()
 
 	$body_fields = array(
 		array(
-			'label' => '<i class="fa fa-layout fa-fw"></i> ' . esc_html__('Content', 'lerp') ,
+			'label' => '<i class="fa fa-layout fa-fw"></i> ' . esc_html__('内容', 'lerp') ,
 			'id' => '_lerp_body_tab',
 			'type' => 'tab',
 		) ,
@@ -1484,7 +1484,7 @@ function lerp_page_options()
 
 		$sidebar = array(
 			'id' => '_lerp_sidebar',
-			'label' => esc_html__('Sidebar', 'lerp') ,
+			'label' => esc_html__('侧边栏', 'lerp') ,
 			'desc' => esc_html__('Specify the sidebar.', 'lerp') ,
 			'type' => 'sidebar-select',
 			'operator' => 'or',
@@ -1492,17 +1492,17 @@ function lerp_page_options()
 
 		$sidebar_position = array(
 			'id' => '_lerp_sidebar_position',
-			'label' => esc_html__('Position', 'lerp') ,
+			'label' => esc_html__('位置', 'lerp') ,
 			'desc' => esc_html__('Specify the position of the sidebar.', 'lerp') ,
 			'type' => 'select',
 			'choices' => array(
 				array(
 					'value' => 'sidebar_right',
-					'label' => esc_html__('Right', 'lerp') ,
+					'label' => esc_html__('右', 'lerp') ,
 				) ,
 				array(
 					'value' => 'sidebar_left',
-					'label' => esc_html__('Left', 'lerp') ,
+					'label' => esc_html__('左', 'lerp') ,
 				) ,
 			) ,
 			'operator' => 'and',
@@ -1510,8 +1510,8 @@ function lerp_page_options()
 
 		$sidebar_size = array(
 			'id' => '_lerp_sidebar_size',
-			'label' => esc_html__('Size', 'lerp') ,
-			'desc' => esc_html__('Set the size of the sidebar.', 'lerp') ,
+			'label' => esc_html__('大小', 'lerp') ,
+			'desc' => esc_html__('设置侧边栏的大小。', 'lerp') ,
 			'std' => '4',
 			'min_max_step' => '1,11,1',
 			'type' => 'numeric-slider',
@@ -1568,7 +1568,7 @@ function lerp_page_options()
 
 		$sidebar_fields = array(
 			array(
-				'label' => '<i class="fa fa-content-right fa-fw"></i> ' . esc_html__('Sidebar', 'lerp') ,
+				'label' => '<i class="fa fa-content-right fa-fw"></i> ' . esc_html__('侧边栏', 'lerp') ,
 				'id' => '_lerp_sidebar_tab',
 				'type' => 'tab',
 			) ,
@@ -1727,7 +1727,7 @@ function lerp_page_options()
 
 		$ppp_fields = array(
 			array(
-				'label' => '<i class="fa fa-location fa-fw"></i> ' . esc_html__('Navigation', 'lerp') ,
+				'label' => '<i class="fa fa-location fa-fw"></i> ' . esc_html__('导航', 'lerp') ,
 				'id' => '_lerp_navigation_tab',
 				'type' => 'tab',
 			) ,
@@ -1794,7 +1794,7 @@ function lerp_page_options()
 
 	$footer_fields = array(
 		array(
-			'label' => '<i class="fa fa-ellipsis fa-fw"></i> ' . esc_html__('Footer', 'lerp') ,
+			'label' => '<i class="fa fa-ellipsis fa-fw"></i> ' . esc_html__('页脚', 'lerp') ,
 			'id' => '_lerp_footer_tab',
 			'type' => 'tab',
 		) ,
@@ -1946,7 +1946,7 @@ function lerp_page_options()
 
 	$scroller_fields = array(
 		array(
-			'label' => '<i class="fa fa-download3 fa-fw"></i> ' . esc_html__('Scroll', 'lerp') ,
+			'label' => '<i class="fa fa-download3 fa-fw"></i> ' . esc_html__('滚动', 'lerp') ,
 			'id' => '_lerp_scroll_tab',
 			'type' => 'tab',
 		) ,
@@ -1980,7 +1980,7 @@ function lerp_page_options()
 
 	$custom_fields = array(
 		array(
-			'label' => '<i class="fa fa-pencil3 fa-fw"></i> ' . esc_html__('Custom Fields', 'lerp') ,
+			'label' => '<i class="fa fa-pencil3 fa-fw"></i> ' . esc_html__('自定义字段', 'lerp') ,
 			'id' => '_lerp_cf_tab',
 			'type' => 'tab',
 		) ,
@@ -1992,7 +1992,7 @@ function lerp_page_options()
 
 	$lerp_page_array = array(
 		'id' => '_lerp_page_options',
-		'title' => esc_html__('Page Options', 'lerp') ,
+		'title' => esc_html__('页面设置', 'lerp') ,
 		'desc' => '',
 		'pages' => $lerp_post_types,
 		'context' => 'normal',

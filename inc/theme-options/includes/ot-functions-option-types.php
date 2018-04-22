@@ -1562,10 +1562,10 @@ if ( ! function_exists( 'ot_type_list_item' ) ) {
         echo '</ul>';
 
         /* button */
-        echo '<a href="javascript:void(0);" class="option-tree-list-item-add option-tree-ui-button button right hug-right" title="' . esc_html__( 'Add New', 'option-tree' ) . '">' . esc_html__( 'Add New', 'option-tree' ) . '</a>';
+        echo '<a href="javascript:void(0);" class="option-tree-list-item-add option-tree-ui-button button right hug-right" title="' . esc_html__( '新增', 'option-tree' ) . '">' . esc_html__( '新增', 'option-tree' ) . '</a>';
 
         /* description */
-        $list_desc = $sortable ? esc_html__( 'You can re-order with drag & drop, the order will update after saving.', 'option-tree' ) : '';
+        $list_desc = $sortable ? esc_html__( '您可以通过拖放进行重新订购，列表将在保存后更新。', 'option-tree' ) : '';
         echo '<div class="list-item-description">' . apply_filters( 'ot_list_item_description', $list_desc, $field_id ) . '</div>';
 
       echo '</div>';
@@ -2324,10 +2324,10 @@ if ( ! function_exists( 'ot_type_slider' ) ) {
         echo '</ul>';
 
         /* button */
-        echo '<a href="javascript:void(0);" class="option-tree-list-item-add option-tree-ui-button button right hug-right" title="' . esc_html__( 'Add New', 'option-tree' ) . '">' . esc_html__( 'Add New', 'option-tree' ) . '</a>';
+        echo '<a href="javascript:void(0);" class="option-tree-list-item-add option-tree-ui-button button right hug-right" title="' . esc_html__( '新增', 'option-tree' ) . '">' . esc_html__( '新增', 'option-tree' ) . '</a>';
 
         /* description */
-        echo '<div class="list-item-description">' . esc_html__( 'You can re-order with drag & drop, the order will update after saving.', 'option-tree' ) . '</div>';
+        echo '<div class="list-item-description">' . esc_html__( '您可以通过拖放进行重新订购，列表将在保存后更新。', 'option-tree' ) . '</div>';
 
       echo '</div>';
 
@@ -2489,10 +2489,10 @@ if ( ! function_exists( 'ot_type_social_links' ) ) {
         echo '</ul>';
 
         /* button */
-        echo '<a href="javascript:void(0);" class="option-tree-social-links-add option-tree-ui-button button button-primary right hug-right" title="' . esc_html__( 'Add New', 'option-tree' ) . '">' . esc_html__( 'Add New', 'option-tree' ) . '</a>';
+        echo '<a href="javascript:void(0);" class="option-tree-social-links-add option-tree-ui-button button button-primary right hug-right" title="' . esc_html__( '新增', 'option-tree' ) . '">' . esc_html__( '新增', 'option-tree' ) . '</a>';
 
         /* description */
-        echo '<div class="list-item-description">' . apply_filters( 'ot_social_links_description', esc_html__( 'You can re-order with drag & drop, the order will update after saving.', 'option-tree' ), $field_id ) . '</div>';
+        echo '<div class="list-item-description">' . apply_filters( 'ot_social_links_description', esc_html__( '您可以通过拖放进行重新订购，列表将在保存后更新。', 'option-tree' ), $field_id ) . '</div>';
 
       echo '</div>';
 

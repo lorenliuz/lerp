@@ -415,7 +415,7 @@ function custom_theme_options()
     $menu = array(
         'id' => '_lerp_%section%_menu',
         'label' => esc_html__('菜单', 'lerp'),
-        'desc' => esc_html__('Override the primary menu created in \'Appearance -> Menus\'.', 'lerp'),
+        'desc' => esc_html__('重写“外观-菜单”中创建的主菜单。', 'lerp'),
         'type' => 'select',
         'choices' => $menus_array,
         'section' => 'lerp_%section%_section',
@@ -423,13 +423,13 @@ function custom_theme_options()
 
     $menu_width = array(
         'id' => '_lerp_%section%_menu_width',
-        'label' => esc_html__('Menu width', 'lerp'),
+        'label' => esc_html__('菜单宽度', 'lerp'),
         'desc' => esc_html__('Override the menu width.', 'lerp'),
         'type' => 'select',
         'choices' => array(
             array(
                 'value' => '',
-                'label' => esc_html__('Inherit', 'lerp'),
+                'label' => esc_html__('继承', 'lerp'),
             ),
             array(
                 'value' => 'full',
@@ -445,7 +445,7 @@ function custom_theme_options()
 
     $menu_opaque = array(
         'id' => '_lerp_%section%_menu_opaque',
-        'label' => esc_html__('Remove transparency', 'lerp'),
+        'label' => esc_html__('去除透明度', 'lerp'),
         'type' => 'on-off',
         'desc' => esc_html__('Override to remove the transparency eventually declared in \'Customize -> Light/Dark skin\'.',
             'lerp'),
@@ -473,7 +473,7 @@ function custom_theme_options()
 
     $header_section_title = array(
         'id' => '_lerp_%section%_header_block_title',
-        'label' => '<i class="fa fa-columns2"></i> ' . esc_html__('Header', 'lerp'),
+        'label' => '<i class="fa fa-columns2"></i> ' . esc_html__('页眉', 'lerp'),
         'desc' => '',
         'type' => 'textblock-titled',
         'class' => 'section-title',
@@ -583,18 +583,18 @@ function custom_theme_options()
         'choices' => array(
             array(
                 'value' => '',
-                'label' => esc_html__('Inherit', 'lerp'),
+                'label' => esc_html__('继承', 'lerp'),
             ),
             array(
                 'value' => 'full',
-                'label' => esc_html__('Full', 'lerp'),
+                'label' => esc_html__('全部', 'lerp'),
             ),
             array(
                 'value' => 'limit',
-                'label' => esc_html__('Limit', 'lerp'),
+                'label' => esc_html__('限制', 'lerp'),
             ),
         ),
-        'desc' => esc_html__('Override the header width.', 'lerp'),
+        'desc' => esc_html__('覆盖标题宽度。', 'lerp'),
         'section' => 'lerp_%section%_section',
         'condition' => '_lerp_%section%_header:contains(header)',
         'operator' => 'or',
@@ -602,9 +602,9 @@ function custom_theme_options()
 
     $header_content_width = array(
         'id' => '_lerp_%section%_header_content_width',
-        'label' => esc_html__('Content full width', 'lerp'),
+        'label' => esc_html__('内容全宽', 'lerp'),
         'type' => 'on-off',
-        'desc' => esc_html__('Activate to expand the header content to full width.', 'lerp'),
+        'desc' => esc_html__('激活将标题内容扩展为全宽。', 'lerp'),
         'std' => 'off',
         'section' => 'lerp_%section%_section',
         'condition' => '_lerp_%section%_header:is(header_basic)',
@@ -613,8 +613,8 @@ function custom_theme_options()
 
     $header_custom_width = array(
         'id' => '_lerp_%section%_header_custom_width',
-        'label' => esc_html__('Custom inner width', 'lerp'),
-        'desc' => esc_html__('Adjust the inner content width in %.', 'lerp'),
+        'label' => esc_html__('自定义内部宽度', 'lerp'),
+        'desc' => esc_html__('在 % 中调整内容宽度。', 'lerp'),
         'std' => '100',
         'type' => 'numeric-slider',
         'min_max_step' => '0,100,1',
@@ -625,7 +625,7 @@ function custom_theme_options()
 
     $header_align = array(
         'id' => '_lerp_%section%_header_align',
-        'label' => esc_html__('Content alignment', 'lerp'),
+        'label' => esc_html__('内容对齐', 'lerp'),
         'desc' => esc_html__('Specify the text/content alignment.', 'lerp'),
         'std' => 'center',
         'type' => 'select',
@@ -635,17 +635,17 @@ function custom_theme_options()
         'choices' => array(
             array(
                 'value' => 'left',
-                'label' => esc_html__('Left', 'lerp'),
+                'label' => esc_html__('左对齐', 'lerp'),
                 'src' => ''
             ),
             array(
                 'value' => 'center',
-                'label' => esc_html__('Center', 'lerp'),
+                'label' => esc_html__('居中对齐', 'lerp'),
                 'src' => ''
             ),
             array(
                 'value' => 'right',
-                'label' => esc_html__('Right', 'lerp'),
+                'label' => esc_html__('右对齐', 'lerp'),
                 'src' => ''
             )
         )
@@ -653,8 +653,8 @@ function custom_theme_options()
 
     $header_height = array(
         'id' => '_lerp_%section%_header_height',
-        'label' => esc_html__('Height', 'lerp'),
-        'desc' => esc_html__('Define the height of the header in px or in % (relative to the window height).', 'lerp'),
+        'label' => esc_html__('高度', 'lerp'),
+        'desc' => esc_html__('在px或 %s 中定义标题的高度（相对于窗口高度）。', 'lerp'),
         'type' => 'measurement',
         'std' => array(
             '60',
@@ -667,7 +667,7 @@ function custom_theme_options()
 
     $header_min_height = array(
         'id' => '_lerp_%section%_header_min_height',
-        'label' => esc_html__('Minimal height', 'lerp'),
+        'label' => esc_html__('最小高度', 'lerp'),
         'desc' => esc_html__('Enter a minimun height for the header in pixel.', 'lerp'),
         'type' => 'text',
         'std' => '300',
@@ -678,7 +678,7 @@ function custom_theme_options()
 
     $header_position = array(
         'id' => '_lerp_%section%_header_position',
-        'label' => esc_html__('Position', 'lerp'),
+        'label' => esc_html__('位置', 'lerp'),
         'desc' => esc_html__('Specify the position of the header content inside the container.', 'lerp'),
         'std' => 'header-center header-middle',
         'type' => 'select',
@@ -1318,7 +1318,7 @@ function custom_theme_options()
 
     $body_section_title = array(
         'id' => '_lerp_%section%_body_title',
-        'label' => '<i class="fa fa-layout"></i> ' . esc_html__('Content', 'lerp'),
+        'label' => '<i class="fa fa-layout"></i> ' . esc_html__('内容', 'lerp'),
         'desc' => '',
         'type' => 'textblock-titled',
         'class' => 'section-title',
@@ -1370,7 +1370,7 @@ function custom_theme_options()
         'choices' => array(
             array(
                 'value' => '',
-                'label' => esc_html__('Inherit', 'lerp'),
+                'label' => esc_html__('继承', 'lerp'),
             ),
             array(
                 'value' => 'full',
@@ -1469,7 +1469,7 @@ function custom_theme_options()
 
     $sidebar_section_title = array(
         'id' => '_lerp_%section%_sidebar_title',
-        'label' => '<i class="fa fa-content-right"></i> ' . esc_html__('Sidebar', 'lerp'),
+        'label' => '<i class="fa fa-content-right"></i> ' . esc_html__('侧边栏', 'lerp'),
         'desc' => '',
         'type' => 'textblock-titled',
         'class' => 'section-title',
@@ -1478,8 +1478,8 @@ function custom_theme_options()
 
     $sidebar_activate = array(
         'id' => '_lerp_%section%_activate_sidebar',
-        'label' => esc_html__('Activate the sidebar', 'lerp'),
-        'desc' => esc_html__('Activate to show the sidebar.', 'lerp'),
+        'label' => esc_html__('激活侧边栏', 'lerp'),
+        'desc' => esc_html__('激活以显示侧边栏。', 'lerp'),
         'std' => 'off',
         'type' => 'on-off',
         'section' => 'lerp_%section%_section',
@@ -1487,8 +1487,8 @@ function custom_theme_options()
 
     $sidebar_widget = array(
         'id' => '_lerp_%section%_sidebar',
-        'label' => esc_html__('Sidebar', 'lerp'),
-        'desc' => esc_html__('Specify the sidebar.', 'lerp'),
+        'label' => esc_html__('侧边栏', 'lerp'),
+        'desc' => esc_html__('指定侧边栏。', 'lerp'),
         'type' => 'sidebar-select',
         'section' => 'lerp_%section%_section',
         'condition' => '_lerp_%section%_activate_sidebar:not(off)',
@@ -1496,17 +1496,17 @@ function custom_theme_options()
 
     $sidebar_position = array(
         'id' => '_lerp_%section%_sidebar_position',
-        'label' => esc_html__('Position', 'lerp'),
-        'desc' => esc_html__('Specify the position of the sidebar.', 'lerp'),
+        'label' => esc_html__('位置', 'lerp'),
+        'desc' => esc_html__('指定边栏的位置。', 'lerp'),
         'type' => 'select',
         'choices' => array(
             array(
                 'value' => 'sidebar_right',
-                'label' => esc_html__('Right', 'lerp'),
+                'label' => esc_html__('右', 'lerp'),
             ),
             array(
                 'value' => 'sidebar_left',
-                'label' => esc_html__('Left', 'lerp'),
+                'label' => esc_html__('左', 'lerp'),
             ),
         ),
         'condition' => '_lerp_%section%_activate_sidebar:not(off)',
@@ -1515,8 +1515,8 @@ function custom_theme_options()
 
     $sidebar_size = array(
         'id' => '_lerp_%section%_sidebar_size',
-        'label' => esc_html__('Size', 'lerp'),
-        'desc' => esc_html__('Set the size of the sidebar.', 'lerp'),
+        'label' => esc_html__('大小', 'lerp'),
+        'desc' => esc_html__('设置边栏的大小。', 'lerp'),
         'std' => '4',
         'min_max_step' => '1,11,1',
         'type' => 'numeric-slider',
@@ -1526,8 +1526,8 @@ function custom_theme_options()
 
     $sidebar_sticky = array(
         'id' => '_lerp_%section%_sidebar_sticky',
-        'label' => esc_html__('Sticky sidebar', 'lerp'),
-        'desc' => esc_html__('Activate to have a sticky sidebar.', 'lerp'),
+        'label' => esc_html__('粘滞侧边栏', 'lerp'),
+        'desc' => esc_html__('激活后，将有一个粘性侧边栏。', 'lerp'),
         'std' => 'off',
         'type' => 'on-off',
         'condition' => '_lerp_%section%_activate_sidebar:not(off)',
@@ -1536,13 +1536,13 @@ function custom_theme_options()
 
     $sidebar_style = array(
         'id' => '_lerp_%section%_sidebar_style',
-        'label' => esc_html__('Skin', 'lerp'),
+        'label' => esc_html__('皮肤', 'lerp'),
         'desc' => esc_html__('Override the sidebar text skin color.', 'lerp'),
         'type' => 'select',
         'choices' => array(
             array(
                 'value' => '',
-                'label' => esc_html__('Inherit', "lerp"),
+                'label' => esc_html__('继承', "lerp"),
             ),
             array(
                 'value' => 'light',
@@ -1559,8 +1559,8 @@ function custom_theme_options()
 
     $sidebar_bgcolor = array(
         'id' => '_lerp_%section%_sidebar_bgcolor',
-        'label' => esc_html__('Background color', 'lerp'),
-        'desc' => esc_html__('Specify the sidebar background color.', 'lerp'),
+        'label' => esc_html__('背景色', 'lerp'),
+        'desc' => esc_html__('指定侧边栏背景颜色。', 'lerp'),
         'type' => 'lerp_color',
         'section' => 'lerp_%section%_section',
         'condition' => '_lerp_%section%_activate_sidebar:not(off)',
@@ -1568,8 +1568,8 @@ function custom_theme_options()
 
     $sidebar_fill = array(
         'id' => '_lerp_%section%_sidebar_fill',
-        'label' => esc_html__('Sidebar filling space', 'lerp'),
-        'desc' => esc_html__('Activate to remove padding around the sidebar and fill the height.', 'lerp'),
+        'label' => esc_html__('侧栏填充空间', 'lerp'),
+        'desc' => esc_html__('激活删除侧栏上的填充并填充高度。', 'lerp'),
         'type' => 'on-off',
         'section' => 'lerp_%section%_section',
         'std' => 'off',
@@ -1579,7 +1579,7 @@ function custom_theme_options()
 
     $navigation_section_title = array(
         'id' => '_lerp_%section%_navigation_title',
-        'label' => '<i class="fa fa-location"></i> ' . esc_html__('Navigation', 'lerp'),
+        'label' => '<i class="fa fa-location"></i> ' . esc_html__('导航', 'lerp'),
         'desc' => '',
         'type' => 'textblock-titled',
         'class' => 'section-title',
@@ -1588,7 +1588,7 @@ function custom_theme_options()
 
     $navigation_activate = array(
         'id' => '_lerp_%section%_navigation_activate',
-        'label' => esc_html__('Navigation bar', 'lerp'),
+        'label' => esc_html__('导航栏', 'lerp'),
         'desc' => esc_html__('Activate to show the navigation bar.', 'lerp'),
         'std' => 'on',
         'type' => 'on-off',
@@ -1597,7 +1597,7 @@ function custom_theme_options()
 
     $navigation_page_index = array(
         'id' => '_lerp_%section%_navigation_index',
-        'label' => esc_html__('Navigation index', 'lerp'),
+        'label' => esc_html__('导航索引', 'lerp'),
         'desc' => esc_html__('Specify the page you want to use as index.', 'lerp'),
         'type' => 'page-select',
         'section' => 'lerp_%section%_section',
@@ -1628,7 +1628,7 @@ function custom_theme_options()
 
     $footer_section_title = array(
         'id' => '_lerp_%section%_footer_block_title',
-        'label' => '<i class="fa fa-ellipsis"></i> ' . esc_html__('Footer', 'lerp'),
+        'label' => '<i class="fa fa-ellipsis"></i> ' . esc_html__('页脚', 'lerp'),
         'desc' => '',
         'type' => 'textblock-titled',
         'class' => 'section-title',
@@ -1658,7 +1658,7 @@ function custom_theme_options()
         'choices' => array(
             array(
                 'value' => '',
-                'label' => esc_html__('Inherit', 'lerp'),
+                'label' => esc_html__('继承', 'lerp'),
             ),
             array(
                 'value' => 'full',
@@ -1674,7 +1674,7 @@ function custom_theme_options()
 
     $custom_fields_section_title = array(
         'id' => '_lerp_%section%_cf_title',
-        'label' => '<i class="fa fa-pencil3"></i> ' . esc_html__('Custom fields', 'lerp'),
+        'label' => '<i class="fa fa-pencil3"></i> ' . esc_html__('自定义字段', 'lerp'),
         'desc' => '',
         'type' => 'textblock-titled',
         'class' => 'section-title',
@@ -1683,7 +1683,7 @@ function custom_theme_options()
 
     $custom_fields_list = array(
         'id' => '_lerp_%section%_custom_fields',
-        'label' => esc_html__('Custom fields', 'lerp'),
+        'label' => esc_html__('自定义字段', 'lerp'),
         'desc' => esc_html__('Create here all the custom fields that can be used inside the posts module.', 'lerp'),
         'type' => 'list-item',
         'section' => 'lerp_%section%_section',
@@ -1729,7 +1729,7 @@ function custom_theme_options()
                 } elseif ( $value == 'author' ) {
                     $cpt_index_sections[] = array(
                         'id' => 'lerp_' . $value . '_index_section',
-                        'title' => '<span class="smaller"><i class="fa fa-archive2"></i> ' . esc_html__('Authors',
+                        'title' => '<span class="smaller"><i class="fa fa-archive2"></i> ' . esc_html__('作者',
                                 'lerp') . '</span>',
                         'group' => esc_html__('归档', 'lerp')
                     );
@@ -1914,11 +1914,11 @@ function custom_theme_options()
             'title' => '<span class="smaller"><i class="fa fa-paper"></i> ' . esc_html__('页面', 'lerp') . '</span>',
             'group' => esc_html__('页面', 'lerp')
         ),
-        array(
-            'id' => 'lerp_portfolio_section',
-            'title' => '<span class="smaller"><i class="fa fa-paper"></i> ' . ucfirst($portfolio_cpt_name) . '</span>',
-            'group' => esc_html__('页面', 'lerp')
-        ),
+//        array(
+//            'id' => 'lerp_portfolio_section',
+//            'title' => '<span class="smaller"><i class="fa fa-paper"></i> ' . ucfirst($portfolio_cpt_name) . '</span>',
+//            'group' => esc_html__('页面', 'lerp')
+//        ),
     );
 
     $custom_settings_section_one = array_merge($custom_settings_section_one, $cpt_single_sections);
@@ -1937,11 +1937,11 @@ function custom_theme_options()
                     'lerp') . '</span>',
             'group' => esc_html__('归档', 'lerp')
         ),
-        array(
-            'id' => 'lerp_portfolio_index_section',
-            'title' => '<span class="smaller"><i class="fa fa-archive2"></i> ' . ucfirst($portfolio_cpt_name) . 's</span>',
-            'group' => esc_html__('归档', 'lerp')
-        ),
+//        array(
+//            'id' => 'lerp_portfolio_index_section',
+//            'title' => '<span class="smaller"><i class="fa fa-archive2"></i> ' . ucfirst($portfolio_cpt_name) . 's</span>',
+//            'group' => esc_html__('归档', 'lerp')
+//        ),
     );
 
     $custom_settings_section_one = array_merge($custom_settings_section_one, $custom_settings_section_two);
@@ -1977,7 +1977,7 @@ function custom_theme_options()
         ),
         array(
             'id' => 'lerp_extra_section',
-            'title' => esc_html__('Extra', 'lerp'),
+            'title' => esc_html__('扩展', 'lerp'),
             'group' => esc_html__('视觉', 'lerp')
         ),
         array(
@@ -2184,7 +2184,7 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_vmenu_position',
-            'label' => esc_html__('Menu horizontal position', 'lerp'),
+            'label' => esc_html__('横向菜单位置', 'lerp'),
             'desc' => esc_html__('Specify the horizontal position of the menu.', 'lerp'),
             'std' => 'left',
             'type' => 'select',
@@ -2206,7 +2206,7 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_vmenu_v_position',
-            'label' => esc_html__('Menu vertical alignment', 'lerp'),
+            'label' => esc_html__('菜单垂直对齐', 'lerp'),
             'desc' => esc_html__('Specify the vertical alignment of the menu.', 'lerp'),
             'std' => 'middle',
             'type' => 'select',
@@ -2285,7 +2285,7 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_menu_full',
-            'label' => esc_html__('Menu full width', 'lerp'),
+            'label' => esc_html__('菜单全宽度', 'lerp'),
             'desc' => esc_html__('Activate to expand the menu to full width. (Only for the horizontal menus).', 'lerp'),
             'std' => 'off',
             'type' => 'on-off',
@@ -2295,7 +2295,7 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_menu_visuals_block_title',
-            'label' => '<i class="fa fa-eye2"></i> ' . esc_html__('Visuals', 'lerp'),
+            'label' => '<i class="fa fa-eye2"></i> ' . esc_html__('视觉', 'lerp'),
             'type' => 'textblock-titled',
             'class' => 'section-title',
             'section' => 'lerp_header_section',
@@ -2412,7 +2412,7 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_menu_animation_block_title',
-            'label' => '<i class="fa fa-fast-forward2"></i> ' . esc_html__('Animation', 'lerp'),
+            'label' => '<i class="fa fa-fast-forward2"></i> ' . esc_html__('动画', 'lerp'),
             'type' => 'textblock-titled',
             'class' => 'section-title',
             'section' => 'lerp_header_section',
@@ -2543,7 +2543,7 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_menu_add_block_title',
-            'label' => '<i class="fa fa-square-plus"></i> ' . esc_html__('Additionals', 'lerp'),
+            'label' => '<i class="fa fa-square-plus"></i> ' . esc_html__('附加功能', 'lerp'),
             'type' => 'textblock-titled',
             'class' => 'section-title',
             'section' => 'lerp_header_section',
@@ -2916,7 +2916,7 @@ function custom_theme_options()
             'choices' => array(
                 array(
                     'value' => '',
-                    'label' => esc_html__('Inherit', "lerp"),
+                    'label' => esc_html__('继承', "lerp"),
                 ),
                 array(
                     'value' => 'light',
@@ -3274,8 +3274,8 @@ function custom_theme_options()
 
         array(
             'id' => '_lerp_sidebars',
-            'label' => esc_html__('Site sidebars', 'lerp'),
-            'desc' => esc_html__('Define here all the sidebars you will need. A default sidebar is already defined.',
+            'label' => esc_html__('网站侧边栏', 'lerp'),
+            'desc' => esc_html__('在这里定义你需要的所有侧边栏。 默认的侧边栏已经定义。',
                 'lerp'),
             'type' => 'list-item',
             'section' => 'lerp_sidebars_section',
@@ -3286,16 +3286,16 @@ function custom_theme_options()
                     'class' => 'unique_id',
                     'std' => 'sidebar-',
                     'type' => 'text',
-                    'label' => esc_html__('Unique sidebar ID', 'lerp'),
-                    'desc' => esc_html__('This value is created automatically and it shouldn\'t be edited unless you know what you are doing.',
+                    'label' => esc_html__('唯一的侧边栏ID', 'lerp'),
+                    'desc' => esc_html__('这个值是自动创建的，除非你知道你在做什么，否则不应该编辑它。',
                         'lerp'),
                 ),
             )
         ),
         array(
             'id' => '_lerp_font_groups',
-            'label' => esc_html__('Custom fonts', 'lerp'),
-            'desc' => esc_html__('Define here all the fonts you will need.', 'lerp'),
+            'label' => esc_html__('自定义字体', 'lerp'),
+            'desc' => esc_html__('在这里定义你需要的所有字体。', 'lerp'),
             'std' => array(
                 array(
                     'title' => 'Font Poppins (Sans Serif)',
@@ -3473,7 +3473,7 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_custom_colors_list',
-            'label' => esc_html__('Color palettes', 'lerp'),
+            'label' => esc_html__('调色板', 'lerp'),
             'desc' => esc_html__('Define all the colors you will need.', 'lerp'),
             'std' => array(
                 array(
@@ -4006,7 +4006,7 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_custom_content_block_title',
-            'label' => '<i class="fa fa-layout"></i> ' . esc_html__('Content', 'lerp'),
+            'label' => '<i class="fa fa-layout"></i> ' . esc_html__('内容', 'lerp'),
             'type' => 'textblock-titled',
             'class' => 'section-title',
             'section' => 'lerp_customize_section',
@@ -4133,15 +4133,15 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_footer_style_block_title',
-            'label' => '<i class="fa fa-ellipsis"></i> ' . esc_html__('Footer', 'lerp'),
+            'label' => '<i class="fa fa-ellipsis"></i> ' . esc_html__('页脚', 'lerp'),
             'type' => 'textblock-titled',
             'class' => 'section-title',
             'section' => 'lerp_customize_section',
         ),
         array(
             'id' => '_lerp_footer_last_style',
-            'label' => esc_html__('Copyright area skin', 'lerp'),
-            'desc' => esc_html__('Specify the copyright area skin color.', 'lerp'),
+            'label' => esc_html__('版权区域皮肤', 'lerp'),
+            'desc' => esc_html__('指定版权区域肤色。', 'lerp'),
             'std' => 'dark',
             'type' => 'select',
             'section' => 'lerp_customize_section',
@@ -4151,38 +4151,38 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_footer_bg_color',
-            'label' => esc_html__('Copyright area custom background color', 'lerp'),
-            'desc' => esc_html__('Specify a custom copyright area background color.', 'lerp'),
+            'label' => esc_html__('版权区域自定义背景颜色', 'lerp'),
+            'desc' => esc_html__('指定一个自定义版权区域背景颜色。', 'lerp'),
             'std' => '',
             'type' => 'lerp_color',
             'section' => 'lerp_customize_section',
         ),
         array(
             'id' => '_lerp_customize_extra_block_title',
-            'label' => '<i class="fa fa-download3"></i> ' . esc_html__('Scroll & Parallax', 'lerp'),
+            'label' => '<i class="fa fa-download3"></i> ' . esc_html__('滚动 & 视差', 'lerp'),
             'type' => 'textblock-titled',
             'class' => 'section-title',
             'section' => 'lerp_extra_section',
         ),
         array(
             'id' => '_lerp_smooth_scroller',
-            'label' => esc_html__('Smooth scroller', 'lerp'),
-            'desc' => esc_html__('Activate the enhanced smooth scroller.', 'lerp'),
+            'label' => esc_html__('平滑滚动', 'lerp'),
+            'desc' => esc_html__('激活增强平滑滚动条.', 'lerp'),
             'std' => 'on',
             'type' => 'on-off',
             'section' => 'lerp_extra_section',
         ),
         array(
             'id' => '_lerp_scroll_constant',
-            'label' => esc_html__('ScrollTo constant speed', 'lerp'),
-            'desc' => esc_html__('Activate this to always have a constant speed when scrolling to point.', 'lerp'),
+            'label' => esc_html__('滚动恒速', 'lerp'),
+            'desc' => esc_html__('激活它，将在滚动到指定位置时，始终具有恒定的速度。', 'lerp'),
             'std' => 'on',
             'type' => 'on-off',
             'section' => 'lerp_extra_section',
         ),
         array(
             'id' => '_lerp_scroll_constant_factor',
-            'label' => esc_html__('ScrollTo constant speed factor', 'lerp'),
+            'label' => esc_html__('滚动恒速系数', 'lerp'),
             'desc' => esc_html__('Adjust the constant scroll speed factor. Default 2', 'lerp'),
             'std' => '2',
             'type' => 'numeric-slider',
@@ -4193,8 +4193,8 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_scroll_speed_value',
-            'label' => esc_html__('ScrollTo speed fixed', 'lerp'),
-            'desc' => esc_html__('Specify the scroll speed time in milliseconds.', 'lerp'),
+            'label' => esc_html__('滚动速度固定', 'lerp'),
+            'desc' => esc_html__('在毫秒内指定滚动速度时间。', 'lerp'),
             'std' => '1000',
             'type' => 'text',
             'section' => 'lerp_extra_section',
@@ -4203,8 +4203,8 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_parallax_factor',
-            'label' => esc_html__('Parallax speed factor', 'lerp'),
-            'desc' => esc_html__('Adjust the parallax speed factor. Default 2.5', 'lerp'),
+            'label' => esc_html__('视差速度系数', 'lerp'),
+            'desc' => esc_html__('调整视差速度系数。默认值2.5', 'lerp'),
             'std' => '2.5',
             'type' => 'numeric-slider',
             'min_max_step' => '0.5,3,0.5',
@@ -4236,50 +4236,18 @@ function custom_theme_options()
         )
     );
 
-    if ( class_exists('WooCommerce') ) {
-
-        $custom_settings_three[] = array(
-            'id' => '_lerp_woocommerce_block_title',
-            'label' => '<i class="fa fa-shopping-cart"></i> ' . esc_html__('WooCommerce', 'lerp'),
-            'type' => 'textblock-titled',
-            'class' => 'section-title',
-            'section' => 'lerp_extra_section',
-        );
-
-        $custom_settings_three[] = array(
-            'id' => '_lerp_woocommerce_cart_icon',
-            'label' => esc_html__('Cart icon', 'lerp'),
-            'desc' => esc_html__('Specify the cart icon', 'lerp'),
-            'std' => 'fa fa-bag',
-            'type' => 'text',
-            'class' => 'button_icon_container',
-            'section' => 'lerp_extra_section',
-        );
-
-        $custom_settings_three[] = array(
-            'id' => '_lerp_woocommerce_hooks',
-            'label' => esc_html__('Enable Hooks', 'lerp'),
-            'desc' => esc_html__('Activate this to enable default WooCommerce hooks on product loops.', 'lerp'),
-            'std' => 'off',
-            'type' => 'on-off',
-            'section' => 'lerp_extra_section',
-            'condition' => '',
-            'operator' => 'and'
-        );
-    }
-
     $custom_settings_four = array(
         array(
             'id' => '_lerp_customize_admin_block_title',
-            'label' => '<i class="fa fa-dashboard"></i> ' . esc_html__('Admin', 'lerp'),
+            'label' => '<i class="fa fa-dashboard"></i> ' . esc_html__('管理', 'lerp'),
             'type' => 'textblock-titled',
             'class' => 'section-title',
             'section' => 'lerp_extra_section',
         ),
         array(
             'id' => '_lerp_admin_help',
-            'label' => esc_html__('Help button in admin bar', 'lerp'),
-            'desc' => esc_html__('Activate to show the Lerp help button in the WP admin bar.', 'lerp'),
+            'label' => esc_html__('管理栏中的帮助按钮', 'lerp'),
+            'desc' => esc_html__('激活以显示在WP管理栏中的LERP帮助按钮。', 'lerp'),
             'std' => 'on',
             'type' => 'on-off',
             'section' => 'lerp_extra_section',
@@ -4374,7 +4342,7 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_footer_add_block_title',
-            'label' => '<i class="fa fa-square-plus"></i> ' . esc_html__('Additionals', 'lerp'),
+            'label' => '<i class="fa fa-square-plus"></i> ' . esc_html__('附加功能', 'lerp'),
             'type' => 'textblock-titled',
             'class' => 'section-title',
             'section' => 'lerp_footer_section',
@@ -4389,8 +4357,8 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_footer_uparrow_mobile',
-            'label' => esc_html__('Scroll up button on mobile', 'lerp'),
-            'desc' => esc_html__('Activate to add a scroll up button in the footer for mobile devices.', 'lerp'),
+            'label' => esc_html__('在移动设备上显示向上滚动按钮', 'lerp'),
+            'desc' => esc_html__('激活以在移动设备的页脚中添加向上滚动按钮。', 'lerp'),
             'type' => 'on-off',
             'std' => 'on',
             'condition' => '_lerp_footer_uparrow:is(on)',
@@ -4399,8 +4367,8 @@ function custom_theme_options()
         ),
         array(
             'id' => '_lerp_social_list',
-            'label' => esc_html__('Social Networks', 'lerp'),
-            'desc' => esc_html__('Define here all the social networks you will need.', 'lerp'),
+            'label' => esc_html__('社交网络', 'lerp'),
+            'desc' => esc_html__('在此定义您需要的所有社交网络。', 'lerp'),
             'type' => 'list-item',
             'section' => 'lerp_connections_section',
             'class' => 'list-social',
@@ -4410,21 +4378,21 @@ function custom_theme_options()
                     'class' => 'unique_id',
                     'std' => 'social-',
                     'type' => 'text',
-                    'label' => esc_html__('Unique social ID', 'lerp'),
-                    'desc' => esc_html__('This value is created automatically and it shouldn\'t be edited unless you know what you are doing.',
+                    'label' => esc_html__('唯一的社交ID', 'lerp'),
+                    'desc' => esc_html__('这个值是自动创建的，除非你知道你在做什么，否则不应该编辑它。',
                         'lerp'),
                 ),
                 array(
                     'id' => '_lerp_social',
-                    'label' => esc_html__('Social Network Icon', 'lerp'),
-                    'desc' => esc_html__('Specify the social network icon.', 'lerp'),
+                    'label' => esc_html__('社交网络图标', 'lerp'),
+                    'desc' => esc_html__('指定社交网络图标。', 'lerp'),
                     'type' => 'text',
                     'class' => 'button_icon_container',
                 ),
                 array(
                     'id' => '_lerp_link',
-                    'label' => esc_html__('Social Network Link', 'lerp'),
-                    'desc' => esc_html__('Enter your social network link.', 'lerp'),
+                    'label' => esc_html__('社交网络链接', 'lerp'),
+                    'desc' => esc_html__('输入你的社交网络链接。', 'lerp'),
                     'std' => '',
                     'type' => 'text',
                     'condition' => '',
@@ -4432,8 +4400,8 @@ function custom_theme_options()
                 ),
                 array(
                     'id' => '_lerp_menu_hidden',
-                    'label' => esc_html__('Hide In The Menu', 'lerp'),
-                    'desc' => esc_html__('Activate to hide the social icon in the menu (if the social connections in the menu is active).',
+                    'label' => esc_html__('隐藏在菜单中', 'lerp'),
+                    'desc' => esc_html__('激活以隐藏菜单中的社交图标（如果菜单中的社交连接处于活动状态）。',
                         'lerp'),
                     'std' => 'off',
                     'type' => 'on-off',
