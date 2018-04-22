@@ -450,7 +450,7 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 
 											echo '<input type="hidden" name="action" value="reset" />';
 
-											echo '<button type="button" class="option-tree-ui-button button button-secondary left reset-settings" title="' . esc_html__( 'Reset Options', 'option-tree' ) . '">' . esc_html__( 'Reset Options', 'option-tree' ) . '</button>';
+											echo '<button type="button" class="option-tree-ui-button button button-secondary left reset-settings" title="' . esc_html__( '重置设置', 'option-tree' ) . '">' . esc_html__( 'Reset Options', 'option-tree' ) . '</button>';
 
 										echo '</form>'; // <!-- .option-tree-reset-form -->
 
@@ -460,7 +460,7 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 											/* form nonce */
 											wp_nonce_field( 'lerp_toggle_ajax_theme_panel', 'lerp_toggle_ajax_theme_panel_nonce' );
 
-											$toggle_ajax_text   = $is_ajax_enabled ? esc_html__( 'Disable AJAX Saving', 'lerp' ) : esc_html__( 'Enable AJAX Saving', 'lerp' );
+											$toggle_ajax_text   = $is_ajax_enabled ? esc_html__( '关闭 AJAX 保存', 'lerp' ) : esc_html__( '开启 AJAX 保存', 'lerp' );
 											$toggle_ajax_action = $is_ajax_enabled ? 'disable-ajax' : 'enable-ajax';
 
 											echo '<input type="hidden" name="toggle_ajax" value="' . $toggle_ajax_action . '">';

@@ -96,7 +96,7 @@ add_filter('ot_register_pages_array', 'custom_register_pages_array', 10, 2);
 //ot_register_pages_array
 function lerp_header_version_text()
 {
-    return esc_html__('Version', 'lerp') . ' ' . UNCODE_VERSION;
+    return esc_html__('Version', 'lerp') . ' ' . LERP_VERSION;
 }
 
 add_filter('ot_header_version_text', 'lerp_header_version_text', 10, 2);
@@ -130,9 +130,9 @@ if ( !function_exists('ot_recognized_lerp_color') ) {
     function ot_recognized_lerp_color($field_id = '')
     {
 
-        global $UNCODE_COLORS;
+        global $LERP_COLORS;
 
-        return apply_filters('ot_recognized_lerp_color', $UNCODE_COLORS, $field_id);
+        return apply_filters('ot_recognized_lerp_color', $LERP_COLORS, $field_id);
     }
 }
 
@@ -141,7 +141,7 @@ if ( !function_exists('ot_recognized_lerp_colors_w_transp') ) {
     function ot_recognized_lerp_colors_w_transp($field_id = '')
     {
 
-        global $UNCODE_COLORS;
+        global $LERP_COLORS;
 
         return apply_filters('ot_recognized_lerp_colors_w_transp',
             array_merge(array(
@@ -150,7 +150,7 @@ if ( !function_exists('ot_recognized_lerp_colors_w_transp') ) {
                     'label' => esc_html__('Transparent', 'lerp')
                 )
             ),
-                $UNCODE_COLORS),
+                $LERP_COLORS),
             $field_id);
     }
 }

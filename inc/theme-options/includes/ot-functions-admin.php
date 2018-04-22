@@ -5099,11 +5099,11 @@ if ( !function_exists('ot_theme_options_layouts_form') ) {
         echo '<div class="option-tree-save-layout' . (!empty($active_layout) ? ' active-layout' : '') . '">';
 
         /* add new layout */
-        echo '<input type="text" name="' . ot_layouts_id() . '[_add_new_layout_]" value="" class="widefat option-tree-ui-input" autocomplete="off" placeholder="' . esc_html__('Enter a Layout Name',
+        echo '<input type="text" name="' . ot_layouts_id() . '[_add_new_layout_]" value="" class="widefat option-tree-ui-input" autocomplete="off" placeholder="' . esc_html__('输入布局名称',
                 'option-tree') . '" />';
 
-        echo '<button type="submit" class="option-tree-ui-button button button-primary save-layout" title="' . esc_html__('Save New Layout',
-                'option-tree') . '">' . esc_html__('Save New Layout', 'option-tree') . '</button>';
+        echo '<button type="submit" class="option-tree-ui-button button button-primary save-layout" title="' . esc_html__('保存新布局',
+                'option-tree') . '">' . esc_html__('保存新布局', 'option-tree') . '</button>';
 
         echo '</div>';
 

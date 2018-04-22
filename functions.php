@@ -86,6 +86,10 @@ require_once get_template_directory() . '/inc/admin-pages/ajax.php';
  */
 require_once get_template_directory() . '/inc/admin-pages/notifications.php';
 
+/**
+ * Load the color system.
+ */
+require_once get_template_directory() . '/inc/colors.php';
 
 /**
  * Required: set 'ot_theme_mode' filter to true.

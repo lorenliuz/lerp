@@ -13,7 +13,10 @@ function custom_theme_options()
 
     global $wpdb, $lerp_colors, $lerp_post_types;
 
-    if ( !isset($lerp_post_types) ) $lerp_post_types = lerp_get_post_types();
+    if ( !isset($lerp_post_types) ) {
+        $lerp_post_types = lerp_get_post_types();
+    }
+
     /**
      * Get a copy of the saved settings array.
      */
@@ -59,7 +62,7 @@ function custom_theme_options()
     $menus_array = array();
     $menus_array[] = array(
         'value' => '',
-        'label' => esc_html__('Inherit', 'lerp')
+        'label' => esc_html__('继承', 'lerp')
     );
     foreach ( $menus as $menu ) {
         $menus_array[] = array(
@@ -138,55 +141,11 @@ function custom_theme_options()
         $lerpblocks = array();
     }
 
-    if ( is_plugin_active('revslider/revslider.php') ) {
+    $revsliders = '';
+    $revslider = '';
 
-        $revslider = array(
-            'value' => 'header_revslider',
-            'label' => esc_html__('Revolution Slider', 'lerp'),
-        );
-
-        $rs = $wpdb->get_results("SELECT id, title, alias FROM " . $wpdb->prefix . "revslider_sliders WHERE type != 'template' ORDER BY id ASC LIMIT 999");
-        $revsliders = array();
-        if ( $rs ) {
-            foreach ( $rs as $slider ) {
-                $revsliders[] = array(
-                    'value' => $slider->alias,
-                    'label' => $slider->title,
-                    'postlink' => admin_url('admin.php?page=revslider&view=slider&id=' . $slider->id),
-                );
-            }
-        } else {
-            $revsliders[] = array(
-                'value' => '',
-                'label' => esc_html__('No Revolution Sliders found', 'lerp')
-            );
-        }
-    } else $revslider = $revsliders = '';
-
-    if ( is_plugin_active('LayerSlider/layerslider.php') ) {
-
-        $layerslider = array(
-            'value' => 'header_layerslider',
-            'label' => esc_html__('LayerSlider', 'lerp'),
-        );
-
-        $ls = $wpdb->get_results("SELECT id, name FROM " . $wpdb->prefix . "layerslider WHERE flag_deleted != '1' ORDER BY id ASC LIMIT 999");
-        $layersliders = array();
-        if ( $ls ) {
-            foreach ( $ls as $slider ) {
-                $layersliders[] = array(
-                    'value' => $slider->id,
-                    'label' => $slider->name,
-                    'postlink' => admin_url('admin.php?page=layerslider&action=edit&id=' . $slider->id),
-                );
-            }
-        } else {
-            $layersliders[] = array(
-                'value' => '',
-                'label' => esc_html__('No LayerSliders found', 'lerp')
-            );
-        }
-    } else $layerslider = $layersliders = '';
+    $layersliders = '';
+    $layerslider = '';
 
     $title_size = array(
         array(
@@ -482,18 +441,18 @@ function custom_theme_options()
 
     $header_type = array(
         'id' => '_lerp_%section%_header',
-        'label' => esc_html__('Type', 'lerp'),
-        'desc' => esc_html__('Specify the header type.', 'lerp'),
+        'label' => esc_html__('类型', 'lerp'),
+        'desc' => esc_html__('指定页眉类型。', 'lerp'),
         'std' => 'none',
         'type' => 'select',
         'choices' => array(
             array(
                 'value' => 'none',
-                'label' => esc_html__('Select…', 'lerp'),
+                'label' => esc_html__('选择…', 'lerp'),
             ),
             array(
                 'value' => 'header_basic',
-                'label' => esc_html__('Basic', 'lerp'),
+                'label' => esc_html__('基本', 'lerp'),
             ),
             $lerpblock,
             $revslider,
@@ -1700,9 +1659,6 @@ function custom_theme_options()
         )
     );
 
-    $portfolio_cpt_name = ot_get_option('_lerp_portfolio_cpt');
-    if ( $portfolio_cpt_name == '' ) $portfolio_cpt_name = 'portfolio';
-
     $cpt_single_sections = array();
     $cpt_index_sections = array();
     $cpt_single_options = array();
@@ -1710,35 +1666,33 @@ function custom_theme_options()
 
     if ( count($lerp_post_types) > 0 ) {
         foreach ( $lerp_post_types as $key => $value ) {
-            if ( $value !== 'portfolio' && $value !== 'product' ) {
-                $cpt_obj = get_post_type_object($value);
+            $cpt_obj = get_post_type_object($value);
 
-                if ( is_object($cpt_obj) ) {
-                    $cpt_name = $cpt_obj->labels->name;
-                    $cpt_sing_name = $cpt_obj->labels->singular_name;
-                    $cpt_single_sections[] = array(
-                        'id' => 'lerp_' . $value . '_section',
-                        'title' => '<span class="smaller"><i class="fa fa-paper"></i> ' . ucfirst($cpt_sing_name) . '</span>',
-                        'group' => esc_html__('Single', 'lerp')
-                    );
-                    $cpt_index_sections[] = array(
-                        'id' => 'lerp_' . $value . '_index_section',
-                        'title' => '<span class="smaller"><i class="fa fa-archive2"></i> ' . ucfirst($cpt_name) . '</span>',
-                        'group' => esc_html__('Archives', 'lerp')
-                    );
-                } elseif ( $value == 'author' ) {
-                    $cpt_index_sections[] = array(
-                        'id' => 'lerp_' . $value . '_index_section',
-                        'title' => '<span class="smaller"><i class="fa fa-archive2"></i> ' . esc_html__('作者',
-                                'lerp') . '</span>',
-                        'group' => esc_html__('归档', 'lerp')
-                    );
-                }
+            if ( is_object($cpt_obj) ) {
+                $cpt_name = $cpt_obj->labels->name;
+                $cpt_sing_name = $cpt_obj->labels->singular_name;
+                $cpt_single_sections[] = array(
+                    'id' => 'lerp_' . $value . '_section',
+                    'title' => '<span class="smaller"><i class="fa fa-paper"></i> ' . ucfirst($cpt_sing_name) . '</span>',
+                    'group' => esc_html__('文章', 'lerp')
+                );
+                $cpt_index_sections[] = array(
+                    'id' => 'lerp_' . $value . '_index_section',
+                    'title' => '<span class="smaller"><i class="fa fa-archive2"></i> ' . ucfirst($cpt_name) . '</span>',
+                    'group' => esc_html__('归档', 'lerp')
+                );
+            } elseif ( $value == 'author' ) {
+                $cpt_index_sections[] = array(
+                    'id' => 'lerp_' . $value . '_index_section',
+                    'title' => '<span class="smaller"><i class="fa fa-archive2"></i> ' . esc_html__('作者',
+                            'lerp') . '</span>',
+                    'group' => esc_html__('归档', 'lerp')
+                );
             }
         }
 
         foreach ( $lerp_post_types as $key => $value ) {
-            if ( $value !== 'portfolio' && $value !== 'product' && $value !== 'author' ) {
+            if ( $value !== 'author' ) {
                 $cpt_single_options[] = str_replace('%section%', $value, $menu_section_title);
                 $cpt_single_options[] = str_replace('%section%', $value, $menu);
                 $cpt_single_options[] = str_replace('%section%', $value, $menu_width);
@@ -1814,75 +1768,74 @@ function custom_theme_options()
                 $cpt_single_options[] = str_replace('%section%', $value, $custom_fields_list);
             }
         }
+
         foreach ( $lerp_post_types as $key => $value ) {
-            if ( $value !== 'portfolio' && $value !== 'product' ) {
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu_section_title);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu_width);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu_opaque);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_section_title);
-                $cpt_index_options[] = str_replace('%section%',
-                    $value . '_index',
-                    run_array_to($header_type, 'std', 'header_basic'));
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_lerp_block);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_revslider);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_layerslider);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_width);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_height);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_min_height);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_style);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_content_width);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_custom_width);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_align);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_position);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_font);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_size);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_height);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_spacing);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_weight);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_transform);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_italic);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_text_animation);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_animation_speed);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_animation_delay);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_featured);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_background);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_parallax);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_kburns);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_overlay_color);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_overlay_color_alpha);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_scroll_opacity);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_scrolldown);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu_no_padding);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu_no_padding_mobile);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $body_section_title);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $show_breadcrumb);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $breadcrumb_align);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $body_lerp_block);
-                $cpt_index_options[] = str_replace('%section%',
-                    $value . '_index',
-                    run_array_to($body_layout_width,
-                        'condition',
-                        '_lerp_%section%_content_block:is(),_lerp_%section%_content_block:is(none)'));
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $body_single_post_width);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $body_single_text_lenght);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $show_title);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_section_title);
-                $cpt_index_options[] = str_replace('%section%',
-                    $value . '_index',
-                    run_array_to($sidebar_activate, 'std', 'on'));
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_widget);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_position);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_size);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_sticky);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_style);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_bgcolor);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_fill);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $footer_section_title);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $footer_lerp_block);
-                $cpt_index_options[] = str_replace('%section%', $value . '_index', $footer_width);
-            }
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu_section_title);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu_width);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu_opaque);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_section_title);
+            $cpt_index_options[] = str_replace('%section%',
+                $value . '_index',
+                run_array_to($header_type, 'std', 'header_basic'));
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_lerp_block);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_revslider);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_layerslider);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_width);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_height);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_min_height);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_style);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_content_width);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_custom_width);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_align);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_position);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_font);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_size);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_height);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_spacing);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_weight);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_transform);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_title_italic);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_text_animation);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_animation_speed);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_animation_delay);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_featured);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_background);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_parallax);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_kburns);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_overlay_color);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_overlay_color_alpha);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_scroll_opacity);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $header_scrolldown);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu_no_padding);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu_no_padding_mobile);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $body_section_title);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $show_breadcrumb);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $breadcrumb_align);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $body_lerp_block);
+            $cpt_index_options[] = str_replace('%section%',
+                $value . '_index',
+                run_array_to($body_layout_width,
+                    'condition',
+                    '_lerp_%section%_content_block:is(),_lerp_%section%_content_block:is(none)'));
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $body_single_post_width);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $body_single_text_lenght);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $show_title);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_section_title);
+            $cpt_index_options[] = str_replace('%section%',
+                $value . '_index',
+                run_array_to($sidebar_activate, 'std', 'on'));
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_widget);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_position);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_size);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_sticky);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_style);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_bgcolor);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $sidebar_fill);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $footer_section_title);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $footer_lerp_block);
+            $cpt_index_options[] = str_replace('%section%', $value . '_index', $footer_width);
         }
     }
 
@@ -1914,11 +1867,6 @@ function custom_theme_options()
             'title' => '<span class="smaller"><i class="fa fa-paper"></i> ' . esc_html__('页面', 'lerp') . '</span>',
             'group' => esc_html__('页面', 'lerp')
         ),
-//        array(
-//            'id' => 'lerp_portfolio_section',
-//            'title' => '<span class="smaller"><i class="fa fa-paper"></i> ' . ucfirst($portfolio_cpt_name) . '</span>',
-//            'group' => esc_html__('页面', 'lerp')
-//        ),
     );
 
     $custom_settings_section_one = array_merge($custom_settings_section_one, $cpt_single_sections);
@@ -1937,11 +1885,6 @@ function custom_theme_options()
                     'lerp') . '</span>',
             'group' => esc_html__('归档', 'lerp')
         ),
-//        array(
-//            'id' => 'lerp_portfolio_index_section',
-//            'title' => '<span class="smaller"><i class="fa fa-archive2"></i> ' . ucfirst($portfolio_cpt_name) . 's</span>',
-//            'group' => esc_html__('归档', 'lerp')
-//        ),
     );
 
     $custom_settings_section_one = array_merge($custom_settings_section_one, $custom_settings_section_two);
@@ -2091,8 +2034,8 @@ function custom_theme_options()
         str_replace('%section%', 'main', run_array_to($header_section_title, 'condition', '_lerp_boxed:is(off)')),
         array(
             'id' => '_lerp_header_full',
-            'label' => esc_html__('Container full width', 'lerp'),
-            'desc' => esc_html__('Activate to expand the header container to full width.', 'lerp'),
+            'label' => esc_html__('容器全宽', 'lerp'),
+            'desc' => esc_html__('激活将标题容器展开为全宽度。', 'lerp'),
             'std' => 'on',
             'type' => 'on-off',
             'section' => 'lerp_main_section',
@@ -2607,35 +2550,6 @@ function custom_theme_options()
             'operator' => 'or'
         ),
         array(
-            'id' => '_lerp_woocommerce_cart',
-            'label' => esc_html__('Woocommerce cart', 'lerp'),
-            'desc' => esc_html__('Activate to show the Woocommerce icon in the menu bar.', 'lerp'),
-            'std' => 'on',
-            'type' => 'on-off',
-            'section' => 'lerp_header_section',
-        ),
-        array(
-            'id' => '_lerp_woocommerce_cart_desktop',
-            'label' => esc_html__('Woocommerce cart on menu bar', 'lerp'),
-            'desc' => esc_html__('Show the cart icon in the menu bar when layout is on desktop mode (Only for overlay and offcanvas menu).',
-                'lerp'),
-            'std' => 'off',
-            'type' => 'on-off',
-            'section' => 'lerp_header_section',
-            'condition' => '_lerp_woocommerce_cart:is(on)',
-            'operator' => 'and'
-        ),
-        array(
-            'id' => '_lerp_woocommerce_cart_mobile',
-            'label' => esc_html__('Woocommerce cart on menu bar for mobile', 'lerp'),
-            'desc' => esc_html__('Show the cart icon in the menu bar when layout is on mobile mode.', 'lerp'),
-            'std' => 'off',
-            'type' => 'on-off',
-            'section' => 'lerp_header_section',
-            'condition' => '_lerp_woocommerce_cart:is(on)',
-            'operator' => 'or'
-        ),
-        array(
             'id' => '_lerp_menu_bloginfo',
             'label' => esc_html__('Top line text', 'lerp'),
             'desc' => esc_html__('Insert additional text on top of the menu.', 'lerp'),
@@ -2784,187 +2698,13 @@ function custom_theme_options()
         str_replace('%section%', 'page', $footer_width),
         str_replace('%section%', 'page', $custom_fields_section_title),
         str_replace('%section%', 'page', $custom_fields_list),
-        ///////////////////////////
-        //  Portfolio Single		///
-        ///////////////////////////
-        str_replace('%section%', 'portfolio', $menu_section_title),
-        str_replace('%section%', 'portfolio', $menu),
-        str_replace('%section%', 'portfolio', $menu_width),
-        str_replace('%section%', 'portfolio', $menu_opaque),
-        str_replace('%section%', 'portfolio', $header_section_title),
-        str_replace('%section%', 'portfolio', $header_type),
-        str_replace('%section%', 'portfolio', $header_lerp_block),
-        str_replace('%section%', 'portfolio', $header_revslider),
-        str_replace('%section%', 'portfolio', $header_layerslider),
-
-        str_replace('%section%', 'portfolio', $header_width),
-        str_replace('%section%', 'portfolio', $header_height),
-        str_replace('%section%', 'portfolio', $header_min_height),
-        str_replace('%section%', 'portfolio', $header_title),
-        str_replace('%section%', 'portfolio', $header_style),
-        str_replace('%section%', 'portfolio', $header_content_width),
-        str_replace('%section%', 'portfolio', $header_custom_width),
-        str_replace('%section%', 'portfolio', $header_align),
-        str_replace('%section%', 'portfolio', $header_position),
-        str_replace('%section%', 'portfolio', $header_title_font),
-        str_replace('%section%', 'portfolio', $header_title_size),
-        str_replace('%section%', 'portfolio', $header_title_height),
-        str_replace('%section%', 'portfolio', $header_title_spacing),
-        str_replace('%section%', 'portfolio', $header_title_weight),
-        str_replace('%section%', 'portfolio', $header_title_transform),
-        str_replace('%section%', 'portfolio', $header_title_italic),
-        str_replace('%section%', 'portfolio', $header_text_animation),
-        str_replace('%section%', 'portfolio', $header_animation_speed),
-        str_replace('%section%', 'portfolio', $header_animation_delay),
-        str_replace('%section%', 'portfolio', $header_featured),
-        str_replace('%section%', 'portfolio', $header_background),
-        str_replace('%section%', 'portfolio', $header_parallax),
-        str_replace('%section%', 'portfolio', $header_kburns),
-        str_replace('%section%', 'portfolio', $header_overlay_color),
-        str_replace('%section%', 'portfolio', $header_overlay_color_alpha),
-        str_replace('%section%', 'portfolio', $header_scroll_opacity),
-        str_replace('%section%', 'portfolio', $header_scrolldown),
-
-        str_replace('%section%', 'portfolio', $body_section_title),
-        str_replace('%section%', 'portfolio', $body_layout_width),
-        str_replace('%section%', 'portfolio', $body_layout_width_custom),
-        str_replace('%section%', 'portfolio', run_array_to($show_breadcrumb, 'std', 'on')),
-        str_replace('%section%', 'portfolio', $breadcrumb_align),
-        str_replace('%section%', 'portfolio', run_array_to($show_title, 'std', 'on')),
-        str_replace('%section%', 'portfolio', $show_media),
-        str_replace('%section%', 'portfolio', $show_featured_media),
-        str_replace('%section%', 'portfolio', run_array_to($show_comments, 'std', 'off')),
-        str_replace('%section%', 'portfolio', $show_share),
-        str_replace('%section%', 'portfolio', $body_lerp_block_after),
-        array(
-            'id' => '_lerp_portfolio_details_title',
-            'label' => '<i class="fa fa-briefcase3"></i> ' . esc_html__('Details', 'lerp'),
-            'type' => 'textblock-titled',
-            'class' => 'section-title',
-            'section' => 'lerp_portfolio_section',
-        ),
-        array(
-            'id' => '_lerp_portfolio_details',
-            'label' => ucfirst($portfolio_cpt_name) . ' ' . esc_html__('details', 'lerp'),
-            'desc' => sprintf(esc_html__('Create here all the %s details label that you need.', 'lerp'),
-                $portfolio_cpt_name),
-            'type' => 'list-item',
-            'section' => 'lerp_portfolio_section',
-            'settings' => array(
-                array(
-                    'id' => '_lerp_portfolio_detail_unique_id',
-                    'class' => 'unique_id',
-                    'std' => 'detail-',
-                    'type' => 'text',
-                    'label' => sprintf(esc_html__('Unique %s detail ID', 'lerp'), $portfolio_cpt_name),
-                    'desc' => esc_html__('This value is created automatically and it shouldn\'t be edited unless you know what you are doing.',
-                        'lerp'),
-                ),
-            )
-        ),
-        array(
-            'id' => '_lerp_portfolio_position',
-            'label' => ucfirst($portfolio_cpt_name) . ' ' . esc_html__('details layout', 'lerp'),
-            'desc' => sprintf(esc_html__('Specify the layout template for all the %s posts.', 'lerp'),
-                $portfolio_cpt_name),
-            'type' => 'select',
-            'section' => 'lerp_portfolio_section',
-            'choices' => array(
-                array(
-                    'value' => '',
-                    'label' => esc_html__('Select…', 'lerp'),
-                ),
-                array(
-                    'value' => 'portfolio_top',
-                    'label' => esc_html__('Details on the top', 'lerp'),
-                ),
-                array(
-                    'value' => 'sidebar_right',
-                    'label' => esc_html__('Details on the right', 'lerp'),
-                ),
-                array(
-                    'value' => 'portfolio_bottom',
-                    'label' => esc_html__('Details on the bottom', 'lerp'),
-                ),
-                array(
-                    'value' => 'sidebar_left',
-                    'label' => esc_html__('Details on the left', 'lerp'),
-                ),
-            )
-        ),
-        array(
-            'id' => '_lerp_portfolio_sidebar_size',
-            'label' => esc_html__('Sidebar size', 'lerp'),
-            'desc' => esc_html__('Set the sidebar size.', 'lerp'),
-            'std' => '4',
-            'min_max_step' => '1,12,1',
-            'type' => 'numeric-slider',
-            'section' => 'lerp_portfolio_section',
-            'operator' => 'and',
-            'condition' => '_lerp_portfolio_position:not(),_lerp_portfolio_position:contains(sidebar)',
-        ),
-        str_replace('%section%',
-            'portfolio',
-            run_array_to($sidebar_sticky,
-                'condition',
-                '_lerp_portfolio_position:not(),_lerp_portfolio_position:contains(sidebar)')),
-        array(
-            'id' => '_lerp_portfolio_style',
-            'label' => esc_html__('Skin', 'lerp'),
-            'desc' => esc_html__('Specify the sidebar text skin color.', 'lerp'),
-            'type' => 'select',
-            'choices' => array(
-                array(
-                    'value' => '',
-                    'label' => esc_html__('继承', "lerp"),
-                ),
-                array(
-                    'value' => 'light',
-                    'label' => esc_html__('Light', "lerp"),
-                ),
-                array(
-                    'value' => 'dark',
-                    'label' => esc_html__('Dark', "lerp"),
-                )
-            ),
-            'section' => 'lerp_portfolio_section',
-            'condition' => '_lerp_portfolio_position:not()',
-        ),
-        array(
-            'id' => '_lerp_portfolio_bgcolor',
-            'label' => esc_html__('Sidebar color', 'lerp'),
-            'desc' => esc_html__('Specify the sidebar background color.', 'lerp'),
-            'type' => 'lerp_color',
-            'section' => 'lerp_portfolio_section',
-            'condition' => '_lerp_portfolio_position:not()',
-        ),
-        array(
-            'id' => '_lerp_portfolio_sidebar_fill',
-            'label' => esc_html__('Sidebar filling space', 'lerp'),
-            'desc' => esc_html__('Activate to remove padding around the sidebar and fill the height.', 'lerp'),
-            'type' => 'on-off',
-            'section' => 'lerp_portfolio_section',
-            'std' => 'off',
-            'operator' => 'and',
-            'condition' => '_lerp_portfolio_position:not(),_lerp_portfolio_sidebar_bgcolor:not(),_lerp_portfolio_position:contains(sidebar)',
-        ),
-        str_replace('%section%', 'portfolio', $navigation_section_title),
-        str_replace('%section%', 'portfolio', $navigation_activate),
-        str_replace('%section%', 'portfolio', $navigation_page_index),
-        str_replace('%section%', 'portfolio', $navigation_index_label),
-        str_replace('%section%', 'portfolio', $navigation_nextprev_title),
-        str_replace('%section%', 'portfolio', $footer_section_title),
-        str_replace('%section%', 'portfolio', $footer_lerp_block),
-        str_replace('%section%', 'portfolio', $footer_width),
-        str_replace('%section%', 'portfolio', $custom_fields_section_title),
-        str_replace('%section%', 'portfolio', $custom_fields_list),
     );
 
     $custom_settings_one = array_merge($custom_settings_one, $cpt_single_options);
 
     $custom_settings_two = array(
         ///////////////////
-        //  Page 404		///
+        //  Page 404    ///
         ///////////////////
         str_replace('%section%', '404', $menu_section_title),
         str_replace('%section%', '404', $menu),
@@ -2973,8 +2713,8 @@ function custom_theme_options()
         str_replace('%section%', '404', $header_section_title),
         str_replace('%section%', '404', $header_type),
         str_replace('%section%', '404', $header_lerp_block),
-        str_replace('%section%', '404', $header_revslider),
-        str_replace('%section%', '404', $header_layerslider),
+//        str_replace('%section%', '404', $header_revslider),
+//        str_replace('%section%', '404', $header_layerslider),
 
         str_replace('%section%', '404', $header_width),
         str_replace('%section%', '404', $header_height),
@@ -3012,7 +2752,7 @@ function custom_theme_options()
         str_replace('%section%', '404', $footer_lerp_block),
         str_replace('%section%', '404', $footer_width),
         //////////////////////
-        //  Posts Index		///
+        //  Posts Index	   ///
         //////////////////////
         str_replace('%section%', 'post_index', $menu_section_title),
         str_replace('%section%', 'post_index', $menu),
@@ -3021,8 +2761,8 @@ function custom_theme_options()
         str_replace('%section%', 'post_index', $header_section_title),
         str_replace('%section%', 'post_index', run_array_to($header_type, 'std', 'header_basic')),
         str_replace('%section%', 'post_index', $header_lerp_block),
-        str_replace('%section%', 'post_index', $header_revslider),
-        str_replace('%section%', 'post_index', $header_layerslider),
+//        str_replace('%section%', 'post_index', $header_revslider),
+//        str_replace('%section%', 'post_index', $header_layerslider),
 
         str_replace('%section%', 'post_index', $header_width),
         str_replace('%section%', 'post_index', $header_height),
@@ -3084,8 +2824,8 @@ function custom_theme_options()
         str_replace('%section%', 'page_index', $header_section_title),
         str_replace('%section%', 'page_index', run_array_to($header_type, 'std', 'header_basic')),
         str_replace('%section%', 'page_index', $header_lerp_block),
-        str_replace('%section%', 'page_index', $header_revslider),
-        str_replace('%section%', 'page_index', $header_layerslider),
+//        str_replace('%section%', 'page_index', $header_revslider),
+//        str_replace('%section%', 'page_index', $header_layerslider),
 
         str_replace('%section%', 'page_index', $header_width),
         str_replace('%section%', 'page_index', $header_height),
@@ -3141,72 +2881,6 @@ function custom_theme_options()
         str_replace('%section%', 'page_index', $footer_section_title),
         str_replace('%section%', 'page_index', $footer_lerp_block),
         str_replace('%section%', 'page_index', $footer_width),
-        ////////////////////////
-        //  Archive Index		///
-        ////////////////////////
-        str_replace('%section%', 'portfolio_index', $menu_section_title),
-        str_replace('%section%', 'portfolio_index', $menu),
-        str_replace('%section%', 'portfolio_index', $menu_width),
-        str_replace('%section%', 'portfolio_index', $menu_opaque),
-        str_replace('%section%', 'portfolio_index', $header_section_title),
-        str_replace('%section%', 'portfolio_index', run_array_to($header_type, 'std', 'header_basic')),
-        str_replace('%section%', 'portfolio_index', $header_lerp_block),
-        str_replace('%section%', 'portfolio_index', $header_revslider),
-        str_replace('%section%', 'portfolio_index', $header_layerslider),
-
-        str_replace('%section%', 'portfolio_index', $header_width),
-        str_replace('%section%', 'portfolio_index', $header_height),
-        str_replace('%section%', 'portfolio_index', $header_min_height),
-        str_replace('%section%', 'portfolio_index', $header_title),
-        str_replace('%section%', 'portfolio_index', $header_style),
-        str_replace('%section%', 'portfolio_index', $header_content_width),
-        str_replace('%section%', 'portfolio_index', $header_custom_width),
-        str_replace('%section%', 'portfolio_index', $header_align),
-        str_replace('%section%', 'portfolio_index', $header_position),
-        str_replace('%section%', 'portfolio_index', $header_title_font),
-        str_replace('%section%', 'portfolio_index', $header_title_size),
-        str_replace('%section%', 'portfolio_index', $header_title_height),
-        str_replace('%section%', 'portfolio_index', $header_title_spacing),
-        str_replace('%section%', 'portfolio_index', $header_title_weight),
-        str_replace('%section%', 'portfolio_index', $header_title_transform),
-        str_replace('%section%', 'portfolio_index', $header_title_italic),
-        str_replace('%section%', 'portfolio_index', $header_text_animation),
-        str_replace('%section%', 'portfolio_index', $header_animation_speed),
-        str_replace('%section%', 'portfolio_index', $header_animation_delay),
-        str_replace('%section%', 'portfolio_index', $header_featured),
-        str_replace('%section%', 'portfolio_index', $header_background),
-        str_replace('%section%', 'portfolio_index', $header_parallax),
-        str_replace('%section%', 'portfolio_index', $header_kburns),
-        str_replace('%section%', 'portfolio_index', $header_overlay_color),
-        str_replace('%section%', 'portfolio_index', $header_overlay_color_alpha),
-        str_replace('%section%', 'portfolio_index', $header_scroll_opacity),
-        str_replace('%section%', 'portfolio_index', $header_scrolldown),
-        str_replace('%section%', 'portfolio_index', $menu_no_padding),
-        str_replace('%section%', 'portfolio_index', $menu_no_padding_mobile),
-
-        str_replace('%section%', 'portfolio_index', $body_section_title),
-        str_replace('%section%', 'portfolio_index', $show_breadcrumb),
-        str_replace('%section%', 'portfolio_index', $breadcrumb_align),
-        str_replace('%section%', 'portfolio_index', $body_lerp_block),
-        str_replace('%section%',
-            'portfolio_index',
-            run_array_to($body_layout_width,
-                'condition',
-                '_lerp_%section%_content_block:is(),_lerp_%section%_content_block:is(none)')),
-        str_replace('%section%', 'portfolio_index', $body_single_post_width),
-        str_replace('%section%', 'portfolio_index', $show_title),
-        str_replace('%section%', 'portfolio_index', $sidebar_section_title),
-        str_replace('%section%', 'portfolio_index', $sidebar_activate),
-        str_replace('%section%', 'portfolio_index', $sidebar_widget),
-        str_replace('%section%', 'portfolio_index', $sidebar_position),
-        str_replace('%section%', 'portfolio_index', $sidebar_size),
-        str_replace('%section%', 'portfolio_index', $sidebar_sticky),
-        str_replace('%section%', 'portfolio_index', $sidebar_style),
-        str_replace('%section%', 'portfolio_index', $sidebar_bgcolor),
-        str_replace('%section%', 'portfolio_index', $sidebar_fill),
-        str_replace('%section%', 'portfolio_index', $footer_section_title),
-        str_replace('%section%', 'portfolio_index', $footer_lerp_block),
-        str_replace('%section%', 'portfolio_index', $footer_width),
     );
 
     $custom_settings_one = array_merge($custom_settings_one, $custom_settings_two);
@@ -4210,30 +3884,6 @@ function custom_theme_options()
             'min_max_step' => '0.5,3,0.5',
             'section' => 'lerp_extra_section',
         ),
-        array(
-            'id' => '_lerp_custom_portfolio_block_title',
-            'label' => '<i class="fa fa-briefcase3"></i> ' . ucfirst($portfolio_cpt_name) . ' ' . esc_html__('CPT',
-                    'lerp'),
-            'type' => 'textblock-titled',
-            'class' => 'section-title',
-            'section' => 'lerp_extra_section',
-        ),
-        array(
-            'id' => '_lerp_portfolio_cpt',
-            'label' => ucfirst($portfolio_cpt_name) . ' ' . esc_html__('CPT label', 'lerp'),
-            'desc' => esc_html__('Enter a custom portfolio post type label.', 'lerp'),
-            'std' => 'portfolio',
-            'type' => 'text',
-            'section' => 'lerp_extra_section',
-        ),
-        array(
-            'id' => '_lerp_portfolio_cpt_slug',
-            'label' => ucfirst($portfolio_cpt_name) . ' ' . esc_html__('CPT slug', 'lerp'),
-            'desc' => esc_html__('Enter a custom portfolio post type slug.', 'lerp'),
-            'std' => 'portfolio',
-            'type' => 'text',
-            'section' => 'lerp_extra_section',
-        )
     );
 
     $custom_settings_four = array(
@@ -4579,183 +4229,6 @@ function custom_theme_options()
         'sections' => $custom_settings_section_one,
         'settings' => $custom_settings_one,
     );
-
-    if ( class_exists('WooCommerce') ) {
-
-        $woo_section = array(
-            // array(
-            // 	'id' => 'lerp_woocommerce_section',
-            // 	'title' => '<i class="fa fa-shopping-cart"></i> ' . esc_html__('WooCommerce', 'lerp')
-            // ),
-            array(
-                'id' => 'lerp_product_section',
-                'title' => '<span class="smaller"><i class="fa fa-paper"></i> ' . esc_html__('Product',
-                        'lerp') . '</span>',
-                'group' => esc_html__('Single', 'lerp'),
-            ),
-            array(
-                'id' => 'lerp_product_index_section',
-                'title' => '<span class="smaller"><i class="fa fa-archive2"></i> ' . esc_html__('Products',
-                        'lerp') . '</span>',
-                'group' => esc_html__('Archives', 'lerp'),
-            ),
-        );
-
-        $menus_array[] = array(
-            'value' => '',
-            'label' => esc_html__('Select…', 'lerp')
-        );
-        $menu_array = array();
-        $nav_menus = get_registered_nav_menus();
-
-        foreach ( $nav_menus as $location => $description ) {
-
-            $menu_array['value'] = $location;
-            $menu_array['label'] = $description;
-            $menus_array[] = $menu_array;
-        }
-
-        $menus_array[] = array(
-            'value' => 'social',
-            'label' => esc_html__('Social Menu', 'lerp')
-        );
-
-        $woocommerce_post = array(
-            /////////////////////////
-            //  Product Single		///
-            /////////////////////////
-            str_replace('%section%', 'product', $menu_section_title),
-            str_replace('%section%', 'product', $menu),
-            str_replace('%section%', 'product', $menu_width),
-            str_replace('%section%', 'product', $menu_opaque),
-            str_replace('%section%', 'product', $header_section_title),
-            str_replace('%section%', 'product', $header_type),
-            str_replace('%section%', 'product', $header_lerp_block),
-            str_replace('%section%', 'product', $header_revslider),
-            str_replace('%section%', 'product', $header_layerslider),
-
-            str_replace('%section%', 'product', $header_width),
-            str_replace('%section%', 'product', $header_height),
-            str_replace('%section%', 'product', $header_min_height),
-            str_replace('%section%', 'product', $header_title),
-            str_replace('%section%', 'product', $header_style),
-            str_replace('%section%', 'product', $header_content_width),
-            str_replace('%section%', 'product', $header_custom_width),
-            str_replace('%section%', 'product', $header_align),
-            str_replace('%section%', 'product', $header_position),
-            str_replace('%section%', 'product', $header_title_font),
-            str_replace('%section%', 'product', $header_title_size),
-            str_replace('%section%', 'product', $header_title_height),
-            str_replace('%section%', 'product', $header_title_spacing),
-            str_replace('%section%', 'product', $header_title_weight),
-            str_replace('%section%', 'product', $header_title_transform),
-            str_replace('%section%', 'product', $header_title_italic),
-            str_replace('%section%', 'product', $header_text_animation),
-            str_replace('%section%', 'product', $header_animation_speed),
-            str_replace('%section%', 'product', $header_animation_delay),
-            str_replace('%section%', 'product', $header_featured),
-            str_replace('%section%', 'product', $header_background),
-            str_replace('%section%', 'product', $header_parallax),
-            str_replace('%section%', 'product', $header_kburns),
-            str_replace('%section%', 'product', $header_overlay_color),
-            str_replace('%section%', 'product', $header_overlay_color_alpha),
-            str_replace('%section%', 'product', $header_scroll_opacity),
-            str_replace('%section%', 'product', $header_scrolldown),
-
-            str_replace('%section%', 'product', $body_section_title),
-            str_replace('%section%', 'product', $body_layout_width),
-            str_replace('%section%', 'product', $body_layout_width_custom),
-            str_replace('%section%', 'product', $show_breadcrumb),
-            str_replace('%section%', 'product', $breadcrumb_align),
-            str_replace('%section%', 'product', $show_title),
-            str_replace('%section%', 'product', $show_share),
-            str_replace('%section%', 'product', $image_layout),
-            str_replace('%section%', 'product', $media_size),
-            str_replace('%section%', 'product', $enable_sticky_desc),
-            str_replace('%section%', 'product', $enable_woo_zoom),
-            str_replace('%section%', 'product', $thumb_cols),
-            str_replace('%section%', 'product', $enable_woo_slider),
-            str_replace('%section%', 'product', $body_lerp_block_after),
-            str_replace('%section%', 'product', $navigation_section_title),
-            str_replace('%section%', 'product', $navigation_activate),
-            str_replace('%section%', 'product', $navigation_page_index),
-            str_replace('%section%', 'product', $navigation_index_label),
-            str_replace('%section%', 'product', $navigation_nextprev_title),
-            str_replace('%section%', 'product', $footer_section_title),
-            str_replace('%section%', 'product', $footer_lerp_block),
-            str_replace('%section%', 'product', $footer_width),
-            str_replace('%section%', 'product', $custom_fields_section_title),
-            str_replace('%section%', 'product', $custom_fields_list),
-            /////////////////////////
-            //  Products Index		///
-            /////////////////////////
-            str_replace('%section%', 'product_index', $menu_section_title),
-            str_replace('%section%', 'product_index', $menu),
-            str_replace('%section%', 'product_index', $menu_width),
-            str_replace('%section%', 'product_index', $menu_opaque),
-            str_replace('%section%', 'product_index', $header_section_title),
-            str_replace('%section%', 'product_index', run_array_to($header_type, 'std', 'header_basic')),
-            str_replace('%section%', 'product_index', $header_lerp_block),
-            str_replace('%section%', 'product_index', $header_revslider),
-            str_replace('%section%', 'product_index', $header_layerslider),
-
-            str_replace('%section%', 'product_index', $header_width),
-            str_replace('%section%', 'product_index', $header_height),
-            str_replace('%section%', 'product_index', $header_min_height),
-            str_replace('%section%', 'product_index', $header_title),
-            str_replace('%section%', 'product_index', $header_style),
-            str_replace('%section%', 'product_index', $header_content_width),
-            str_replace('%section%', 'product_index', $header_custom_width),
-            str_replace('%section%', 'product_index', $header_align),
-            str_replace('%section%', 'product_index', $header_position),
-            str_replace('%section%', 'product_index', $header_title_font),
-            str_replace('%section%', 'product_index', $header_title_size),
-            str_replace('%section%', 'product_index', $header_title_height),
-            str_replace('%section%', 'product_index', $header_title_spacing),
-            str_replace('%section%', 'product_index', $header_title_weight),
-            str_replace('%section%', 'product_index', $header_title_transform),
-            str_replace('%section%', 'product_index', $header_title_italic),
-            str_replace('%section%', 'product_index', $header_text_animation),
-            str_replace('%section%', 'product_index', $header_animation_speed),
-            str_replace('%section%', 'product_index', $header_animation_delay),
-            str_replace('%section%', 'product_index', $header_featured),
-            str_replace('%section%', 'product_index', $header_background),
-            str_replace('%section%', 'product_index', $header_parallax),
-            str_replace('%section%', 'product_index', $header_kburns),
-            str_replace('%section%', 'product_index', $header_overlay_color),
-            str_replace('%section%', 'product_index', $header_overlay_color_alpha),
-            str_replace('%section%', 'product_index', $header_scroll_opacity),
-            str_replace('%section%', 'product_index', $header_scrolldown),
-            str_replace('%section%', 'product_index', $menu_no_padding),
-            str_replace('%section%', 'product_index', $menu_no_padding_mobile),
-
-            str_replace('%section%', 'product_index', $body_section_title),
-            str_replace('%section%', 'product_index', $show_breadcrumb),
-            str_replace('%section%', 'product_index', $breadcrumb_align),
-            str_replace('%section%', 'product_index', $body_lerp_block),
-            str_replace('%section%', 'product_index', $body_layout_width),
-            str_replace('%section%', 'product_index', $body_single_post_width),
-            str_replace('%section%', 'product_index', $show_title),
-            str_replace('%section%', 'product_index', $sidebar_section_title),
-            str_replace('%section%', 'product_index', run_array_to($sidebar_activate, 'std', 'on')),
-            str_replace('%section%', 'product_index', $sidebar_widget),
-            str_replace('%section%', 'product_index', $sidebar_position),
-            str_replace('%section%', 'product_index', $sidebar_size),
-            str_replace('%section%', 'product_index', $sidebar_sticky),
-            str_replace('%section%', 'product_index', $sidebar_style),
-            str_replace('%section%', 'product_index', $sidebar_bgcolor),
-            str_replace('%section%', 'product_index', $sidebar_fill),
-            str_replace('%section%', 'product_index', $footer_section_title),
-            str_replace('%section%', 'product_index', $footer_lerp_block),
-            str_replace('%section%', 'product_index', $footer_width),
-        );
-
-        $custom_settings['sections'] = array_merge($custom_settings['sections'], $woo_section);
-        // array_push($custom_settings['settings'], $woocommerce_cart_icon);
-        // array_push($custom_settings['settings'], $woocommerce_hooks);
-        $custom_settings['settings'] = array_merge($custom_settings['settings'], $woocommerce_post);
-
-    }
 
     $custom_settings['settings'] = array_filter($custom_settings['settings'], 'lerp_is_not_null');
 
