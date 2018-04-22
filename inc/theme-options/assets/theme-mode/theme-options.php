@@ -447,10 +447,6 @@ function custom_theme_options()
         'type' => 'select',
         'choices' => array(
             array(
-                'value' => 'none',
-                'label' => esc_html__('选择…', 'lerp'),
-            ),
-            array(
                 'value' => 'header_basic',
                 'label' => esc_html__('基本', 'lerp'),
             ),
@@ -537,7 +533,7 @@ function custom_theme_options()
 
     $header_width = array(
         'id' => '_lerp_%section%_header_width',
-        'label' => esc_html__('Header width', 'lerp'),
+        'label' => esc_html__('页眉宽度', 'lerp'),
         'type' => 'select',
         'choices' => array(
             array(
