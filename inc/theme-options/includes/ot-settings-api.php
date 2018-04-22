@@ -262,8 +262,8 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 								echo lerp_admin_panel_page_title( 'utils' );
 							} else {
 								echo lerp_admin_panel_page_title( true, array(
-									'page_title'  => esc_html__( 'Theme Options', 'lerp' ),
-									'description' => esc_html__( 'Theme Options are the backbone of Lerp. They are logically organised and give you full control over your website design and settings.', 'lerp' ),
+									'page_title'  => esc_html__( 'Lerp 主题设置', 'lerp' ),
+									'description' => esc_html__( '主题选项能够让您完全控制您的网站设计和设置。', 'lerp' ),
 								) );
 							}
 
@@ -271,22 +271,6 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 								echo ot_alert_message( $page );
 
 								settings_errors( 'option-tree' );
-
-								/* Header */
-								// echo '<div id="option-tree-header-wrap">';
-
-								// 	echo '<ul id="option-tree-header">';
-
-								// 		echo '<li id="option-tree-logo">' . apply_filters( 'ot_header_logo_link', '<a href="http://wordpress.org/extend/plugins/option-tree/" target="_blank">OptionTree</a>', $page['id'] ) . '</li>';
-
-								// 		echo '<li id="option-tree-version"><span>' . apply_filters( 'ot_header_version_text', 'OptionTree ' . OT_VERSION, $page['id'] ) . '</span></li>';
-
-								// 		// Add additional theme specific links here.
-								// 		do_action( 'ot_header_list', $page['id'] );
-
-								// 	echo '</ul>';
-
-								// echo '</div>';
 
 							}
 

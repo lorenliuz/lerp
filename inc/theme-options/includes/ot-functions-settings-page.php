@@ -110,9 +110,9 @@ if ( !function_exists('ot_type_theme_options_ui') ) {
         /* buttons */
         echo '<a href="javascript:void(0);" class="option-tree-section-add option-tree-ui-button button hug-left">' . esc_html__('Add Section',
                 'option-tree') . '</a>';
-        echo '<a href="javascript:void(0);" class="option-tree-setting-add option-tree-ui-button button">' . esc_html__('Add Setting',
+        echo '<a href="javascript:void(0);" class="option-tree-setting-add option-tree-ui-button button">' . esc_html__('添加设置',
                 'option-tree') . '</a>';
-        echo '<button class="option-tree-ui-button button button-primary right hug-right">' . esc_html__('Save Changes',
+        echo '<button class="option-tree-ui-button button button-primary right hug-right">' . esc_html__('保存更改',
                 'option-tree') . '</button>';
 
         /* sidebar textarea */

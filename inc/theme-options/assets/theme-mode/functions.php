@@ -76,7 +76,7 @@ add_filter('ot_theme_options_parent_slug', 'lerp_admin_slug');
 
 function lerp_to_title()
 {
-    return esc_html__('Theme Options', 'lerp');
+    return esc_html__('主题设置', 'lerp');
 }
 
 add_filter('ot_theme_options_menu_title', 'lerp_to_title');

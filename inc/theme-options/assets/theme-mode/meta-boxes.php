@@ -74,7 +74,7 @@ function lerp_page_options()
 
 	$specific_menu = array(
 		'id' => '_lerp_specific_menu',
-		'label' => esc_html__('Menu', 'lerp') ,
+		'label' => esc_html__('菜单', 'lerp') ,
 		'desc' => esc_html__('Override the menu.','lerp'),
 		'type' => 'select',
 		'choices' => $menus_array
@@ -135,7 +135,7 @@ function lerp_page_options()
 
 	$menu_fields = array(
 		array(
-			'label' => '<i class="fa fa-menu fa-fw"></i> ' . esc_html__('Menu', 'lerp') ,
+			'label' => '<i class="fa fa-menu fa-fw"></i> ' . esc_html__('菜单', 'lerp') ,
 			'id' => '_lerp_menu_tab',
 			'type' => 'tab',
 		) ,
@@ -1921,7 +1921,7 @@ function lerp_page_options()
 
 	$fullpage_menu = array(
 		'id' => '_lerp_fullpage_menu',
-		'label' => esc_html__('Menu', 'lerp') ,
+		'label' => esc_html__('菜单', 'lerp') ,
 		'desc' => esc_html__('Set the animation for the Menu. NB: When you use the Slides Scroll the default Menu behaviour is Sticky.','lerp'),
 		'type' => 'select',
 		'choices' => array(
