@@ -1,6 +1,6 @@
 (function(w) {
 	"use strict";
-	var lerp = 'lerpAI',
+	var uncode = 'uncodeAI',
 		path = ';path=',
 		doc = document,
 		winWidth = w.innerWidth,
@@ -13,12 +13,12 @@
 		cookiesEnable = navigator.cookieEnabled;
 
 	/**
-	 * Extract the lerp cookie values
+	 * Extract the uncode cookie values
 	 *
-	 * @return {Object}				lerp cookie values
+	 * @return {Object}				uncode cookie values
 	 */
-	var getlerpCookies = function() {
-		for (var index = 0, cookieParts = doc.cookie.split(';'), cookiePattern = /^\slerpAI\.([^=]+)=(.*?)\s*$/, cookies = {}, cookie; index < cookieParts.length; ++index) {
+	var getuncodeCookies = function() {
+		for (var index = 0, cookieParts = doc.cookie.split(';'), cookiePattern = /^\suncodeAI\.([^=]+)=(.*?)\s*$/, cookies = {}, cookie; index < cookieParts.length; ++index) {
 			if (cookie = cookieParts[index].match(cookiePattern)) {
 				cookies[cookie[1]] = cookie[2];
 			}
@@ -103,11 +103,11 @@
 	var roundToPrecision = function(em, precision) {
 		return precision * Math.round(10 * em / precision) / 10;
 	}
-	if (cookiesEnable) cookies = getlerpCookies();
+	if (cookiesEnable) cookies = getuncodeCookies();
 	if (cookies.images !== undefined) cookieRecorded = true;
-	// Run through all document JavaScripts and find the lerp script (must reference a script file named "lerp.js" or carry an ID attribute with value "lerp")
+	// Run through all document JavaScripts and find the uncode script (must reference a script file named "uncode.js" or carry an ID attribute with value "uncode")
 	for (var index = 0, scripts = doc.getElementsByTagName('script'); index < scripts.length; ++index) {
-		if (scripts[index].id == lerp) {
+		if (scripts[index].id == uncode) {
 			var pixelRatio = getDevicePixelRatio();
 			var imgBreakpoint = '2880';
 			var imgRetinaBreakpoint = '2880';
@@ -118,8 +118,8 @@
 			path = path + scripts[index].getAttribute('data-home');
 			if (scripts[index].getAttribute('data-async') == 'true') cookiesEnable = false;
 			// Set the general screen size cookie
-			if (cookiesEnable) doc.cookie = lerp + '.screen=' + screenWidth + path; // + 'x' + screenHeight + '@' + pixelRatio + path;
-			w.lerpScreen = screenWidth;
+			if (cookiesEnable) doc.cookie = uncode + '.screen=' + screenWidth + path; // + 'x' + screenHeight + '@' + pixelRatio + path;
+			w.uncodeScreen = screenWidth;
 			// Set the image engine cookie (if enabled)
 			if (!scripts[index].getAttribute('data-disable-images')) {
 				var breakpoints = getBreakpoints(scripts[index].getAttribute('data-breakpoints-images'));
@@ -140,21 +140,21 @@
 				} while (breakpoints.length);
 			}
 			if (pixelRatio > 1) {
-				if (cookiesEnable) doc.cookie = lerp + '.images=' + imgRetinaBreakpoint + path;
-				w.lerpImages = imgRetinaBreakpoint;
+				if (cookiesEnable) doc.cookie = uncode + '.images=' + imgRetinaBreakpoint + path;
+				w.uncodeImages = imgRetinaBreakpoint;
 			} else {
-				if (cookiesEnable) doc.cookie = lerp + '.images=' + imgBreakpoint + path;
-				w.lerpImages = imgBreakpoint;
+				if (cookiesEnable) doc.cookie = uncode + '.images=' + imgBreakpoint + path;
+				w.uncodeImages = imgBreakpoint;
 			}
-			// Determine the lerp cookie values
+			// Determine the uncode cookie values
 			if (cookiesEnable) {
-				cookies = getlerpCookies();
+				cookies = getuncodeCookies();
 				cssBreakpoint = cookies.css || '-';
 				if ((!('css' in cookies) || !cookies.css || (cookies.css == '-')) && !scripts[index].getAttribute('data-disable-css')) {
 					var emRatio = winWidth / measureWindowEmWidth(parseFloat(scripts[index].getAttribute('data-em-precision') || .5, 10) / 100);
 					cssBreakpoint = screenWidth + 'x' + screenHeight + '@' + (Math.round(emRatio * 10) / 10);
 				}
-				doc.cookie = lerp + '.css=' + cssBreakpoint + path;
+				doc.cookie = uncode + '.css=' + cssBreakpoint + path;
 			}
 			break;
 		}

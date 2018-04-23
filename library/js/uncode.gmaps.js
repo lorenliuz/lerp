@@ -1,6 +1,6 @@
 (function() {
 	"use strict";
-	var lerp_gmaps_init = function() {
+	var uncode_gmaps_init = function() {
 		var gmaps_single = function($el) {
 			//set your google maps parameters
 			var map_id = jQuery($el).attr('id'),
@@ -303,9 +303,9 @@
 				jQuery('.gmap-buttons', $el).css('opacity', '1');
 			});
 		};
-		jQuery('.lerp-map-wrapper').each(function() {
+		jQuery('.uncode-map-wrapper').each(function() {
 			gmaps_single(this);
     });
 	};
-	google.maps.event.addDomListener(window, 'load', lerp_gmaps_init);
+	google.maps.event.addDomListener(window, 'load', uncode_gmaps_init);
 }());
