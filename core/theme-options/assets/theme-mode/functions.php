@@ -747,7 +747,7 @@ function uncode_css_upload_error_notice() {
 if (!function_exists('uncode_create_dynamic_css')) {
 	function uncode_create_dynamic_css() {
 
-		$css_dir = get_template_directory() . '/library/css/';
+		$css_dir = get_template_directory() . '/lib/assets/css/';
 		ob_start(); // Capture all output (output buffering)
 
 		require(get_template_directory() . '/core/inc/style-custom.css.php'); // Generate CSS

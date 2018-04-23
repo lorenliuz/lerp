@@ -72,7 +72,7 @@ function custom_theme_options()
 
         $uncodeblock = array(
             'value' => 'header_uncodeblock',
-            'label' => esc_html__('Content Block', 'uncode'),
+            'label' => esc_html__('内容块', 'uncode'),
         );
 
         $uncodeblocks = array(

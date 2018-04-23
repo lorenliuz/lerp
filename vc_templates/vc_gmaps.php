@@ -2,7 +2,7 @@
 $google_api_key = ot_get_option('_uncode_gmaps_api');
 if ($google_api_key !== '') $google_api_key = '?key=' . $google_api_key;
 wp_enqueue_script('google-maps-api', '//maps.googleapis.com/maps/api/js' . $google_api_key, array(), false, true);
-wp_enqueue_script('uncode-google-maps', get_template_directory_uri() . '/library/js/min/uncode.gmaps.min.js', array('google-maps-api') , UNCODE_VERSION, true);
+wp_enqueue_script('uncode-google-maps', get_template_directory_uri() . '/lib/assets/js/min/uncode.gmaps.min.js', array('google-maps-api') , UNCODE_VERSION, true);
 
 $output = $title = $latlon = $link = $size = $address = $zoom = $map_color = $ui_color = $map_saturation = $map_brightness = $type = $bubble = $mobile_no_drag = $el_class = $ui_color_map = '';
 extract(shortcode_atts(array(

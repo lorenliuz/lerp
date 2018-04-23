@@ -26,7 +26,7 @@ function uncode_custom_excerpt_length($length)
 add_filter('excerpt_length', 'uncode_custom_excerpt_length', 999);
 
 function uncode_wpcf7_ajax_loader() {
-	return get_template_directory_uri() . '/library/img/fading-squares.gif';
+	return get_template_directory_uri() . '/lib/assets/img/fading-squares.gif';
 }
 
 add_filter( 'wpcf7_ajax_loader', 'uncode_wpcf7_ajax_loader', 10 );

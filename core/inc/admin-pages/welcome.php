@@ -76,7 +76,7 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 		<div class="uncode-admin-panel__content uncode-admin-panel__content--two-cols">
 
 			<div class="uncode-admin-panel__left">
-				<h2 class="uncode-admin-panel__heading"><?php esc_html_e( 'Registration', 'uncode' ); ?></h2>
+				<h2 class="uncode-admin-panel__heading"><?php esc_html_e( '注册', 'uncode' ); ?></h2>
 
 				<div class="uncode-info-box">
 					<p class="uncode-admin-panel__description"><?php printf(esc_html__('According to the %s you are only allowed to use this theme on a single domain. Creating multiple unregistered installations is a copyright violation. Please register your product.','uncode'), '<a tabindex="-1" href="' . esc_url('//themeforest.net/licenses/standard') . '" target="_blank">'.esc_html__('Envato License Terms','uncode').'</a>'); ?></p>
@@ -230,14 +230,14 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 			</div><!-- .uncode-admin-panel__left -->
 
 			<div class="uncode-admin-panel__right">
-				<h2 class="uncode-admin-panel__heading"><?php esc_html_e( 'System Status', 'uncode' ); ?></h2>
+				<h2 class="uncode-admin-panel__heading"><?php esc_html_e( '系统状态', 'uncode' ); ?></h2>
 
 				<p class="uncode-admin-panel__description"><?php printf(esc_html__("Under System Status, you can find important information about your server setup. If you see red errors that indicate problems, it is likely that you're not in compliance with Uncode's %s.", "uncode"), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213453949') . '" target="_blank">'.esc_html__('Server Requirements','uncode').'</a>'); ?></p>
 
 				<table class="widefat system-status-list" cellspacing="0" id="status">
 					<tbody>
 						<tr>
-							<td data-export-label="License"><?php echo esc_html__("Theme version", "uncode"); ?>
+							<td data-export-label="License"><?php echo esc_html__("主题版本", "uncode"); ?>
 							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'The version of Uncode installed on your site.', 'uncode' ) . '</small>'; ?></td>
 							<td>
 							<?php $theme_data = wp_get_theme();
@@ -273,12 +273,12 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 							</td>
 						</tr>
 						<tr>
-							<td data-export-label="WP Version"><?php esc_html_e( 'WP Version', 'uncode' ); ?>
+							<td data-export-label="WP Version"><?php esc_html_e( 'WordPress版本', 'uncode' ); ?>
 							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'The version of WordPress installed on your site.', 'uncode' ) . '</small>'; ?></td>
 							<td><?php bloginfo('version'); ?></td>
 						</tr>
 						<tr>
-							<td data-export-label="Language"><?php esc_html_e( 'Language', 'uncode' ); ?>
+							<td data-export-label="Language"><?php esc_html_e( '语言', 'uncode' ); ?>
 							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'The current language used by WordPress. Default = English.', 'uncode' ) . '</small>'; ?></td>
 							<td><?php echo get_locale() ?></td>
 						</tr>
@@ -288,7 +288,7 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 							<td><?php if ( is_multisite() ) echo '&#10004;'; else echo '&ndash;'; ?></td>
 						</tr>
 						<tr>
-							<td data-export-label="Frontend Stylesheet"><?php esc_html_e( 'Frontend Stylesheet', 'uncode' ); ?>
+							<td data-export-label="Frontend Stylesheet"><?php esc_html_e( '前端样式', 'uncode' ); ?>
 							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'Uncode is generating a stylesheet when the options are saved. The file must be writtable.', 'uncode' ) . '</small>'; ?></td>
 							<td><?php
 								global $wp_filesystem;
@@ -296,7 +296,7 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 									require_once (ABSPATH . '/wp-admin/includes/file.php');
 								}
 								$mod_file = (defined('FS_CHMOD_FILE')) ? FS_CHMOD_FILE : false;
-								$front_css = get_template_directory() . '/library/css/';
+								$front_css = get_template_directory() . '/lib/assets/css/';
 								$front_css_file = $front_css . 'style-custom.css';
 								$creds = request_filesystem_credentials($front_css, '', false, false, array());
 								$can_write_front = true;
@@ -330,7 +330,7 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 							?></td>
 						</tr>
 						<tr>
-							<td data-export-label="Backend Stylesheet"><?php esc_html_e( 'Backend Stylesheet', 'uncode' ); ?>
+							<td data-export-label="Backend Stylesheet"><?php esc_html_e( '后台样式', 'uncode' ); ?>
 							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'Uncode is generating a stylesheet when the options are saved. The file must be writtable.', 'uncode' ) . '</small>'; ?></td>
 							<td><?php
 								$mod_file = (defined('FS_CHMOD_FILE')) ? FS_CHMOD_FILE : false;
@@ -368,7 +368,7 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 							?></td>
 						</tr>
 						<tr>
-							<td data-export-label="WP Memory Limit"><?php esc_html_e( 'WP Memory Limit', 'uncode' ); ?>
+							<td data-export-label="WP Memory Limit"><?php esc_html_e( 'WordPress内存限制', 'uncode' ); ?>
 							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'Memory Limits not satisfied may produce possible errors on the frontend of the site as blank pages.', 'uncode' ) . '</small>'; ?></td>
 							<td><?php
 								$memory = uncode_let_to_num( WP_MEMORY_LIMIT );
@@ -381,7 +381,7 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 							?></td>
 						</tr>
 						<tr>
-							<td data-export-label="Server Memory Limit"><?php esc_html_e( 'Server Memory Limit', 'uncode' ); ?>
+							<td data-export-label="Server Memory Limit"><?php esc_html_e( '服务器内存限制', 'uncode' ); ?>
 							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'This is actually the real memory available for your installation despite the WP memory limit.', 'uncode' ) . '</small>'; ?></td>
 							<td class="real-memory">
 								<span class="calculating"><?php esc_html_e( 'Calculating…', 'uncode' ); ?></span>
@@ -421,7 +421,7 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 							</td>
 						</tr>
 						<tr>
-							<td data-export-label="WP Debug Mode"><?php esc_html_e( 'WP Debug Mode', 'uncode' ); ?>
+							<td data-export-label="WP Debug Mode"><?php esc_html_e( 'WordPress调试模式', 'uncode' ); ?>
 							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'Displays whether or not WordPress is in Debug Mode.', 'uncode' ) . '</small>'; ?></td>
 							<td><?php if ( defined('WP_DEBUG') && WP_DEBUG ) echo '<mark class="yes">' . '&#10004;' . '</mark>'; else echo '&ndash;'; ?></td>
 						</tr>

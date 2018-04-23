@@ -483,12 +483,12 @@ class UncodeFont {
 
 					<div class="ui-tabs">
 						<ul class="ui-tabs-nav uncode-admin-panel__left">
-							<h2 class="uncode-admin-panel__heading"><?php esc_html_e( 'Options', 'uncode' ); ?></h2>
+							<h2 class="uncode-admin-panel__heading"><?php esc_html_e( '选项', 'uncode' ); ?></h2>
 							<li id="tab_font_stack" class="ot-section-label">
-								<a href="#section_font_stack"><?php esc_html_e( 'Font Imports', 'uncode' ); ?></a>
+								<a href="#section_font_stack"><?php esc_html_e( '导入字体', 'uncode' ); ?></a>
 							</li>
 							<li id="tab_font_source_settings" class="ot-section-label">
-								<a href="#section_font_source_settings"><?php esc_html_e( 'Font Libraries', 'uncode' ); ?></a>
+								<a href="#section_font_source_settings"><?php esc_html_e( '字体库', 'uncode' ); ?></a>
 							</li>
 						</ul>
 
@@ -496,10 +496,10 @@ class UncodeFont {
 							<div id="post-body">
 								<div id="post-body-content">
 									<div id="section_font_stack">
-										<h2 class="uncode-admin-panel__heading label"><?php esc_html_e( 'Font Imports', 'uncode' ); ?></h2>
+										<h2 class="uncode-admin-panel__heading label"><?php esc_html_e( '导入字体', 'uncode' ); ?></h2>
 
 										<form method="post" action="options.php">
-											<input type="submit" name="Submit" class="button button-primary uncode-ui-button" value="<?php esc_html_e( 'Save Font Imports', 'uncode' ); ?>" />
+											<input type="submit" name="Submit" class="button button-primary uncode-ui-button" value="<?php esc_html_e( '导入并保存字体', 'uncode' ); ?>" />
 											<?php $this->show_stack(); ?>
 											<div class="metabox-holder">
 												<div>
@@ -517,7 +517,7 @@ class UncodeFont {
 									</div><!-- #section_font_stack -->
 
 									<div id="section_font_source_settings" class='font-source-settings'>
-										<h2 class="uncode-admin-panel__heading label"><?php esc_html_e( 'Font Libraries', 'uncode' ); ?></h2>
+										<h2 class="uncode-admin-panel__heading label"><?php esc_html_e( '字体库', 'uncode' ); ?></h2>
 
 										<form method="post" action="options.php">
 
@@ -890,8 +890,8 @@ class UncodeFont {
 		<?php
 		if ($number_of_fonts > 0) { ?>
 			<div id="uf-font-details" class="uf-font-details">
-				<h2>Preview</h2>
-				<p><?php esc_html_e( 'Select a font from the left to see its details.', 'uncode' ); ?></p>
+				<h2>预览</h2>
+				<p><?php esc_html_e( '从左边选择字体以查看其细节。', 'uncode' ); ?></p>
 
 			</div>
 			<?php

@@ -15,26 +15,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 function uncode_get_admin_panel_menu_pages() {
 	$pages = array(
 		'welcome' => array(
-			'title'       => esc_html__( 'Welcome', 'uncode' ),
-			'page_title'  => esc_html__( 'Welcome to Uncode', 'uncode' ),
+			'title'       => esc_html__( '欢迎', 'uncode' ),
+			'page_title'  => esc_html__( '欢迎使用Lerp', 'uncode' ),
 			'description' => sprintf( esc_html__( "%s is installed! Please register your purchase, make sure that you've fulfilled all of the requirements below, and look for a green success message.", "uncode" ), UNCODE_NAME ),
 			'url'         => admin_url( 'admin.php?page=uncode-system-status' )
 		),
 		'plugins' => array(
-			'title'       => esc_html__( 'Plugins', 'uncode' ),
-			'page_title'  => esc_html__( 'Plugins', 'uncode' ),
+			'title'       => esc_html__( '插件', 'uncode' ),
+			'page_title'  => esc_html__( '插件', 'uncode' ),
 			'description' => esc_html__( 'Uncode Core and Uncode Visual Composer (WPBakery Page Builder) are the only required plugins. Any other plugins are optional.', 'uncode' ),
 			'url'         => admin_url( 'admin.php?page=uncode-plugins' )
 		),
 		'fonts' => array(
-			'title'       => esc_html__( 'Font Stacks', 'uncode' ),
-			'page_title'  => esc_html__( 'Font Stacks', 'uncode' ),
-			'description' => esc_html__( 'Import fonts from the most popular fonts libraries and create your Font Stacks.', 'uncode' ),
+			'title'       => esc_html__( '字体库', 'uncode' ),
+			'page_title'  => esc_html__( '字体库', 'uncode' ),
+			'description' => esc_html__( '从最流行的字体库导入字体并创建字体堆栈。', 'uncode' ),
 			'url'         => admin_url( 'admin.php?page=uncode-font-stacks' )
 		),
 		'utils' => array(
-			'title'       => esc_html__( 'Options Utils', 'uncode' ),
-			'page_title'  => esc_html__( 'Options Utils', 'uncode' ),
+			'title'       => esc_html__( '设置工具', 'uncode' ),
+			'page_title'  => esc_html__( '设置工具', 'uncode' ),
 			'description' => esc_html__( 'Find useful tools to save as manual backup or to export/import your Theme Options.', 'uncode' ),
 			'url'         => admin_url( 'admin.php?page=uncode-settings' )
 		),
@@ -42,9 +42,9 @@ function uncode_get_admin_panel_menu_pages() {
 
 	if ( ot_get_option('_uncode_admin_help') !== 'off' ) {
 		$pages['support'] = array(
-			'title'       => esc_html__( 'Support', 'uncode' ),
-			'page_title'  => esc_html__( 'Support', 'uncode' ),
-			'description' => esc_html__( 'Our online documentation is an incredible resource for learning how to use Uncode. We also offer private support throughout our Help Center.', 'uncode' ),
+			'title'       => esc_html__( '支持', 'uncode' ),
+			'page_title'  => esc_html__( '支持', 'uncode' ),
+			'description' => esc_html__( '帮助您了解如何使用Lerp主题', 'uncode' ),
 			'url'         => admin_url( 'admin.php?page=uncode-support' )
 		);
 	}
