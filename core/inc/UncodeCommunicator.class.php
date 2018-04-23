@@ -1,9 +1,9 @@
-<?php if (!class_exists('UncodeCommunicator')): ?>
+<?php if (!class_exists('LerpCommunicator')): ?>
 <?php
-class UncodeCommunicator extends UncodeAPI {
+class LerpCommunicator extends LerpAPI {
     var $items;
 
-    function __construct($baseUrl='http://static.undsgn.com/uncode') {
+    function __construct($baseUrl='http://static.undsgn.com/lerp') {
         parent::__construct($baseUrl);
         $this->items = array();
     }
@@ -11,10 +11,10 @@ class UncodeCommunicator extends UncodeAPI {
     /**
      * Used to fetch items from the specified endpoint.
      *
-     * @return Array<UncodeNewsItem>
+     * @return Array<LerpNewsItem>
      */
     function fetchItems() {
-        $last_time = get_option('uncode_messaging_last');
+        $last_time = get_option('lerp_messaging_last');
         $this_time = time();
         $_items = array();
         $cached = false;
@@ -23,7 +23,7 @@ class UncodeCommunicator extends UncodeAPI {
             $minutes_since = round(abs($this_time - $last_time) / 60,2);
 
             if ($minutes_since <= 5) {
-                $_items = json_decode(get_option('uncode_messaging'));
+                $_items = json_decode(get_option('lerp_messaging'));
 
                 if (!empty($_items)) {
                     $this->items = $_items;
@@ -64,7 +64,7 @@ class UncodeCommunicator extends UncodeAPI {
                     $date = isset($_item->date) ? $_item->date : null;
                     $url = isset($_item->url) ? $_item->url : '#';
 
-                    $newsItem = new UncodeNewsItem(
+                    $newsItem = new LerpNewsItem(
                         $_item->title,
                         $_item->body,
                         $type,
@@ -80,7 +80,7 @@ class UncodeCommunicator extends UncodeAPI {
             }
         }
 
-        update_option('uncode_messaging_last', time());
+        update_option('lerp_messaging_last', time());
 
         return $this->items;
     }
@@ -93,7 +93,7 @@ class UncodeCommunicator extends UncodeAPI {
     function getUnreadItems() {
         $items = array();
         foreach ($this->fetchItems() as $item) {
-            if ($item instanceof UncodeNewsItem) {
+            if ($item instanceof LerpNewsItem) {
                 if($item->isRead()) { continue; }
             } else {
                 if (isset($item->read)) {
@@ -117,7 +117,7 @@ class UncodeCommunicator extends UncodeAPI {
         $count = 0;
 
         foreach ($this->fetchItems() as $item) {
-            if ($item instanceof UncodeNewsItem) {
+            if ($item instanceof LerpNewsItem) {
                 if($item->isRead()) { continue; }
             } else {
                 if (isset($item->read)) {
@@ -139,7 +139,7 @@ class UncodeCommunicator extends UncodeAPI {
      */
     function render_items() {
 ?>
-        <ul id="uncode-communicator-list">
+        <ul id="lerp-communicator-list">
 <?php
         foreach ($this->getUnreadItems() as $item) {
             if (isset($item->object)) {

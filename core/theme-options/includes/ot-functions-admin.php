@@ -90,7 +90,7 @@ if ( ! function_exists( 'ot_register_settings_page' ) ) {
 		global $ot_has_custom_theme_options;
 
 		// Display UI Builder admin notice
-		if ( OT_SHOW_OPTIONS_UI == true && isset( $_REQUEST['page'] ) && $_REQUEST['page'] == 'uncode-settings' && ( $ot_has_custom_theme_options == true || has_action( 'admin_init', 'custom_theme_options' ) || has_action( 'init', 'custom_theme_options' ) ) ) {
+		if ( OT_SHOW_OPTIONS_UI == true && isset( $_REQUEST['page'] ) && $_REQUEST['page'] == 'lerp-settings' && ( $ot_has_custom_theme_options == true || has_action( 'admin_init', 'custom_theme_options' ) || has_action( 'init', 'custom_theme_options' ) ) ) {
 
 			function ot_has_custom_theme_options() {
 
@@ -109,7 +109,7 @@ if ( ! function_exists( 'ot_register_settings_page' ) ) {
 				'page_title'      => esc_html__( 'OptionTree', 'option-tree' ),
 				'menu_title'      => esc_html__( 'OptionTree', 'option-tree' ),
 				'capability'      => 'edit_theme_options',
-				'menu_slug'       => 'uncode-settings',
+				'menu_slug'       => 'lerp-settings',
 				'icon_url'        => null,
 				'position'        => 61,
 				'hidden_page'     => true
@@ -120,7 +120,7 @@ if ( ! function_exists( 'ot_register_settings_page' ) ) {
 				'page_title'      => esc_html__( 'Settings', 'option-tree' ),
 				'menu_title'      => esc_html__( 'Settings', 'option-tree' ),
 				'capability'      => 'edit_theme_options',
-				'menu_slug'       => 'uncode-settings',
+				'menu_slug'       => 'lerp-settings',
 				'icon_url'        => null,
 				'position'        => null,
 				'updated_message' => esc_html__( 'Theme Options updated.', 'option-tree' ),
@@ -210,7 +210,7 @@ if ( ! function_exists( 'ot_register_settings_page' ) ) {
 			),
 			array(
 				'id'              => 'documentation',
-				'parent_slug'     => 'uncode-settings',
+				'parent_slug'     => 'lerp-settings',
 				'page_title'      => esc_html__( 'Documentation', 'option-tree' ),
 				'menu_title'      => esc_html__( 'Documentation', 'option-tree' ),
 				'capability'      => 'edit_theme_options',
@@ -769,7 +769,7 @@ if ( ! function_exists( 'ot_admin_styles' ) ) {
 		 * @param array $screen_ids An array of screen IDs.
 		 */
 		$screen_ids = apply_filters( 'ot_dequeue_jquery_ui_css_screen_ids', array(
-			'toplevel_page_uncode-settings',
+			'toplevel_page_lerp-settings',
 			'optiontree_page_ot-documentation',
 			'appearance_page_ot-theme-options'
 		) );
@@ -2309,17 +2309,17 @@ if ( ! function_exists( 'ot_alert_message' ) ) {
 			if ( $message == 'success' ) {
 
 				if ( $page[ 'id' ] == 'settings' ) {
-					return '<div class="uncode-ui-notice uncode-ui-notice--success fade"><p>' . esc_html__( 'Settings updated.', 'option-tree' ) . '</p></div>';
+					return '<div class="lerp-ui-notice lerp-ui-notice--success fade"><p>' . esc_html__( 'Settings updated.', 'option-tree' ) . '</p></div>';
 				} else {
-					return '<div id="uncode-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Settings updated.', 'option-tree' ) . '</p></div>';
+					return '<div id="lerp-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Settings updated.', 'option-tree' ) . '</p></div>';
 				}
 
 			} else if ( $message == 'failed' ) {
 
 				if ( $page[ 'id' ] == 'settings' ) {
-					return '<div class="uncode-ui-notice uncode-ui-notice--error fade"><p>' . esc_html__( 'Settings could not be saved.', 'option-tree' ) . '</p></div>';
+					return '<div class="lerp-ui-notice lerp-ui-notice--error fade"><p>' . esc_html__( 'Settings could not be saved.', 'option-tree' ) . '</p></div>';
 				} else {
-					return '<div id="uncode-ot-message" class="error fade below-h2"><p>' . esc_html__( 'Settings could not be saved.', 'option-tree' ) . '</p></div>';
+					return '<div id="lerp-ot-message" class="error fade below-h2"><p>' . esc_html__( 'Settings could not be saved.', 'option-tree' ) . '</p></div>';
 				}
 
 			}
@@ -2329,17 +2329,17 @@ if ( ! function_exists( 'ot_alert_message' ) ) {
 			if ( $message == 'success' ) {
 
 				if ( $page[ 'id' ] == 'settings' ) {
-					return '<div class="uncode-ui-notice uncode-ui-notice--success fade"><p>' . esc_html__( 'Settings Imported.', 'option-tree' ) . '</p></div>';
+					return '<div class="lerp-ui-notice lerp-ui-notice--success fade"><p>' . esc_html__( 'Settings Imported.', 'option-tree' ) . '</p></div>';
 				} else {
-					return '<div id="uncode-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Settings Imported.', 'option-tree' ) . '</p></div>';
+					return '<div id="lerp-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Settings Imported.', 'option-tree' ) . '</p></div>';
 				}
 
 			} else if ( $message == 'failed' ) {
 
 				if ( $page[ 'id' ] == 'settings' ) {
-					return '<div class="uncode-ui-notice uncode-ui-notice--error fade"><p>' . esc_html__( 'Settings could not be imported.', 'option-tree' ) . '</p></div>';
+					return '<div class="lerp-ui-notice lerp-ui-notice--error fade"><p>' . esc_html__( 'Settings could not be imported.', 'option-tree' ) . '</p></div>';
 				} else {
-					return '<div id="uncode-ot-message" class="error fade below-h2"><p>' . esc_html__( 'Settings could not be imported.', 'option-tree' ) . '</p></div>';
+					return '<div id="lerp-ot-message" class="error fade below-h2"><p>' . esc_html__( 'Settings could not be imported.', 'option-tree' ) . '</p></div>';
 				}
 
 			}
@@ -2348,17 +2348,17 @@ if ( ! function_exists( 'ot_alert_message' ) ) {
 			if ( $message == 'success' ) {
 
 				if ( $page[ 'id' ] == 'settings' ) {
-					return '<div class="uncode-ui-notice uncode-ui-notice--success fade"><p>' . esc_html__( 'Data Imported.', 'option-tree' ) . '</p></div>';
+					return '<div class="lerp-ui-notice lerp-ui-notice--success fade"><p>' . esc_html__( 'Data Imported.', 'option-tree' ) . '</p></div>';
 				} else {
-					return '<div id="uncode-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Data Imported.', 'option-tree' ) . '</p></div>';
+					return '<div id="lerp-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Data Imported.', 'option-tree' ) . '</p></div>';
 				}
 
 			} else if ( $message == 'failed' ) {
 
 				if ( $page[ 'id' ] == 'settings' ) {
-					return '<div class="uncode-ui-notice uncode-ui-notice--error fade"><p>' . esc_html__( 'Data could not be imported.', 'option-tree' ) . '</p></div>';
+					return '<div class="lerp-ui-notice lerp-ui-notice--error fade"><p>' . esc_html__( 'Data could not be imported.', 'option-tree' ) . '</p></div>';
 				} else {
-					return '<div id="uncode-ot-message" class="error fade below-h2"><p>' . esc_html__( 'Data could not be imported.', 'option-tree' ) . '</p></div>';
+					return '<div id="lerp-ot-message" class="error fade below-h2"><p>' . esc_html__( 'Data could not be imported.', 'option-tree' ) . '</p></div>';
 				}
 
 			}
@@ -2368,17 +2368,17 @@ if ( ! function_exists( 'ot_alert_message' ) ) {
 			if ( $message == 'success' ) {
 
 				if ( $page[ 'id' ] == 'settings' ) {
-					return '<div class="uncode-ui-notice uncode-ui-notice--success fade"><p>' . esc_html__( 'Layouts Imported.', 'option-tree' ) . '</p></div>';
+					return '<div class="lerp-ui-notice lerp-ui-notice--success fade"><p>' . esc_html__( 'Layouts Imported.', 'option-tree' ) . '</p></div>';
 				} else {
-					return '<div id="uncode-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Layouts Imported.', 'option-tree' ) . '</p></div>';
+					return '<div id="lerp-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Layouts Imported.', 'option-tree' ) . '</p></div>';
 				}
 
 			} else if ( $message == 'failed' ) {
 
 				if ( $page[ 'id' ] == 'settings' ) {
-					return '<div class="uncode-ui-notice uncode-ui-notice--error fade"><p>' . esc_html__( 'Layouts could not be imported.', 'option-tree' ) . '</p></div>';
+					return '<div class="lerp-ui-notice lerp-ui-notice--error fade"><p>' . esc_html__( 'Layouts could not be imported.', 'option-tree' ) . '</p></div>';
 				} else {
-					return '<div id="uncode-ot-message" class="error fade below-h2"><p>' . esc_html__( 'Layouts could not be imported.', 'option-tree' ) . '</p></div>';
+					return '<div id="lerp-ot-message" class="error fade below-h2"><p>' . esc_html__( 'Layouts could not be imported.', 'option-tree' ) . '</p></div>';
 				}
 
 			}
@@ -2388,25 +2388,25 @@ if ( ! function_exists( 'ot_alert_message' ) ) {
 			if ( $message == 'success' ) {
 
 				if ( $page[ 'id' ] == 'settings' ) {
-					return '<div class="uncode-ui-notice uncode-ui-notice--success fade"><p>' . esc_html__( 'Layouts Updated.', 'option-tree' ) . '</p></div>';
+					return '<div class="lerp-ui-notice lerp-ui-notice--success fade"><p>' . esc_html__( 'Layouts Updated.', 'option-tree' ) . '</p></div>';
 				} else {
-					return '<div id="uncode-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Layouts Updated.', 'option-tree' ) . '</p></div>';
+					return '<div id="lerp-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Layouts Updated.', 'option-tree' ) . '</p></div>';
 				}
 
 			} else if ( $message == 'failed' ) {
 
 				if ( $page[ 'id' ] == 'settings' ) {
-					return '<div class="uncode-ui-notice uncode-ui-notice--error fade"><p>' . esc_html__( 'Layouts could not be updated.', 'option-tree' ) . '</p></div>';
+					return '<div class="lerp-ui-notice lerp-ui-notice--error fade"><p>' . esc_html__( 'Layouts could not be updated.', 'option-tree' ) . '</p></div>';
 				} else {
-					return '<div id="uncode-ot-message" class="error fade below-h2"><p>' . esc_html__( 'Layouts could not be updated.', 'option-tree' ) . '</p></div>';
+					return '<div id="lerp-ot-message" class="error fade below-h2"><p>' . esc_html__( 'Layouts could not be updated.', 'option-tree' ) . '</p></div>';
 				}
 
 			} else if ( $message == 'deleted' ) {
 
 				if ( $page[ 'id' ] == 'settings' ) {
-					return '<div class="uncode-ui-notice uncode-ui-notice--success fade"><p>' . esc_html__( 'Layouts have been deleted.', 'option-tree' ) . '</p></div>';
+					return '<div class="lerp-ui-notice lerp-ui-notice--success fade"><p>' . esc_html__( 'Layouts have been deleted.', 'option-tree' ) . '</p></div>';
 				} else {
-					return '<div id="uncode-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Layouts have been deleted.', 'option-tree' ) . '</p></div>';
+					return '<div id="lerp-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Layouts have been deleted.', 'option-tree' ) . '</p></div>';
 				}
 
 			}
@@ -2414,17 +2414,17 @@ if ( ! function_exists( 'ot_alert_message' ) ) {
 		} else if ( $updated == 'layout' ) {
 
 			if ( $page[ 'id' ] == 'settings' ) {
-				return '<div class="uncode-ui-notice uncode-ui-notice--success fade"><p>' . esc_html__( 'Layout activated.', 'option-tree' ) . '</p></div>';
+				return '<div class="lerp-ui-notice lerp-ui-notice--success fade"><p>' . esc_html__( 'Layout activated.', 'option-tree' ) . '</p></div>';
 			} else {
-				return '<div id="uncode-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Layout activated.', 'option-tree' ) . '</p></div>';
+				return '<div id="lerp-ot-message" class="updated fade below-h2"><p>' . esc_html__( 'Layout activated.', 'option-tree' ) . '</p></div>';
 			}
 
 		} else if ( $action == 'reset' ) {
 
 			if ( $page[ 'id' ] == 'settings' ) {
-				return '<div class="uncode-ui-notice uncode-ui-notice--success fade"><p>' . $page['reset_message'] . '</p></div>';
+				return '<div class="lerp-ui-notice lerp-ui-notice--success fade"><p>' . $page['reset_message'] . '</p></div>';
 			} else {
-				return '<div id="uncode-ot-message" class="updated fade below-h2"><p>' . $page['reset_message'] . '</p></div>';
+				return '<div id="lerp-ot-message" class="updated fade below-h2"><p>' . $page['reset_message'] . '</p></div>';
 			}
 
 		}
@@ -2434,9 +2434,9 @@ if ( ! function_exists( 'ot_alert_message' ) ) {
 		if ( $updated == 'true' ) {
 
 			if ( $page[ 'id' ] == 'settings' ) {
-				return '<div class="uncode-ui-notice uncode-ui-notice--success fade"><p>' . $page['updated_message'] . '</p></div>';
+				return '<div class="lerp-ui-notice lerp-ui-notice--success fade"><p>' . $page['updated_message'] . '</p></div>';
 			} else {
-				return '<div id="uncode-ot-message" class="updated fade below-h2"><p>' . $page['updated_message'] . '</p></div>';
+				return '<div id="lerp-ot-message" class="updated fade below-h2"><p>' . $page['updated_message'] . '</p></div>';
 			}
 
 		}

@@ -8,7 +8,7 @@
  * or theme author for support.
  *
  * @package   TGM-Plugin-Activation
- * @version   2.6.1 for parent theme uncode for publication on ThemeForest
+ * @version   2.6.1 for parent theme lerp for publication on ThemeForest
  * @link      http://tgmpluginactivation.com/
  * @author    Thomas Griffin, Gary Jones, Juliette Reinders Folmer
  * @copyright Copyright (c) 2011, Thomas Griffin
@@ -759,7 +759,7 @@ if ( !class_exists('TGM_Plugin_Activation') ) {
             // EDITED by UNCODE
             // This replaces '<div class="tgmpa wrap">'
             // Moved up to include the tgmpa messages inside the panel
-            do_action('uncode_before_tgmpa_form');
+            do_action('lerp_before_tgmpa_form');
 
             // Store new instance of plugin table in object.
             $plugin_table = new TGMPA_List_Table;
@@ -792,7 +792,7 @@ if ( !class_exists('TGM_Plugin_Activation') ) {
             <?php
             // EDITED by UNCODE
             // Closes '<div class="tgmpa wrap">'
-            do_action('uncode_after_tgmpa_form'); ?>
+            do_action('lerp_after_tgmpa_form'); ?>
 
             <?php
         }
@@ -1080,10 +1080,10 @@ if ( !class_exists('TGM_Plugin_Activation') ) {
                     // EDITED by UNCODE
                     // Remove "message" ID from TGMPA messages, otherwise WP will remove
                     // them from the normal HTML flow.
-                    // Also, add uncode-ui classes.
+                    // Also, add lerp-ui classes.
                     //
                     // Old markup was: <div id="message" class="error">
-                    echo '<div class="uncode-ui-notice uncode-ui-notice--error"><p>', wp_kses_post($activate->get_error_message()), '</p></div>',
+                    echo '<div class="lerp-ui-notice lerp-ui-notice--error"><p>', wp_kses_post($activate->get_error_message()), '</p></div>',
                     '<p><a href="', esc_url($this->get_tgmpa_url()), '" target="_parent">', esc_html($this->strings['return']), '</a></p>';
 
                     return false; // End it here if there is an error with activation.
@@ -1095,10 +1095,10 @@ if ( !class_exists('TGM_Plugin_Activation') ) {
                             // EDITED by UNCODE
                             // Remove "message" ID from TGMPA messages, otherwise WP will remove
                             // them from the normal HTML flow.
-                            // Also, add uncode-ui classes.
+                            // Also, add lerp-ui classes.
                             //
                             // Old markup was: <div id="message" class="success">
-                            echo '<div class="uncode-ui-notice uncode-ui-notice--success"><p>', esc_html($this->strings['activated_successfully']), ' <strong>', esc_html($this->plugins[$slug]['name']), '.</strong></p></div>';
+                            echo '<div class="lerp-ui-notice lerp-ui-notice--success"><p>', esc_html($this->strings['activated_successfully']), ' <strong>', esc_html($this->plugins[$slug]['name']), '.</strong></p></div>';
                         }
                     } else {
                         // Simpler message layout for use on the plugin install page.
@@ -1112,10 +1112,10 @@ if ( !class_exists('TGM_Plugin_Activation') ) {
                 // EDITED by UNCODE
                 // Remove "message" ID from TGMPA messages, otherwise WP will remove
                 // them from the normal HTML flow.
-                // Also, add uncode-ui classes.
+                // Also, add lerp-ui classes.
                 //
                 // Old markup was: <div id="message" class="error">
-                echo '<div class="uncode-ui-notice uncode-ui-notice--error"><p>',
+                echo '<div class="lerp-ui-notice lerp-ui-notice--error"><p>',
                 sprintf(
                     esc_html($this->strings['plugin_already_active']),
                     '<strong>' . esc_html($this->plugins[$slug]['name']) . '</strong>'
@@ -1129,10 +1129,10 @@ if ( !class_exists('TGM_Plugin_Activation') ) {
                         // EDITED by UNCODE
                         // Remove "message" ID from TGMPA messages, otherwise WP will remove
                         // them from the normal HTML flow.
-                        // Also, add uncode-ui classes.
+                        // Also, add lerp-ui classes.
                         //
                         // Old markup was: <div id="message" class="error">
-                        echo '<div class="uncode-ui-notice uncode-ui-notice--error"><p>',
+                        echo '<div class="lerp-ui-notice lerp-ui-notice--error"><p>',
                         sprintf(
                             esc_html($this->strings['plugin_needs_higher_version']),
                             '<strong>' . esc_html($this->plugins[$slug]['name']) . '</strong>'
@@ -2984,10 +2984,10 @@ if ( !class_exists('TGMPA_List_Table') ) {
                     // EDITED by UNCODE
                     // Remove "message" ID from TGMPA messages, otherwise WP will remove
                     // them from the normal HTML flow.
-                    // Also, add uncode-ui classes.
+                    // Also, add lerp-ui classes.
                     //
                     // Old markup was: <div id="message" class="error">
-                    echo '<div class="uncode-ui-notice uncode-ui-notice--error"><p>', esc_html($message), '</p></div>';
+                    echo '<div class="lerp-ui-notice lerp-ui-notice--error"><p>', esc_html($message), '</p></div>';
 
                     return false;
                 }
@@ -3033,10 +3033,10 @@ if ( !class_exists('TGMPA_List_Table') ) {
                     // EDITED by UNCODE
                     // Remove "message" ID from TGMPA messages, otherwise WP will remove
                     // them from the normal HTML flow.
-                    // Also, add uncode-ui classes.
+                    // Also, add lerp-ui classes.
                     //
                     // Old markup was: <div id="message" class="error">
-                    echo '<div class="uncode-ui-notice uncode-ui-notice--error"><p>', esc_html($message), '</p></div>';
+                    echo '<div class="lerp-ui-notice lerp-ui-notice--error"><p>', esc_html($message), '</p></div>';
 
                     return false;
                 }
@@ -3144,10 +3144,10 @@ if ( !class_exists('TGMPA_List_Table') ) {
                     // EDITED by UNCODE
                     // Remove "message" ID from TGMPA messages, otherwise WP will remove
                     // them from the normal HTML flow.
-                    // Also, add uncode-ui classes.
+                    // Also, add lerp-ui classes.
                     //
                     // Old markup was: <div id="message" class="error">
-                    echo '<div class="uncode-ui-notice uncode-ui-notice--error"><p>', esc_html__('No plugins were selected to be activated. No action taken.', 'tgmpa'), '</p></div>';
+                    echo '<div class="lerp-ui-notice lerp-ui-notice--error"><p>', esc_html__('No plugins were selected to be activated. No action taken.', 'tgmpa'), '</p></div>';
 
                     return false;
                 }
@@ -3176,10 +3176,10 @@ if ( !class_exists('TGMPA_List_Table') ) {
                     // EDITED by UNCODE
                     // Remove "message" ID from TGMPA messages, otherwise WP will remove
                     // them from the normal HTML flow.
-                    // Also, add uncode-ui classes.
+                    // Also, add lerp-ui classes.
                     //
                     // Old markup was: <div id="message" class="error">
-                    echo '<div class="uncode-ui-notice uncode-ui-notice--error"><p>', esc_html__('No plugins are available to be activated at this time.', 'tgmpa'), '</p></div>';
+                    echo '<div class="lerp-ui-notice lerp-ui-notice--error"><p>', esc_html__('No plugins are available to be activated at this time.', 'tgmpa'), '</p></div>';
 
                     return false;
                 }
@@ -3191,10 +3191,10 @@ if ( !class_exists('TGMPA_List_Table') ) {
                     // EDITED by UNCODE
                     // Remove "message" ID from TGMPA messages, otherwise WP will remove
                     // them from the normal HTML flow.
-                    // Also, add uncode-ui classes.
+                    // Also, add lerp-ui classes.
                     //
                     // Old markup was: <div id="message" class="error">
-                    echo '<div class="uncode-ui-notice uncode-ui-notice--error"><p>', wp_kses_post($activate->get_error_message()), '</p></div>';
+                    echo '<div class="lerp-ui-notice lerp-ui-notice--error"><p>', wp_kses_post($activate->get_error_message()), '</p></div>';
                 } else {
                     $count = count($plugin_names); // Count so we can use _n function.
                     $plugin_names = array_map(array('TGMPA_Utils', 'wrap_in_strong'), $plugin_names);
@@ -3204,11 +3204,11 @@ if ( !class_exists('TGMPA_List_Table') ) {
                     // EDITED by UNCODE
                     // Remove "message" ID from TGMPA messages, otherwise WP will remove
                     // them from the normal HTML flow.
-                    // Also, add uncode-ui classes.
+                    // Also, add lerp-ui classes.
                     //
                     // Old markup was: <div id="message" class="updated">
                     printf( // WPCS: xss ok.
-                        '<div class="uncode-ui-notice uncode-ui-notice--success"><p>%1$s %2$s.</p></div>',
+                        '<div class="lerp-ui-notice lerp-ui-notice--success"><p>%1$s %2$s.</p></div>',
                         esc_html(_n('The following plugin was activated successfully:', 'The following plugins were activated successfully:', $count, 'tgmpa')),
                         $imploded
                     );

@@ -1,4 +1,4 @@
-<?php if (!class_exists('UncodeHotfix')): ?>
+<?php if (!class_exists('LerpHotfix')): ?>
 <?php
 /**
  * Base class for talking to API:s
@@ -6,11 +6,11 @@
  * Other API classes may extend this class to take use of the
  * POST and GET request functions.
  */
-class UncodeAPI {
+class LerpAPI {
     var $baseUrl;
     var $session;
 
-    function __construct($baseUrl='http://static.undsgn.com/uncode/endpoint') {
+    function __construct($baseUrl='http://static.undsgn.com/lerp/endpoint') {
         $this->baseUrl = $baseUrl;
         $this->session = null;
     }
@@ -75,7 +75,7 @@ class UncodeAPI {
                 "",
                 $this->baseUrl . '/' . $endpoint
             ),
-            CURLOPT_USERAGENT => 'Uncode',
+            CURLOPT_USERAGENT => 'Lerp',
             CURLOPT_HTTPHEADER => $headers
         );
 

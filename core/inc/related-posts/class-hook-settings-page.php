@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-class Uncode_RP4WP_Hook_Settings_Page extends RP4WP_Hook {
+class Lerp_RP4WP_Hook_Settings_Page extends RP4WP_Hook {
 	protected $tag = 'admin_menu';
 
 	/**

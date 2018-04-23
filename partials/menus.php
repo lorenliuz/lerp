@@ -1,6 +1,6 @@
 <?php
 
-function uncode_center_nav_menu_items($items, $args) {
+function lerp_center_nav_menu_items($items, $args) {
 	if ( $args->theme_location == 'primary') {
 		if (is_array($items) || is_object($items)) {
 			global $logo_html;
@@ -48,8 +48,8 @@ if (!class_exists('unmenu')) {
 		{
 			global $LOGO, $metabox_data, $post, $menutype, $adaptive_images, $adaptive_images_async, $ai_width;
 
-			$general_style = ot_get_option( '_uncode_general_style');
-			$stylemain = ot_get_option( '_uncode_primary_menu_style');
+			$general_style = ot_get_option( '_lerp_general_style');
+			$stylemain = ot_get_option( '_lerp_primary_menu_style');
 			if ($stylemain === '') $stylemain = $general_style;
 
 			$type = ($type == '') ? 'hmenu-right' : $type;
@@ -57,10 +57,10 @@ if (!class_exists('unmenu')) {
 
 			$social_html = $social_html_inner = $secondary_menu_html = $social_icon = $search = $main_absolute = $sub_absolute = $main_transparent = $sub_transparent = $stylemainback = $stylesecback = $mainborders = $main_width = $menu_bloginfo = $vmenu_position = '';
 
-			$menu_custom_padding = ot_get_option('_uncode_menu_custom_padding');
+			$menu_custom_padding = ot_get_option('_lerp_menu_custom_padding');
 			$data_padding_shrink = '';
 			if ($menu_custom_padding === 'on') {
-				$custom_menu_padding_desktop = ot_get_option('_uncode_menu_custom_padding_desktop');
+				$custom_menu_padding_desktop = ot_get_option('_lerp_menu_custom_padding_desktop');
 				$custom_menu_padding_desktop_shrinked = $custom_menu_padding_desktop > 9 ? $custom_menu_padding_desktop - 9 : 0;
 				$data_padding_shrink = ' data-padding-shrink ="' . esc_attr( $custom_menu_padding_desktop_shrinked ) . '"';
 			}
@@ -77,7 +77,7 @@ if (!class_exists('unmenu')) {
 				foreach ($LOGO->logo_id as $key => $value) {
 					$logo_alt = get_post_meta($value, '_wp_attachment_image_alt', true);
 					if ( empty($logo_alt) ) $logo_alt = 'logo';
-					$logo_info = uncode_get_media_info($value);
+					$logo_info = lerp_get_media_info($value);
 					$media_metavalues = (isset($logo_info->metadata)) ? unserialize($logo_info->metadata) : '';
 					if (!empty($logo_info)) {
 						if (count($LOGO->logo_id) === 2) {
@@ -106,11 +106,11 @@ if (!class_exists('unmenu')) {
 								$media_code .= "<script>new Vivus('".$id_icon."', {type: 'delayed', pathTimingFunction: Vivus.EASE_OUT, animTimingFunction: Vivus.LINEAR, duration: ".$icon_time."});</script>";
 							}
 							if ($menutype === 'menu-overlay' || $menutype === 'menu-overlay-center' || $type === 'offcanvas_head') {
-								$vmenu_position = ot_get_option('_uncode_vmenu_position');
+								$vmenu_position = ot_get_option('_lerp_vmenu_position');
 								if ($vmenu_position === 'left') $media_code = str_replace('<svg ', '<svg preserveAspectRatio="xMaxYMin" ', $media_code);
 								else $media_code = str_replace('<svg ', '<svg preserveAspectRatio="xMinYMin" ', $media_code);
 							} else if ($vertical) {
-								$vmenu_position = ot_get_option('_uncode_vmenu_position');
+								$vmenu_position = ot_get_option('_lerp_vmenu_position');
 								if ($vmenu_position === 'right') $media_code = str_replace('<svg ', '<svg preserveAspectRatio="xMaxYMin" ', $media_code);
 								else $media_code = str_replace('<svg ', '<svg preserveAspectRatio="xMinYMin" ', $media_code);
 							} else {
@@ -140,7 +140,7 @@ if (!class_exists('unmenu')) {
 								}
 								$logoDivInner .= '<img src="'.$logo_info->guid.'" alt="logo" width="'.round($logo_metavalues['width']).'" height="'.round($logo_metavalues['height']).'" class="img-responsive" />';
 							} else {
-								$logo_resized = uncode_resize_image($logo_info->id, $logo_info->guid, $logo_info->path, $logo_metavalues['width'], $logo_metavalues['height'], 'null', $logo_height, false, 'height');
+								$logo_resized = lerp_resize_image($logo_info->id, $logo_info->guid, $logo_info->path, $logo_metavalues['width'], $logo_metavalues['height'], 'null', $logo_height, false, 'height');
 								$single_width = $logo_resized['single_width'];
 								$logo_class = ' class="img-responsive"';
 								$logo_data = '';
@@ -162,9 +162,9 @@ if (!class_exists('unmenu')) {
 			if ($logoDivInner === '') $logoDivInner .= '<h2 class="text-logo h3 logo-skinnable" data-maxheight="'.$logo_height.'" style="font-size:'.$logo_height.'px;">' . esc_html(get_bloginfo( 'name','display' )) . '</h2>';
 			$logoDiv .= $logoDivInner;
 			$logoDiv .= '</a>';
-			$socials = ot_get_option( '_uncode_social_list');
-			$boxed = ot_get_option( '_uncode_boxed');
-			$menu_bloginfo = ot_get_option( '_uncode_menu_bloginfo');
+			$socials = ot_get_option( '_lerp_social_list');
+			$boxed = ot_get_option( '_lerp_boxed');
+			$menu_bloginfo = ot_get_option( '_lerp_menu_bloginfo');
 
 			$post_type = isset( $post->post_type ) ? $post->post_type : 'post';
 			if (is_author()) $post_type = 'author';
@@ -174,10 +174,10 @@ if (!class_exists('unmenu')) {
 
 			$theme_locations = get_nav_menu_locations();
 
-			if (isset($metabox_data['_uncode_specific_menu'][0]) && $metabox_data['_uncode_specific_menu'][0] !== '') {
-				$primary_menu = $metabox_data['_uncode_specific_menu'][0];
+			if (isset($metabox_data['_lerp_specific_menu'][0]) && $metabox_data['_lerp_specific_menu'][0] !== '') {
+				$primary_menu = $metabox_data['_lerp_specific_menu'][0];
 			} else {
-				$menu_generic = ot_get_option( '_uncode_'.$post_type.'_menu');
+				$menu_generic = ot_get_option( '_lerp_'.$post_type.'_menu');
 				if ($menu_generic !== '') {
 					$primary_menu = $menu_generic;
 				} else {
@@ -189,34 +189,34 @@ if (!class_exists('unmenu')) {
 				}
 			}
 
-			if (isset($metabox_data['_uncode_specific_menu_width'][0]) && $metabox_data['_uncode_specific_menu_width'][0] !== '') {
-				if ($metabox_data['_uncode_specific_menu_width'][0] === 'full') $menu_full_width = true;
+			if (isset($metabox_data['_lerp_specific_menu_width'][0]) && $metabox_data['_lerp_specific_menu_width'][0] !== '') {
+				if ($metabox_data['_lerp_specific_menu_width'][0] === 'full') $menu_full_width = true;
 			} else {
-				$menu_generic_width = ot_get_option( '_uncode_'.$post_type.'_menu_width');
+				$menu_generic_width = ot_get_option( '_lerp_'.$post_type.'_menu_width');
 				if ($menu_generic_width === 'full') $menu_full_width = true;
 				else
 				{
-					$menu_full = ot_get_option( '_uncode_menu_full');
+					$menu_full = ot_get_option( '_lerp_menu_full');
 					$menu_full_width = ($menu_full !== 'on') ? false : true;
 				}
 			}
 			if (!isset($menu_full_width)) $menu_full_width = false;
 
-			$get_menu_hide = ot_get_option( (wp_is_mobile() ? '_uncode_menu_hide_mobile' : '_uncode_menu_hide') );
+			$get_menu_hide = ot_get_option( (wp_is_mobile() ? '_lerp_menu_hide_mobile' : '_lerp_menu_hide') );
 			$menu_hide = ($get_menu_hide === 'on')  ? ' menu-hide' : '';
-			$menu_sticky = (ot_get_option( (wp_is_mobile() ? '_uncode_menu_sticky_mobile' : '_uncode_menu_sticky')) === 'on') || ( uncode_is_full_page(true) ) ? ' menu-sticky' : (($get_menu_hide === 'on') ? ' menu-hide-only' : '');
-			$menu_no_arrow = (ot_get_option( '_uncode_menu_no_arrows') === 'on')  ? ' menu-no-arrows' : '';
+			$menu_sticky = (ot_get_option( (wp_is_mobile() ? '_lerp_menu_sticky_mobile' : '_lerp_menu_sticky')) === 'on') || ( lerp_is_full_page(true) ) ? ' menu-sticky' : (($get_menu_hide === 'on') ? ' menu-hide-only' : '');
+			$menu_no_arrow = (ot_get_option( '_lerp_menu_no_arrows') === 'on')  ? ' menu-no-arrows' : '';
 			if ($type === 'vmenu') {
 				if ($menu_sticky !== '') $menu_hide .= '-vertical';
 				if ($menu_sticky !== '') $menu_sticky .= '-vertical';
 			}
 
 			$effects = '';
-			$menu_shrink = (ot_get_option( '_uncode_menu_shrink' ) === 'on' && $type !== 'hmenu-center') ? ' menu-shrink' : '';
+			$menu_shrink = (ot_get_option( '_lerp_menu_shrink' ) === 'on' && $type !== 'hmenu-center') ? ' menu-shrink' : '';
 			$effects .= ($menu_hide !== '') ? $menu_hide : '';
 
-			$sub_shadows = ot_get_option( '_uncode_submenu_shadows');
-			$sub_shadows_darker = ot_get_option( '_uncode_submenu_darker_shadows') === 'on' ? 'darker-' : '';
+			$sub_shadows = ot_get_option( '_lerp_submenu_shadows');
+			$sub_shadows_darker = ot_get_option( '_lerp_submenu_darker_shadows') === 'on' ? 'darker-' : '';
 			$sub_shadows = $sub_shadows !== '' ? ' menu-dd-shadow-' . $sub_shadows_darker . $sub_shadows : '';
 
 			if ($boxed === 'on') {
@@ -225,26 +225,26 @@ if (!class_exists('unmenu')) {
 				if (!$menu_full_width) $main_width = ' limit-width';
 			}
 
-			$has_shadows = ot_get_option( '_uncode_menu_shadows') == 'on' ? true : false;
-			$has_borders = ot_get_option( '_uncode_menu_borders') == 'on' ? true : false;
-			$remove_shadow = (isset($metabox_data['_uncode_specific_menu_no_shadow'][0]) && $metabox_data['_uncode_specific_menu_no_shadow'][0] === 'on') ? true : false;
+			$has_shadows = ot_get_option( '_lerp_menu_shadows') == 'on' ? true : false;
+			$has_borders = ot_get_option( '_lerp_menu_borders') == 'on' ? true : false;
+			$remove_shadow = (isset($metabox_data['_lerp_specific_menu_no_shadow'][0]) && $metabox_data['_lerp_specific_menu_no_shadow'][0] === 'on') ? true : false;
 			$menushadows = $has_shadows ?  ' menu-shadows' : '';
 			$menushadows .= $remove_shadow ?  ' force-no-shadows' : '';
 			$menuborders = $has_borders ? (($vertical) ? ' vmenu-borders' : ' menu-borders') : ' menu-no-borders';
 
-			$stylemainsubmenu = ot_get_option( '_uncode_primary_submenu_style');
+			$stylemainsubmenu = ot_get_option( '_lerp_primary_submenu_style');
 			if ($stylemainsubmenu === '') $stylemainsubmenu = $stylemain;
 
-			$stylesecmenu = ot_get_option( '_uncode_secondary_menu_style');
+			$stylesecmenu = ot_get_option( '_lerp_secondary_menu_style');
 			if ($stylesecmenu === '') $stylesecmenu = $general_style;
 
-			$transpmainheader = ot_get_option('_uncode_menu_bg_alpha_' . $stylemain);
+			$transpmainheader = ot_get_option('_lerp_menu_bg_alpha_' . $stylemain);
 
-			$stylemainback = ot_get_option('_uncode_menu_bg_color_' . $stylemain);
+			$stylemainback = ot_get_option('_lerp_menu_bg_color_' . $stylemain);
 			$stylemainback = ($stylemainback === '') ? ' style-' . $stylemain . '-bg' : ' style-' . $stylemainback . '-bg';
 
 			if ($type === 'menu-overlay' || $type === 'menu-overlay-center') {
-				$styleoverlay = ot_get_option( '_uncode_overlay_menu_style');
+				$styleoverlay = ot_get_option( '_lerp_overlay_menu_style');
 				$stylemainmenu = ' menu-' . $styleoverlay . ' submenu-' . $styleoverlay;
 				$buttonstyle_primary = 'mobile-menu-button-' . $styleoverlay;
 			} else {
@@ -258,7 +258,7 @@ if (!class_exists('unmenu')) {
 
 			$stylemaincombo = ' menu-primary' . $stylemainmenu;
 
-			$stylesecback = ot_get_option('_uncode_secmenu_bg_color_' . $stylesecmenu);
+			$stylesecback = ot_get_option('_lerp_secmenu_bg_color_' . $stylesecmenu);
 			$stylesecback = ($stylesecback === '') ? ' style-' . $stylesecmenu . '-bg' : ' style-' . $stylesecback . '-bg';
 			$stylesubstylemenu = ' menu-' . $stylesecmenu . ' submenu-' . $stylesecmenu;
 			$stylesecbackfull = '';
@@ -268,10 +268,10 @@ if (!class_exists('unmenu')) {
 
 			if ($transpmainheader !== '100') {
 				$remove_transparency = false;
-				if (isset($metabox_data['_uncode_specific_menu_opaque'][0]) && $metabox_data['_uncode_specific_menu_opaque'][0] === 'on') {
+				if (isset($metabox_data['_lerp_specific_menu_opaque'][0]) && $metabox_data['_lerp_specific_menu_opaque'][0] === 'on') {
 					$remove_transparency = true;
 				} else {
-					$get_remove_transparency = ot_get_option( '_uncode_'.$post_type.'_menu_opaque');
+					$get_remove_transparency = ot_get_option( '_lerp_'.$post_type.'_menu_opaque');
 					if ($get_remove_transparency === 'on') $remove_transparency = true;
 				}
 
@@ -286,11 +286,11 @@ if (!class_exists('unmenu')) {
 
 			$woo_icon = $woo_icon_mobile = $woo_cart_class = '';
 			if ( class_exists( 'WooCommerce' ) ) {
-				$woo_cart = ot_get_option('_uncode_woocommerce_cart');
-				$woo_icon = ot_get_option('_uncode_woocommerce_cart_icon');
+				$woo_cart = ot_get_option('_lerp_woocommerce_cart');
+				$woo_icon = ot_get_option('_lerp_woocommerce_cart_icon');
 				if ($woo_cart === 'on' && $woo_icon !== '') {
-					$woo_cart_mobile = ot_get_option('_uncode_woocommerce_cart_mobile');
-					if ($type === 'menu-overlay' || $type === 'menu-overlay-center' || $type === 'offcanvas_head' || $type === 'vmenu-offcanvas') $woo_cart_desktop = ot_get_option('_uncode_woocommerce_cart_desktop');
+					$woo_cart_mobile = ot_get_option('_lerp_woocommerce_cart_mobile');
+					if ($type === 'menu-overlay' || $type === 'menu-overlay-center' || $type === 'offcanvas_head' || $type === 'vmenu-offcanvas') $woo_cart_desktop = ot_get_option('_lerp_woocommerce_cart_desktop');
 					else $woo_cart_desktop = '';
 					if ($woo_cart_mobile === 'on' || $woo_cart_desktop === 'on') {
 						if ($woo_cart_mobile === 'on' && $woo_cart_desktop !== 'on') {
@@ -312,18 +312,18 @@ if (!class_exists('unmenu')) {
 					if ($woo_cart_class === 'hidden') $woo_icon = '';
 					else {
 						if ($type == 'offcanvas_head' && $woo_cart_class === '') $woo_cart_class = 'hidden ';
-						$woo_icon = uncode_add_cart_in_menu($woo_icon, $woo_cart_class);
+						$woo_icon = lerp_add_cart_in_menu($woo_icon, $woo_cart_class);
 					}
 				} else $woo_icon = '';
 			}
 
-			$search_active = ot_get_option( '_uncode_menu_search');
-			$socials_active = ot_get_option( '_uncode_menu_socials');
+			$search_active = ot_get_option( '_lerp_menu_search');
+			$socials_active = ot_get_option( '_lerp_menu_socials');
 
 			if (!empty($socials) && $socials_active === 'on') {
 				foreach ($socials as $social) {
-					if (isset($social['_uncode_menu_hidden']) && $social['_uncode_menu_hidden'] === 'on' || $social['_uncode_social'] === '') continue;
-					$social_html_inner .= '<li class="menu-item-link social-icon tablet-hidden mobile-hidden '.$social['_uncode_social_unique_id'].'"><a href="'.$social['_uncode_link'].'" target="_blank"><i class="'.$social['_uncode_social'].'"></i></a></li>';
+					if (isset($social['_lerp_menu_hidden']) && $social['_lerp_menu_hidden'] === 'on' || $social['_lerp_social'] === '') continue;
+					$social_html_inner .= '<li class="menu-item-link social-icon tablet-hidden mobile-hidden '.$social['_lerp_social_unique_id'].'"><a href="'.$social['_lerp_link'].'" target="_blank"><i class="'.$social['_lerp_social'].'"></i></a></li>';
 				}
 			}
 
@@ -346,7 +346,7 @@ if (!class_exists('unmenu')) {
 													<i class="fa fa-search3"></i>';
 						if (!$vertical)
 							$search_inner .= 		'<span class="desktop-hidden">';
-							$search_inner .= 		'<span>' .esc_html__('Search','uncode') . '</span>';
+							$search_inner .= 		'<span>' .esc_html__('Search','lerp') . '</span>';
 						if (!$vertical)
 							$search_inner .=		'</span>';
 						$search_inner .=			'<i class="fa fa-angle-down fa-dropdown'.(!$vertical ? ' desktop-hidden' : '').'"></i>
@@ -354,7 +354,7 @@ if (!class_exists('unmenu')) {
 													<ul role="menu" class="drop-menu'.(!$vertical ? ' desktop-hidden' : '').'">
 														<li>
 															<form class="search" method="get" action="'. get_home_url(get_current_blog_id(),'/') .'">
-																<input type="search" class="search-field no-livesearch" placeholder="'.esc_html__('Search…','uncode').'" value="" name="s" title="Search for:" />
+																<input type="search" class="search-field no-livesearch" placeholder="'.esc_html__('Search…','lerp').'" value="" name="s" title="Search for:" />
 															</form>
 														</li>
 													</ul>';
@@ -390,11 +390,11 @@ if (!class_exists('unmenu')) {
 				$social_html .= '</ul></div>';
 			}
 
-			$no_secondary = ot_get_option('_uncode_menu_no_secondary');
+			$no_secondary = ot_get_option('_lerp_menu_no_secondary');
 
-			$stylepadding = ot_get_option('_uncode_secondary_padding') === 'on' ? ' top-menu-padding' : '';
+			$stylepadding = ot_get_option('_lerp_secondary_padding') === 'on' ? ' top-menu-padding' : '';
 
-			$menu_sub_animation = ot_get_option( '_uncode_menu_li_animation' ) === 'on' ? ' menu-animated' : '';
+			$menu_sub_animation = ot_get_option( '_lerp_menu_li_animation' ) === 'on' ? ' menu-animated' : '';
 
 			$secondary_menu = '';
 			if ($no_secondary !== 'on' && isset($theme_locations['secondary'])) {
@@ -556,7 +556,7 @@ if (!class_exists('unmenu')) {
 													</div>
 													<div class="mmb-container"><div class="mobile-menu-button '.$buttonstyle_primary.' lines-button x2"><span class="lines"></span></div></div>
 												</div>';
-					add_filter('wp_nav_menu_objects', 'uncode_center_nav_menu_items', 10, 2);
+					add_filter('wp_nav_menu_objects', 'lerp_center_nav_menu_items', 10, 2);
 					$this->html = '<div class="menu-wrapper'.$menu_shrink.$menu_sticky.$menu_no_arrow.$menu_sub_animation.'">
 													'.($no_secondary !== 'on' ? $secondary_menu_html : '').'
 													<header id="masthead" class="navbar'.$stylemaincombo.$main_absolute.' menu-with-logo">
@@ -644,7 +644,7 @@ if (!class_exists('unmenu')) {
 				 * */
 				case 'menu-overlay':
 				case 'menu-overlay-center':
-					$overlay_animation = ot_get_option( '_uncode_menu_overlay_animation');
+					$overlay_animation = ot_get_option( '_lerp_menu_overlay_animation');
 					if ($overlay_animation === '' || $overlay_animation === '3d') $overlay_animation = 'contentscale';
 					$this->html =	'<div class="overlay overlay-'.$overlay_animation.' style-'.$styleoverlay.'-bg overlay-menu" data-area="menu" data-container="main-container">
 													<div class="main-header">
@@ -694,15 +694,15 @@ if (!class_exists('unmenu')) {
 				 * Vertical menus
 				 * */
 				default:
-					$footer_copyright = ot_get_option('_uncode_footer_copyright');
+					$footer_copyright = ot_get_option('_lerp_footer_copyright');
 					$footer_text_content = '';
 					if ($footer_copyright !== 'off') {
-						$footer_text_content .= '<p>&copy; '.date("Y").' '.get_bloginfo('name') . ' <span style="white-space:nowrap;">' . esc_html__('All rights reserved','uncode') . '</span></p>';
+						$footer_text_content .= '<p>&copy; '.date("Y").' '.get_bloginfo('name') . ' <span style="white-space:nowrap;">' . esc_html__('All rights reserved','lerp') . '</span></p>';
 					}
 
-					$footer_text = ot_get_option('_uncode_footer_text');
+					$footer_text = ot_get_option('_lerp_footer_text');
 					if ($footer_text !== '') {
-						$footer_text_content .= uncode_remove_wpautop($footer_text);
+						$footer_text_content .= lerp_remove_wpautop($footer_text);
 					}
 					$this->html = '<div class="main-header">
 													<div id="masthead" class="masthead-vertical'.$menu_sticky.'">

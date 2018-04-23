@@ -14,7 +14,7 @@ $history_tab = $history;
 
 $el_class = $this->getExtraClass( $el_class );
 
-$element = 'uncode-tabs';
+$element = 'lerp-tabs';
 
 // Extract tab titles
 $content = preg_replace('/vc_tab/', 'vc_tab first="1"', $content, 1);
@@ -52,7 +52,7 @@ if ($vertical === 'yes') $tabs_nav .= '</div>';
 $css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, trim( $element . ' wpb_content_element ' . $el_class ), $this->settings['base'], $atts );
 
 $output .= '<div class="' . esc_attr($css_class) . '" data-interval="' . esc_attr($interval) . '">';
-$output .= '<div class="uncode-wrapper tab-container">';
+$output .= '<div class="lerp-wrapper tab-container">';
 $output .= wpb_widget_title( array( 'title' => $title, 'extraclass' => $element . '_heading' ) );
 $output .= $tabs_nav;
 if ($vertical === 'yes') $output .= '<div class="vertical-tab-contents">';
@@ -63,5 +63,5 @@ if ($vertical === 'yes') $output .= '</div>';
 $output .= '</div>';
 $output .= '</div>';
 
-echo uncode_remove_wpautop($output);
+echo lerp_remove_wpautop($output);
 $history_tab = '';

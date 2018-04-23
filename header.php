@@ -4,7 +4,7 @@
  *
  * Displays all of the <head> section and everything up till <div class="page-wrapper">
  *
- * @package uncode
+ * @package lerp
  */
 
 global $is_redirect, $redirect_page;
@@ -48,17 +48,17 @@ if (is_admin_bar_showing()) $html_class .= ' admin-mode';
 	$onepage = false;
 	$background_div = $background_style = $background_color_css = '';
 
-	if (isset($metabox_data['_uncode_page_scroll'][0]) && $metabox_data['_uncode_page_scroll'][0] == 'on') {
+	if (isset($metabox_data['_lerp_page_scroll'][0]) && $metabox_data['_lerp_page_scroll'][0] == 'on') {
 		$onepage = true;
 	}
 
-	$boxed = ot_get_option( '_uncode_boxed');
-	$vmenu_position = ot_get_option('_uncode_vmenu_position');
-	$fontsizes = ot_get_option( '_uncode_heading_font_sizes');
-	$background = ot_get_option( '_uncode_body_background');
+	$boxed = ot_get_option( '_lerp_boxed');
+	$vmenu_position = ot_get_option('_lerp_vmenu_position');
+	$fontsizes = ot_get_option( '_lerp_heading_font_sizes');
+	$background = ot_get_option( '_lerp_body_background');
 
-	if (isset($metabox_data['_uncode_specific_body_background'])) {
-		$specific_background = unserialize($metabox_data['_uncode_specific_body_background'][0]);
+	if (isset($metabox_data['_lerp_specific_body_background'])) {
+		$specific_background = unserialize($metabox_data['_lerp_specific_body_background'][0]);
 		if ($specific_background['background-color'] != '' || $specific_background['background-image'] != '') {
 			$background = $specific_background;
 		}
@@ -67,7 +67,7 @@ if (is_admin_bar_showing()) $html_class .= ' admin-mode';
 	$back_class = '';
 	if (!empty($background) && ($background['background-color'] != '' || $background['background-image'] != '')) {
 		if ($background['background-color'] !== '') $background_color_css = ' style-'. $background['background-color'] . '-bg';
-		$back_result_array = uncode_get_back_html($background, '', '', '', 'div');
+		$back_result_array = lerp_get_back_html($background, '', '', '', 'div');
 
 		if ((strpos($back_result_array['mime'], 'image') !== false)) {
 			$background_style .= (strpos($back_result_array['back_url'], 'background-image') !== false) ? $back_result_array['back_url'] : 'background-image: url(' . $back_result_array['back_url'] . ');';
@@ -88,15 +88,15 @@ if (is_admin_bar_showing()) $html_class .= ' admin-mode';
 		$boxed_width = ' limit-width';
 	} else {
 		$boxed_width = '';
-		$body_border = ot_get_option('_uncode_body_border');
+		$body_border = ot_get_option('_lerp_body_border');
 		if ($body_border !== '' && $body_border !== 0) {
 			$body_attr = ' data-border="' . esc_attr($body_border) . '"';
 		}
 	}
 
-	if ( uncode_is_full_page(true) ) {
-		if ( isset($metabox_data['_uncode_scroll_additional_padding'][0]) && $metabox_data['_uncode_scroll_additional_padding'][0] != '' )
-			$fp_add_padding = $metabox_data['_uncode_scroll_additional_padding'][0];
+	if ( lerp_is_full_page(true) ) {
+		if ( isset($metabox_data['_lerp_scroll_additional_padding'][0]) && $metabox_data['_lerp_scroll_additional_padding'][0] != '' )
+			$fp_add_padding = $metabox_data['_lerp_scroll_additional_padding'][0];
 		else
 			$fp_add_padding = 0;
 
@@ -106,13 +106,13 @@ if (is_admin_bar_showing()) $html_class .= ' admin-mode';
 
 ?>
 <body <?php body_class($background_color_css); echo $body_attr; ?>>
-	<?php echo uncode_remove_wpautop( $background_div ) ; ?>
+	<?php echo lerp_remove_wpautop( $background_div ) ; ?>
 	<?php do_action( 'before' );
 
-	$body_border = ot_get_option('_uncode_body_border');
+	$body_border = ot_get_option('_lerp_body_border');
 	if ($body_border !== '' && $body_border !== 0) {
-		$general_style = ot_get_option('_uncode_general_style');
-		$body_border_color = ot_get_option('_uncode_body_border_color');
+		$general_style = ot_get_option('_lerp_general_style');
+		$body_border_color = ot_get_option('_lerp_body_border_color');
 		if ($body_border_color === '') $body_border_color = ' style-' . $general_style . '-bg';
 		else $body_border_color = ' style-' . $body_border_color . '-bg';
 		$body_border_frame ='<div class="body-borders" data-border="'.$body_border.'"><div class="top-border body-border-shadow"></div><div class="right-border body-border-shadow"></div><div class="bottom-border body-border-shadow"></div><div class="left-border body-border-shadow"></div><div class="top-border'.$body_border_color.'"></div><div class="right-border'.$body_border_color.'"></div><div class="bottom-border'.$body_border_color.'"></div><div class="left-border'.$body_border_color.'"></div></div>';
@@ -127,11 +127,11 @@ if (is_admin_bar_showing()) $html_class .= ' admin-mode';
 			if ($is_redirect !== true) {
 				if ($menutype === 'vmenu-offcanvas' || $menutype === 'menu-overlay' || $menutype === 'menu-overlay-center') {
 					$mainmenu = new unmenu('offcanvas_head', $menutype);
-					echo uncode_remove_wpautop( $mainmenu->html );
+					echo lerp_remove_wpautop( $mainmenu->html );
 				}
 				if ( !($menutype === 'vmenu' && $boxed === 'on' && $vmenu_position === 'right') ) {
 					$mainmenu = new unmenu($menutype, $menutype);
-					echo uncode_remove_wpautop( $mainmenu->html );
+					echo lerp_remove_wpautop( $mainmenu->html );
 				}
 			}
 			?>

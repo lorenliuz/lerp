@@ -93,7 +93,7 @@ $a_target = $media_link['target'];
 
 $alignment = ' text-' . $alignment;
 
-$css_class = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'uncode-single-media ' . $el_class , $this->settings['base'], $atts);
+$css_class = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'lerp-single-media ' . $el_class , $this->settings['base'], $atts);
 
 $css_class .= $alignment;
 
@@ -248,7 +248,7 @@ if ($media_lightbox === 'yes') {
 
 if ($advanced === 'yes') {
 
-	$layout = uncode_flatArray(vc_sorted_list_parse_value($media_items));
+	$layout = lerp_flatArray(vc_sorted_list_parse_value($media_items));
 
 	if ($media_lightbox !== 'yes') {
 		$lightbox_classes = array();
@@ -270,9 +270,9 @@ if ($advanced === 'yes') {
 		$media_html = '<img src="https://placeholdit.imgix.net/~text?txtsize=33&amp;txt=media+not+available&amp;w=500&amp;h=500" />';
 	} else {
 		if (isset($div_data['data-delay']) && $div_data['data-delay'] !== '') $block_data['delay'] = $animation_delay;
-		$media_html = uncode_create_single_block($block_data, 'single-' . $lbox_id, 'masonry', $layout, $lightbox_classes, $carousel_textual);
+		$media_html = lerp_create_single_block($block_data, 'single-' . $lbox_id, 'masonry', $layout, $lightbox_classes, $carousel_textual);
 	}
-	$media_string = '<div class="uncode-single-media-wrapper single-advanced">' . $media_html . '</div>';
+	$media_string = '<div class="lerp-single-media-wrapper single-advanced">' . $media_html . '</div>';
 
 } else {
 
@@ -293,14 +293,14 @@ if ($advanced === 'yes') {
 	} else {
 
 		if ($media_poster === 'yes') {
-			$poster = get_post_meta($media, "_uncode_poster_image", true);
+			$poster = get_post_meta($media, "_lerp_poster_image", true);
 			if (isset($poster) && $poster !== '') $block_data['poster'] = true;
 		}
 
 		if (isset($div_data['data-delay']) && $div_data['data-delay'] !== '') $block_data['delay'] = $animation_delay;
-		$media_attributes = uncode_get_media_info($media);
+		$media_attributes = lerp_get_media_info($media);
 		$media_metavalues = unserialize($media_attributes->metadata);
-		$media_html = uncode_create_single_block($block_data, 'single-' . $lbox_id, 'masonry', $layout, $lightbox_classes, $carousel_textual);
+		$media_html = lerp_create_single_block($block_data, 'single-' . $lbox_id, 'masonry', $layout, $lightbox_classes, $carousel_textual);
 
 		if (class_exists('DOMDocument')) {
 			libxml_use_internal_errors(true);
@@ -328,7 +328,7 @@ if ($advanced === 'yes') {
 	}
 
 	if ($media_lightbox === 'yes') {
-		$media_string = str_replace('t-entry-visual-cont', 'uncode-single-media-wrapper' . $shape, $media_html);
+		$media_string = str_replace('t-entry-visual-cont', 'lerp-single-media-wrapper' . $shape, $media_html);
 		if ($media_attributes->post_mime_type === 'oembed/iframe') {
 			$media_string .= '<div id="inline-' . esc_attr( $media ) . '" class="ilightbox-html" style="display: none;">' . $media_attributes->post_content . '</div>';
 		}
@@ -336,9 +336,9 @@ if ($advanced === 'yes') {
 		if (!empty($a_href)) {
 			$a_target = ($a_target !== '') ? ' target="' . esc_attr( $a_target ) . '"' : '';
 			$a_title = ($a_title !== '') ? ' title="' . esc_attr( $a_title ) . '"' : '';
-			$media_string = '<a class="single-media-link" href="' . esc_attr( $a_href ) . '"'.$a_target.$a_title.'>' . $media_string = str_replace('t-entry-visual-cont', 'uncode-single-media-wrapper' . $shape, $media_html) . '</a>';
+			$media_string = '<a class="single-media-link" href="' . esc_attr( $a_href ) . '"'.$a_target.$a_title.'>' . $media_string = str_replace('t-entry-visual-cont', 'lerp-single-media-wrapper' . $shape, $media_html) . '</a>';
 		} else {
-			$media_string = str_replace('t-entry-visual-cont', 'uncode-single-media-wrapper' . $shape, $media_html);
+			$media_string = str_replace('t-entry-visual-cont', 'lerp-single-media-wrapper' . $shape, $media_html);
 		}
 	}
 }
@@ -351,4 +351,4 @@ $output.= '</div>';
 if ($caption === 'yes' && isset($media_attributes->post_excerpt) && $media_attributes->post_excerpt !== '') $output.= '<figcaption>'.$media_attributes->post_excerpt.'</figcaption>';
 $output.= '</div>';
 
-echo uncode_remove_wpautop($output);
+echo lerp_remove_wpautop($output);

@@ -3,8 +3,8 @@
 /**
  * Build background HTML
  */
-if ( !function_exists('uncode_get_back_html') ) {
-    function uncode_get_back_html($background = array(), $overlay_color = '', $overlay_color_alpha = '', $overlay_pattern = '', $type)
+if ( !function_exists('lerp_get_back_html') ) {
+    function lerp_get_back_html($background = array(), $overlay_color = '', $overlay_color_alpha = '', $overlay_pattern = '', $type)
     {
 
         global $front_background_colors, $adaptive_images, $adaptive_images_async, $adaptive_images_async_blur;
@@ -14,7 +14,7 @@ if ( !function_exists('uncode_get_back_html') ) {
         if ( !empty($background['background-image']) ) {
             $media_ids = explode(',', $background['background-image']);
             if ( count($media_ids) === 1 ) {
-                $back_attributes = uncode_get_media_info($background['background-image']);
+                $back_attributes = lerp_get_media_info($background['background-image']);
                 if ( isset($back_attributes->post_mime_type) ) $background_mime = $back_attributes->post_mime_type;
 
                 $back_repeat = (isset($background['background-repeat']) && $background['background-repeat'] !== '') ? 'background-repeat: ' . $background['background-repeat'] . ';' : '';
@@ -33,7 +33,7 @@ if ( !function_exists('uncode_get_back_html') ) {
                     if ( $background_mime === 'image/gif' || $background_mime === 'image/url' ) {
                         $background_url = $back_attributes->guid;
                     } else {
-                        $resized_back = uncode_resize_image($back_attributes->id, $back_attributes->guid, $back_attributes->path, $image_orig_w, $image_orig_h, 12, '', false);
+                        $resized_back = lerp_resize_image($back_attributes->id, $back_attributes->guid, $back_attributes->path, $image_orig_w, $image_orig_h, 12, '', false);
                         $background_url = $resized_back['url'];
                     }
                     $back_url = ($background_url != '') ? 'background-image: url(' . $background_url . ');' : '';
@@ -47,7 +47,7 @@ if ( !function_exists('uncode_get_back_html') ) {
                     $exloded_url = explode(".", strtolower($back_attributes->guid));
                     $ext = end($exloded_url);
                     $videos[(String)$ext] = $back_attributes->guid;
-                    $alt_videos = get_post_meta($background['background-image'], "_uncode_video_alternative", true);
+                    $alt_videos = get_post_meta($background['background-image'], "_lerp_video_alternative", true);
 
                     if ( !empty($alt_videos) ) {
                         foreach ( $alt_videos as $key => $value ) {
@@ -66,16 +66,16 @@ if ( !function_exists('uncode_get_back_html') ) {
                         $video_src .= ' ' . $key . '=' . $value;
                     }
 
-                    $back_mime_css = ' self-video uncode-video-container';
+                    $back_mime_css = ' self-video lerp-video-container';
 
-                    add_filter("wp_video_shortcode_class", "uncode_back_video_class", 10, 2);
+                    add_filter("wp_video_shortcode_class", "lerp_back_video_class", 10, 2);
                     $header_background_selfvideo = do_shortcode('[video' . $video_src . ' loop="y"]');
                     $header_background_selfvideo = str_replace('controls="controls"', '', $header_background_selfvideo);
 
                     $get_video_meta = unserialize($back_attributes->metadata);
                     $video_ratio = $get_video_meta['width'] / $get_video_meta['height'];
                     $header_background_selfvideo = str_replace('class="background-video-shortcode"', 'class="background-video-shortcode" data-ratio="' . $video_ratio . '"', $header_background_selfvideo);
-                    remove_filter("wp_video_shortcode_class", "uncode_back_video_class");
+                    remove_filter("wp_video_shortcode_class", "lerp_back_video_class");
                 } else {
                     switch ( $background_mime ) {
                         case 'oembed/flickr':
@@ -118,7 +118,7 @@ if ( !function_exists('uncode_get_back_html') ) {
                                 }
                             }
                             $header_background_video .= ' data-ignore data-ratio="' . $video_ratio . '" data-provider="' . ($background_mime === 'oembed/vimeo' ? 'vimeo' : 'youtube') . '" data-video="' . $video_url . '" data-id="' . rand(10000, 99999) . '"';
-                            $back_mime_css = ' video uncode-video-container';
+                            $back_mime_css = ' video lerp-video-container';
                             break;
                         case 'oembed/soundcloud':
                             $url = $back_attributes->guid;
@@ -166,13 +166,13 @@ if ( !function_exists('uncode_get_back_html') ) {
                             $content_html .= '</blockquote>
 																	</div>
 																</div>';
-                            $poster = get_post_meta($background['background-image'], "_uncode_poster_image", true);
+                            $poster = get_post_meta($background['background-image'], "_lerp_poster_image", true);
                             if ( $poster !== '' ) {
-                                $poster_attributes = uncode_get_media_info($poster);
+                                $poster_attributes = lerp_get_media_info($poster);
                                 $media_metavalues = unserialize($poster_attributes->metadata);
                                 $image_orig_w = $media_metavalues['width'];
                                 $image_orig_h = $media_metavalues['height'];
-                                $resized_image = uncode_resize_image($poster_attributes->id, $poster_attributes->guid, $poster_attributes->path, $image_orig_w, $image_orig_h, 12, '', false);
+                                $resized_image = lerp_resize_image($poster_attributes->id, $poster_attributes->guid, $poster_attributes->path, $image_orig_w, $image_orig_h, 12, '', false);
                                 $poster_url = $resized_image['url'];
                                 if ( isset($poster_attributes->post_mime_type) ) $background_mime = $poster_attributes->post_mime_type;
                                 if ( strpos($background_mime, 'image/') !== false ) {
@@ -191,13 +191,13 @@ if ( !function_exists('uncode_get_back_html') ) {
                             if ( isset($back_attributes->post_excerpt) && $back_attributes->post_excerpt !== '' ) $author = '<p><small>' . $back_attributes->post_excerpt . '</small></p>';
                             else $author = '';
                             $content_html = '<blockquote class="pullquote"><p>' . $back_attributes->post_content . '</p>' . $author . '</blockquote>';
-                            $poster = get_post_meta($background['background-image'], "_uncode_poster_image", true);
+                            $poster = get_post_meta($background['background-image'], "_lerp_poster_image", true);
                             if ( $poster !== '' ) {
-                                $poster_attributes = uncode_get_media_info($poster);
+                                $poster_attributes = lerp_get_media_info($poster);
                                 $media_metavalues = unserialize($poster_attributes->metadata);
                                 $image_orig_w = $media_metavalues['width'];
                                 $image_orig_h = $media_metavalues['height'];
-                                $resized_image = uncode_resize_image($poster_attributes->id, $poster_attributes->guid, $poster_attributes->path, $image_orig_w, $image_orig_h, 12, '', false);
+                                $resized_image = lerp_resize_image($poster_attributes->id, $poster_attributes->guid, $poster_attributes->path, $image_orig_w, $image_orig_h, 12, '', false);
                                 $poster_url = $resized_image['url'];
                                 if ( isset($poster_attributes->post_mime_type) ) $background_mime = $poster_attributes->post_mime_type;
                                 if ( strpos($background_mime, 'image/') !== false ) {
@@ -227,13 +227,13 @@ if ( !function_exists('uncode_get_back_html') ) {
                             } else if ( $background_mime === 'oembed/spotify' ) {
                                 $content_html = wp_oembed_get($back_attributes->guid);
                             }
-                            $poster = get_post_meta($background['background-image'], "_uncode_poster_image", true);
+                            $poster = get_post_meta($background['background-image'], "_lerp_poster_image", true);
                             if ( $poster !== '' ) {
-                                $poster_attributes = uncode_get_media_info($poster);
+                                $poster_attributes = lerp_get_media_info($poster);
                                 $media_metavalues = unserialize($poster_attributes->metadata);
                                 $image_orig_w = $media_metavalues['width'];
                                 $image_orig_h = $media_metavalues['height'];
-                                $resized_image = uncode_resize_image($poster_attributes->id, $poster_attributes->guid, $poster_attributes->path, $image_orig_w, $image_orig_h, 12, '', false);
+                                $resized_image = lerp_resize_image($poster_attributes->id, $poster_attributes->guid, $poster_attributes->path, $image_orig_w, $image_orig_h, 12, '', false);
                                 $poster_url = $resized_image['url'];
                                 if ( isset($poster_attributes->post_mime_type) ) $background_mime = $poster_attributes->post_mime_type;
                                 if ( strpos($background_mime, 'image/') !== false ) {
@@ -270,7 +270,7 @@ if ( !function_exists('uncode_get_back_html') ) {
 
         if ( $overlay_color_alpha !== '' && $overlay_color !== '' ) $overlay_color_alpha = ' style="opacity: ' . ($overlay_color_alpha / 100) . ';"';
         else $overlay_color_alpha = '';
-        if ( !empty($overlay_pattern) ) $overlay_pattern = ' uncode-' . $overlay_pattern;
+        if ( !empty($overlay_pattern) ) $overlay_pattern = ' lerp-' . $overlay_pattern;
 
         if ( !empty($overlay_pattern) && $overlay_pattern !== '' ) $header_overlay_pattern_style = '<div class="header-bg-overlay-inner' . $overlay_pattern . '"' . $overlay_color_alpha . '></div>';
         if ( !empty($overlay_color) && $overlay_color !== '' ) $header_overlay_style = '<div class="header-bg-overlay-inner' . $overlay_color . '"' . $overlay_color_alpha . '></div>';
@@ -324,8 +324,8 @@ if ( !function_exists('uncode_get_back_html') ) {
 /**
  * Row template
  */
-if ( !function_exists('uncode_get_row_template') ) {
-    function uncode_get_row_template($content, $limit_width, $limit_content_width, $style, $row_class = '', $padding_top = true, $padding_lr = true, $padding_bottom = true, $row_style = '')
+if ( !function_exists('lerp_get_row_template') ) {
+    function lerp_get_row_template($content, $limit_width, $limit_content_width, $style, $row_class = '', $padding_top = true, $padding_lr = true, $padding_bottom = true, $row_style = '')
     {
 
         if ( $content === '' ) return;
@@ -366,8 +366,8 @@ if ( !function_exists('uncode_get_row_template') ) {
  * @param  boolean $with_html
  * @return [type]
  */
-if ( !function_exists('uncode_create_single_block') ) {
-    function uncode_create_single_block($block_data, $el_id, $style_preset, $layout, $lightbox_classes, $carousel_textual, $with_html = true)
+if ( !function_exists('lerp_create_single_block') ) {
+    function lerp_create_single_block($block_data, $el_id, $style_preset, $layout, $lightbox_classes, $carousel_textual, $with_html = true)
     {
 
         global $adaptive_images, $adaptive_images_async, $adaptive_images_async_blur, $post;
@@ -489,12 +489,12 @@ if ( !function_exists('uncode_create_single_block') ) {
             /** get media info **/
             if ( count($items_thumb_id) > 1 ) {
                 if ( $media_poster ) {
-                    $media_attributes = uncode_get_media_info($items_thumb_id[0]);
+                    $media_attributes = lerp_get_media_info($items_thumb_id[0]);
                     $media_metavalues = unserialize($media_attributes->metadata);
                     $media_mime = $media_attributes->post_mime_type;
                 } else $multiple_items = true;
             } else {
-                $media_attributes = uncode_get_media_info($item_thumb_id);
+                $media_attributes = lerp_get_media_info($item_thumb_id);
                 if ( !isset($media_attributes) ) {
                     $media_attributes = new stdClass();
                     $media_attributes->metadata = '';
@@ -512,8 +512,8 @@ if ( !function_exists('uncode_create_single_block') ) {
 
             /** check if open to lightbox **/
             if ( $lightbox_classes && !(isset($block_data['explode_album']) && is_array($block_data['explode_album']) && !empty($block_data['explode_album'])) ) {
-                if ( isset($lightbox_classes['data-title']) && $lightbox_classes['data-title'] === true ) $lightbox_classes['data-title'] = apply_filters('uncode_media_attribute_title', $media_attributes->post_title, $items_thumb_id[0]);
-                if ( isset($lightbox_classes['data-caption']) && $lightbox_classes['data-caption'] === true ) $lightbox_classes['data-caption'] = apply_filters('uncode_media_attribute_excerpt', $media_attributes->post_excerpt, $items_thumb_id[0]);
+                if ( isset($lightbox_classes['data-title']) && $lightbox_classes['data-title'] === true ) $lightbox_classes['data-title'] = apply_filters('lerp_media_attribute_title', $media_attributes->post_title, $items_thumb_id[0]);
+                if ( isset($lightbox_classes['data-caption']) && $lightbox_classes['data-caption'] === true ) $lightbox_classes['data-caption'] = apply_filters('lerp_media_attribute_excerpt', $media_attributes->post_excerpt, $items_thumb_id[0]);
             }
 
             /** shortcode carousel  **/
@@ -521,7 +521,7 @@ if ( !function_exists('uncode_create_single_block') ) {
 
                 $shortcode = '[vc_gallery nested="yes" el_id="gallery-' . rand() . '" medias="' . $item_thumb_id . '" type="carousel" style_preset="' . $style_preset . '" single_padding="0" thumb_size="' . $images_size . '" carousel_lg="1" carousel_md="1" carousel_sm="1" gutter_size="0" media_items="media" carousel_interval="0" carousel_dots="yes" carousel_dots_mobile="yes" carousel_autoh="yes" carousel_type="fade" carousel_nav="no" carousel_nav_mobile="no" carousel_dots_inside="yes" single_text="overlay" single_border="yes" single_width="' . $single_width . '" single_height="' . $single_height . '" single_text_visible="no" single_text_anim="no" single_overlay_visible="no" single_overlay_anim="no" single_image_anim="no"]';
 
-                $media_oembed = uncode_get_oembed($item_thumb_id, $shortcode, 'shortcode', false);
+                $media_oembed = lerp_get_oembed($item_thumb_id, $shortcode, 'shortcode', false);
                 $media_code = $media_oembed['code'];
                 $media_type = $media_oembed['type'];
                 if ( ($key = array_search('tmb-overlay-anim', $block_classes)) !== false ) {
@@ -549,7 +549,7 @@ if ( !function_exists('uncode_create_single_block') ) {
                         if ( $adaptive_images === 'on' && $adaptive_images_async === 'on' ) {
                             $create_link = (is_array($media_attributes->guid) ? $media_attributes->guid['url'] : $media_attributes->guid);
                         } else {
-                            $big_image = uncode_resize_image($media_attributes->id, (is_array($media_attributes->guid) ? $media_attributes->guid['url'] : $media_attributes->guid), $media_attributes->path, $image_orig_w, $image_orig_h, 12, null, false);
+                            $big_image = lerp_resize_image($media_attributes->id, (is_array($media_attributes->guid) ? $media_attributes->guid['url'] : $media_attributes->guid), $media_attributes->path, $image_orig_w, $image_orig_h, 12, null, false);
                             $create_link = $big_image['url'];
                         }
                         $create_link = strtok($create_link, '?');
@@ -585,15 +585,15 @@ if ( !function_exists('uncode_create_single_block') ) {
                             if ( $style_preset !== 'metro' )
                                 $single_height = $single_height / (12 / $single_image_size);
                         }
-                        global $woocommerce_loop, $uncode_vc_index;
-                        if ( !$uncode_vc_index && ((isset($woocommerce_loop['columns']) && $woocommerce_loop['columns'] != '') || (function_exists('is_product_category') && is_product_category()) || (function_exists('is_product_tag') && is_product_tag())) ) {
+                        global $woocommerce_loop, $lerp_vc_index;
+                        if ( !$lerp_vc_index && ((isset($woocommerce_loop['columns']) && $woocommerce_loop['columns'] != '') || (function_exists('is_product_category') && is_product_category()) || (function_exists('is_product_tag') && is_product_tag())) ) {
                             $wc_catalog_image_size = get_option('shop_catalog_image_size');
                             if ( $wc_catalog_image_size['crop'] ) {
                                 $crop = true;
                                 $single_height = ($single_width * $wc_catalog_image_size['height']) / $wc_catalog_image_size['width'];
                             }
                         }
-                        $resized_image = uncode_resize_image($media_attributes->id, $media_attributes->guid, $media_attributes->path, $image_orig_w, $image_orig_h, $single_width, $single_height, $crop, $single_fixed);
+                        $resized_image = lerp_resize_image($media_attributes->id, $media_attributes->guid, $media_attributes->path, $image_orig_w, $image_orig_h, $single_width, $single_height, $crop, $single_fixed);
                     }
                     $item_media = esc_attr($resized_image['url']);
                     if ( strpos($media_mime, 'image/') !== false && $media_mime !== 'image/gif' && $media_mime !== 'image/url' && $adaptive_images === 'on' && $adaptive_images_async === 'on' ) {
@@ -658,7 +658,7 @@ if ( !function_exists('uncode_create_single_block') ) {
                         if ( $lightbox_classes ) $create_link = $item_media;
                     } /** any other oembed **/
                     else {
-                        $media_oembed = uncode_get_oembed($item_thumb_id, $media_attributes->guid, $media_attributes->post_mime_type, $media_poster, $media_attributes->post_excerpt, $media_attributes->post_content);
+                        $media_oembed = lerp_get_oembed($item_thumb_id, $media_attributes->guid, $media_attributes->post_mime_type, $media_poster, $media_attributes->post_excerpt, $media_attributes->post_content);
                         /** check if is an image oembed  **/
                         if ( $media_oembed['type'] === 'image' ) {
                             $item_media = esc_attr($media_oembed['code']);
@@ -679,11 +679,11 @@ if ( !function_exists('uncode_create_single_block') ) {
                                 } else $crop = true;
 
                                 if ( !empty($media_oembed['poster']) && $media_oembed['poster'] !== '' ) {
-                                    $poster_attributes = uncode_get_media_info($media_oembed['poster']);
+                                    $poster_attributes = lerp_get_media_info($media_oembed['poster']);
                                     $media_metavalues = unserialize($poster_attributes->metadata);
                                     $image_orig_w = $media_metavalues['width'];
                                     $image_orig_h = $media_metavalues['height'];
-                                    $resized_image = uncode_resize_image($poster_attributes->id, $poster_attributes->guid, $poster_attributes->path, $image_orig_w, $image_orig_h, $single_width, $single_height, $crop);
+                                    $resized_image = lerp_resize_image($poster_attributes->id, $poster_attributes->guid, $poster_attributes->path, $image_orig_w, $image_orig_h, $single_width, $single_height, $crop);
                                     $item_media = esc_attr($resized_image['url']);
                                     if ( strpos($poster_attributes->post_mime_type, 'image/') !== false && $poster_attributes->post_mime_type !== 'image/gif' && $poster_attributes->post_mime_type !== 'image/url' && $adaptive_images === 'on' && $adaptive_images_async === 'on' ) {
                                         $adaptive_async_class = ' adaptive-async';
@@ -701,7 +701,7 @@ if ( !function_exists('uncode_create_single_block') ) {
                                                 if ( $adaptive_images === 'on' && $adaptive_images_async === 'on' ) {
                                                     $poster_url = $poster_attributes->guid;
                                                 } else {
-                                                    $big_image = uncode_resize_image($poster_attributes->id, $poster_attributes->guid, $poster_attributes->path, $image_orig_w, $image_orig_h, 12, null, false);
+                                                    $big_image = lerp_resize_image($poster_attributes->id, $poster_attributes->guid, $poster_attributes->path, $image_orig_w, $image_orig_h, 12, null, false);
                                                     $create_link = $big_image['url'];
                                                 }
                                                 break;
@@ -727,11 +727,11 @@ if ( !function_exists('uncode_create_single_block') ) {
                                 }
 
                                 if ( strpos($media_mime, 'audio/') !== false && isset($media_oembed['poster']) && $media_oembed['poster'] !== '' ) {
-                                    $poster_attributes = uncode_get_media_info($media_oembed['poster']);
+                                    $poster_attributes = lerp_get_media_info($media_oembed['poster']);
                                     $media_metavalues = unserialize($poster_attributes->metadata);
                                     $image_orig_w = $media_metavalues['width'];
                                     $image_orig_h = $media_metavalues['height'];
-                                    $resized_image = uncode_resize_image($poster_attributes->id, $poster_attributes->guid, $poster_attributes->path, $image_orig_w, $image_orig_h, $single_width, $single_height, $crop);
+                                    $resized_image = lerp_resize_image($poster_attributes->id, $poster_attributes->guid, $poster_attributes->path, $image_orig_w, $image_orig_h, $single_width, $single_height, $crop);
                                     $media_oembed['dummy'] = ($image_orig_h / $image_orig_w) * 100;
                                 }
 
@@ -810,7 +810,7 @@ if ( !function_exists('uncode_create_single_block') ) {
                 case 'type':
                     $get_the_post_type = get_post_type($block_data['id']);
                     if ( $get_the_post_type === 'portfolio' ) {
-                        $portfolio_cpt_name = ot_get_option('_uncode_portfolio_cpt');
+                        $portfolio_cpt_name = ot_get_option('_lerp_portfolio_cpt');
                         if ( $portfolio_cpt_name !== '' ) $get_the_post_type = $portfolio_cpt_name;
                     }
                     $get_the_post_type = get_post_type_object($get_the_post_type);
@@ -827,7 +827,7 @@ if ( !function_exists('uncode_create_single_block') ) {
                     $meta_inner = '';
 
                     if ( is_sticky() ) {
-                        $meta_inner .= '<span class="t-entry-category"><i class="fa fa-ribbon fa-push-right"></i>' . esc_html__('Sticky', 'uncode') . '</span><span class="small-spacer"></span>';
+                        $meta_inner .= '<span class="t-entry-category"><i class="fa fa-ribbon fa-push-right"></i>' . esc_html__('Sticky', 'lerp') . '</span><span class="small-spacer"></span>';
                     }
 
                     if ( $key === 'meta' ) {
@@ -883,7 +883,7 @@ if ( !function_exists('uncode_create_single_block') ) {
                             }
 
                             if ( isset($block_data['single_categories'][$t_key]['cat_id']) ) {
-                                $term_color = get_option('_uncode_taxonomy_' . $block_data['single_categories'][$t_key]['cat_id']);
+                                $term_color = get_option('_lerp_taxonomy_' . $block_data['single_categories'][$t_key]['cat_id']);
                                 if ( isset($term_color['term_color']) && $term_color['term_color'] !== '' && $with_bg ) {
                                     $term_color = 'text-' . $term_color['term_color'] . '-color';
                                     $cat_link = str_replace('<a ', '<a class="' . $term_color . '" ', $cat_link);
@@ -919,7 +919,7 @@ if ( !function_exists('uncode_create_single_block') ) {
                     if ( isset($value[0]) && ($value[0] === 'full') ) {
                         $block_text = (($post_format === 'link') ? '<i class="fa fa-link fa-push-right"></i>' : '') . $block_data['content'];
                         $block_text .= wp_link_pages(array(
-                            'before' => '<div class="page-links">' . esc_html__('Pages:', 'uncode'),
+                            'before' => '<div class="page-links">' . esc_html__('Pages:', 'lerp'),
                             'after' => '</div>',
                             'link_before' => '<span>',
                             'link_after' => '</span>',
@@ -928,17 +928,17 @@ if ( !function_exists('uncode_create_single_block') ) {
                     } else $block_text = get_post_field('post_excerpt', $block_data['id']);
 
                     if ( function_exists('qtranxf_getLanguage') ) $block_text = __($block_text);
-                    $block_text = uncode_remove_wpautop($block_text, true);
+                    $block_text = lerp_remove_wpautop($block_text, true);
 
                     $text_class = (isset($block_data['text_lead']) && ($block_data['text_lead'] === 'yes')) ? ' class="text-lead"' : '';
 
                     $block_text = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $block_text);
                     if ( isset($block_data['text_length']) && $block_data['text_length'] !== '' ) {
                         $block_text = preg_replace('#<a class="more-link(.*?)</a>#', '', $block_text);
-                        $block_text = '<p' . $text_class . '>' . uncode_truncate($block_text, $block_data['text_length']) . '</p>';
+                        $block_text = '<p' . $text_class . '>' . lerp_truncate($block_text, $block_data['text_length']) . '</p>';
                     } else if ( isset($value[1]) && !empty($value[1]) ) {
                         $block_text = preg_replace('#<a class="more-link(.*?)</a>#', '', $block_text);
-                        $block_text = '<p' . $text_class . '>' . uncode_truncate($block_text, $value[1]) . '</p>';
+                        $block_text = '<p' . $text_class . '>' . lerp_truncate($block_text, $value[1]) . '</p>';
                     }
 
 
@@ -959,11 +959,11 @@ if ( !function_exists('uncode_create_single_block') ) {
                         if ( $value[0] === 'link' ) $btn_shape = ' btn-link';
                         else $btn_shape = ' btn-default btn-' . $value[0];
                     }
-                    if ( uncode_btn_style() !== '' )
-                        $btn_shape .= ' ' . uncode_btn_style();
+                    if ( lerp_btn_style() !== '' )
+                        $btn_shape .= ' ' . lerp_btn_style();
                     $data_values = (isset($block_data['link']['target']) && !empty($block_data['link']['target']) && is_array($block_data['link'])) ? ' target="' . trim($block_data['link']['target']) . '"' : '';
-                    if ( $single_text === 'overlay' && $single_elements_click !== 'yes' ) $inner_entry .= '<p class="t-entry-readmore"><span class="btn' . $btn_shape . '">' . esc_html__('Read More', 'uncode') . ' </span></p>';
-                    else $inner_entry .= '<p class="t-entry-readmore"><a href="' . $create_link . '" class="btn' . $btn_shape . '"' . $data_values . '>' . esc_html__('Read More', 'uncode') . ' </a></p>';
+                    if ( $single_text === 'overlay' && $single_elements_click !== 'yes' ) $inner_entry .= '<p class="t-entry-readmore"><span class="btn' . $btn_shape . '">' . esc_html__('Read More', 'lerp') . ' </span></p>';
+                    else $inner_entry .= '<p class="t-entry-readmore"><a href="' . $create_link . '" class="btn' . $btn_shape . '"' . $data_values . '>' . esc_html__('Read More', 'lerp') . ' </a></p>';
                     break;
 
                 case 'author':
@@ -971,32 +971,32 @@ if ( !function_exists('uncode_create_single_block') ) {
                     $author_name = get_the_author_meta('display_name', $author);
                     $author_link = get_author_posts_url($author);
                     $inner_entry .= '<p class="t-entry-author">';
-                    if ( $single_text === 'overlay' && $single_elements_click !== 'yes' ) $inner_entry .= get_avatar($author, 80) . '<span>' . esc_html__('by', 'uncode') . ' ' . $author_name . '</span>';
-                    else $inner_entry .= '<a href="' . $author_link . '">' . get_avatar($author, 80) . '<span>' . esc_html__('by', 'uncode') . ' ' . $author_name . '</span></a>';
+                    if ( $single_text === 'overlay' && $single_elements_click !== 'yes' ) $inner_entry .= get_avatar($author, 80) . '<span>' . esc_html__('by', 'lerp') . ' ' . $author_name . '</span>';
+                    else $inner_entry .= '<a href="' . $author_link . '">' . get_avatar($author, 80) . '<span>' . esc_html__('by', 'lerp') . ' ' . $author_name . '</span></a>';
                     $inner_entry .= '</p>';
                     break;
 
                 case 'extra':
                     $inner_entry .= '<p class="t-entry-comments entry-small"><span class="extras">';
 
-                    if ( function_exists('uncode_dot_irecommendthis') ) {
-                        global $uncode_dot_irecommendthis;
+                    if ( function_exists('lerp_dot_irecommendthis') ) {
+                        global $lerp_dot_irecommendthis;
                         if ( $single_text !== 'overlay' ) {
-                            $inner_entry .= $uncode_dot_irecommendthis->dot_recommend($block_data['id'], true);
+                            $inner_entry .= $lerp_dot_irecommendthis->dot_recommend($block_data['id'], true);
                         } else {
                             if ( $single_elements_click === 'yes' ) {
-                                $inner_entry .= $uncode_dot_irecommendthis->dot_recommend($block_data['id'], true);
+                                $inner_entry .= $lerp_dot_irecommendthis->dot_recommend($block_data['id'], true);
                             } else {
-                                $inner_entry .= $uncode_dot_irecommendthis->dot_recommend($block_data['id'], false);
+                                $inner_entry .= $lerp_dot_irecommendthis->dot_recommend($block_data['id'], false);
                             }
                         }
                     }
 
                     $num_comments = get_comments_number($block_data['id']);
-                    $entry_comments = '<i class="fa fa-speech-bubble"></i><span>' . $num_comments . ' ' . _nx('Comment', 'Comments', $num_comments, 'comments', 'uncode') . '</span>';
+                    $entry_comments = '<i class="fa fa-speech-bubble"></i><span>' . $num_comments . ' ' . _nx('Comment', 'Comments', $num_comments, 'comments', 'lerp') . '</span>';
                     if ( $single_text === 'overlay' && $single_elements_click !== 'yes' ) $inner_entry .= '<span class="extras-wrap">' . $entry_comments . '</span>';
                     else $inner_entry .= '<a class="extras-wrap" href="' . get_comments_link($block_data['id']) . '" title="title">' . $entry_comments . '</a>';
-                    $inner_entry .= '<span class="extras-wrap"><i class="fa fa-watch"></i><span>' . uncode_estimated_reading_time($block_data['id']) . '</span></span></span></p>';
+                    $inner_entry .= '<span class="extras-wrap"><i class="fa fa-watch"></i><span>' . lerp_estimated_reading_time($block_data['id']) . '</span></span></span></p>';
                     break;
 
                 case 'caption':
@@ -1107,9 +1107,9 @@ if ( !function_exists('uncode_create_single_block') ) {
             $video_src = '';
             if ( isset($media_attributes->post_mime_type) && strpos($media_attributes->post_mime_type, 'video/') !== false ) {
                 $video_src .= 'html5video:{preload:\'true\',';
-                $video_autoplay = get_post_meta($item_thumb_id, "_uncode_video_autoplay", true);
+                $video_autoplay = get_post_meta($item_thumb_id, "_lerp_video_autoplay", true);
                 if ( $video_autoplay ) $video_src .= 'autoplay:\'true\',';
-                $alt_videos = get_post_meta($item_thumb_id, "_uncode_video_alternative", true);
+                $alt_videos = get_post_meta($item_thumb_id, "_lerp_video_alternative", true);
                 if ( !empty($alt_videos) ) {
                     foreach ( $alt_videos as $key => $value ) {
                         $exloded_url = explode(".", strtolower($value));
@@ -1183,7 +1183,7 @@ if ( !function_exists('uncode_create_single_block') ) {
         }, $tmb_data, array_keys($tmb_data));
 
         $output = '';
-        if ( ot_get_option('_uncode_woocommerce_hooks') === 'on' && $is_product ) {
+        if ( ot_get_option('_lerp_woocommerce_hooks') === 'on' && $is_product ) {
             ob_start();
             do_action('woocommerce_before_shop_loop_item');
             $output .= ob_get_clean();
@@ -1192,7 +1192,7 @@ if ( !function_exists('uncode_create_single_block') ) {
         $output .= '<div class="' . implode(' ', $block_classes) . '">
 						<div class="' . (($nested !== 'yes') ? 't-inside' : '') . $single_back_color . $single_animation . '" ' . implode(' ', $div_data_attributes) . '>';
 
-        if ( ot_get_option('_uncode_woocommerce_hooks') === 'on' && $is_product ) {
+        if ( ot_get_option('_lerp_woocommerce_hooks') === 'on' && $is_product ) {
             ob_start();
             do_action('woocommerce_before_shop_loop_item_title');
             $output .= ob_get_clean();
@@ -1226,7 +1226,7 @@ if ( !function_exists('uncode_create_single_block') ) {
                     $create_link = '#';
                     $album_item_dimensions = '';
                     foreach ( $block_data['explode_album'] as $key_album => $album_item_id ) {
-                        $album_item_attributes = uncode_get_album_item($album_item_id);
+                        $album_item_attributes = lerp_get_album_item($album_item_id);
                         if ( $media_poster )
                             $album_th_id = $album_item_attributes['poster'];
                         else
@@ -1235,7 +1235,7 @@ if ( !function_exists('uncode_create_single_block') ) {
                         if ( $album_th_id == '' )
                             continue;
 
-                        $thumb_attributes = uncode_get_media_info($album_th_id);
+                        $thumb_attributes = lerp_get_media_info($album_th_id);
                         $album_th_metavalues = unserialize($thumb_attributes->metadata);
 
                         if ( !isset($album_th_metavalues['width']) || !isset($album_th_metavalues['height']) )
@@ -1391,7 +1391,7 @@ if ( !function_exists('uncode_create_single_block') ) {
 
         endif;
 
-        if ( ot_get_option('_uncode_woocommerce_hooks') === 'on' && $is_product ) {
+        if ( ot_get_option('_lerp_woocommerce_hooks') === 'on' && $is_product ) {
             ob_start();
             do_action('woocommerce_after_shop_loop_item_title');
             $output .= ob_get_clean();
@@ -1400,7 +1400,7 @@ if ( !function_exists('uncode_create_single_block') ) {
         $output .= '</div>
 					</div>';
 
-        if ( ot_get_option('_uncode_woocommerce_hooks') === 'on' && $is_product ) {
+        if ( ot_get_option('_lerp_woocommerce_hooks') === 'on' && $is_product ) {
             ob_start();
             do_action('woocommerce_after_shop_loop_item');
             $output .= ob_get_clean();
@@ -1414,8 +1414,8 @@ if ( !function_exists('uncode_create_single_block') ) {
 /**
  * Create post info HTML
  */
-if ( !function_exists('uncode_post_info') ) {
-    function uncode_post_info()
+if ( !function_exists('lerp_post_info') ) {
+    function lerp_post_info()
     {
         $categories = get_the_category();
         $separator = ', ';
@@ -1426,12 +1426,12 @@ if ( !function_exists('uncode_post_info') ) {
 
         if ( $categories ) {
             foreach ( $categories as $category ) {
-                $cat_output .= '<a href="' . get_category_link($category->term_id) . '" title="' . esc_attr(sprintf(esc_html__("View all posts in %s", 'uncode'), $category->name)) . '">' . $category->cat_name . '</a>' . $separator;
+                $cat_output .= '<a href="' . get_category_link($category->term_id) . '" title="' . esc_attr(sprintf(esc_html__("View all posts in %s", 'lerp'), $category->name)) . '">' . $category->cat_name . '</a>' . $separator;
             }
-            $output[] = '<div class="category-info"><span>|</span>' . esc_html__('In', 'uncode') . ' ' . trim($cat_output, $separator) . '</div>';
+            $output[] = '<div class="category-info"><span>|</span>' . esc_html__('In', 'lerp') . ' ' . trim($cat_output, $separator) . '</div>';
         }
 
-        $output[] = '<div class="author-info"><span>|</span>' . esc_html__('By', 'uncode') . ' ' . '<a href="' . get_author_posts_url(get_the_author_meta('ID')) . '">' . get_the_author() . '</a></div>';
+        $output[] = '<div class="author-info"><span>|</span>' . esc_html__('By', 'lerp') . ' ' . '<a href="' . get_author_posts_url(get_the_author_meta('ID')) . '">' . get_the_author() . '</a></div>';
 
         return '<div class="post-info">' . implode('', $output) . '</div>';
     }
@@ -1440,8 +1440,8 @@ if ( !function_exists('uncode_post_info') ) {
 /**
  * Create portfolio info HTML
  */
-if ( !function_exists('uncode_portfolio_info') ) {
-    function uncode_portfolio_info()
+if ( !function_exists('lerp_portfolio_info') ) {
+    function lerp_portfolio_info()
     {
         $categories = wp_get_object_terms(get_the_id(), 'portfolio_category');
         $separator = ', ';
@@ -1451,9 +1451,9 @@ if ( !function_exists('uncode_portfolio_info') ) {
         if ( $categories ) {
 
             foreach ( $categories as $cat ) {
-                $cat_output .= '<a href="' . get_term_link($cat->term_id, $cat->taxonomy) . '" title="' . esc_attr(sprintf(esc_html__("View all posts in %s", 'uncode'), $cat->name)) . '">' . $cat->name . '</a>' . $separator;
+                $cat_output .= '<a href="' . get_term_link($cat->term_id, $cat->taxonomy) . '" title="' . esc_attr(sprintf(esc_html__("View all posts in %s", 'lerp'), $cat->name)) . '">' . $cat->name . '</a>' . $separator;
             }
-            $output[] = '<div class="category-info">' . esc_html__('In', 'uncode') . ' ' . trim($cat_output, $separator) . '</div>';
+            $output[] = '<div class="category-info">' . esc_html__('In', 'lerp') . ' ' . trim($cat_output, $separator) . '</div>';
         }
         return '<div class="post-info">' . implode('', $output) . '</div>';
     }
@@ -1462,27 +1462,27 @@ if ( !function_exists('uncode_portfolio_info') ) {
 /**
  * Build breadcrumb
  */
-if ( !function_exists('uncode_breadcrumbs') ) {
-    function uncode_breadcrumbs($navigation_index = '')
+if ( !function_exists('lerp_breadcrumbs') ) {
+    function lerp_breadcrumbs($navigation_index = '')
     {
 
         /* === OPTIONS === */
-        $text['home'] = esc_html__('Home', 'uncode');
+        $text['home'] = esc_html__('Home', 'lerp');
 
         // text for the 'Home' link
-        $text['category'] = esc_html__('Archive by Category', 'uncode') . ' ' . '"%s"';
+        $text['category'] = esc_html__('Archive by Category', 'lerp') . ' ' . '"%s"';
 
         // text for a category page
-        $text['search'] = esc_html__('Search Results for', 'uncode') . ' ' . '"%s" Query';
+        $text['search'] = esc_html__('Search Results for', 'lerp') . ' ' . '"%s" Query';
 
         // text for a search results page
-        $text['tag'] = esc_html__('Posts Tagged', 'uncode') . ' ' . '"%s"';
+        $text['tag'] = esc_html__('Posts Tagged', 'lerp') . ' ' . '"%s"';
 
         // text for a tag page
-        $text['author'] = esc_html__('Articles Posted by', 'uncode') . ' ' . '%s';
+        $text['author'] = esc_html__('Articles Posted by', 'lerp') . ' ' . '%s';
 
         // text for an author page
-        $text['404'] = esc_html__('Error 404', 'uncode');
+        $text['404'] = esc_html__('Error 404', 'lerp');
 
         // text for the 404 page
 
@@ -1645,7 +1645,7 @@ if ( !function_exists('uncode_breadcrumbs') ) {
 
             if ( get_query_var('paged') ) {
                 if ( is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author() ) $html .= ' (';
-                $html .= '<li class="paged">' . esc_html__('Page', 'uncode') . ' ' . get_query_var('paged') . '</li>';
+                $html .= '<li class="paged">' . esc_html__('Page', 'lerp') . ' ' . get_query_var('paged') . '</li>';
                 if ( is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author() ) $html .= ')';
             }
 
@@ -1659,8 +1659,8 @@ if ( !function_exists('uncode_breadcrumbs') ) {
 /**
  * Get image size for the dummy space
  */
-if ( !function_exists('uncode_get_dummy_size') ) {
-    function uncode_get_dummy_size($id, $size = null)
+if ( !function_exists('lerp_get_dummy_size') ) {
+    function lerp_get_dummy_size($id, $size = null)
     {
         $attachment_meta = get_post_meta($id, '_wp_attachment_metadata', true);
         if ( $size != null && isset($attachment_meta['sizes']) && array_key_exists($size, $attachment_meta['sizes']) ) $attachment_meta = $attachment_meta['sizes'][$size];

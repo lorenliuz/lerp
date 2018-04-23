@@ -103,11 +103,11 @@ if ($subheading !== '') {
 	if ($sub_lead === 'yes') $sub_lead = ' text-lead';
 	if ($sub_reduced === 'yes') $sub_reduced = ' text-top-reduced';
 	if ($sub_lead !== '' || $sub_reduced !== '') $sub_class = ' class="'.esc_attr(trim($sub_lead.$sub_reduced)).'"';
-	$output .= '<div'.$sub_class.'>' . uncode_remove_wpautop($subheading, true) . '</div>';
+	$output .= '<div'.$sub_class.'>' . lerp_remove_wpautop($subheading, true) . '</div>';
 }
 if ($separator === 'under') $output .= '<hr class="' . esc_attr(trim(implode( ' ', $separator_classes ))) . '" />';
 $output .= '</div>';
 $output .= '<div class="clear"></div>';
 
-echo uncode_remove_wpautop($output);
+echo lerp_remove_wpautop($output);
 

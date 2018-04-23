@@ -3,12 +3,12 @@
 /**
  * Add HTML5 Boilerplate's .htaccess via WordPress
  */
-function uncode_add_h5bp_htaccess()
+function lerp_add_h5bp_htaccess()
 {
 
 	$options = get_option( ot_options_id() );
-	$theme_opt = $options['_uncode_htaccess'];
-	$saved_opt = get_option("_uncode_htaccess_performace");
+	$theme_opt = $options['_lerp_htaccess'];
+	$saved_opt = get_option("_lerp_htaccess_performace");
 
 	if (($theme_opt === 'on' && $saved_opt !== 'on') || ($theme_opt === 'off' && $saved_opt === 'on'))
 	{
@@ -27,11 +27,11 @@ function uncode_add_h5bp_htaccess()
 
 				if ($theme_opt === 'on' && $saved_opt !== 'on') {
 					$filename = dirname(__FILE__) . '/h5bp-htaccess';
-					update_option("_uncode_htaccess_performace", $theme_opt);
+					update_option("_lerp_htaccess_performace", $theme_opt);
 					return insert_with_markers($htaccess_file, 'HTML5 Boilerplate', extract_from_markers($filename, 'HTML5 Boilerplate'));
 				}
 				elseif ($theme_opt === 'off' && $saved_opt === 'on') {
-					update_option("_uncode_htaccess_performace", $theme_opt);
+					update_option("_lerp_htaccess_performace", $theme_opt);
 					return insert_with_markers($htaccess_file, 'HTML5 Boilerplate', '');
 				}
 			}
@@ -39,4 +39,4 @@ function uncode_add_h5bp_htaccess()
 	}
 }
 
-add_filter('ot_after_theme_options_save', 'uncode_add_h5bp_htaccess');
+add_filter('ot_after_theme_options_save', 'lerp_add_h5bp_htaccess');

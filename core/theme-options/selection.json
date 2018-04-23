@@ -10862,7 +10862,7 @@
     }],
     "height": 1024,
     "metadata": {
-        "name": "uncode-icons"
+        "name": "lerp-icons"
     },
     "preferences": {
         "showGlyphs": true,
@@ -10870,7 +10870,7 @@
         "fontPref": {
             "prefix": "fa-",
             "metadata": {
-                "fontFamily": "uncode-icons",
+                "fontFamily": "lerp-icons",
                 "majorVersion": 1,
                 "minorVersion": 0
             },

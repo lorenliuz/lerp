@@ -51,4 +51,4 @@ if ($title != '')
 $output.= '</div>';
 $output.= '</div>';
 
-echo uncode_remove_wpautop($output);
+echo lerp_remove_wpautop($output);

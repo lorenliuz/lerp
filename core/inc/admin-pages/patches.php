@@ -1,11 +1,11 @@
 <?php
-require_once get_template_directory() . '/core/inc/UncodeAPI.class.php';
-require_once get_template_directory() . '/core/inc/UncodeHotfix.class.php';
+require_once get_template_directory() . '/core/inc/LerpAPI.class.php';
+require_once get_template_directory() . '/core/inc/LerpHotfix.class.php';
 
 /*function patches_add_news_notification() {
     global $menu;
 
-    $hotfix = new UncodeHotfix('http://www.mocky.io/v2');
+    $hotfix = new LerpHotfix('http://www.mocky.io/v2');
     $patches_count = $hotfix->countCommittedPatches([
         'key' => 'merged',
         'value' => false
@@ -13,7 +13,7 @@ require_once get_template_directory() . '/core/inc/UncodeHotfix.class.php';
 
     foreach ( $menu as $key => $value ) {
 
-        if ( $menu[$key][2] == 'uncode-system-status' || $menu[$key][2] == 'patches' ) {
+        if ( $menu[$key][2] == 'lerp-system-status' || $menu[$key][2] == 'patches' ) {
             $menu[$key][0] .= ' ' . "<span class='update-plugins count-$patches_count'><span class='update-count'>$patches_count</span></span>";
             return;
 
@@ -26,7 +26,7 @@ add_action( 'admin_menu', 'patches_add_news_notification' );*/
 function patches_callback() {
     if (!isInstallationLegit() || requiredDataEmpty()) { wp_die(); }
 
-    $hotfix = new UncodeHotfix();
+    $hotfix = new LerpHotfix();
 
     if (isset($_POST['merge_patch'])) {
         $patch_id = $_POST['patch_id'];
@@ -52,16 +52,16 @@ function patches_callback() {
     });
 
 ?>
-<div class="wrap" id="uncode-patches">
-    <h1><?php esc_html_e('Patches', 'uncode'); ?>
-        <span class="uncode-heading-subtitle"><?php esc_html_e( "The easiest and fastest way to fix issues on fly", "uncode" ); ?></span>
+<div class="wrap" id="lerp-patches">
+    <h1><?php esc_html_e('Patches', 'lerp'); ?>
+        <span class="lerp-heading-subtitle"><?php esc_html_e( "The easiest and fastest way to fix issues on fly", "lerp" ); ?></span>
     </h1>
 
     <table class='wp-list-table widefat fixed striped posts'>
         <thead>
-            <th><?php esc_html_e( "Fix", "uncode" ); ?></th>
-            <th><?php esc_html_e( "Path", "uncode" ); ?></th>
-            <th><?php esc_html_e( "Date", "uncode" ); ?></th>
+            <th><?php esc_html_e( "Fix", "lerp" ); ?></th>
+            <th><?php esc_html_e( "Path", "lerp" ); ?></th>
+            <th><?php esc_html_e( "Date", "lerp" ); ?></th>
             <th></th>
         </thead>
         <tbody id='the-list'>
@@ -75,7 +75,7 @@ function patches_callback() {
                     <td>
                         <form method='POST'>
                             <input type='hidden' name='patch_id' value='<?php echo $patch->id; ?>'>
-                            <input type='submit' class='button button-primary' name='merge_patch' value='<?php esc_html_e( "Apply", "uncode" ); ?>'>
+                            <input type='submit' class='button button-primary' name='merge_patch' value='<?php esc_html_e( "Apply", "lerp" ); ?>'>
                         </form>
                     </td>
                 </tr>
@@ -87,7 +87,7 @@ function patches_callback() {
  }
 
 function patches_submenu_page() {
-    $hotfix = new UncodeHotfix('http://www.mocky.io/v2');
+    $hotfix = new LerpHotfix('http://www.mocky.io/v2');
     $patches_count = $hotfix->countCommittedPatches(array(
         'key' => 'merged',
         'value' => false
@@ -96,9 +96,9 @@ function patches_submenu_page() {
     if (isInstallationLegit() && !requiredDataEmpty()) {
         if ($patches_count > 0) {
             add_submenu_page(
-                'uncode-system-status',
-                esc_html__('Patches ', 'uncode') . '<span class="update-plugins count-'.$patches_count.'"><span class="update-count">'.$patches_count.'</span></span>',
-                esc_html__('Patches ', 'uncode') . '<span class="update-plugins count-'.$patches_count.'"><span class="update-count">'.$patches_count.'</span></span>',
+                'lerp-system-status',
+                esc_html__('Patches ', 'lerp') . '<span class="update-plugins count-'.$patches_count.'"><span class="update-count">'.$patches_count.'</span></span>',
+                esc_html__('Patches ', 'lerp') . '<span class="update-plugins count-'.$patches_count.'"><span class="update-count">'.$patches_count.'</span></span>',
                 'manage_options',
                 'patches',
                 'patches_callback' );
@@ -114,7 +114,7 @@ if (!wp_next_scheduled('patch_task_hook' )) {
 add_action('patch_task_hook', 'patch_task_function');
 
 function patch_task_function() {
-    $hotfix = new UncodeHotfix();
+    $hotfix = new LerpHotfix();
     $hotfix->commitPatches();
 }
 

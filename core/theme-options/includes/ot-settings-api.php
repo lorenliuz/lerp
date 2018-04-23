@@ -256,14 +256,14 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 
 						}
 
-						echo '<div class="wrap settings-wrap uncode-wrap" id ="page-' . $page['id'] . '">';
+						echo '<div class="wrap settings-wrap lerp-wrap" id ="page-' . $page['id'] . '">';
 
 							if ( $page[ 'id' ] == 'settings' ) {
-								echo uncode_admin_panel_page_title( 'utils' );
+								echo lerp_admin_panel_page_title( 'utils' );
 							} else {
-								echo uncode_admin_panel_page_title( true, array(
-									'page_title'  => esc_html__( 'Theme Options', 'uncode' ),
-									'description' => esc_html__( 'Theme Options are the backbone of Uncode. They are logically organised and give you full control over your website design and settings.', 'uncode' ),
+								echo lerp_admin_panel_page_title( true, array(
+									'page_title'  => esc_html__( 'Theme Options', 'lerp' ),
+									'description' => esc_html__( 'Theme Options are the backbone of Lerp. They are logically organised and give you full control over your website design and settings.', 'lerp' ),
 								) );
 							}
 
@@ -291,13 +291,13 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 							}
 
 							if ( $page[ 'id' ] == 'settings' ) {
-								echo '<div class="uncode-admin-panel">';
-									//echo uncode_admin_panel_title();
-									echo uncode_admin_panel_menu( 'utils' );
+								echo '<div class="lerp-admin-panel">';
+									//echo lerp_admin_panel_title();
+									echo lerp_admin_panel_menu( 'utils' );
 
-									echo '<div class="uncode-admin-panel__content">';
+									echo '<div class="lerp-admin-panel__content">';
 
-										//echo '<h2 class="uncode-admin-panel__heading">' . esc_html__( 'Options Utils', 'uncode' ) . '</h2>';
+										//echo '<h2 class="lerp-admin-panel__heading">' . esc_html__( 'Options Utils', 'lerp' ) . '</h2>';
 
 										echo ot_alert_message( $page );
 
@@ -308,8 +308,8 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 								if ( $show_buttons ) {
 
 									// TODO: when AJAX will be definitely enabled, add a filter for debugging purposes
-									$is_ajax_enabled = get_option( 'uncode_ajax_theme_panel', false );
-									$form_class = 'uncode-admin-panel';
+									$is_ajax_enabled = get_option( 'lerp_ajax_theme_panel', false );
+									$form_class = 'lerp-admin-panel';
 									$form_class .= $is_ajax_enabled ? ' ajax-enabled' : '';
 
 									echo '<form action="options.php" method="post" id="option-tree-settings-api" class="' . $form_class . '">';
@@ -353,7 +353,7 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 										echo '<div id="theme-options-ajax-message"></div>';
 
 										if ( $show_buttons ) {
-											echo '<button class="option-tree-ui-button button button-primary right option-tree-save-button uncode-spinning"><span><span class="uncode-ot-spinner"></span><span class="uncode-ot-ok"></span><span class="uncode-ot-no"></span>' . $page['button_text'] . '</span></button>';
+											echo '<button class="option-tree-ui-button button button-primary right option-tree-save-button lerp-spinning"><span><span class="lerp-ot-spinner"></span><span class="lerp-ot-ok"></span><span class="lerp-ot-no"></span>' . $page['button_text'] . '</span></button>';
 										}
 
 										echo '</div>'; // <!-- #option-tree-sub-header -->
@@ -365,13 +365,13 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 										/* check for sections */
 										if ( isset( $page['sections'] ) && count( $page['sections'] ) > 0 ) {
 
-											echo '<ul class="ui-tabs-nav uncode-admin-panel__left">';
+											echo '<ul class="ui-tabs-nav lerp-admin-panel__left">';
 
 											/* Header */
 											//echo '<div id="option-tree-header-wrap">';
 
 										if ( $page[ 'id' ] == 'settings' ) {
-											echo '<h2 class="uncode-admin-panel__heading">' . esc_html__('Options', 'uncode') . '</h2>';
+											echo '<h2 class="lerp-admin-panel__heading">' . esc_html__('Options', 'lerp') . '</h2>';
 										}
 
 											$group = '';
@@ -412,7 +412,7 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 										}
 
 										/* sections */
-										echo '<div id="poststuff" class="metabox-holder uncode-admin-panel__right">';
+										echo '<div id="poststuff" class="metabox-holder lerp-admin-panel__right">';
 
 											echo '<div id="post-body">';
 
@@ -435,7 +435,7 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 
 									// 	echo '<div class="option-tree-ui-buttons">';
 
-									// 		echo '<button class="option-tree-ui-button button button-primary right option-tree-save-button"><span><span class="uncode-ot-spinner"></span><span class="uncode-ot-ok"></span><span class="uncode-ot-no"></span>' . $page['button_text'] . '</span></button>';
+									// 		echo '<button class="option-tree-ui-button button button-primary right option-tree-save-button"><span><span class="lerp-ot-spinner"></span><span class="lerp-ot-ok"></span><span class="lerp-ot-no"></span>' . $page['button_text'] . '</span></button>';
 
 									// 	echo '</div>';
 
@@ -450,7 +450,7 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 								}
 
 								if ( $show_buttons || ( $page['id'] == 'ot_theme_options' && OT_SHOW_NEW_LAYOUT == true ) )
-									echo '<div class="uncode-ot-bottom-toolbar">';
+									echo '<div class="lerp-ot-bottom-toolbar">';
 
 									/* layouts form */
 									if ( $page['id'] == 'ot_theme_options' && OT_SHOW_NEW_LAYOUT == true )
@@ -475,9 +475,9 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 										echo '<form method="post" class="toggle-ajax-theme-panel">';
 
 											/* form nonce */
-											wp_nonce_field( 'uncode_toggle_ajax_theme_panel', 'uncode_toggle_ajax_theme_panel_nonce' );
+											wp_nonce_field( 'lerp_toggle_ajax_theme_panel', 'lerp_toggle_ajax_theme_panel_nonce' );
 
-											$toggle_ajax_text   = $is_ajax_enabled ? esc_html__( 'Disable AJAX Saving', 'uncode' ) : esc_html__( 'Enable AJAX Saving', 'uncode' );
+											$toggle_ajax_text   = $is_ajax_enabled ? esc_html__( 'Disable AJAX Saving', 'lerp' ) : esc_html__( 'Enable AJAX Saving', 'lerp' );
 											$toggle_ajax_action = $is_ajax_enabled ? 'disable-ajax' : 'enable-ajax';
 
 											echo '<input type="hidden" name="toggle_ajax" value="' . $toggle_ajax_action . '">';
@@ -489,14 +489,14 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 									}
 
 								if ( $show_buttons || ( $page['id'] == 'ot_theme_options' && OT_SHOW_NEW_LAYOUT == true ) )
-									echo '</div>'; // <!-- .uncode-ot-bottom-toolbar -->
+									echo '</div>'; // <!-- .lerp-ot-bottom-toolbar -->
 
 							if ( $page[ 'id' ] == 'settings' ) {
-									echo '</div>'; // <!-- .uncode-admin-panel__content -->
-								echo '</div>'; // <!-- .uncode-admin-panel -->
+									echo '</div>'; // <!-- .lerp-admin-panel__content -->
+								echo '</div>'; // <!-- .lerp-admin-panel -->
 							}
 
-						echo '</div>'; // <!-- .uncode-wrap -->
+						echo '</div>'; // <!-- .lerp-wrap -->
 					}
 
 				}
@@ -669,7 +669,7 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 		 */
 		public function initialize_settings() {
 
-			$default_header_image = get_option('uncode_default_header_image');
+			$default_header_image = get_option('lerp_default_header_image');
 
 			/* loop through options */
 			foreach( (array) $this->options as $option ) {
@@ -691,13 +691,13 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 
 							if (isset($default_header_image)) {
 								$defaults[$setting['id']] = ot_validate_setting( $setting['std'], $setting['type'], $setting['id'] );
-								if ($setting['id'] === '_uncode_post_header_background' ||
-										$setting['id'] === '_uncode_page_header_background' ||
-										$setting['id'] === '_uncode_portfolio_header_background' ||
-										$setting['id'] === '_uncode_404_header_background' ||
-										$setting['id'] === '_uncode_search_index_header_background' ||
-										$setting['id'] === '_uncode_post_index_header_background' ||
-										$setting['id'] === '_uncode_portfolio_index_header_background')
+								if ($setting['id'] === '_lerp_post_header_background' ||
+										$setting['id'] === '_lerp_page_header_background' ||
+										$setting['id'] === '_lerp_portfolio_header_background' ||
+										$setting['id'] === '_lerp_404_header_background' ||
+										$setting['id'] === '_lerp_search_index_header_background' ||
+										$setting['id'] === '_lerp_post_index_header_background' ||
+										$setting['id'] === '_lerp_portfolio_index_header_background')
 								{
 									$defaults[$setting['id']]['background-image'] = $default_header_image;
 								}
@@ -712,7 +712,7 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 				}
 
 				update_option( $option['id'], $defaults );
-				uncode_create_dynamic_css();
+				lerp_create_dynamic_css();
 
 			}
 
@@ -1137,7 +1137,7 @@ if ( ! class_exists( 'OT_Settings' ) ) {
 
 							/* reset options */
 							delete_option( $option['id'] );
-							delete_option( 'uncode_font_options' );
+							delete_option( 'lerp_font_options' );
 
 						}
 

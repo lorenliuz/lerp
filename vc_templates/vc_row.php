@@ -57,18 +57,18 @@ $row_cont_classes = array('vc_row');
 //$row_inner_classes = array('wpb_row');
 $row_inner_classes = array();
 
-if (strpos($content,'[uncode_slider') !== false) $with_slider = true;
+if (strpos($content,'[lerp_slider') !== false) $with_slider = true;
 else $with_slider = false;
 
-$uncodeblock_found = false;
-if (strpos($content,'[uncode_block') !== false) {
-	$regex = '/\[uncode_block(.*?)\](.*?)/';
+$lerpblock_found = false;
+if (strpos($content,'[lerp_block') !== false) {
+	$regex = '/\[lerp_block(.*?)\](.*?)/';
 	$regex_attr = '/(.*?)=\"(.*?)\"/';
 	preg_match_all($regex, $content, $matches, PREG_SET_ORDER);
 	if (count($matches)) {
 		$inside_column = false;
 		foreach ($matches as $key => $value) {
-			$uncodeblock_found = true;
+			$lerpblock_found = true;
 			if (isset($value[1])) {
 				$output .= $value[0];
 				preg_match_all($regex_attr, trim($value[1]), $matches_attr, PREG_SET_ORDER);
@@ -81,7 +81,7 @@ if (strpos($content,'[uncode_block') !== false) {
 					}
 				}
 				if ($inside_column) {
-					$uncodeblock_found = false;
+					$lerpblock_found = false;
 					$output = '';
 					continue;
 				}
@@ -129,7 +129,7 @@ if (!empty($back_image) || $overlay_color !== '')
 		'background-attachment' => $back_attachment,
 	);
 
-	$back_result_array = uncode_get_back_html($back_array, $overlay_color, $overlay_alpha, '', 'row');
+	$back_result_array = lerp_get_back_html($back_array, $overlay_color, $overlay_alpha, '', 'row');
 	$background_div = $back_result_array['back_html'];
 }
 
@@ -256,7 +256,7 @@ if ($z_index !== '0' && $z_index !== '') {
 
 if ($row_style !== '') $row_style = ' style="' . esc_attr( $row_style ) . '"';
 
-$boxed = ot_get_option('_uncode_boxed');
+$boxed = ot_get_option('_lerp_boxed');
 
 if ($boxed !== 'on') {
 	if ($unlock_row === 'yes') {
@@ -270,7 +270,7 @@ if ($boxed !== 'on') {
 	}
 }
 
-/** send variable to uncode slider **/
+/** send variable to lerp slider **/
 if ($with_slider) {
 	if ($unlock_row === 'yes' && $unlock_row_content !== 'yes') {
 		$limit_content_inner = ' limit_content="yes"';
@@ -280,9 +280,9 @@ if ($with_slider) {
 	} else $limit_content_inner = '';
 
 	if ($override_padding === 'yes') {
-		$content = str_replace('[uncode_slider','[uncode_slider' . $limit_content_inner . ' slider_height="'.(($row_height_percent !== '' || $is_header === 'yes') ? 'forced' : 'auto' ).'"'.($is_header === 'yes' ? ' is_header="true"' : '').' top_padding="' . esc_attr( $top_padding ) . '" bottom_padding="' . esc_attr( $bottom_padding ) . '" h_padding="' . esc_attr( $h_padding ) . '" ', $content);
+		$content = str_replace('[lerp_slider','[lerp_slider' . $limit_content_inner . ' slider_height="'.(($row_height_percent !== '' || $is_header === 'yes') ? 'forced' : 'auto' ).'"'.($is_header === 'yes' ? ' is_header="true"' : '').' top_padding="' . esc_attr( $top_padding ) . '" bottom_padding="' . esc_attr( $bottom_padding ) . '" h_padding="' . esc_attr( $h_padding ) . '" ', $content);
 	} else {
-		$content = str_replace('[uncode_slider','[uncode_slider' . $limit_content_inner . ' slider_height="'.(($row_height_percent !== '' || $is_header === 'yes') ? 'forced' : 'auto' ).'"'.($is_header === 'yes' ? ' is_header="true"' : '').' top_padding="2" bottom_padding="2" h_padding="2" ', $content);
+		$content = str_replace('[lerp_slider','[lerp_slider' . $limit_content_inner . ' slider_height="'.(($row_height_percent !== '' || $is_header === 'yes') ? 'forced' : 'auto' ).'"'.($is_header === 'yes' ? ' is_header="true"' : '').' top_padding="2" bottom_padding="2" h_padding="2" ', $content);
 	}
 	$row_classes[] = 'row-slider';
 }
@@ -290,7 +290,7 @@ if ($with_slider) {
 $row_classes[] = 'row-parent';
 $row_cont_classes[] = 'row-container';
 if ($kburns === 'yes') $row_cont_classes[] = 'with-kburns';
-if ($parallax === 'yes' && !uncode_is_full_page()) $row_cont_classes[] = 'with-parallax';
+if ($parallax === 'yes' && !lerp_is_full_page()) $row_cont_classes[] = 'with-parallax';
 if ($row_name !== '') $row_cont_classes[] = 'onepage-section';
 if ($is_header === 'yes') $row_classes[] = 'row-header';
 
@@ -303,9 +303,9 @@ if ($mobile_visibility === 'yes') $row_cont_classes[] = 'mobile-hidden';
 
 if ( $row_custom_style !== '' ) $row_custom_style = ' style="' . esc_attr( $row_custom_style )  . '"';
 
-if (!$uncodeblock_found) :
-	global $uncode_row_parent;
-	$uncode_row_parent = 12;
+if (!$lerpblock_found) :
+	global $lerp_row_parent;
+	$lerp_row_parent = 12;
 	$css_class = preg_replace( '/\s+/', ' ', apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, implode( ' ', array_filter( $row_cont_classes ) ), $this->settings['base'], $atts ) );
 	$output.= '<div data-parent="true" class="' . esc_attr(trim($css_class)) . '"' . $row_name . $row_style . '>';
 	if ($unlock_row === 'yes') $output.= $background_div;
@@ -313,7 +313,7 @@ if (!$uncodeblock_found) :
 	if ($unlock_row !== 'yes') $output.= $background_div;
 	if (!$with_slider) $output.= '<div class="' . esc_attr(trim(implode(' ', $row_inner_classes))) . '">';
 	$output.= $content;
-	echo uncode_remove_wpautop($output);
+	echo lerp_remove_wpautop($output);
 	$script_id = 'script-'.big_rand();
 	echo '<script id="'.esc_attr($script_id).'" data-row="'.esc_attr($script_id).'" type="text/javascript">if ( typeof UNCODE !== "undefined" ) UNCODE.initRow(document.getElementById("'.$script_id.'"));</script>';
 	$output = '';
@@ -322,4 +322,4 @@ if (!$uncodeblock_found) :
 	$output.= '</div>';
 endif;
 
-echo uncode_remove_wpautop($output);
+echo lerp_remove_wpautop($output);

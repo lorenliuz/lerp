@@ -50,7 +50,7 @@ $row_classes = array(
 $row_cont_classes = array();
 $row_inner_classes = array();
 
-if (strpos($content,'[uncode_slider') !== false || $has_slider === 'yes') $with_slider = true;
+if (strpos($content,'[lerp_slider') !== false || $has_slider === 'yes') $with_slider = true;
 else $with_slider = false;
 
 $row_cont_classes[] = $this->getExtraClass($el_class);
@@ -88,7 +88,7 @@ if (!empty($back_image) || $overlay_color !== '')
 		'background-attachment' => $back_attachment,
 	);
 
-	$back_result_array = uncode_get_back_html($back_array, $overlay_color, $overlay_alpha, '', 'row');
+	$back_result_array = lerp_get_back_html($back_array, $overlay_color, $overlay_alpha, '', 'row');
 	$background_div = $back_result_array['back_html'];
 }
 
@@ -204,7 +204,7 @@ if ($limit_content === 'yes') {
 
 $row_cont_classes[] = 'row-container';
 if ($kburns === 'yes') $row_cont_classes[] = 'with-kburns';
-if ($parallax === 'yes' && !uncode_is_full_page()) $row_cont_classes[] = 'with-parallax';
+if ($parallax === 'yes' && !lerp_is_full_page()) $row_cont_classes[] = 'with-parallax';
 if ($row_name !== '') $row_cont_classes[] = 'onepage-section';
 
 $row_inner_classes[] = 'row-inner';
@@ -214,8 +214,8 @@ if ($desktop_visibility === 'yes') $row_cont_classes[] = 'desktop-hidden';
 if ($medium_visibility === 'yes') $row_cont_classes[] = 'tablet-hidden';
 if ($mobile_visibility === 'yes') $row_cont_classes[] = 'mobile-hidden';
 
-global $uncode_row_child, $uncode_row_parent;
-$uncode_row_child = $uncode_row_parent = 12;
+global $lerp_row_child, $lerp_row_parent;
+$lerp_row_child = $lerp_row_parent = 12;
 
 $css_class = preg_replace( '/\s+/', ' ', apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, implode( ' ', array_filter( $row_cont_classes ) ), $this->settings['base'], $atts ) );
 $output.= '<div class="' . esc_attr(trim($css_class)) . '"' . $row_name . $row_style . '>';
@@ -227,4 +227,4 @@ $output.= $content;
 if (!$with_slider) $output.= '</div>';
 $output.= '</div>';
 $output.= '</div>';
-echo uncode_remove_wpautop($output);
+echo lerp_remove_wpautop($output);

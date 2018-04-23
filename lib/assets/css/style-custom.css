@@ -573,7 +573,7 @@ body,
 #respond .comments-title,
 #comments #reply-title,
 #respond #reply-title,
-.uncode-share h6,
+.lerp-share h6,
 .woocommerce div.product .wootabs .tab-pane:not(.tab-vcomposer) .product-tab-title,
 .woocommerce div.single-product .wootabs .tab-pane:not(.tab-vcomposer) .product-tab-title,
 .woocommerce #content div.product .wootabs .tab-pane:not(.tab-vcomposer) .product-tab-title,
@@ -750,7 +750,7 @@ mark,
 .mejs-controls .mejs-time-rail .mejs-time-loaded,
 .woocommerce span.onsale,
 .widget_price_filter .ui-slider .ui-slider-range,
-.uncode-cart .badge,
+.lerp-cart .badge,
 .mobile-shopping-cart .badge {
   background-color: color-210407;
 }
@@ -930,18 +930,18 @@ p .thank-you {
 .style-light .style-dark .woocommerce table.cart a.remove,
 .style-dark .woocommerce #content table.cart a.remove,
 .style-light .style-dark .woocommerce #content table.cart a.remove,
-.style-dark .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li .amount,
-.style-light .style-dark .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li .amount,
-.style-dark .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li .amount,
-.style-light .style-dark .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li .amount,
-.style-dark .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li a,
-.style-light .style-dark .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li a,
-.style-dark .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li a,
-.style-light .style-dark .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li a,
-.style-dark .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li .h2,
-.style-light .style-dark .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li .h2,
-.style-dark .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li .h2,
-.style-light .style-dark .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li .h2,
+.style-dark .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li .amount,
+.style-light .style-dark .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li .amount,
+.style-dark .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li .amount,
+.style-light .style-dark .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li .amount,
+.style-dark .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li a,
+.style-light .style-dark .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li a,
+.style-dark .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li a,
+.style-light .style-dark .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li a,
+.style-dark .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li .h2,
+.style-light .style-dark .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li .h2,
+.style-dark .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li .h2,
+.style-light .style-dark .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li .h2,
 .style-dark .woocommerce.widget_shopping_cart .total,
 .style-light .style-dark .woocommerce.widget_shopping_cart .total,
 .style-dark .woocommerce .widget_shopping_cart .total,
@@ -1068,18 +1068,18 @@ p .thank-you {
 .style-dark .style-light .woocommerce table.cart a.remove,
 .style-light .woocommerce #content table.cart a.remove,
 .style-dark .style-light .woocommerce #content table.cart a.remove,
-.style-light .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li .amount,
-.style-dark .style-light .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li .amount,
-.style-light .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li .amount,
-.style-dark .style-light .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li .amount,
-.style-light .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li a,
-.style-dark .style-light .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li a,
-.style-light .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li a,
-.style-dark .style-light .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li a,
-.style-light .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li .h2,
-.style-dark .style-light .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li .h2,
-.style-light .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li .h2,
-.style-dark .style-light .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li .h2,
+.style-light .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li .amount,
+.style-dark .style-light .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li .amount,
+.style-light .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li .amount,
+.style-dark .style-light .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li .amount,
+.style-light .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li a,
+.style-dark .style-light .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li a,
+.style-light .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li a,
+.style-dark .style-light .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li a,
+.style-light .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li .h2,
+.style-dark .style-light .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li .h2,
+.style-light .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li .h2,
+.style-dark .style-light .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li .h2,
 .style-light .woocommerce.widget_shopping_cart .total,
 .style-dark .style-light .woocommerce.widget_shopping_cart .total,
 .style-light .woocommerce .widget_shopping_cart .total,
@@ -1142,7 +1142,7 @@ button[type="submit"],
 .woocommerce #content .quantity .minus,
 .woocommerce table.cart a.remove,
 .woocommerce #content table.cart a.remove,
-.uncode-cart .btn {
+.lerp-cart .btn {
   font-weight: 600 !important;
 }
 /* #Font-Serif */
@@ -1242,9 +1242,9 @@ button[type="submit"],
 .style-dark .plan .plan-button,
 .style-dark.style-override .plan .plan-button,
 .style-light .style-dark .plan .plan-button,
-.style-dark .uncode-single-media-wrapper.img-thumbnail:not(.single-advanced),
-.style-dark.style-override .uncode-single-media-wrapper.img-thumbnail:not(.single-advanced),
-.style-light .style-dark .uncode-single-media-wrapper.img-thumbnail:not(.single-advanced),
+.style-dark .lerp-single-media-wrapper.img-thumbnail:not(.single-advanced),
+.style-dark.style-override .lerp-single-media-wrapper.img-thumbnail:not(.single-advanced),
+.style-light .style-dark .lerp-single-media-wrapper.img-thumbnail:not(.single-advanced),
 .style-dark .post-share,
 .style-dark.style-override .post-share,
 .style-light .style-dark .post-share,
@@ -1305,12 +1305,12 @@ button[type="submit"],
 .style-dark .woocommerce #reviews #review_form_wrapper,
 .style-dark.style-override .woocommerce #reviews #review_form_wrapper,
 .style-light .style-dark .woocommerce #reviews #review_form_wrapper,
-.style-dark .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li,
-.style-dark.style-override .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li,
-.style-light .style-dark .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li,
-.style-dark .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li,
-.style-dark.style-override .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li,
-.style-light .style-dark .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li,
+.style-dark .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li,
+.style-dark.style-override .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li,
+.style-light .style-dark .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li,
+.style-dark .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li,
+.style-dark.style-override .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li,
+.style-light .style-dark .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li,
 .style-dark .woocommerce.widget_shopping_cart .total,
 .style-dark.style-override .woocommerce.widget_shopping_cart .total,
 .style-light .style-dark .woocommerce.widget_shopping_cart .total,
@@ -1451,9 +1451,9 @@ button[type="submit"],
 .style-light .plan .plan-button,
 .style-light.style-override .plan .plan-button,
 .style-dark .style-light .plan .plan-button,
-.style-light .uncode-single-media-wrapper.img-thumbnail:not(.single-advanced),
-.style-light.style-override .uncode-single-media-wrapper.img-thumbnail:not(.single-advanced),
-.style-dark .style-light .uncode-single-media-wrapper.img-thumbnail:not(.single-advanced),
+.style-light .lerp-single-media-wrapper.img-thumbnail:not(.single-advanced),
+.style-light.style-override .lerp-single-media-wrapper.img-thumbnail:not(.single-advanced),
+.style-dark .style-light .lerp-single-media-wrapper.img-thumbnail:not(.single-advanced),
 .style-light .post-share,
 .style-light.style-override .post-share,
 .style-dark .style-light .post-share,
@@ -1514,12 +1514,12 @@ button[type="submit"],
 .style-light .woocommerce #reviews #review_form_wrapper,
 .style-light.style-override .woocommerce #reviews #review_form_wrapper,
 .style-dark .style-light .woocommerce #reviews #review_form_wrapper,
-.style-light .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li,
-.style-light.style-override .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li,
-.style-dark .style-light .woocommerce ul.cart_list:not(.uncode-cart-dropdown) li,
-.style-light .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li,
-.style-light.style-override .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li,
-.style-dark .style-light .woocommerce ul.product_list_widget:not(.uncode-cart-dropdown) li,
+.style-light .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li,
+.style-light.style-override .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li,
+.style-dark .style-light .woocommerce ul.cart_list:not(.lerp-cart-dropdown) li,
+.style-light .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li,
+.style-light.style-override .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li,
+.style-dark .style-light .woocommerce ul.product_list_widget:not(.lerp-cart-dropdown) li,
 .style-light .woocommerce.widget_shopping_cart .total,
 .style-light.style-override .woocommerce.widget_shopping_cart .total,
 .style-dark .style-light .woocommerce.widget_shopping_cart .total,
@@ -2240,16 +2240,16 @@ select,
   box-shadow: inset 0 2px 1px rgba(0, 0, 0, 0.025);
 }
 /* #Form-xl */
-.style-dark .uncode-live-search input.form-xl,
-.style-dark.style-override .uncode-live-search input.form-xl,
-.style-light .style-dark .uncode-live-search input.form-xl {
+.style-dark .lerp-live-search input.form-xl,
+.style-dark.style-override .lerp-live-search input.form-xl,
+.style-light .style-dark .lerp-live-search input.form-xl {
   -webkit-box-shadow: 0px 0px 0px 6px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 0px 0px 6px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 0px 6px rgba(0, 0, 0, 0.2);
 }
-.style-light .uncode-live-search input.form-xl,
-.style-light.style-override .uncode-live-search input.form-xl,
-.style-dark .style-light .uncode-live-search input.form-xl {
+.style-light .lerp-live-search input.form-xl,
+.style-light.style-override .lerp-live-search input.form-xl,
+.style-dark .style-light .lerp-live-search input.form-xl {
   -webkit-box-shadow: 0px 0px 0px 6px rgba(255, 255, 255, 0.2);
   -moz-box-shadow: 0px 0px 0px 6px rgba(255, 255, 255, 0.2);
   box-shadow: 0px 0px 0px 6px rgba(255, 255, 255, 0.2);
@@ -2281,12 +2281,12 @@ textarea,
   transition: color 200ms cubic-bezier(0.785, 0.135, 0.15, 0.86), background-color 200ms cubic-bezier(0.785, 0.135, 0.15, 0.86), border-color 200ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 /* #Cart dropdown */
-.submenu-light ul.uncode-cart-dropdown a,
-.submenu-light ul.uncode-cart-dropdown span {
+.submenu-light ul.lerp-cart-dropdown a,
+.submenu-light ul.lerp-cart-dropdown span {
   color: #303133 !important;
 }
-.submenu-dark ul.uncode-cart-dropdown a,
-.submenu-dark ul.uncode-cart-dropdown span {
+.submenu-dark ul.lerp-cart-dropdown a,
+.submenu-dark ul.lerp-cart-dropdown span {
   color: #ffffff !important;
 }
 /* #Woo Headings */
@@ -2530,20 +2530,20 @@ button[type="submit"],
 .font-size-menu,
 .menu-container ul.menu-smart > li > a,
 .menu-smart > li > a > div > div > div.btn,
-.uncode-cart .buttons a {
+.lerp-cart .buttons a {
   font-size: 12px;
 }
 @media (min-width: 960px) {
   .font-size-menu,
   .menu-container ul.menu-smart > li > a,
   .menu-smart > li > a > div > div > div.btn,
-  .uncode-cart .buttons a {
+  .lerp-cart .buttons a {
     font-size: 12px;
   }
   .font-size-submenu,
   .menu-horizontal ul ul a,
   .vmenu-container ul ul a,
-  .uncode-cart .cart-desc {
+  .lerp-cart .cart-desc {
     font-size: 12px;
   }
 }
@@ -3083,10 +3083,10 @@ body:not(.menu-force-opacity) .style-dark-override:not(.is_stuck):not(.is_mobile
   display: none !important;
 }
 /* SubMenu Cart */
-.submenu-light .menu-accordion .menu-smart .uncode-cart li {
+.submenu-light .menu-accordion .menu-smart .lerp-cart li {
   border-color: rgba(234,234,234,0.5);
 }
-.submenu-dark .menu-accordion .menu-smart .uncode-cart li {
+.submenu-dark .menu-accordion .menu-smart .lerp-cart li {
   border-color: rgba(255,255,255,0.15);
 }
 /* #Menu-vertical */
@@ -3225,7 +3225,7 @@ body:not(.menu-force-opacity) .style-dark-override:not(.is_stuck):not(.is_mobile
 .tmb-shadowed:not(.tmb-no-bg):not(.tmb-media-shadowed).tmb > .t-inside,
 .tmb-shadowed.tmb-no-bg.tmb-media-first.tmb > .t-inside .t-entry-visual,
 .tmb-media-shadowed.tmb .t-entry-visual,
-.uncode-single-media-wrapper.tmb-shadow {
+.lerp-single-media-wrapper.tmb-shadow {
   -webkit-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
   -moz-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);

@@ -33,7 +33,7 @@ foreach ($accordion_tab as $tab)
 }
 
 $el_class = $this->getExtraClass($el_class);
-$css_class = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'uncode-accordion ' . $el_class, $this->settings['base'], $atts);
+$css_class = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'lerp-accordion ' . $el_class, $this->settings['base'], $atts);
 
 $output.= '<div class="' . esc_attr(trim($css_class)) . '" data-collapsible="' . esc_attr($collapsible) . '" data-active-tab="' . esc_attr($active_tab) . '">';
 $output.= '<div class="panel-group" id="' . esc_attr( $el_id ) . '" role="tablist" aria-multiselectable="true">';
@@ -45,5 +45,5 @@ $output.= $content;
 $output.= '</div>';
 $output.= '</div>';
 
-echo uncode_remove_wpautop($output);
+echo lerp_remove_wpautop($output);
 $history_tab = '';

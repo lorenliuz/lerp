@@ -62,7 +62,7 @@ body,
 #respond .comments-title,
 #comments #reply-title,
 #respond #reply-title,
-.uncode-share h6 {
+.lerp-share h6 {
   font-family: <?php echo ($font_family_ui); ?>;
   font-weight: <?php echo ($ui_font_weight); ?>;
   letter-spacing: 0.05em;
@@ -231,7 +231,7 @@ blockquote {
 mark,
 .mejs-controls .mejs-time-rail .mejs-time-loaded,
 .widget_price_filter .ui-slider .ui-slider-range,
-.uncode-cart .badge,
+.lerp-cart .badge,
 .mobile-shopping-cart .badge {
   background-color: <?php echo ($color_primary); ?>;
 }
@@ -279,7 +279,7 @@ body.textual-accent-color .post-content label a.active:not(.btn),
 body.textual-accent-color .post-content small a:not(.btn-text-skin):hover:not(.btn),
 body.textual-accent-color .post-content small a:not(.btn-text-skin):focus:not(.btn),
 body.textual-accent-color .post-content small a.active:not(.btn) {
-  color: <?php echo function_exists('uncode_darken_color') ? uncode_darken_color( $color_primary, -25 ) : $color_primary; ?> !important;
+  color: <?php echo function_exists('lerp_darken_color') ? lerp_darken_color( $color_primary, -25 ) : $color_primary; ?> !important;
 }
 /* #Heading-style */
 .headings-style,
@@ -530,7 +530,7 @@ button[type="submit"],
 }
 /* #Button-weight */
 .buttons-weight,
-.uncode-cart .btn {
+.lerp-cart .btn {
   font-weight: <?php echo ($btn_font_weight); ?> !important;
 }
 /* #Font-Serif */
@@ -630,9 +630,9 @@ button[type="submit"],
 .style-dark .plan .plan-button,
 .style-dark.style-override .plan .plan-button,
 .style-light .style-dark .plan .plan-button,
-.style-dark .uncode-single-media-wrapper.img-thumbnail:not(.single-advanced),
-.style-dark.style-override .uncode-single-media-wrapper.img-thumbnail:not(.single-advanced),
-.style-light .style-dark .uncode-single-media-wrapper.img-thumbnail:not(.single-advanced),
+.style-dark .lerp-single-media-wrapper.img-thumbnail:not(.single-advanced),
+.style-dark.style-override .lerp-single-media-wrapper.img-thumbnail:not(.single-advanced),
+.style-light .style-dark .lerp-single-media-wrapper.img-thumbnail:not(.single-advanced),
 .style-dark .post-share,
 .style-dark.style-override .post-share,
 .style-light .style-dark .post-share,
@@ -755,9 +755,9 @@ button[type="submit"],
 .style-light .plan .plan-button,
 .style-light.style-override .plan .plan-button,
 .style-dark .style-light .plan .plan-button,
-.style-light .uncode-single-media-wrapper.img-thumbnail:not(.single-advanced),
-.style-light.style-override .uncode-single-media-wrapper.img-thumbnail:not(.single-advanced),
-.style-dark .style-light .uncode-single-media-wrapper.img-thumbnail:not(.single-advanced),
+.style-light .lerp-single-media-wrapper.img-thumbnail:not(.single-advanced),
+.style-light.style-override .lerp-single-media-wrapper.img-thumbnail:not(.single-advanced),
+.style-dark .style-light .lerp-single-media-wrapper.img-thumbnail:not(.single-advanced),
 .style-light .post-share,
 .style-light.style-override .post-share,
 .style-dark .style-light .post-share,
@@ -1267,8 +1267,8 @@ button[type="submit"],
 .style-dark .style-light.style-override .btn-default.btn-flat:hover,
 .style-dark .style-light .btn-default.btn-flat:hover {
   color: #ffffff !important;
-  background-color: <?php echo function_exists('uncode_darken_color') ? uncode_darken_color( $color_heading ) : $color_heading; ?> !important;
-  border-color: <?php echo function_exists('uncode_darken_color') ? uncode_darken_color( $color_heading ) : $color_heading; ?> !important;
+  background-color: <?php echo function_exists('lerp_darken_color') ? lerp_darken_color( $color_heading ) : $color_heading; ?> !important;
+  border-color: <?php echo function_exists('lerp_darken_color') ? lerp_darken_color( $color_heading ) : $color_heading; ?> !important;
 }
 .style-dark .btn-default,
 .style-light .style-dark.style-override .btn-default,
@@ -1361,16 +1361,16 @@ select,
   box-shadow: inset 0 2px 1px rgba(0, 0, 0, 0.025);
 }
 /* #Form-xl */
-.style-dark .uncode-live-search input.form-xl,
-.style-dark.style-override .uncode-live-search input.form-xl,
-.style-light .style-dark .uncode-live-search input.form-xl {
+.style-dark .lerp-live-search input.form-xl,
+.style-dark.style-override .lerp-live-search input.form-xl,
+.style-light .style-dark .lerp-live-search input.form-xl {
   -webkit-box-shadow: 0px 0px 0px 6px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 0px 0px 6px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 0px 6px rgba(0, 0, 0, 0.2);
 }
-.style-light .uncode-live-search input.form-xl,
-.style-light.style-override .uncode-live-search input.form-xl,
-.style-dark .style-light .uncode-live-search input.form-xl {
+.style-light .lerp-live-search input.form-xl,
+.style-light.style-override .lerp-live-search input.form-xl,
+.style-dark .style-light .lerp-live-search input.form-xl {
   -webkit-box-shadow: 0px 0px 0px 6px rgba(255, 255, 255, 0.2);
   -moz-box-shadow: 0px 0px 0px 6px rgba(255, 255, 255, 0.2);
   box-shadow: 0px 0px 0px 6px rgba(255, 255, 255, 0.2);
@@ -1402,12 +1402,12 @@ textarea,
   transition: color 200ms cubic-bezier(0.785, 0.135, 0.15, 0.86), background-color 200ms cubic-bezier(0.785, 0.135, 0.15, 0.86), border-color 200ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 /* #Cart dropdown */
-.submenu-light ul.uncode-cart-dropdown a,
-.submenu-light ul.uncode-cart-dropdown span {
+.submenu-light ul.lerp-cart-dropdown a,
+.submenu-light ul.lerp-cart-dropdown span {
   color: <?php echo ($color_menu_text); ?> !important;
 }
-.submenu-dark ul.uncode-cart-dropdown a,
-.submenu-dark ul.uncode-cart-dropdown span {
+.submenu-dark ul.lerp-cart-dropdown a,
+.submenu-dark ul.lerp-cart-dropdown span {
   color: <?php echo ($color_menu_text_inverted); ?> !important;
 }
 .row-breadcrumb.row-breadcrumb-light .breadcrumb-title {
@@ -1634,20 +1634,20 @@ button[type="submit"],
 .font-size-menu,
 .menu-container ul.menu-smart > li > a,
 .menu-smart > li > a > div > div > div.btn,
-.uncode-cart .buttons a {
+.lerp-cart .buttons a {
   font-size: 12px;
 }
 @media (min-width: 960px) {
   .font-size-menu,
   .menu-container ul.menu-smart > li > a,
   .menu-smart > li > a > div > div > div.btn,
-  .uncode-cart .buttons a {
+  .lerp-cart .buttons a {
     font-size: <?php echo ($menu_font_size); ?>px;
   }
   .font-size-submenu,
   .menu-horizontal ul ul a,
   .vmenu-container ul ul a,
-  .uncode-cart .cart-desc {
+  .lerp-cart .cart-desc {
     font-size: <?php echo ($submenu_font_size); ?>px;
   }
 }
@@ -2187,10 +2187,10 @@ body:not(.menu-force-opacity) .style-dark-override:not(.is_stuck):not(.is_mobile
   display: none !important;
 }
 /* SubMenu Cart */
-.submenu-light .menu-accordion .menu-smart .uncode-cart li {
+.submenu-light .menu-accordion .menu-smart .lerp-cart li {
   border-color: <?php echo ($color_menu_border_light); ?>;
 }
-.submenu-dark .menu-accordion .menu-smart .uncode-cart li {
+.submenu-dark .menu-accordion .menu-smart .lerp-cart li {
   border-color: <?php echo ($color_menu_border_dark); ?>;
 }
 /* #Menu-vertical */
@@ -2323,7 +2323,7 @@ body:not(.menu-force-opacity) .style-dark-override:not(.is_stuck):not(.is_mobile
 .tmb-shadowed:not(.tmb-no-bg):not(.tmb-media-shadowed).tmb > .t-inside,
 .tmb-shadowed.tmb-no-bg.tmb-media-first.tmb > .t-inside .t-entry-visual,
 .tmb-media-shadowed.tmb .t-entry-visual,
-.uncode-single-media-wrapper.tmb-shadow {
+.lerp-single-media-wrapper.tmb-shadow {
   -webkit-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
   -moz-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);

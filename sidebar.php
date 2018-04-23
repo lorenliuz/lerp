@@ -2,11 +2,11 @@
 /**
  * The sidebar containing the main widget area.
  *
- * @package uncode
+ * @package lerp
  */
 
 $metabox_data = get_post_custom($post->ID);
-$sidebar = (isset($metabox_data['_uncode_page_sidebar'][0])) ? 'uncode-' . $metabox_data['_uncode_page_sidebar'][0] : 'sidebar-1';
+$sidebar = (isset($metabox_data['_lerp_page_sidebar'][0])) ? 'lerp-' . $metabox_data['_lerp_page_sidebar'][0] : 'sidebar-1';
 
 if ( ! is_active_sidebar( $sidebar ) ) {
 	return;

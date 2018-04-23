@@ -941,8 +941,8 @@ if ( ! function_exists( 'ot_type_custom_post_type_select' ) ) {
 
         echo '<div class="link-button">';
 
-        if ($post_active !== '') echo '<a class="option-tree-ui-button button" href="'.$post_active.'" target="_blank">' . esc_html__('Edit','uncode') . '</a>';
-        else echo '<a class="option-tree-ui-button button hidden" href="" target="_blank">' . esc_html__('Edit','uncode') . '</a>';
+        if ($post_active !== '') echo '<a class="option-tree-ui-button button" href="'.$post_active.'" target="_blank">' . esc_html__('Edit','lerp') . '</a>';
+        else echo '<a class="option-tree-ui-button button hidden" href="" target="_blank">' . esc_html__('Edit','lerp') . '</a>';
 
         echo '</div>';
 
@@ -2179,8 +2179,8 @@ if ( ! function_exists( 'ot_type_select' ) ) {
 
         echo '<div class="link-button">';
 
-        if ($posts && $post_active !== '') echo '<a class="option-tree-ui-button button" href="'.$post_active.'" target="_blank">' . esc_html__('Edit','uncode') . '</a>';
-        else echo '<a class="option-tree-ui-button button hidden" href="" target="_blank">' . esc_html__('Edit','uncode') . '</a>';
+        if ($posts && $post_active !== '') echo '<a class="option-tree-ui-button button" href="'.$post_active.'" target="_blank">' . esc_html__('Edit','lerp') . '</a>';
+        else echo '<a class="option-tree-ui-button button hidden" href="" target="_blank">' . esc_html__('Edit','lerp') . '</a>';
 
         echo '</div>';
 

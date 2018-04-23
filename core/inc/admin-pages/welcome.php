@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function uncode_let_to_num( $size ) {
+function lerp_let_to_num( $size ) {
   $l   = substr( $size, -1 );
   $ret = substr( $size, 0, -1 );
   switch ( strtoupper( $l ) ) {
@@ -25,13 +25,13 @@ function uncode_let_to_num( $size ) {
   return $ret;
 }
 
-if ( class_exists('UncodeCommunicator') ) {
-	$communicator = new UncodeCommunicator();
+if ( class_exists('LerpCommunicator') ) {
+	$communicator = new LerpCommunicator();
 	$unread_mess = $communicator->countUnreadItems();
 }
 
-if ( class_exists('UncodeHotfix') ) {
-	$hotfix = new UncodeHotfix('http://static.undsgn.com/uncode/endpoint');
+if ( class_exists('LerpHotfix') ) {
+	$hotfix = new LerpHotfix('http://static.undsgn.com/lerp/endpoint');
 	$test = array(
 		'key' => 'merged',
 	    'value' => false
@@ -39,7 +39,7 @@ if ( class_exists('UncodeHotfix') ) {
 	$patches_count = $hotfix->countCommittedPatches($test);
 }
 
-if(isset($_POST['install_uncode'])) {
+if(isset($_POST['install_lerp'])) {
     $_SESSION['ignore_walkthrough'] = null;
     unset($_SESSION['ignore_walkthrough']);
     ?>
@@ -50,9 +50,9 @@ if(isset($_POST['install_uncode'])) {
 if (!empty($_SESSION['ignore_walkthrough'])) {
 ?>
 <div class="update-nag">
-    <?php echo esc_html__('You need to install Uncode before you can use it.', 'uncode'); ?>
+    <?php echo esc_html__('You need to install Lerp before you can use it.', 'lerp'); ?>
     <form method="POST">
-        <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Run Installer', 'uncode' ); ?>" name="install_uncode">
+        <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Run Installer', 'lerp' ); ?>" name="install_lerp">
     </form>
 </div>
 <?php exit; } ?>
@@ -65,21 +65,21 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 }
 ?>
 
-<div class="wrap uncode-wrap" id="option-tree-settings-api">
+<div class="wrap lerp-wrap" id="option-tree-settings-api">
 
-	<?php echo uncode_admin_panel_page_title( 'welcome' ); ?>
+	<?php echo lerp_admin_panel_page_title( 'welcome' ); ?>
 
-	<div class="uncode-admin-panel">
-		<?php //echo uncode_admin_panel_title(); ?>
-		<?php echo uncode_admin_panel_menu( 'welcome' ); ?>
+	<div class="lerp-admin-panel">
+		<?php //echo lerp_admin_panel_title(); ?>
+		<?php echo lerp_admin_panel_menu( 'welcome' ); ?>
 
-		<div class="uncode-admin-panel__content uncode-admin-panel__content--two-cols">
+		<div class="lerp-admin-panel__content lerp-admin-panel__content--two-cols">
 
-			<div class="uncode-admin-panel__left">
-				<h2 class="uncode-admin-panel__heading"><?php esc_html_e( '注册', 'uncode' ); ?></h2>
+			<div class="lerp-admin-panel__left">
+				<h2 class="lerp-admin-panel__heading"><?php esc_html_e( '注册', 'lerp' ); ?></h2>
 
-				<div class="uncode-info-box">
-					<p class="uncode-admin-panel__description"><?php printf(esc_html__('According to the %s you are only allowed to use this theme on a single domain. Creating multiple unregistered installations is a copyright violation. Please register your product.','uncode'), '<a tabindex="-1" href="' . esc_url('//themeforest.net/licenses/standard') . '" target="_blank">'.esc_html__('Envato License Terms','uncode').'</a>'); ?></p>
+				<div class="lerp-info-box">
+					<p class="lerp-admin-panel__description"><?php printf(esc_html__('According to the %s you are only allowed to use this theme on a single domain. Creating multiple unregistered installations is a copyright violation. Please register your product.','lerp'), '<a tabindex="-1" href="' . esc_url('//themeforest.net/licenses/standard') . '" target="_blank">'.esc_html__('Envato License Terms','lerp').'</a>'); ?></p>
 
 					<?php
 					// This flag checks if the license is already used in another domain
@@ -126,10 +126,10 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 						$installationLegit = false;
 					}
 
-					if ( isset( $_POST[ 'change_license' ] ) && class_exists( 'UncodeCommunicator' ) ) {
+					if ( isset( $_POST[ 'change_license' ] ) && class_exists( 'LerpCommunicator' ) ) {
 						$is_deregistering_license = true;
 						$communicator->unRegisterDomains( $toolkitData[ 'purchase_code' ] );
-						delete_option( 'uncode-wordpress-data' );
+						delete_option( 'lerp-wordpress-data' );
 					}
 
 					if ( ! $installationLegit ) {
@@ -149,14 +149,14 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 					$connected_domain = $communicator->getConnectedDomains( $toolkitData[ 'purchase_code' ] );
 					?>
 
-					<form method="POST" id="uncode_api_credentials_form" class="uncode-registration-form uncode-registration-form--<?php echo $license_ok ? 'license-ok' : ''; ?> <?php echo $envato_toolkit_active ? 'uncode-registration-form--toolkit-active' : 'toolkit-not-active'; ?> uncode-registration-form--<?php echo $license_already_in_use ? 'already-in-use' : ''; ?>">
+					<form method="POST" id="lerp_api_credentials_form" class="lerp-registration-form lerp-registration-form--<?php echo $license_ok ? 'license-ok' : ''; ?> <?php echo $envato_toolkit_active ? 'lerp-registration-form--toolkit-active' : 'toolkit-not-active'; ?> lerp-registration-form--<?php echo $license_already_in_use ? 'already-in-use' : ''; ?>">
 
 						<div class="format-setting-wrap">
 							<div class="format-setting-label">
-								<h3 class="label"><?php esc_html_e('Envato Username', 'uncode'); ?></h3>
+								<h3 class="label"><?php esc_html_e('Envato Username', 'lerp'); ?></h3>
 							</div>
 							<div class="format-setting has-desc">
-								<div class="description"><?php printf(esc_html__('Please insert your Envato username. %s.','uncode'), '<a tabindex="-1" href="' . esc_url('//support.undsgn.com/hc/en-us/articles/115002308845#envato-username') . '" target="_blank">'.esc_html__('More info','uncode').'</a>'); ?></div>
+								<div class="description"><?php printf(esc_html__('Please insert your Envato username. %s.','lerp'), '<a tabindex="-1" href="' . esc_url('//support.undsgn.com/hc/en-us/articles/115002308845#envato-username') . '" target="_blank">'.esc_html__('More info','lerp').'</a>'); ?></div>
 								<div class="format-setting-inner">
 									<input type="text" name="envato_username" id="envato_username" class="widefat option-tree-ui-input" value="<?php echo ( ! $is_deregistering_license && isset( $toolkitData[ 'user_name' ] ) && $toolkitData[ 'user_name' ] ) ? $toolkitData[ 'user_name' ] : ''; ?>" <?php echo $license_ok && ! $license_already_in_use ? 'disabled' : ''; ?>>
 								</div>
@@ -165,10 +165,10 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 
 						<div class="format-setting-wrap">
 							<div class="format-setting-label">
-								<h3 class="label"><?php esc_html_e('Envato API-Key', 'uncode'); ?></h3>
+								<h3 class="label"><?php esc_html_e('Envato API-Key', 'lerp'); ?></h3>
 							</div>
 							<div class="format-setting has-desc">
-								<div class="description"><?php printf(esc_html__('Please insert your Envato API Key. %s.','uncode'), '<a tabindex="-1" href="' . esc_url('//support.undsgn.com/hc/en-us/articles/115002308845#envato-api-key') . '" target="_blank">'.esc_html__('More info','uncode').'</a>'); ?></div>
+								<div class="description"><?php printf(esc_html__('Please insert your Envato API Key. %s.','lerp'), '<a tabindex="-1" href="' . esc_url('//support.undsgn.com/hc/en-us/articles/115002308845#envato-api-key') . '" target="_blank">'.esc_html__('More info','lerp').'</a>'); ?></div>
 								<div class="format-setting-inner">
 									<input type="text" name="envato_api_key" id="envato_api_key" class="widefat option-tree-ui-input" value="<?php echo ( ! $is_deregistering_license && isset( $toolkitData[ 'api_key' ] ) && $toolkitData[ 'api_key' ] ) ? $toolkitData[ 'api_key' ] : ''; ?>" <?php echo $license_ok && ! $license_already_in_use ? 'disabled' : ''; ?>>
 								</div>
@@ -177,10 +177,10 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 
 						<div class="format-setting-wrap">
 							<div class="format-setting-label">
-								<h3 class="label"><?php esc_html_e('Envato purchase code', 'uncode'); ?></h3>
+								<h3 class="label"><?php esc_html_e('Envato purchase code', 'lerp'); ?></h3>
 							</div>
 							<div class="format-setting has-desc">
-								<div class="description"><?php printf(esc_html__('Please insert your Envato purchase code. %s.','uncode'), '<a tabindex="-1" href="' . esc_url('//support.undsgn.com/hc/en-us/articles/115002308845#envato-purchase-code') . '" target="_blank">'.esc_html__('More info','uncode').'</a>'); ?></div>
+								<div class="description"><?php printf(esc_html__('Please insert your Envato purchase code. %s.','lerp'), '<a tabindex="-1" href="' . esc_url('//support.undsgn.com/hc/en-us/articles/115002308845#envato-purchase-code') . '" target="_blank">'.esc_html__('More info','lerp').'</a>'); ?></div>
 								<div class="format-setting-inner">
 									<input type="text" name="envato_purchase_code" id="envato_purchase_code" class="widefat option-tree-ui-input" value="<?php echo ( ! $is_deregistering_license && isset( $toolkitData[ 'purchase_code' ] ) && $toolkitData[ 'purchase_code' ] ) ? $toolkitData[ 'purchase_code' ] : ''; ?>" <?php echo $license_ok && ! $license_already_in_use ? 'disabled' : ''; ?>>
 								</div>
@@ -189,24 +189,24 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 
 						<div>
 
-							<p style="display: none;" class="uncode-admin-panel__description uncode-admin-registration-info uncode-admin-registration-info--license-invalid uncode-ui-notice uncode-ui-notice--error" id="license_error"><?php esc_html_e('You have entered invalid credentials, or your Envato account does not include Uncode among your purchased items.', 'uncode'); ?></p>
-							<p style="display: none;" class="uncode-admin-panel__description uncode-admin-registration-info uncode-admin-registration-info--license-invalid uncode-ui-notice uncode-ui-notice--error" id="license_empty"><?php esc_html_e('Please fill out all required fields.', 'uncode'); ?></p>
+							<p style="display: none;" class="lerp-admin-panel__description lerp-admin-registration-info lerp-admin-registration-info--license-invalid lerp-ui-notice lerp-ui-notice--error" id="license_error"><?php esc_html_e('You have entered invalid credentials, or your Envato account does not include Lerp among your purchased items.', 'lerp'); ?></p>
+							<p style="display: none;" class="lerp-admin-panel__description lerp-admin-registration-info lerp-admin-registration-info--license-invalid lerp-ui-notice lerp-ui-notice--error" id="license_empty"><?php esc_html_e('Please fill out all required fields.', 'lerp'); ?></p>
 
 							<?php if ( $license_already_in_use ) : ?>
-								<p class="uncode-admin-panel__description uncode-admin-registration-info uncode-admin-registration-info--license-invalid uncode-ui-notice uncode-ui-notice--error">
-									<?php printf( wp_kses( __( 'This product is in use on another domain: <span>%s</a>', 'uncode' ), array( 'span' => array() ) ), $connected_domain ); ?><br>
-									<?php printf(esc_html__('Are you using this theme on a new domain? %s.', 'uncode' ), '<a tabindex="-1" href="' . esc_url('//themeforest.net/item/uncode-creative-multiuse-wordpress-theme/13373220?utm_source=undsgn_support&ref=undsgn&license=regular&open_purchase_for_item_id=13373220&purchasable=source') . '" target="_blank">'.esc_html__('Purchase a new license','uncode').'</a>'); ?></p>
+								<p class="lerp-admin-panel__description lerp-admin-registration-info lerp-admin-registration-info--license-invalid lerp-ui-notice lerp-ui-notice--error">
+									<?php printf( wp_kses( __( 'This product is in use on another domain: <span>%s</a>', 'lerp' ), array( 'span' => array() ) ), $connected_domain ); ?><br>
+									<?php printf(esc_html__('Are you using this theme on a new domain? %s.', 'lerp' ), '<a tabindex="-1" href="' . esc_url('//themeforest.net/item/lerp-creative-multiuse-wordpress-theme/13373220?utm_source=undsgn_support&ref=undsgn&license=regular&open_purchase_for_item_id=13373220&purchasable=source') . '" target="_blank">'.esc_html__('Purchase a new license','lerp').'</a>'); ?></p>
 
 							<?php endif; ?>
 
 							<?php if ( ! $envato_toolkit_active ) : ?>
-								<p class="uncode-registration-form__warning uncode-ui-notice uncode-ui-notice--error"><?php printf( wp_kses( __( 'Envato WordPress Toolkit plugin must be active to register your theme. <a href="%1$s"> Click here to activate it.</a>', 'uncode' ), array( 'a' => array( 'href' => array() ) ) ), esc_url( admin_url( 'admin.php?page=uncode-plugins' ) ) ); ?></p>
+								<p class="lerp-registration-form__warning lerp-ui-notice lerp-ui-notice--error"><?php printf( wp_kses( __( 'Envato WordPress Toolkit plugin must be active to register your theme. <a href="%1$s"> Click here to activate it.</a>', 'lerp' ), array( 'a' => array( 'href' => array() ) ) ), esc_url( admin_url( 'admin.php?page=lerp-plugins' ) ) ); ?></p>
 							<?php endif;
 
-							$register_button_text = $toolkitData && ! $is_deregistering_license ? '' : __( 'Register your theme', 'uncode' );
+							$register_button_text = $toolkitData && ! $is_deregistering_license ? '' : __( 'Register your theme', 'lerp' );
 
 							if ( $toolkitData && $license_already_in_use ) :
-								$register_button_text = __( 'Activate on this domain', 'uncode' );
+								$register_button_text = __( 'Activate on this domain', 'lerp' );
 
 								?>
 								<input type="hidden" id="license_force_activation" name="force_activation" value="1">
@@ -214,7 +214,7 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 							endif;
 							?>
 							<?php if ( $register_button_text ) : ?>
-								<button class="button button-primary" type="submit"<?php if ( ! $envato_toolkit_active ) echo ' disabled'; ?> id="envato_update_info" name="envato_update_info"<?php echo ! $envato_toolkit_active ? ' disabled' : ''; ?>><span><span class="uncode-ot-spinner"></span><?php echo esc_attr( $register_button_text ); ?></span></button>
+								<button class="button button-primary" type="submit"<?php if ( ! $envato_toolkit_active ) echo ' disabled'; ?> id="envato_update_info" name="envato_update_info"<?php echo ! $envato_toolkit_active ? ' disabled' : ''; ?>><span><span class="lerp-ot-spinner"></span><?php echo esc_attr( $register_button_text ); ?></span></button>
 							<?php endif ?>
 						</div>
 
@@ -222,23 +222,23 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 
 					<?php if ( $toolkitData && ! $is_deregistering_license && ! $license_already_in_use ) : ?>
 						<form id="change_license_form" method="POST">
-							<button type="submit" class="button button-primary" name="change_license"><?php echo esc_html__( 'Deregister your product', 'uncode' ); ?></button>
+							<button type="submit" class="button button-primary" name="change_license"><?php echo esc_html__( 'Deregister your product', 'lerp' ); ?></button>
 						</form>
 					<?php endif; ?>
-				</div><!-- .uncode-info-box -->
+				</div><!-- .lerp-info-box -->
 
-			</div><!-- .uncode-admin-panel__left -->
+			</div><!-- .lerp-admin-panel__left -->
 
-			<div class="uncode-admin-panel__right">
-				<h2 class="uncode-admin-panel__heading"><?php esc_html_e( '系统状态', 'uncode' ); ?></h2>
+			<div class="lerp-admin-panel__right">
+				<h2 class="lerp-admin-panel__heading"><?php esc_html_e( '系统状态', 'lerp' ); ?></h2>
 
-				<p class="uncode-admin-panel__description"><?php printf(esc_html__("Under System Status, you can find important information about your server setup. If you see red errors that indicate problems, it is likely that you're not in compliance with Uncode's %s.", "uncode"), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213453949') . '" target="_blank">'.esc_html__('Server Requirements','uncode').'</a>'); ?></p>
+				<p class="lerp-admin-panel__description"><?php printf(esc_html__("Under System Status, you can find important information about your server setup. If you see red errors that indicate problems, it is likely that you're not in compliance with Lerp's %s.", "lerp"), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213453949') . '" target="_blank">'.esc_html__('Server Requirements','lerp').'</a>'); ?></p>
 
 				<table class="widefat system-status-list" cellspacing="0" id="status">
 					<tbody>
 						<tr>
-							<td data-export-label="License"><?php echo esc_html__("主题版本", "uncode"); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'The version of Uncode installed on your site.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="License"><?php echo esc_html__("主题版本", "lerp"); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'The version of Lerp installed on your site.', 'lerp' ) . '</small>'; ?></td>
 							<td>
 							<?php $theme_data = wp_get_theme();
 							if ( $theme_data->parent() )
@@ -252,44 +252,44 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 			            </tr>
 		            <?php if ( is_child_theme() ) : ?>
 						<tr>
-							<td data-export-label="Child Theme"><?php echo esc_html__("Child Theme", "uncode"); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'Name and version of child theme installed on your site.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="Child Theme"><?php echo esc_html__("Child Theme", "lerp"); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'Name and version of child theme installed on your site.', 'lerp' ) . '</small>'; ?></td>
 							<td>
-							<?php printf( wp_kses_post( _x( '%s - %s', 'Child theme name and version', 'uncode' ) ), $theme_data->get( 'Name' ), $theme_data->get( 'Version' ) ) . '</small>'; ?>
+							<?php printf( wp_kses_post( _x( '%s - %s', 'Child theme name and version', 'lerp' ) ), $theme_data->get( 'Name' ), $theme_data->get( 'Version' ) ) . '</small>'; ?>
 							</td>
 			            </tr>
 			        <?php endif; ?>
 						<tr>
-							<td data-export-label="Product Registration"><?php echo esc_html__("Product Registration", "uncode"); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'Please validate your product license as outlined in Envato\'s license terms.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="Product Registration"><?php echo esc_html__("Product Registration", "lerp"); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'Please validate your product license as outlined in Envato\'s license terms.', 'lerp' ) . '</small>'; ?></td>
 							<td>
 							<?php
 							if ( $license_ok && !$license_already_in_use ) {
-								echo '<mark class="yes">' . esc_html__( 'Theme registered.', 'uncode' ) . '</mark>';
+								echo '<mark class="yes">' . esc_html__( 'Theme registered.', 'lerp' ) . '</mark>';
 							} else {
-								echo '<mark class="error">' . esc_html__( 'Not registered.', 'uncode' ) . '</mark>';
+								echo '<mark class="error">' . esc_html__( 'Not registered.', 'lerp' ) . '</mark>';
 							}
 							?>
 							</td>
 						</tr>
 						<tr>
-							<td data-export-label="WP Version"><?php esc_html_e( 'WordPress版本', 'uncode' ); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'The version of WordPress installed on your site.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="WP Version"><?php esc_html_e( 'WordPress版本', 'lerp' ); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'The version of WordPress installed on your site.', 'lerp' ) . '</small>'; ?></td>
 							<td><?php bloginfo('version'); ?></td>
 						</tr>
 						<tr>
-							<td data-export-label="Language"><?php esc_html_e( '语言', 'uncode' ); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'The current language used by WordPress. Default = English.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="Language"><?php esc_html_e( '语言', 'lerp' ); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'The current language used by WordPress. Default = English.', 'lerp' ) . '</small>'; ?></td>
 							<td><?php echo get_locale() ?></td>
 						</tr>
 						<tr>
-							<td data-export-label="WP Multisite"><?php esc_html_e( 'WP Multisite', 'uncode' ); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'Whether or not you have WordPress Multisite enabled.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="WP Multisite"><?php esc_html_e( 'WP Multisite', 'lerp' ); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'Whether or not you have WordPress Multisite enabled.', 'lerp' ) . '</small>'; ?></td>
 							<td><?php if ( is_multisite() ) echo '&#10004;'; else echo '&ndash;'; ?></td>
 						</tr>
 						<tr>
-							<td data-export-label="Frontend Stylesheet"><?php esc_html_e( '前端样式', 'uncode' ); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'Uncode is generating a stylesheet when the options are saved. The file must be writtable.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="Frontend Stylesheet"><?php esc_html_e( '前端样式', 'lerp' ); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__( 'Lerp is generating a stylesheet when the options are saved. The file must be writtable.', 'lerp' ) . '</small>'; ?></td>
 							<td><?php
 								global $wp_filesystem;
 								if (empty($wp_filesystem)) {
@@ -321,17 +321,17 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 
 								if ($can_write_front) {
 									if ( ! $file_is_writable )
-										printf( '<div class="uncode-note">' . wp_kses(__( 'WordPress doesn\'t have direct access to this file <code>%s</code>. This is most likely due to a conflict with server file permissions. It is also possible that WordPress\' file access is not configured correctly. The custom CSS will be output inline.', 'uncode' ), array( 'code' => '' )) . '</div>', $front_css_file  );
+										printf( '<div class="lerp-note">' . wp_kses(__( 'WordPress doesn\'t have direct access to this file <code>%s</code>. This is most likely due to a conflict with server file permissions. It is also possible that WordPress\' file access is not configured correctly. The custom CSS will be output inline.', 'lerp' ), array( 'code' => '' )) . '</div>', $front_css_file  );
 									else
 										echo '<mark class="yes">' . '<code class="yes">' . $front_css .'</code></mark> ';
 								} else {
-									printf( '<div class="uncode-note">' . wp_kses(__( 'WordPress doesn\'t have direct access to this folder <code>%s</code>. This is most likely due to a conflict with server file permissions. It is also possible that WordPress\' file access is not configured correctly. The custom CSS will be output inline.', 'uncode' ), array( 'code' => '' )) . '</div>', $front_css  );
+									printf( '<div class="lerp-note">' . wp_kses(__( 'WordPress doesn\'t have direct access to this folder <code>%s</code>. This is most likely due to a conflict with server file permissions. It is also possible that WordPress\' file access is not configured correctly. The custom CSS will be output inline.', 'lerp' ), array( 'code' => '' )) . '</div>', $front_css  );
 								}
 							?></td>
 						</tr>
 						<tr>
-							<td data-export-label="Backend Stylesheet"><?php esc_html_e( '后台样式', 'uncode' ); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'Uncode is generating a stylesheet when the options are saved. The file must be writtable.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="Backend Stylesheet"><?php esc_html_e( '后台样式', 'lerp' ); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'Lerp is generating a stylesheet when the options are saved. The file must be writtable.', 'lerp' ) . '</small>'; ?></td>
 							<td><?php
 								$mod_file = (defined('FS_CHMOD_FILE')) ? FS_CHMOD_FILE : false;
 								$back_css = get_template_directory() . '/core/assets/css/';
@@ -359,79 +359,79 @@ if ( is_plugin_active( 'envato-wordpress-toolkit-master/index.php' ) ) {
 
 								if ($can_write_back) {
 									if ( ! $back_is_writable )
-										printf( '<div class="uncode-note">' . wp_kses(__( 'WordPress doesn\'t have direct access to this file <code>%s</code>. This is most likely due to a conflict with server file permissions. It is also possible that WordPress\' file access is not configured correctly. The custom CSS will be output inline.', 'uncode' ), array( 'code' => '' )) . '</div>', $back_css_file  );
+										printf( '<div class="lerp-note">' . wp_kses(__( 'WordPress doesn\'t have direct access to this file <code>%s</code>. This is most likely due to a conflict with server file permissions. It is also possible that WordPress\' file access is not configured correctly. The custom CSS will be output inline.', 'lerp' ), array( 'code' => '' )) . '</div>', $back_css_file  );
 									else
 										echo '<mark class="yes">' . '<code class="yes">' . $back_css .'</code></mark> ';
 								} else {
-									printf( '<div class="uncode-note">' . wp_kses(__( 'WordPress doesn\'t have direct access to this folder <code>%s</code>. This is most likely due to a conflict with server file permissions. It is also possible that WordPress\' file access is not configured correctly. The custom CSS will be output inline.', 'uncode' ), array( 'code' => '' )) . '</div>', $back_css  );
+									printf( '<div class="lerp-note">' . wp_kses(__( 'WordPress doesn\'t have direct access to this folder <code>%s</code>. This is most likely due to a conflict with server file permissions. It is also possible that WordPress\' file access is not configured correctly. The custom CSS will be output inline.', 'lerp' ), array( 'code' => '' )) . '</div>', $back_css  );
 								}
 							?></td>
 						</tr>
 						<tr>
-							<td data-export-label="WP Memory Limit"><?php esc_html_e( 'WordPress内存限制', 'uncode' ); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'Memory Limits not satisfied may produce possible errors on the frontend of the site as blank pages.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="WP Memory Limit"><?php esc_html_e( 'WordPress内存限制', 'lerp' ); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'Memory Limits not satisfied may produce possible errors on the frontend of the site as blank pages.', 'lerp' ) . '</small>'; ?></td>
 							<td><?php
-								$memory = uncode_let_to_num( WP_MEMORY_LIMIT );
+								$memory = lerp_let_to_num( WP_MEMORY_LIMIT );
 
 								if ( $memory < 100663296 ) {
-									echo '<mark class="error">' . sprintf(esc_html__('%s - We recommend setting memory to at least 96MB. %s.','uncode'), size_format( $memory ), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213459889') . '" target="_blank">'.esc_html__('More info','uncode').'</a>') . '</mark>';
+									echo '<mark class="error">' . sprintf(esc_html__('%s - We recommend setting memory to at least 96MB. %s.','lerp'), size_format( $memory ), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213459889') . '" target="_blank">'.esc_html__('More info','lerp').'</a>') . '</mark>';
 								} else {
 									echo '<mark class="yes">' . size_format( $memory ) . '</mark>';
 								}
 							?></td>
 						</tr>
 						<tr>
-							<td data-export-label="Server Memory Limit"><?php esc_html_e( '服务器内存限制', 'uncode' ); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'This is actually the real memory available for your installation despite the WP memory limit.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="Server Memory Limit"><?php esc_html_e( '服务器内存限制', 'lerp' ); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'This is actually the real memory available for your installation despite the WP memory limit.', 'lerp' ) . '</small>'; ?></td>
 							<td class="real-memory">
-								<span class="calculating"><?php esc_html_e( 'Calculating…', 'uncode' ); ?></span>
+								<span class="calculating"><?php esc_html_e( 'Calculating…', 'lerp' ); ?></span>
 								<mark class="yes" style="display: none;">%d% MB</mark>
-								<mark class="error" style="display: none;"><?php esc_html_e( 'You only have %d% MB available and it\'s not enough to run the system. If you have already increased the memory limit please check with your hosting provider for increase it (at least 96MB is required).','uncode' ); ?></mark>
+								<mark class="error" style="display: none;"><?php esc_html_e( 'You only have %d% MB available and it\'s not enough to run the system. If you have already increased the memory limit please check with your hosting provider for increase it (at least 96MB is required).','lerp' ); ?></mark>
 							</td>
 						</tr>
 						<tr>
-							<td data-export-label="PHP Max Input Vars"><?php esc_html_e( 'PHP Max Input Vars', 'uncode' ); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'Max Input Vars not satisfied may result in loss of Theme Options.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="PHP Max Input Vars"><?php esc_html_e( 'PHP Max Input Vars', 'lerp' ); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'Max Input Vars not satisfied may result in loss of Theme Options.', 'lerp' ) . '</small>'; ?></td>
 							<td><?php
 								$max_input = ini_get('max_input_vars');
 								if ( $max_input < 3000 ) {
-									echo '<mark class="error">' . sprintf( wp_kses(__( '%s - We recommend setting PHP max_input_vars to at least 3000. See: <a href="%s" target="_blank">Increasing the PHP max vars limit</a>', 'uncode' ), array( 'a' => array( 'href' => array(),'target' => array() ) ) ), $max_input, '//undsgn.com/uncode/documentation/max-input-vars/' ) . '</mark>';
+									echo '<mark class="error">' . sprintf( wp_kses(__( '%s - We recommend setting PHP max_input_vars to at least 3000. See: <a href="%s" target="_blank">Increasing the PHP max vars limit</a>', 'lerp' ), array( 'a' => array( 'href' => array(),'target' => array() ) ) ), $max_input, '//undsgn.com/lerp/documentation/max-input-vars/' ) . '</mark>';
 								} else {
 									echo '<mark class="yes">' . $max_input . '</mark>';
 								}
 							?></td>
 						</tr>
 						<tr>
-							<td data-export-label="PHP Max Input Vars Allowed"><?php esc_html_e( 'PHP Max Input Vars (allowed)', 'uncode' ); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'The effective maximum number of variables your server can use for a single function to avoid overloads. If this value is lower than max_input_vars your server is applying restrictions on the actual number of vars that can be used.', 'uncode' ) . '<br>' . esc_attr__( 'If you modified the server settings refresh the option to test.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="PHP Max Input Vars Allowed"><?php esc_html_e( 'PHP Max Input Vars (allowed)', 'lerp' ); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'The effective maximum number of variables your server can use for a single function to avoid overloads. If this value is lower than max_input_vars your server is applying restrictions on the actual number of vars that can be used.', 'lerp' ) . '<br>' . esc_attr__( 'If you modified the server settings refresh the option to test.', 'lerp' ) . '</small>'; ?></td>
 							<td class="get-max-input-vars">
-								<?php $uncode_test_max_input_vars = intval(get_option('uncode_test_max_input_vars'));
-									if ( $uncode_test_max_input_vars != '' ) : ?>
-									<span class="calculating" style="display: none"><?php esc_html_e( 'Calculating…', 'uncode' ); ?></span>
-									<mark class="yes" <?php if ( $uncode_test_max_input_vars < 3000 ) echo 'style="display: none;"' ?>><?php echo $uncode_test_max_input_vars; ?></mark>
-									<mark class="error get_data" <?php if ( $uncode_test_max_input_vars >= 3000 ) echo 'style="display: none;"'; ?>><?php echo $uncode_test_max_input_vars; printf(esc_html__(' - We recommend setting PHP max_input_vars to at least 3000. %s.','uncode'), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213459869') . '" target="_blank">'.esc_html__('More info','uncode').'</a>'); ?></mark>
+								<?php $lerp_test_max_input_vars = intval(get_option('lerp_test_max_input_vars'));
+									if ( $lerp_test_max_input_vars != '' ) : ?>
+									<span class="calculating" style="display: none"><?php esc_html_e( 'Calculating…', 'lerp' ); ?></span>
+									<mark class="yes" <?php if ( $lerp_test_max_input_vars < 3000 ) echo 'style="display: none;"' ?>><?php echo $lerp_test_max_input_vars; ?></mark>
+									<mark class="error get_data" <?php if ( $lerp_test_max_input_vars >= 3000 ) echo 'style="display: none;"'; ?>><?php echo $lerp_test_max_input_vars; printf(esc_html__(' - We recommend setting PHP max_input_vars to at least 3000. %s.','lerp'), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213459869') . '" target="_blank">'.esc_html__('More info','lerp').'</a>'); ?></mark>
 									<a href="#" id="max_vars_checker"><i class="fa fa-refresh"></i></a>
 								<?php else : ?>
-									<span class="calculating"><?php esc_html_e( 'Calculating…', 'uncode' ); ?></span>
+									<span class="calculating"><?php esc_html_e( 'Calculating…', 'lerp' ); ?></span>
 									<mark class="yes" style="display: none;"></mark>
-									<mark class="error get_data" style="display: none;">%d%<?php printf(esc_html__(' - We recommend setting PHP max_input_vars to at least 3000. %s.','uncode'), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213459869') . '" target="_blank">'.esc_html__('More info','uncode').'</a>'); ?></mark>
-									<mark class="error no_data" style="display: none;"><?php esc_html_e('No available data','uncode'); ?></mark>
+									<mark class="error get_data" style="display: none;">%d%<?php printf(esc_html__(' - We recommend setting PHP max_input_vars to at least 3000. %s.','lerp'), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213459869') . '" target="_blank">'.esc_html__('More info','lerp').'</a>'); ?></mark>
+									<mark class="error no_data" style="display: none;"><?php esc_html_e('No available data','lerp'); ?></mark>
 									<a href="#" id="max_vars_checker"><i class="fa fa-refresh"></i></a>
 								<?php endif; ?>
 							</td>
 						</tr>
 						<tr>
-							<td data-export-label="WP Debug Mode"><?php esc_html_e( 'WordPress调试模式', 'uncode' ); ?>
-							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'Displays whether or not WordPress is in Debug Mode.', 'uncode' ) . '</small>'; ?></td>
+							<td data-export-label="WP Debug Mode"><?php esc_html_e( 'WordPress调试模式', 'lerp' ); ?>
+							<?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__( 'Displays whether or not WordPress is in Debug Mode.', 'lerp' ) . '</small>'; ?></td>
 							<td><?php if ( defined('WP_DEBUG') && WP_DEBUG ) echo '<mark class="yes">' . '&#10004;' . '</mark>'; else echo '&ndash;'; ?></td>
 						</tr>
 					</tbody>
 				</table>
-				<?php do_action('uncode_welcome'); ?>
-			</div><!-- .uncode-admin-panel__right -->
-		</div><!-- .uncode-admin-panel__content -->
-	</div><!-- .uncode-admin-panel -->
-</div><!-- .uncode-wrap -->
+				<?php do_action('lerp_welcome'); ?>
+			</div><!-- .lerp-admin-panel__right -->
+		</div><!-- .lerp-admin-panel__content -->
+	</div><!-- .lerp-admin-panel -->
+</div><!-- .lerp-wrap -->
 
 <script type="text/javascript">
 
@@ -454,7 +454,7 @@ var wpost = function (url, data, callback) {
     xhr.send(JSON.stringify(data));
 }
 
-if ( document.getElementById('uncode_api_credentials_form') !== null && document.getElementById('envato_update_info') !== null ) {
+if ( document.getElementById('lerp_api_credentials_form') !== null && document.getElementById('envato_update_info') !== null ) {
 
 	document.getElementById('envato_update_info').addEventListener("mousedown", function(e) {
 	    var license_empty_dom = document.getElementById('license_empty');
@@ -466,10 +466,10 @@ if ( document.getElementById('uncode_api_credentials_form') !== null && document
 	document.getElementById('envato_update_info').addEventListener("click", function(e) {
 	    e.preventDefault();
 
-	    var $form_credentials = document.getElementById('uncode_api_credentials_form');
-	    var user_name_field = document.getElementById('uncode_api_credentials_form').querySelector('[name="envato_username"]');
-	    var api_key_field = document.getElementById('uncode_api_credentials_form').querySelector('[name="envato_api_key"]');
-	    var purchase_code_field = document.getElementById('uncode_api_credentials_form').querySelector('[name="envato_purchase_code"]');
+	    var $form_credentials = document.getElementById('lerp_api_credentials_form');
+	    var user_name_field = document.getElementById('lerp_api_credentials_form').querySelector('[name="envato_username"]');
+	    var api_key_field = document.getElementById('lerp_api_credentials_form').querySelector('[name="envato_api_key"]');
+	    var purchase_code_field = document.getElementById('lerp_api_credentials_form').querySelector('[name="envato_purchase_code"]');
 	    var user_name = user_name_field.value;
 	    var api_key = api_key_field.value;
 	    var purchase_code = purchase_code_field.value;
@@ -491,9 +491,9 @@ if ( document.getElementById('uncode_api_credentials_form') !== null && document
 
 	    } else {
 
-	    	//var $spinner = document.getElementById('uncode_api_credentials_form').querySelector('[class*="uncode-ot-spinner"]');
+	    	//var $spinner = document.getElementById('lerp_api_credentials_form').querySelector('[class*="lerp-ot-spinner"]');
 
-	    	$form_credentials.classList.add("uncode-ajax-loading");
+	    	$form_credentials.classList.add("lerp-ajax-loading");
 
 		    wpost(
 		        ajaxurl + '?action=update_license', {
@@ -507,7 +507,7 @@ if ( document.getElementById('uncode_api_credentials_form') !== null && document
 
 		            if (obj['success'] == 'false' || obj['success'] == false) {
 		                var license_error_dom = document.getElementById('license_error');
-		                $form_credentials.classList.remove("uncode-ajax-loading");
+		                $form_credentials.classList.remove("lerp-ajax-loading");
 		                license_error_dom.style.display = 'inline-block';
 
 		                //license_error_dom.innerHTML = obj['data'];
@@ -526,15 +526,15 @@ if ( document.getElementById('uncode_api_credentials_form') !== null && document
 jQuery( document ).ready( function ( $ ) {
 
 	//Remove error class from empty fields
-	var $uncode_api_credentials_form = $('form#uncode_api_credentials_form'),
+	var $lerp_api_credentials_form = $('form#lerp_api_credentials_form'),
 		$license_empty = $('#license_empty'),
 		$license_error = $('#license_error'),
-	$credentials_inputs = $('input[type="text"]', $uncode_api_credentials_form).each(function(){
+	$credentials_inputs = $('input[type="text"]', $lerp_api_credentials_form).each(function(){
 
 		var $input = $(this).on('keyup paste', function(){
 			$input.removeClass('error');
 
-			if ( ! $('input[type="text"].error', $uncode_api_credentials_form).length )
+			if ( ! $('input[type="text"].error', $lerp_api_credentials_form).length )
 				$license_empty.add($license_error).hide();
 		});
 
@@ -613,7 +613,7 @@ jQuery( document ).ready( function ( $ ) {
 				$yes.add($errors).add($checker).fadeOut(200);
 				setTimeout(function(){
 					$calculating.fadeIn(200);
-					uncode_test_max_input_vars(10000);
+					lerp_test_max_input_vars(10000);
 				}, 200);
 
 			});
@@ -621,7 +621,7 @@ jQuery( document ).ready( function ( $ ) {
 		};
 		max_vars_checker();
 
-		var uncode_test_max_input_vars = function($vars){
+		var lerp_test_max_input_vars = function($vars){
 			var param = [],
 				var_string,
 				intData;
@@ -632,7 +632,7 @@ jQuery( document ).ready( function ( $ ) {
 			$.ajax({
 				url: ajaxurl,
 				data: {
-					action: 'uncode_test_vars',
+					action: 'lerp_test_vars',
 					content: param,
 				},
 				type: 'post',
@@ -654,12 +654,12 @@ jQuery( document ).ready( function ( $ ) {
 						var_string.add('#max_vars_checker').fadeIn();
 
 					} else {
-						uncode_test_max_input_vars($vars+10000);
+						lerp_test_max_input_vars($vars+10000);
 					}
 					$.ajax({
 						url: ajaxurl,
 						data: {
-							action: 'uncode_update_max_input_vars',
+							action: 'lerp_update_max_input_vars',
 							content: intData,
 						},
 						type: 'post'
@@ -669,8 +669,8 @@ jQuery( document ).ready( function ( $ ) {
 
 		};
 
-		<?php if ( $uncode_test_max_input_vars == '' ) { ?>
-		uncode_test_max_input_vars(10000);
+		<?php if ( $lerp_test_max_input_vars == '' ) { ?>
+		lerp_test_max_input_vars(10000);
 		<?php } ?>
 
 	});

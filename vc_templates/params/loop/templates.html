@@ -158,7 +158,7 @@
                 }
                 params = _.indexOf(data.value, value) >=0 ? ' checked="true"' : '';
             if(!_.isEmpty(params) && is_locked) params += ' disabled="true"';
-            if ( value !== 'uncodeblock' ) {
+            if ( value !== 'lerpblock' ) {
             #>
             <label><input type="checkbox" data-input="{{ name }}" value="{{ value }}" {{ params }}/> {{ label }}</label>
             <#

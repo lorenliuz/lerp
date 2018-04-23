@@ -9,7 +9,7 @@
  * E.g., it puts together the home page when no home.php file exists.
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package uncode
+ * @package lerp
  */
 
 get_header();
@@ -25,26 +25,26 @@ $with_builder = false;
 $index_has_navigation = false;
 
 $post_type = 'post_index';
-$single_post_width = ot_get_option('_uncode_' . $post_type . '_single_width');
-$single_text_length = ot_get_option('_uncode_' . $post_type . '_single_text_length');
+$single_post_width = ot_get_option('_lerp_' . $post_type . '_single_width');
+$single_text_length = ot_get_option('_lerp_' . $post_type . '_single_text_length');
 set_query_var( 'single_post_width', $single_post_width );
 if ($single_text_length !== '') set_query_var( 'single_text_length', $single_text_length );
 
 /** Get general datas **/
-$style = ot_get_option('_uncode_general_style');
-if (isset($metabox_data['_uncode_specific_bg_color'][0]) && $metabox_data['_uncode_specific_bg_color'][0] !== '') {
-	$bg_color = $metabox_data['_uncode_specific_bg_color'][0];
-} else $bg_color = ot_get_option('_uncode_general_bg_color');
+$style = ot_get_option('_lerp_general_style');
+if (isset($metabox_data['_lerp_specific_bg_color'][0]) && $metabox_data['_lerp_specific_bg_color'][0] !== '') {
+	$bg_color = $metabox_data['_lerp_specific_bg_color'][0];
+} else $bg_color = ot_get_option('_lerp_general_bg_color');
 $bg_color = ($bg_color == '') ? ' style-'.$style.'-bg' : ' style-'.$bg_color.'-bg';
 
 /** Use generic page width **/
-$generic_content_full = ot_get_option('_uncode_'.$post_type.'_layout_width');
+$generic_content_full = ot_get_option('_lerp_'.$post_type.'_layout_width');
 if ($generic_content_full === '') {
-	$main_content_full = ot_get_option('_uncode_body_full');
+	$main_content_full = ot_get_option('_lerp_body_full');
 	if ($main_content_full !== 'on') $limit_content_width = ' limit-width';
 } else {
 	if ($generic_content_full === 'limit') {
-		$generic_custom_width = ot_get_option('_uncode_'.$post_type.'_layout_width_custom');
+		$generic_custom_width = ot_get_option('_lerp_'.$post_type.'_layout_width_custom');
 		if (isset($generic_custom_width[0]) && isset($generic_custom_width[1])) {
 			if ($generic_custom_width[1] === 'px') {
 				$page_custom_width[0] = 12 * round(($generic_custom_width[0]) / 12);
@@ -59,48 +59,48 @@ if ($generic_content_full === '') {
 }
 
 if (!empty($metabox_data)) {
-	$media = get_post_meta($post->ID, '_uncode_featured_media', 1);
-	$media_display = get_post_meta($post->ID, '_uncode_featured_media_display', 1);
+	$media = get_post_meta($post->ID, '_lerp_featured_media', 1);
+	$media_display = get_post_meta($post->ID, '_lerp_featured_media_display', 1);
 	$featured_image = get_post_thumbnail_id($post->ID);
 	if ($featured_image === '') $featured_image = $media;
 }
 
 
 /** Collect header data **/
-if (isset($metabox_data['_uncode_header_type'][0]) && $metabox_data['_uncode_header_type'][0] !== '')
+if (isset($metabox_data['_lerp_header_type'][0]) && $metabox_data['_lerp_header_type'][0] !== '')
 {
-	$page_header_type = $metabox_data['_uncode_header_type'][0];
+	$page_header_type = $metabox_data['_lerp_header_type'][0];
 	if ($page_header_type !== 'none')
 	{
-		$meta_data = uncode_get_specific_header_data($metabox_data, $post_type, $featured_image);
+		$meta_data = lerp_get_specific_header_data($metabox_data, $post_type, $featured_image);
 		$metabox_data = $meta_data['meta'];
 		$show_title = $meta_data['show_title'];
 	}
 }
 else
 {
-	$page_header_type = ot_get_option('_uncode_' . $post_type . '_header');
+	$page_header_type = ot_get_option('_lerp_' . $post_type . '_header');
 	if ($page_header_type !== '' && $page_header_type !== 'none')
 	{
-		$metabox_data['_uncode_header_type'] = array($page_header_type);
-		$meta_data = uncode_get_general_header_data($metabox_data, $post_type);
+		$metabox_data['_lerp_header_type'] = array($page_header_type);
+		$meta_data = lerp_get_general_header_data($metabox_data, $post_type);
 		$metabox_data = $meta_data['meta'];
 		$show_title = $meta_data['show_title'];
 	}
 }
 
 /** Get layout info **/
-$activate_sidebar = ot_get_option('_uncode_'.$post_type.'_activate_sidebar');
+$activate_sidebar = ot_get_option('_lerp_'.$post_type.'_activate_sidebar');
 if ($activate_sidebar !== 'off') {
-	$layout = ot_get_option('_uncode_'.$post_type.'_sidebar_position');
+	$layout = ot_get_option('_lerp_'.$post_type.'_sidebar_position');
 	if ($layout === '') $layout = 'sidebar_right';
-	$sidebar = ot_get_option('_uncode_'.$post_type.'_sidebar');
-	$sidebar_style = ot_get_option('_uncode_'.$post_type.'_sidebar_style');
-	$sidebar_size = ot_get_option('_uncode_'.$post_type.'_sidebar_size');
-	$sidebar_sticky = ot_get_option('_uncode_' . $post_type . '_sidebar_sticky');
+	$sidebar = ot_get_option('_lerp_'.$post_type.'_sidebar');
+	$sidebar_style = ot_get_option('_lerp_'.$post_type.'_sidebar_style');
+	$sidebar_size = ot_get_option('_lerp_'.$post_type.'_sidebar_size');
+	$sidebar_sticky = ot_get_option('_lerp_' . $post_type . '_sidebar_sticky');
 	$sidebar_sticky = ($sidebar_sticky === 'on') ? ' sticky-element sticky-sidebar' : '';
-	$sidebar_fill = ot_get_option('_uncode_'.$post_type.'_sidebar_fill');
-	$sidebar_bg_color = ot_get_option('_uncode_'.$post_type.'_sidebar_bgcolor');
+	$sidebar_fill = ot_get_option('_lerp_'.$post_type.'_sidebar_fill');
+	$sidebar_bg_color = ot_get_option('_lerp_'.$post_type.'_sidebar_bgcolor');
 	$sidebar_bg_color = ($sidebar_bg_color !== '') ? ' style-' . $sidebar_bg_color . '-bg' : '';
 }
 
@@ -116,13 +116,13 @@ $posts_counter = $wp_query->post_count;
 /** Build header **/
 if ($page_header_type !== '' && $page_header_type !== 'none')
 {
-	$page_title = (is_home()) ? get_bloginfo('description') : ot_get_option('_uncode_'.$post_type.'_header_title_text');
+	$page_title = (is_home()) ? get_bloginfo('description') : ot_get_option('_lerp_'.$post_type.'_header_title_text');
 	$page_header = new unheader($metabox_data, $page_title);
 
 	$header_html = $page_header->html;
 	if ($header_html !== '') {
 		echo '<div id="page-header">';
-		echo uncode_remove_wpautop( $page_header->html );
+		echo lerp_remove_wpautop( $page_header->html );
 		echo '</div>';
 	}
 }
@@ -133,7 +133,7 @@ if (have_posts()):
 	if (isset($metabox_data['post_id']) && $metabox_data['post_id'] !== '') {
 		$content_id = $metabox_data['post_id'];
 	} else {
-		$content_id = ot_get_option('_uncode_' . $post_type . '_content_block');
+		$content_id = ot_get_option('_lerp_' . $post_type . '_content_block');
 	}
 
 	if ($content_id === '') {
@@ -165,12 +165,12 @@ if (have_posts()):
 	} else {
 
 		$content_id = apply_filters( 'wpml_object_id', $content_id, 'post' );
-		$uncode_block = get_post_field('post_content', $content_id);
-		if (has_shortcode($uncode_block, 'vc_row')) $with_builder = true;
+		$lerp_block = get_post_field('post_content', $content_id);
+		if (has_shortcode($lerp_block, 'vc_row')) $with_builder = true;
 		$archive_query = ' loop="size:'.get_option('posts_per_page').'|order_by:date|post_type:post"';
-		$regex = '/\[uncode_index(.*?)\]/';
+		$regex = '/\[lerp_index(.*?)\]/';
 		$regex_attr = '/(.*?)=\"(.*?)\"/';
-		preg_match_all($regex, $uncode_block, $matches, PREG_SET_ORDER);
+		preg_match_all($regex, $lerp_block, $matches, PREG_SET_ORDER);
 		foreach ($matches as $key => $value) {
 			$index_found = false;
 			$index_pagination = false;
@@ -196,12 +196,12 @@ if (have_posts()):
 				if ($index_count === 0) {
 					$value[1] .= $archive_query;
 				}
-				$replacement = '[uncode_index' . $value[1] . ']';
-				$uncode_block = str_replace($value[0], $replacement, $uncode_block);
+				$replacement = '[lerp_index' . $value[1] . ']';
+				$lerp_block = str_replace($value[0], $replacement, $lerp_block);
 				if ($index_pagination || $index_infinite) $index_has_navigation = true;
 			}
 		}
-		$the_content .= $uncode_block;
+		$the_content .= $lerp_block;
 
 	}
 
@@ -305,18 +305,18 @@ if (have_posts()):
 	} else {
 
 		/** Create html without sidebar **/
-		if ($with_builder !== $with_builder) $the_content = '<div class="post-content"' . $page_custom_width . '>' . uncode_get_row_template($the_content, $limit_width, $limit_content_width, $style, '', 'double', true, 'double') . '</div>';
+		if ($with_builder !== $with_builder) $the_content = '<div class="post-content"' . $page_custom_width . '>' . lerp_get_row_template($the_content, $limit_width, $limit_content_width, $style, '', 'double', true, 'double') . '</div>';
 		else $the_content = '<div class="post-content"' . $page_custom_width . '>' . $the_content . '</div>';
 
 	}
 
 	/** Build and display navigation html **/
 	if (!$index_has_navigation) {
-		$navigation_option = ot_get_option('_uncode_' . $post_type . '_navigation_activate');
+		$navigation_option = ot_get_option('_lerp_' . $post_type . '_navigation_activate');
 		if ($navigation_option !== 'off')
 		{
-			$navigation = uncode_posts_navigation();
-			if (!empty($navigation) && $navigation !== '') $navigation_content = uncode_get_row_template($navigation, '', $limit_content_width, $style, ' row-navigation row-navigation-' . $style, true, true, true);
+			$navigation = lerp_posts_navigation();
+			if (!empty($navigation) && $navigation !== '') $navigation_content = lerp_get_row_template($navigation, '', $limit_content_width, $style, ' row-navigation row-navigation-' . $style, true, true, true);
 		}
 	}
 

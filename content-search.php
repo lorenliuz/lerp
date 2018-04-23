@@ -4,7 +4,7 @@
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package uncode
+ * @package lerp
  */
 
 $post_type = get_post_type();
@@ -18,7 +18,7 @@ $post_type = get_post_type();
 	<div class="entry-summary">
 		<?php
 			$text = wp_strip_all_tags(do_shortcode(get_the_content()));
-			echo uncode_truncate($text, 400);
+			echo lerp_truncate($text, 400);
 		?>
 	</div><!-- .entry-summary -->
 

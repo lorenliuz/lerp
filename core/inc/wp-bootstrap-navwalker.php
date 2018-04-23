@@ -278,7 +278,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 *
 * @since 3.0.0
 */
-class Uncode_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
+class Lerp_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 
 	function widget($args, $instance) {
 
@@ -302,9 +302,9 @@ class Uncode_Nav_Menu_Widget extends WP_Nav_Menu_Widget {
 
 }
 
-add_action("widgets_init", "uncode_custom_menu_widget");
+add_action("widgets_init", "lerp_custom_menu_widget");
 
-function uncode_custom_menu_widget() {
+function lerp_custom_menu_widget() {
 	unregister_widget("WP_Nav_Menu_Widget");
-	register_widget("Uncode_Nav_Menu_Widget");
+	register_widget("Lerp_Nav_Menu_Widget");
 }

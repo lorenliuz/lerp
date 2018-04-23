@@ -1,6 +1,6 @@
-<?php if (!class_exists('UncodeNewsItem')): ?>
+<?php if (!class_exists('LerpNewsItem')): ?>
 <?php
-class UncodeNewsItem {
+class LerpNewsItem {
     var $title;
     var $body;
     var $date;
@@ -28,7 +28,7 @@ class UncodeNewsItem {
             $this->url = '#';
         }
 
-        $option = json_decode(get_option('uncode_messaging'));
+        $option = json_decode(get_option('lerp_messaging'));
         if (empty($option)) {
             $option = array();
         } 
@@ -48,7 +48,7 @@ class UncodeNewsItem {
             );
         }
 
-        update_option('uncode_messaging', json_encode($option));
+        update_option('lerp_messaging', json_encode($option));
     }
 
     /**
@@ -111,7 +111,7 @@ class UncodeNewsItem {
      * @return StdClass
      */
     function getInstance() {
-        $option = json_decode(get_option('uncode_messaging'));
+        $option = json_decode(get_option('lerp_messaging'));
 
         if (empty($option)) {
             return null;

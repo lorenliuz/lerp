@@ -73,7 +73,7 @@ if ( ! class_exists( 'OT_Meta_Box' ) ) {
      */
     function build_meta_box( $post, $metabox ) {
 
-      echo '<div class="ot-metabox-wrapper uncode-admin-panel">';
+      echo '<div class="ot-metabox-wrapper lerp-admin-panel">';
 
         /* Use nonce for verification */
         echo '<input type="hidden" name="' . $this->meta_box['id'] . '_nonce" value="' . wp_create_nonce( $this->meta_box['id'] ) . '" />';
@@ -154,7 +154,7 @@ if ( ! class_exists( 'OT_Meta_Box' ) ) {
               /* don't show title with textblocks */
               if ( $_args['type'] != 'textblock' && ! empty( $field['label'] ) ) {
                 echo '<div class="format-setting-label">';
-                	$for_att = $_args['type'] !== 'uncode_colors_w_transp' ? ' for="' . $field['id'] . '"' : '';
+                	$for_att = $_args['type'] !== 'lerp_colors_w_transp' ? ' for="' . $field['id'] . '"' : '';
                 	echo '<label' . $for_att . ' class="label">' . $field['label'];
                   		if ( isset($field['desc']) && $field['desc'] !== '' ) echo '<span class="toggle-description"></span>';
 	                echo '</label>';

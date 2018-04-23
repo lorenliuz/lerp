@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package uncode
+ * @package lerp
  */
 
 global $wp_query;
@@ -14,12 +14,12 @@ $stylesArray = array(
 	'light',
 	'dark'
 );
-$general_style = ot_get_option('_uncode_general_style');
+$general_style = ot_get_option('_lerp_general_style');
 
 $overlay_style = $stylesArray[!array_search($general_style, $stylesArray) ];
 $overlay_back_color = 'style-' . $overlay_style . '-bg';
 
-$item_thumb_id = get_post_meta($post->ID, '_uncode_featured_media', 1);
+$item_thumb_id = get_post_meta($post->ID, '_lerp_featured_media', 1);
 if ($item_thumb_id === '') $item_thumb_id = get_post_thumbnail_id($post->ID);
 
 $block_classes = array(
@@ -43,16 +43,16 @@ $layout = array();
 
 $title_classes[] = 'h3';
 
-global $uncode_index_map;
-if (!class_exists('uncode_index')) {
-	echo esc_html__('Please activate Uncode Core plugin to version > 1.0.5','uncode');
+global $lerp_index_map;
+if (!class_exists('lerp_index')) {
+	echo esc_html__('Please activate Lerp Core plugin to version > 1.0.5','lerp');
 	die();
 }
-$uncode_index_instance = new uncode_index($uncode_index_map);
-$post_category = $uncode_index_instance->getCategoriesCss( $post->ID);
+$lerp_index_instance = new lerp_index($lerp_index_map);
+$post_category = $lerp_index_instance->getCategoriesCss( $post->ID);
 $block_data['content'] = get_the_content();
 $block_data['single_categories_id'] = $post_category['cat_id'];
-$block_data['single_categories'] = $uncode_index_instance->getCategoriesLink( $post->ID );
+$block_data['single_categories'] = $lerp_index_instance->getCategoriesLink( $post->ID );
 $block_data['classes'] = $block_classes;
 $block_data['tmb_data'] = $tmb_data;
 $block_data['id'] = $post->ID;
@@ -87,4 +87,4 @@ if ($post_format !== 'aside' && $post_format !== 'link' && $post_format !== 'quo
 if ($post_format !== 'aside' && $post_format !== 'link' && $post_format !== 'quote') $layout['author'] = array();
 $layout['icon'] = array();
 
-echo uncode_create_single_block($block_data, rand() , 'masonry', $layout, false, 'no');
+echo lerp_create_single_block($block_data, rand() , 'masonry', $layout, false, 'no');

@@ -2,11 +2,11 @@ $ = jQuery.noConflict();
 
 jQuery(document).ready(function($) {
 	$('.if-js-closed').removeClass('if-js-closed').addClass('closed');
-	postboxes.add_postbox_toggles('uncodefont');
+	postboxes.add_postbox_toggles('lerpfont');
 
-	var UncodeFontFontStack = UncodeFontJS.font_stack;
-	UncodeFontFontStack = $.parseJSON(UncodeFontFontStack);
-	var UncodeFontFontVariations = {
+	var LerpFontFontStack = LerpFontJS.font_stack;
+	LerpFontFontStack = $.parseJSON(LerpFontFontStack);
+	var LerpFontFontVariations = {
 		n1: 'Thin',
 		n2: 'Extra Light',
 		n3: 'Light',
@@ -68,9 +68,9 @@ jQuery(document).ready(function($) {
 	$('#uf-font-stack li').live('click', function() {
 		$(this).addClass('selected').siblings().removeClass('selected');
 		var fontFamily = $(this).find('.uf-font-family').text();
-		var len = UncodeFontFontStack.length;
+		var len = LerpFontFontStack.length;
 		for (var i=0; i<len; i++) {
-			var font = UncodeFontFontStack[i];
+			var font = LerpFontFontStack[i];
 			if (fontFamily == font.family) {
 				var details = "<h2>" + font.family + "</h2>";
 				if (font.generic != '') {
@@ -108,8 +108,8 @@ jQuery(document).ready(function($) {
 						variantStr += "<ul class='uf-variant-list'>";
 						if (vlen == 1) {
 							variantStr += "<li>";
-							if (typeof UncodeFontFontVariations[variants[0]] != 'undefined') {
-								weight = UncodeFontFontVariations[variants[0]];
+							if (typeof LerpFontFontVariations[variants[0]] != 'undefined') {
+								weight = LerpFontFontVariations[variants[0]];
 								variantStr += weight + ' (' + variants[0] + ')';
 							}
 							else {
@@ -140,8 +140,8 @@ jQuery(document).ready(function($) {
 								}
 
 								variantStr += "<input type='checkbox' " + checked + " class='uf-variant-list-cb' id='uf-variant-" + variants[j] + "'/>";
-								if (typeof UncodeFontFontVariations[variants[j]] != 'undefined') {
-									weight = UncodeFontFontVariations[variants[j]];
+								if (typeof LerpFontFontVariations[variants[j]] != 'undefined') {
+									weight = LerpFontFontVariations[variants[j]];
 									variantStr += weight + ' (' + variants[j] + ')';
 								}
 								else {
@@ -232,11 +232,11 @@ jQuery(document).ready(function($) {
 		else if ($(this).hasClass('uf-subset-list-cb')) {
 			selectionId = this.id.substr(10);
 		}
-		var len = UncodeFontFontStack.length;
+		var len = LerpFontFontStack.length;
 		var font;
 		for (var i=0; i<len; i++) {
-			if (UncodeFontFontStack[i].family == fontName) {
-				font = UncodeFontFontStack[i];
+			if (LerpFontFontStack[i].family == fontName) {
+				font = LerpFontFontStack[i];
 				var selections;
 				if ($(this).hasClass('uf-variant-list-cb')) {
 					selections = font.selvariants;
@@ -263,18 +263,18 @@ jQuery(document).ready(function($) {
 					selections = $(this).val();
 				}
 				if ($(this).hasClass('uf-variant-list-cb')) {
-					UncodeFontFontStack[i].selvariants = selections;
+					LerpFontFontStack[i].selvariants = selections;
 				}
 				else if ($(this).hasClass('uf-subset-list-cb')) {
-					UncodeFontFontStack[i].selsubsets = selections;
+					LerpFontFontStack[i].selsubsets = selections;
 				}
 				else {
-					UncodeFontFontStack[i].selectors = selections;
+					LerpFontFontStack[i].selectors = selections;
 				}
 				break;
 			}
 		}
-		$('#font_stack').val(JSON.stringify(UncodeFontFontStack));
+		$('#font_stack').val(JSON.stringify(LerpFontFontStack));
 	});
 
 	$('.uf-variant-font-selector').live('change', function() {
@@ -283,29 +283,29 @@ jQuery(document).ready(function($) {
 		for (var i=0; i<len; i++) {
 			if (classes[i].substr(0, 30) == 'uf-variant-font-selector-base-') {
 				var stub = classes[i].substr(30);
-				var fontLen = UncodeFontFontStack.length;
+				var fontLen = LerpFontFontStack.length;
 				for (var j=0; j<fontLen; j++) {
-					if (typeof UncodeFontFontStack[j].stub != 'undefined' && UncodeFontFontStack[j].stub == stub) {
+					if (typeof LerpFontFontStack[j].stub != 'undefined' && LerpFontFontStack[j].stub == stub) {
 						var variantSelectors = new Array();
 						var selectors = $('.uf-variant-font-selector');
 						$.each(selectors, function(index){
 							variantSelectors[index] = $(this).val();
 						});
 						variantSelectors = variantSelectors.join('|');
-						UncodeFontFontStack[j].variantselectors = variantSelectors;
+						LerpFontFontStack[j].variantselectors = variantSelectors;
 					}
 				}
 				break;
 			}
 		}
-		$('#font_stack').val(JSON.stringify(UncodeFontFontStack));
+		$('#font_stack').val(JSON.stringify(LerpFontFontStack));
 	});
 
 	$('.uf-add-font').live('click', function() {
 		var family = $(this).parents('.uf-fonts-for li').children('.uf-list-family').text();
-		var len = UncodeFontFontStack.length;
+		var len = LerpFontFontStack.length;
 		for (var i=0; i<len; i++) {
-			if (family == UncodeFontFontStack[i].family) {
+			if (family == LerpFontFontStack[i].family) {
 				return false;
 			}
 		}
@@ -352,7 +352,7 @@ jQuery(document).ready(function($) {
 			link.attr({
 				type: 'text/css',
 				rel: 'stylesheet',
-				href: UncodeFontJS.font_dir_url + stub + '/stylesheet.css'
+				href: LerpFontJS.font_dir_url + stub + '/stylesheet.css'
 			});
 			$('head').append(link);
 			variants = $(lineItem).children('.uf-font-variants').text();
@@ -384,7 +384,7 @@ jQuery(document).ready(function($) {
 		}
 
 		$('#uf-font-stack').append($("<li><span class='sample' style='font-family: " + fontFamily + ";'>Mr. Jock, TV quiz Ph.D., bags few lynx.</span><span class='uf-stack-meta'><span class='uf-font-family'>" + family + "</span> <i class='fa fa-cross uf-remove-font'></i></span></span></li>").hide().fadeIn());
-		UncodeFontFontStack[UncodeFontFontStack.length] = {
+		LerpFontFontStack[LerpFontFontStack.length] = {
 			family: family,
 			familyID: familyID,
 			source: source,
@@ -398,7 +398,7 @@ jQuery(document).ready(function($) {
 			selsubsets: subsets
 		};
 
-		$('#font_stack').val(JSON.stringify(UncodeFontFontStack));
+		$('#font_stack').val(JSON.stringify(LerpFontFontStack));
 		$('html, body').animate({
 			scrollTop: 0
 		}, 'slow');
@@ -423,13 +423,13 @@ jQuery(document).ready(function($) {
 		if ($(this).hasClass('uf-download-font-fs')) {
 			var url = "http://www.fontsquirrel.com/fontfacekit/" + encodeURIComponent(family);
 			$('<div class="uf-font-wip">&nbsp;</div>').prependTo($(this).parents('li'));
-			$.post(UncodeFontJS.ajaxurl, "action=uncodefont_download_font&font_url=" + url + "&nonce=" + UncodeFontJS.nonce, function(data) {
+			$.post(LerpFontJS.ajaxurl, "action=lerpfont_download_font&font_url=" + url + "&nonce=" + LerpFontJS.nonce, function(data) {
 				if (data.indexOf("<form") > -1) {
 					$('.uf-font-wip').after( $(data) );
 					$('.uf-font-wip').remove();
 					$('#uf-fs-Blackletter-fonts form').on( 'submit', function (e) {
 						e.preventDefault();
-						$.post(this.getAttribute('action') + '&fileaccess=other', "action=uncodefont_download_font&font_url=" + url + "&" + $(this).serialize(), function(data) {
+						$.post(this.getAttribute('action') + '&fileaccess=other', "action=lerpfont_download_font&font_url=" + url + "&" + $(this).serialize(), function(data) {
 							var response = $.parseJSON(data);
 							if (typeof response.success == 'undefined') {
 								alert("Font download failed!");
@@ -487,7 +487,7 @@ jQuery(document).ready(function($) {
 		var family = $(this).parents('.uf-fonts-for li').children('.uf-font-stub').text();
 		if ($(this).hasClass('uf-delete-download-fs')) {
 			$('<div class="uf-font-wip">&nbsp;</div>').prependTo($(this).parents('li'));
-			$.post(UncodeFontJS.ajaxurl, "action=uncodefont_delete_download&font_family=" + family, function(data) {
+			$.post(LerpFontJS.ajaxurl, "action=lerpfont_delete_download&font_family=" + family, function(data) {
 				var response = $.parseJSON(data);
 				if (typeof response.success == 'undefined') {
 					alert("Font deletion failed!");
@@ -510,7 +510,7 @@ jQuery(document).ready(function($) {
 
 	$('.uf-remove-font').live('click', function() {
 		var font_to_remove = $(this).siblings('.uf-font-family').text();
-		UncodeFontFontStack = $.map(UncodeFontFontStack, function(value) {
+		LerpFontFontStack = $.map(LerpFontFontStack, function(value) {
 			if (font_to_remove == value['family']) {
 				return null;
 			}
@@ -519,13 +519,13 @@ jQuery(document).ready(function($) {
 		$(this).parents('#uf-font-stack li').fadeOut(500, function(){
 			$(this).remove();
 			if ($('#uf-font-stack').children().length == 0) {
-				$('.uf-font-details').html("<h2>Add Fonts</h2>You have no fonts in your stack. Please add a font first from the sources below. If you don't see any fonts below, make sure you have set up the <a href='admin.php?page=uncodefont-settings'>Font Sources</a> correctly.");
+				$('.uf-font-details').html("<h2>Add Fonts</h2>You have no fonts in your stack. Please add a font first from the sources below. If you don't see any fonts below, make sure you have set up the <a href='admin.php?page=lerpfont-settings'>Font Sources</a> correctly.");
 			}
 			else if ($('.uf-font-details h2').text() == font_to_remove) {
 				$('.uf-font-details').html('<h2>Preview</h2>Select a font from the left to see its details.');
 			}
 		});
-		$('#font_stack').val(JSON.stringify(UncodeFontFontStack));
+		$('#font_stack').val(JSON.stringify(LerpFontFontStack));
 		return false;
 	});
 

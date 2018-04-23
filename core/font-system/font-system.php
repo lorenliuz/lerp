@@ -1,15 +1,15 @@
 <?php
 
-class UncodeFont {
+class LerpFont {
 	var $version, $fonts_page_name, $settings_page_name, $options, $font_stack, $font_stack_string, $font_directory, $font_directory_url;
 	function __construct() {
-		$this->options = get_option('uncode_font_options');
+		$this->options = get_option('lerp_font_options');
 
 		if (!isset($this->options) || !is_array($this->options)) {
 			$this->options = array(
     		'font_stack' => '[{&quot;family&quot;:&quot;Poppins&quot;,&quot;familyID&quot;:&quot;&quot;,&quot;source&quot;:&quot;Google Web Fonts&quot;,&quot;stub&quot;:&quot;&quot;,&quot;generic&quot;:&quot;&quot;,&quot;variants&quot;:&quot;300,regular,500,600,700&quot;,&quot;selvariants&quot;:&quot;300,regular,500,600,700&quot;,&quot;variantselectors&quot;:&quot;&quot;,&quot;files&quot;:&quot;&quot;,&quot;subsets&quot;:&quot;devanagari,latin-ext,latin-ext&quot;,&quot;selsubsets&quot;:&quot;devanagari,latin-ext,latin-ext&quot;},{&quot;family&quot;:&quot;Droid Serif&quot;,&quot;familyID&quot;:&quot;&quot;,&quot;source&quot;:&quot;Google Web Fonts&quot;,&quot;stub&quot;:&quot;&quot;,&quot;generic&quot;:&quot;&quot;,&quot;variants&quot;:&quot;regular,italic,700,700italic&quot;,&quot;selvariants&quot;:&quot;regular,italic,700,700italic&quot;,&quot;variantselectors&quot;:&quot;&quot;,&quot;files&quot;:&quot;&quot;,&quot;subsets&quot;:&quot;latin&quot;,&quot;selsubsets&quot;:&quot;latin&quot;},{&quot;family&quot;:&quot;Dosis&quot;,&quot;familyID&quot;:&quot;&quot;,&quot;source&quot;:&quot;Google Web Fonts&quot;,&quot;stub&quot;:&quot;&quot;,&quot;generic&quot;:&quot;&quot;,&quot;variants&quot;:&quot;200,300,regular,500,600,700,800&quot;,&quot;selvariants&quot;:&quot;200,300,regular,500,600,700,800&quot;,&quot;variantselectors&quot;:&quot;&quot;,&quot;files&quot;:&quot;&quot;,&quot;subsets&quot;:&quot;latin,latin-ext&quot;,&quot;selsubsets&quot;:&quot;latin,latin-ext&quot;},{&quot;family&quot;:&quot;Playfair Display&quot;,&quot;familyID&quot;:&quot;&quot;,&quot;source&quot;:&quot;Google Web Fonts&quot;,&quot;stub&quot;:&quot;&quot;,&quot;generic&quot;:&quot;&quot;,&quot;variants&quot;:&quot;regular,italic,700,700italic,900,900italic&quot;,&quot;selvariants&quot;:&quot;regular,italic,700,700italic,900,900italic&quot;,&quot;variantselectors&quot;:&quot;&quot;,&quot;files&quot;:&quot;&quot;,&quot;subsets&quot;:&quot;latin,latin-ext,cyrillic&quot;,&quot;selsubsets&quot;:&quot;latin,latin-ext,cyrillic&quot;},{&quot;family&quot;:&quot;Oswald&quot;,&quot;familyID&quot;:&quot;&quot;,&quot;source&quot;:&quot;Google Web Fonts&quot;,&quot;stub&quot;:&quot;&quot;,&quot;generic&quot;:&quot;&quot;,&quot;variants&quot;:&quot;300,regular,700&quot;,&quot;selvariants&quot;:&quot;300,regular,700&quot;,&quot;variantselectors&quot;:&quot;&quot;,&quot;files&quot;:&quot;&quot;,&quot;subsets&quot;:&quot;latin,latin-ext&quot;,&quot;selsubsets&quot;:&quot;latin,latin-ext&quot;},{&quot;family&quot;:&quot;Roboto&quot;,&quot;familyID&quot;:&quot;&quot;,&quot;source&quot;:&quot;Google Web Fonts&quot;,&quot;stub&quot;:&quot;&quot;,&quot;generic&quot;:&quot;&quot;,&quot;variants&quot;:&quot;100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&quot;,&quot;selvariants&quot;:&quot;100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic&quot;,&quot;variantselectors&quot;:&quot;&quot;,&quot;files&quot;:&quot;&quot;,&quot;subsets&quot;:&quot;vietnamese,greek,cyrillic-ext,cyrillic,greek-ext,latin,latin-ext&quot;,&quot;selsubsets&quot;:&quot;vietnamese,greek,cyrillic-ext,cyrillic,greek-ext,latin,latin-ext&quot;},{&quot;family&quot;:&quot;Nunito&quot;,&quot;familyID&quot;:&quot;&quot;,&quot;source&quot;:&quot;Google Web Fonts&quot;,&quot;stub&quot;:&quot;&quot;,&quot;generic&quot;:&quot;&quot;,&quot;variants&quot;:&quot;200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,900,900italic&quot;,&quot;selvariants&quot;:&quot;200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,900,900italic&quot;,&quot;variantselectors&quot;:&quot;&quot;,&quot;files&quot;:&quot;&quot;,&quot;subsets&quot;:&quot;vietnamese,latin,latin-ext&quot;,&quot;selsubsets&quot;:&quot;vietnamese,latin,latin-ext&quot;}]'
     	);
-    	add_option('uncode_font_options', $this->options);
+    	add_option('lerp_font_options', $this->options);
     }
 
 		if (!isset($this->options['font_stack']) || is_null($this->options['font_stack']) || trim($this->options['font_stack']) == '') {
@@ -26,10 +26,10 @@ class UncodeFont {
 		$scheme = parse_url( $site_url, PHP_URL_SCHEME );
 		$upload_dir_url = set_url_scheme( $upload_dir['baseurl'], $scheme );
 
-		$this->font_directory = $upload_dir['basedir'] .'/uncode-fonts';
-		$this->font_directory_url = $upload_dir_url .'/uncode-fonts';
+		$this->font_directory = $upload_dir['basedir'] .'/lerp-fonts';
+		$this->font_directory_url = $upload_dir_url .'/lerp-fonts';
 
-		if (isset($_REQUEST['action']) && $_REQUEST['action'] === 'uncodefont_download_font' && isset($_REQUEST['fileaccess']) && $_REQUEST['fileaccess'] === 'other') {
+		if (isset($_REQUEST['action']) && $_REQUEST['action'] === 'lerpfont_download_font' && isset($_REQUEST['fileaccess']) && $_REQUEST['fileaccess'] === 'other') {
 			$this->download_font();
 			die();
 		}
@@ -43,8 +43,8 @@ class UncodeFont {
 		add_action('wp_head', array(&$this, 'print_direct_scripts'));
 		add_action('wp_head', array(&$this, 'print_selectors'));
 
-		add_action('wp_ajax_uncodefont_download_font', array(&$this, 'download_font'));
-		add_action('wp_ajax_uncodefont_delete_download', array(&$this, 'delete_download'));
+		add_action('wp_ajax_lerpfont_download_font', array(&$this, 'download_font'));
+		add_action('wp_ajax_lerpfont_delete_download', array(&$this, 'delete_download'));
 
 		// Themes
 		add_filter('suffusion_font_list', array(&$this, 'add_more_fonts'), 10, 4);
@@ -55,7 +55,7 @@ class UncodeFont {
 	}
 
 	function add_admin_menu() {
-		$this->fonts_page_name = add_submenu_page('uncode-system-status', 'Font Stacks', 'Font Stacks', 'edit_theme_options', 'uncode-font-stacks', array(&$this, 'render_options'));
+		$this->fonts_page_name = add_submenu_page('lerp-system-status', 'Font Stacks', 'Font Stacks', 'edit_theme_options', 'lerp-font-stacks', array(&$this, 'render_options'));
 		add_action('load-'.$this->fonts_page_name, array(&$this, 'add_meta_boxes'));
 		add_action('admin_head-'.$this->fonts_page_name, array(&$this, 'print_direct_scripts'));
 	}
@@ -88,7 +88,7 @@ class UncodeFont {
 				}
 
 				if (isset($font['source']) && $font['source'] == 'Font Squirrel') {
-					if (@file_exists(trailingslashit($this->font_directory).'uncodefont.css')) wp_enqueue_style('uf-font-squirrel', trailingslashit($this->font_directory_url).'uncodefont.css', array(), UNCODE_VERSION);
+					if (@file_exists(trailingslashit($this->font_directory).'lerpfont.css')) wp_enqueue_style('uf-font-squirrel', trailingslashit($this->font_directory_url).'lerpfont.css', array(), UNCODE_VERSION);
 				}
 			}
 
@@ -97,9 +97,9 @@ class UncodeFont {
 				'font_stack' => $fonts,
 				'ajaxurl' => admin_url('admin-ajax.php'),
 				'font_dir_url' => trailingslashit($this->font_directory_url),
-				'nonce'  => wp_create_nonce( 'uncode_font_download' ),
+				'nonce'  => wp_create_nonce( 'lerp_font_download' ),
 			);
-			wp_localize_script('uf-js', 'UncodeFontJS', $uf_params);
+			wp_localize_script('uf-js', 'LerpFontJS', $uf_params);
 		}
 	}
 
@@ -107,11 +107,11 @@ class UncodeFont {
 	 * Prints scripts directly into the header. This is useful when you cannot enqueue something (e.g. JS code instead of a file, or CSS text)
 	 */
 	function print_direct_scripts() {
-		if ((is_admin() && !isset($_GET['page'])) || (is_admin() && isset($_GET['page']) && $_GET['page'] != 'uncode-font-stacks')) {
+		if ((is_admin() && !isset($_GET['page'])) || (is_admin() && isset($_GET['page']) && $_GET['page'] != 'lerp-font-stacks')) {
 			return;
 		}
 
-		global $uncodefont_typekit_text, $uncodefont_typekit_error;
+		global $lerpfont_typekit_text, $lerpfont_typekit_error;
 
 		if (isset($this->options['typekit_kit_ID']) && $this->options['typekit_kit_ID'] !== '') {
 			if (isset($this->options['typekit_api_key'])) {
@@ -124,14 +124,14 @@ class UncodeFont {
 				$script = '';
 				$response = wp_remote_request($url."?token=$api_key", $curl_args);
 
-				$uncodefont_typekit_text = $uncodefont_typekit_error = '';
+				$lerpfont_typekit_text = $lerpfont_typekit_error = '';
 				if (!is_wp_error($response)) {
 					$response = wp_remote_retrieve_body($response);
 					$response = json_decode($response);
 
 					if (isset($response->kit)) {
-						$uncodefont_typekit_text .= "<div>";
-						$uncodefont_typekit_text .= "<strong>".esc_html__('Your kits:', 'uncodefont')." </strong>";
+						$lerpfont_typekit_text .= "<div>";
+						$lerpfont_typekit_text .= "<strong>".esc_html__('Your kits:', 'lerpfont')." </strong>";
 						$kit_string = "";
 						$family_string = "";
 						$kit_position = 0;
@@ -176,18 +176,18 @@ class UncodeFont {
 						}
 						if ($kit_string != '') {
 							$kit_string = substr($kit_string, 0, -2);
-							$uncodefont_typekit_text .= $kit_string;
+							$lerpfont_typekit_text .= $kit_string;
 						}
-						$uncodefont_typekit_text .= "</div>";
-						$uncodefont_typekit_text .= $family_string;
+						$lerpfont_typekit_text .= "</div>";
+						$lerpfont_typekit_text .= $family_string;
 						$script .= "<script type='text/javascript'>try{Typekit.load();}catch(e){}</script>\n";
 					}
 					else {
-						$uncodefont_typekit_text .= esc_html__('No kits found for the API key you provided.', 'uncodefont');
+						$lerpfont_typekit_text .= esc_html__('No kits found for the API key you provided.', 'lerpfont');
 					}
 				}
 				else {
-					$uncodefont_typekit_error .= $this->connection_failed('Typekit', false);
+					$lerpfont_typekit_error .= $this->connection_failed('Typekit', false);
 				}
 				if (!is_admin()) {
 					$echo_script = false;
@@ -197,7 +197,7 @@ class UncodeFont {
 					if ($echo_script) echo do_shortcode($script);
 				} else echo do_shortcode($script);
 			}
-		} else $uncodefont_typekit_text .= esc_html__('No kits ID inserted.', 'uncodefont');
+		} else $lerpfont_typekit_text .= esc_html__('No kits ID inserted.', 'lerpfont');
 	}
 
 	function print_selectors() {
@@ -301,7 +301,7 @@ class UncodeFont {
 								if (!is_wp_error($response)) {
 									$response = wp_remote_retrieve_body($response);
 									$response = json_decode($response);
-									wp_enqueue_style('uncodefont-fontdeck', $response->cssurl, array(), UNCODE_VERSION);
+									wp_enqueue_style('lerpfont-fontdeck', $response->cssurl, array(), UNCODE_VERSION);
 									$fontdeck_included = true;
 								}
 							}
@@ -311,15 +311,15 @@ class UncodeFont {
 							break;
 
 						case 'Font Squirrel':
-							if (@file_exists(trailingslashit($this->font_directory).'uncodefont.css') && !(isset($this->options['fontsquirrel_combine']) && $this->options['fontsquirrel_combine'] == 'dont-combine')) {
-								wp_enqueue_style('uf-font-squirrel', trailingslashit($this->font_directory_url).'uncodefont.css', array(), UNCODE_VERSION);
+							if (@file_exists(trailingslashit($this->font_directory).'lerpfont.css') && !(isset($this->options['fontsquirrel_combine']) && $this->options['fontsquirrel_combine'] == 'dont-combine')) {
+								wp_enqueue_style('uf-font-squirrel', trailingslashit($this->font_directory_url).'lerpfont.css', array(), UNCODE_VERSION);
 							}
 							else {
 
 								// Enqueue individually
 								if (@file_exists(trailingslashit($this->font_directory).$font['stub']) &&
 									@file_exists(trailingslashit($this->font_directory).$font['stub'].'/stylesheet.css')) {
-									wp_enqueue_style('uncodefont-font-squirrel-'.$font['stub'], trailingslashit($this->font_directory_url).$font['stub'].'/stylesheet.css', array(), UNCODE_VERSION);
+									wp_enqueue_style('lerpfont-font-squirrel-'.$font['stub'], trailingslashit($this->font_directory_url).$font['stub'].'/stylesheet.css', array(), UNCODE_VERSION);
 								}
 							}
 							break;
@@ -335,7 +335,7 @@ class UncodeFont {
 				$url .= $google_subsets;
 			}
 			$url = str_replace('|', '%7C', $url);
-			wp_enqueue_style('uncodefont-google', $url, array(), UNCODE_VERSION);
+			wp_enqueue_style('lerpfont-google', $url, array(), UNCODE_VERSION);
 		}
 	}
 
@@ -343,12 +343,12 @@ class UncodeFont {
 	 * Registers the settings for the WP Settings API.
 	 */
 	function admin_init() {
-		register_setting('uncode_font_options-fonts', 'uncode_font_options', array(&$this, 'validate_options'));
-		register_setting('uncode_font_options-settings', 'uncode_font_options', array(&$this, 'validate_options'));
+		register_setting('lerp_font_options-fonts', 'lerp_font_options', array(&$this, 'validate_options'));
+		register_setting('lerp_font_options-settings', 'lerp_font_options', array(&$this, 'validate_options'));
 	}
 
 	/**
-	 * After form submission, save Font Squirrel CSS to the UncodeFont directory
+	 * After form submission, save Font Squirrel CSS to the LerpFont directory
 	 * And show a success/error message in any case
 	 */
 	function after_form_submit() {
@@ -356,7 +356,7 @@ class UncodeFont {
 			return;
 		}
 
-		// Save Font Squirrel CSS to the UncodeFont directory
+		// Save Font Squirrel CSS to the LerpFont directory
 		$font_faces = array();
 		$extensions = array(
 			'eot' => 'embedded-opentype',
@@ -444,7 +444,7 @@ class UncodeFont {
 
 		if (!@file_exists($this->font_directory)) {
 			if (!wp_mkdir_p($this->font_directory)) {
-				echo '<div class="uncode-ui-notice uncode-ui-notice--error">' . sprintf( wp_kses( __( 'Failed to create directory <code>%1$s</code>. Please make sure that you have permissions to create the folder.', 'uncode' ), array( 'code' => array() ) ), esc_url( $this->font_directory ) ) . '</div>';
+				echo '<div class="lerp-ui-notice lerp-ui-notice--error">' . sprintf( wp_kses( __( 'Failed to create directory <code>%1$s</code>. Please make sure that you have permissions to create the folder.', 'lerp' ), array( 'code' => array() ) ), esc_url( $this->font_directory ) ) . '</div>';
 				return;
 			}
 		}
@@ -452,54 +452,54 @@ class UncodeFont {
 		if (!(isset($this->options['fontsquirrel_combine']) && $this->options['fontsquirrel_combine'] == 'dont-combine')) {
 			$this->setup_wp_filesystem();
 			global $wp_filesystem;
-			if (isset($wp_filesystem) && !$wp_filesystem->put_contents(trailingslashit($this->font_directory).'uncodefont.css', $css, $this->mod_file)) {
-				echo '<div class="uncode-ui-notice uncode-ui-notice--error">' . esc_html__( 'Failed to save file uncodefont.css. Please check your folder permissions.', 'uncode' ) . '</div>';
+			if (isset($wp_filesystem) && !$wp_filesystem->put_contents(trailingslashit($this->font_directory).'lerpfont.css', $css, $this->mod_file)) {
+				echo '<div class="lerp-ui-notice lerp-ui-notice--error">' . esc_html__( 'Failed to save file lerpfont.css. Please check your folder permissions.', 'lerp' ) . '</div>';
 				return;
 			}
 		}
 
-		echo '<div class="uncode-ui-notice uncode-ui-notice--success">' . esc_html__( 'Fonts saved.', 'uncode' ) . '</div>';
+		echo '<div class="lerp-ui-notice lerp-ui-notice--success">' . esc_html__( 'Fonts saved.', 'lerp' ) . '</div>';
 	}
 
 	function add_meta_boxes() {
-		add_meta_box('uncodefont-google', 'Google Fonts', array(&$this, 'select_from_google_fonts'), $this->fonts_page_name, 'column1');
-		add_meta_box('uncodefont-typekit', 'Typekit', array(&$this, 'select_from_typekit'), $this->fonts_page_name, 'column1');
-		add_meta_box('uncodefont-fontdeck', 'Fontdeck', array(&$this, 'select_from_fontdeck'), $this->fonts_page_name, 'column1');
-		add_meta_box('uncodefont-font-squirrel', 'Font Squirrel', array(&$this, 'select_from_font_squirrel'), $this->fonts_page_name, 'column1');
+		add_meta_box('lerpfont-google', 'Google Fonts', array(&$this, 'select_from_google_fonts'), $this->fonts_page_name, 'column1');
+		add_meta_box('lerpfont-typekit', 'Typekit', array(&$this, 'select_from_typekit'), $this->fonts_page_name, 'column1');
+		add_meta_box('lerpfont-fontdeck', 'Fontdeck', array(&$this, 'select_from_fontdeck'), $this->fonts_page_name, 'column1');
+		add_meta_box('lerpfont-font-squirrel', 'Font Squirrel', array(&$this, 'select_from_font_squirrel'), $this->fonts_page_name, 'column1');
 	}
 
 	function render_options() { ?>
-		<div class="wrap uncode-wrap settings-wrap" id="uncode-font">
+		<div class="wrap lerp-wrap settings-wrap" id="lerp-font">
 
-			<?php echo uncode_admin_panel_page_title( 'fonts' ); ?>
+			<?php echo lerp_admin_panel_page_title( 'fonts' ); ?>
 
-			<div class="uncode-admin-panel">
-				<?php //echo uncode_admin_panel_title(); ?>
-				<?php echo uncode_admin_panel_menu( 'fonts' ); ?>
+			<div class="lerp-admin-panel">
+				<?php //echo lerp_admin_panel_title(); ?>
+				<?php echo lerp_admin_panel_menu( 'fonts' ); ?>
 
-				<div class="uncode-admin-panel__content">
+				<div class="lerp-admin-panel__content">
 
 					<?php $this->after_form_submit(); ?>
 
 					<div class="ui-tabs">
-						<ul class="ui-tabs-nav uncode-admin-panel__left">
-							<h2 class="uncode-admin-panel__heading"><?php esc_html_e( '选项', 'uncode' ); ?></h2>
+						<ul class="ui-tabs-nav lerp-admin-panel__left">
+							<h2 class="lerp-admin-panel__heading"><?php esc_html_e( '选项', 'lerp' ); ?></h2>
 							<li id="tab_font_stack" class="ot-section-label">
-								<a href="#section_font_stack"><?php esc_html_e( '导入字体', 'uncode' ); ?></a>
+								<a href="#section_font_stack"><?php esc_html_e( '导入字体', 'lerp' ); ?></a>
 							</li>
 							<li id="tab_font_source_settings" class="ot-section-label">
-								<a href="#section_font_source_settings"><?php esc_html_e( '字体库', 'uncode' ); ?></a>
+								<a href="#section_font_source_settings"><?php esc_html_e( '字体库', 'lerp' ); ?></a>
 							</li>
 						</ul>
 
-						<div id="poststuff" class="metabox-holder uncode-admin-panel__right">
+						<div id="poststuff" class="metabox-holder lerp-admin-panel__right">
 							<div id="post-body">
 								<div id="post-body-content">
 									<div id="section_font_stack">
-										<h2 class="uncode-admin-panel__heading label"><?php esc_html_e( '导入字体', 'uncode' ); ?></h2>
+										<h2 class="lerp-admin-panel__heading label"><?php esc_html_e( '导入字体', 'lerp' ); ?></h2>
 
 										<form method="post" action="options.php">
-											<input type="submit" name="Submit" class="button button-primary uncode-ui-button" value="<?php esc_html_e( '导入并保存字体', 'uncode' ); ?>" />
+											<input type="submit" name="Submit" class="button button-primary lerp-ui-button" value="<?php esc_html_e( '导入并保存字体', 'lerp' ); ?>" />
 											<?php $this->show_stack(); ?>
 											<div class="metabox-holder">
 												<div>
@@ -510,84 +510,84 @@ class UncodeFont {
 												</div>
 											</div>
 											<?php
-											settings_fields('uncode_font_options-fonts');
+											settings_fields('lerp_font_options-fonts');
 											?>
 											<input type='hidden' id="uf-preview-link" value="<?php echo get_template_directory_uri() . '/core/font-system/preview.php'; ?>" />
 										</form>
 									</div><!-- #section_font_stack -->
 
 									<div id="section_font_source_settings" class='font-source-settings'>
-										<h2 class="uncode-admin-panel__heading label"><?php esc_html_e( '字体库', 'uncode' ); ?></h2>
+										<h2 class="lerp-admin-panel__heading label"><?php esc_html_e( '字体库', 'lerp' ); ?></h2>
 
 										<form method="post" action="options.php">
 
-											<input type="submit" name="Submit" class="button button-primary uncode-ui-button" value="<?php esc_html_e( 'Save Font Libraries', 'uncode' ); ?>" />
+											<input type="submit" name="Submit" class="button button-primary lerp-ui-button" value="<?php esc_html_e( 'Save Font Libraries', 'lerp' ); ?>" />
 
 											<div class="font-sources__list">
 
 												<div id="font-source-typekit" class="font-source">
-													<div class="uncode-info-box">
-														<h4 class="font-source__title"><?php esc_html_e( 'Typekit', 'uncode' ); ?></h4>
-														<p class="font-source__description"><?php printf( wp_kses( __( 'You need a <a href="%1$s">Typekit API key</a> to access your Typekit fonts.', 'uncode' ), array( 'a' => array( 'href' => array() ) ) ), esc_url( 'https://typekit.com/account/tokens' ) ); ?></p>
+													<div class="lerp-info-box">
+														<h4 class="font-source__title"><?php esc_html_e( 'Typekit', 'lerp' ); ?></h4>
+														<p class="font-source__description"><?php printf( wp_kses( __( 'You need a <a href="%1$s">Typekit API key</a> to access your Typekit fonts.', 'lerp' ), array( 'a' => array( 'href' => array() ) ) ), esc_url( 'https://typekit.com/account/tokens' ) ); ?></p>
 
 														<div class="font-source__field">
 															<label class="font-source__label">
-																<strong><?php esc_html_e( 'Enter your API Key', 'uncode' ); ?>:</strong>
-																<input class="font-source__input widefat" type="text" id="typekit_api_key" name="uncode_font_options[typekit_api_key]" value="<?php if (isset($this->options['typekit_api_key'])) echo esc_attr($this->options['typekit_api_key']); ?>"/>
+																<strong><?php esc_html_e( 'Enter your API Key', 'lerp' ); ?>:</strong>
+																<input class="font-source__input widefat" type="text" id="typekit_api_key" name="lerp_font_options[typekit_api_key]" value="<?php if (isset($this->options['typekit_api_key'])) echo esc_attr($this->options['typekit_api_key']); ?>"/>
 															</label>
 														</div>
 
 														<div class="font-source__field">
 															<label class="font-source__label">
-																<strong><?php esc_html_e( 'Enter your Kit ID', 'uncode' ); ?>:</strong>
-																<input class="font-source__input widefat" type="text" id="typekit_kit_ID" name="uncode_font_options[typekit_kit_ID]" value="<?php if (isset($this->options['typekit_kit_ID'])) echo esc_attr($this->options['typekit_kit_ID']); ?>"/>
+																<strong><?php esc_html_e( 'Enter your Kit ID', 'lerp' ); ?>:</strong>
+																<input class="font-source__input widefat" type="text" id="typekit_kit_ID" name="lerp_font_options[typekit_kit_ID]" value="<?php if (isset($this->options['typekit_kit_ID'])) echo esc_attr($this->options['typekit_kit_ID']); ?>"/>
 															</label>
 														</div>
 
-													</div><!-- .uncode-info-box -->
+													</div><!-- .lerp-info-box -->
 												</div><!-- .font-source -->
 
 												<div id="font-source-fontdeck" class="font-source">
-													<div class="uncode-info-box">
-														<h4 class="font-source__title"><?php esc_html_e( 'Fontdeck', 'uncode' ); ?></h4>
-														<p class="font-source__description"><?php printf( wp_kses( __( 'You will need to create a <a href="%1$s" target="_blank" tabindex="-1">Fontdeck</a> Project to access your fonts from Fontdeck.', 'uncode' ), array( 'a' => array( 'href' => array(), 'target' => array(), 'tabindex' => array() ) ) ), esc_url( 'http://fontdeck.com' ) ); ?></p>
+													<div class="lerp-info-box">
+														<h4 class="font-source__title"><?php esc_html_e( 'Fontdeck', 'lerp' ); ?></h4>
+														<p class="font-source__description"><?php printf( wp_kses( __( 'You will need to create a <a href="%1$s" target="_blank" tabindex="-1">Fontdeck</a> Project to access your fonts from Fontdeck.', 'lerp' ), array( 'a' => array( 'href' => array(), 'target' => array(), 'tabindex' => array() ) ) ), esc_url( 'http://fontdeck.com' ) ); ?></p>
 
 														<div class="font-source__field">
 															<label class="font-source__label">
-																<strong><?php esc_html_e( 'Enter your project id:', 'uncode' ); ?></strong>
-																<input class="font-source__input widefat" type="text" id="fondeck_project" name="uncode_font_options[fontdeck_project]" value="<?php if (isset($this->options['fontdeck_project'])) echo esc_attr($this->options['fontdeck_project']); ?>"/>
+																<strong><?php esc_html_e( 'Enter your project id:', 'lerp' ); ?></strong>
+																<input class="font-source__input widefat" type="text" id="fondeck_project" name="lerp_font_options[fontdeck_project]" value="<?php if (isset($this->options['fontdeck_project'])) echo esc_attr($this->options['fontdeck_project']); ?>"/>
 															</label>
 														</div>
-													</div><!-- .uncode-info-box -->
+													</div><!-- .lerp-info-box -->
 												</div><!-- .font-source -->
 
 												<div id="font-source-squirrel" class="font-source">
-													<div class="uncode-info-box">
-														<h4 class="font-source__title"><?php esc_html_e( 'Font Squirrel', 'uncode' ); ?></h4>
+													<div class="lerp-info-box">
+														<h4 class="font-source__title"><?php esc_html_e( 'Font Squirrel', 'lerp' ); ?></h4>
 														<div class="font-source__field">
-															<p><strong><?php esc_html_e( 'Pull fonts from Font Squirrel?', 'uncode' ); ?></strong></p>
+															<p><strong><?php esc_html_e( 'Pull fonts from Font Squirrel?', 'lerp' ); ?></strong></p>
 															<label class="font-source__label">
-																<input class="font-source__input" type="radio" name="uncode_font_options[fontsquirrel_pull]" <?php if (isset($this->options['fontsquirrel_pull'])) { checked($this->options['fontsquirrel_pull'], 'pull'); } else { echo 'checked'; } ?> value='pull' /> <?php esc_html_e( 'Pull', 'uncode' ); ?>
+																<input class="font-source__input" type="radio" name="lerp_font_options[fontsquirrel_pull]" <?php if (isset($this->options['fontsquirrel_pull'])) { checked($this->options['fontsquirrel_pull'], 'pull'); } else { echo 'checked'; } ?> value='pull' /> <?php esc_html_e( 'Pull', 'lerp' ); ?>
 															</label>
 															<label class="font-source__label">
-																<input class="font-source__input" type="radio" name="uncode_font_options[fontsquirrel_pull]" <?php if (isset($this->options['fontsquirrel_pull'])) checked($this->options['fontsquirrel_pull'], 'dont-pull'); ?> value='dont-pull' /> <?php esc_html_e( 'Don\'t Pull', 'uncode' ); ?>
+																<input class="font-source__input" type="radio" name="lerp_font_options[fontsquirrel_pull]" <?php if (isset($this->options['fontsquirrel_pull'])) checked($this->options['fontsquirrel_pull'], 'dont-pull'); ?> value='dont-pull' /> <?php esc_html_e( 'Don\'t Pull', 'lerp' ); ?>
 															</label>
 														</div>
 
 													<div class="font-source__field">
-														<p><strong><?php esc_html_e( 'Combine Font Squirrel CSS files?', 'uncode' ); ?></strong></p>
+														<p><strong><?php esc_html_e( 'Combine Font Squirrel CSS files?', 'lerp' ); ?></strong></p>
 														<label class="font-source__label">
-															<input class="font-source__input" type="radio" name="uncode_font_options[fontsquirrel_combine]" <?php if (isset($this->options['fontsquirrel_combine'])) { checked($this->options['fontsquirrel_combine'], 'combine'); } else { echo 'checked'; } ?> value='combine' /> <?php esc_html_e( 'Combine', 'uncode' ); ?>
+															<input class="font-source__input" type="radio" name="lerp_font_options[fontsquirrel_combine]" <?php if (isset($this->options['fontsquirrel_combine'])) { checked($this->options['fontsquirrel_combine'], 'combine'); } else { echo 'checked'; } ?> value='combine' /> <?php esc_html_e( 'Combine', 'lerp' ); ?>
 														</label>
 														<label class="font-source__label">
-															<input class="font-source__input" type="radio" name="uncode_font_options[fontsquirrel_combine]" <?php if (isset($this->options['fontsquirrel_combine'])) checked($this->options['fontsquirrel_combine'], 'dont-combine'); ?> value='dont-combine' /> <?php esc_html_e( 'Don\'t Combine', 'uncode' ); ?>
+															<input class="font-source__input" type="radio" name="lerp_font_options[fontsquirrel_combine]" <?php if (isset($this->options['fontsquirrel_combine'])) checked($this->options['fontsquirrel_combine'], 'dont-combine'); ?> value='dont-combine' /> <?php esc_html_e( 'Don\'t Combine', 'lerp' ); ?>
 														</label>
 													</div>
 												</div><!-- .font-source -->
 
 											</div><!-- .font-sources__list -->
 
-											<?php settings_fields( 'uncode_font_options-settings' ); ?>
+											<?php settings_fields( 'lerp_font_options-settings' ); ?>
 										</form>
 									</div><!-- .font-source-settings -->
 								</div><!-- #post-body-content -->
@@ -596,10 +596,10 @@ class UncodeFont {
 
 					</div><!-- .ui-tabs -->
 
-				</div><!-- .uncode-admin-panel__content -->
+				</div><!-- .lerp-admin-panel__content -->
 
-			</div><!-- .uncode-admin-panel -->
-		</div><!-- .uncode-wrap -->
+			</div><!-- .lerp-admin-panel -->
+		</div><!-- .lerp-wrap -->
 		<?php
 	}
 
@@ -613,8 +613,8 @@ class UncodeFont {
 	}
 
 	function enqueue_fontdeck_styles() {
-		global $uncodefont_fontdeck_text, $uncodefont_fontdeck_error;
-		$uncodefont_fontdeck_text = $uncodefont_fontdeck_error = '';
+		global $lerpfont_fontdeck_text, $lerpfont_fontdeck_error;
+		$lerpfont_fontdeck_text = $lerpfont_fontdeck_error = '';
 		$css_url = '';
 		if (isset($this->options['fontdeck_project']) && trim($this->options['fontdeck_project']) != '') {
 			$domain = $_SERVER['SERVER_NAME'];
@@ -634,11 +634,11 @@ class UncodeFont {
 
 				if (isset($response->fonts) && count($response->fonts) > 0) {
 					$fonts = $response->fonts;
-					$uncodefont_fontdeck_text .= sprintf(esc_html__('The following fonts were found for project %1$s:', 'uncodefont'), $project);
-					$uncodefont_fontdeck_text .= "<div id='uf-fd-$project-fonts' class='uf-fonts-for uf-group-key-position-1'>";
-					$uncodefont_fontdeck_text .= "<ul>";
+					$lerpfont_fontdeck_text .= sprintf(esc_html__('The following fonts were found for project %1$s:', 'lerpfont'), $project);
+					$lerpfont_fontdeck_text .= "<div id='uf-fd-$project-fonts' class='uf-fonts-for uf-group-key-position-1'>";
+					$lerpfont_fontdeck_text .= "<ul>";
 					foreach ($fonts as $font) {
-						$uncodefont_fontdeck_text .= $this->create_font_line_item(
+						$lerpfont_fontdeck_text .= $this->create_font_line_item(
 							'Fontdeck',
 							'fd',
 							$font,
@@ -651,15 +651,15 @@ class UncodeFont {
 							)
 						);
 					}
-					$uncodefont_fontdeck_text .= "</ul>";
-					$uncodefont_fontdeck_text .= "</div>";
+					$lerpfont_fontdeck_text .= "</ul>";
+					$lerpfont_fontdeck_text .= "</div>";
 				}
 				else {
-					$uncodefont_fontdeck_text .= sprintf(esc_html__('No fonts found for project %1$s on %2$s. Make sure your project id is correct and this domain is added to it in your Fontdeck account.', 'uncodefont'), $project, $domain);
+					$lerpfont_fontdeck_text .= sprintf(esc_html__('No fonts found for project %1$s on %2$s. Make sure your project id is correct and this domain is added to it in your Fontdeck account.', 'lerpfont'), $project, $domain);
 				}
 			}
 			else {
-				$uncodefont_fontdeck_error .= $this->connection_failed('Fontdeck', false);
+				$lerpfont_fontdeck_error .= $this->connection_failed('Fontdeck', false);
 			}
 		}
 		return $css_url;
@@ -732,7 +732,7 @@ class UncodeFont {
 						$first_char_index = substr($first_char_index, 0, -2);
 					}
 
-					echo "<div class=\"uncode-index-alphabet\">".$first_char_index."</div>";
+					echo "<div class=\"lerp-index-alphabet\">".$first_char_index."</div>";
 					echo do_shortcode($fonts_by_first_letter);
 				}
 			}
@@ -743,10 +743,10 @@ class UncodeFont {
 
 	function select_from_font_squirrel() {
 		if (isset($this->options['fontsquirrel_pull']) && $this->options['fontsquirrel_pull'] == 'dont-pull') {
-			printf( wp_kses( __( 'You have chosen not to pull fonts from <a href="%1$s">Font Squirrel</a>. To change your settings <a href="%1$s">click here</a>.', 'uncode' ), array( 'a' => array( 'href' => array() ) ) ), '#font-source-squirrel' );
+			printf( wp_kses( __( 'You have chosen not to pull fonts from <a href="%1$s">Font Squirrel</a>. To change your settings <a href="%1$s">click here</a>.', 'lerp' ), array( 'a' => array( 'href' => array() ) ) ), '#font-source-squirrel' );
 			return;
 		}
-		echo '<p>' . sprintf( wp_kses( __( 'Fonts will be downloaded from <a href="%1$s">Font Squirrel</a> to <code>%2$s</code>. Only downloaded fonts are available for addition to the stack.', 'uncode' ), array( 'a' => array( 'href' => array() ), 'code' => array() ) ), 'http://fontsquirrel.com', esc_url( $this->font_directory ) ) . '</p>';
+		echo '<p>' . sprintf( wp_kses( __( 'Fonts will be downloaded from <a href="%1$s">Font Squirrel</a> to <code>%2$s</code>. Only downloaded fonts are available for addition to the stack.', 'lerp' ), array( 'a' => array( 'href' => array() ), 'code' => array() ) ), 'http://fontsquirrel.com', esc_url( $this->font_directory ) ) . '</p>';
 		$url = "http://www.fontsquirrel.com/api/classifications";
 		$args = array(
 			'timeout' => 20000,
@@ -807,36 +807,36 @@ class UncodeFont {
 
 	function select_from_fontdeck() {
 		if (!isset($this->options['fontdeck_project']) || trim($this->options['fontdeck_project']) == '') {
-			printf( wp_kses( __( 'Please enter <a href="%1$s">your Fontdeck project id</a> to see the available Fontdeck fonts.', 'uncode' ), array( 'a' => array( 'href' => array() ) ) ), '#font-source-fontdeck' );
+			printf( wp_kses( __( 'Please enter <a href="%1$s">your Fontdeck project id</a> to see the available Fontdeck fonts.', 'lerp' ), array( 'a' => array( 'href' => array() ) ) ), '#font-source-fontdeck' );
 			return;
 		}
 
-		global $uncodefont_fontdeck_text, $uncodefont_fontdeck_error;
-		if (trim($uncodefont_fontdeck_text) != '') {
-			echo do_shortcode($uncodefont_fontdeck_text);
+		global $lerpfont_fontdeck_text, $lerpfont_fontdeck_error;
+		if (trim($lerpfont_fontdeck_text) != '') {
+			echo do_shortcode($lerpfont_fontdeck_text);
 		}
-		else if (trim($uncodefont_fontdeck_error) != '') {
-			echo do_shortcode($uncodefont_fontdeck_error);
+		else if (trim($lerpfont_fontdeck_error) != '') {
+			echo do_shortcode($lerpfont_fontdeck_error);
 		}
 	}
 
 	function select_from_typekit() {
 		if (!isset($this->options['typekit_api_key']) || trim($this->options['typekit_api_key']) == '') {
-			printf( wp_kses( __( 'Please enter <a href="%s" target="_blank" tabindex="-1">your Typekit API Key</a> to see the available Typekit fonts.', 'uncode' ), array( 'a' => array( 'href' => array() ) ) ), '#font-source-typekit' );
+			printf( wp_kses( __( 'Please enter <a href="%s" target="_blank" tabindex="-1">your Typekit API Key</a> to see the available Typekit fonts.', 'lerp' ), array( 'a' => array( 'href' => array() ) ) ), '#font-source-typekit' );
 			return;
 		}
 
-		global $uncodefont_typekit_text, $uncodefont_typekit_error;
-		if ($uncodefont_typekit_text != '') {
-			echo do_shortcode($uncodefont_typekit_text);
+		global $lerpfont_typekit_text, $lerpfont_typekit_error;
+		if ($lerpfont_typekit_text != '') {
+			echo do_shortcode($lerpfont_typekit_text);
 		}
-		else if ($uncodefont_typekit_error != '') {
-			echo do_shortcode($uncodefont_typekit_error);
+		else if ($lerpfont_typekit_error != '') {
+			echo do_shortcode($lerpfont_typekit_error);
 		}
 	}
 
 	function select_from_fonts_com() {
-		printf( wp_kses( __( 'You need an <a href="%1$s">authentication key</a> to use fonts from Fonts.com.', 'uncode' ), array( 'a' => array( 'href' => array() ) ) ), esc_url( 'https://webfonts.fonts.com/en-US/Account/AccountInformation' ) );
+		printf( wp_kses( __( 'You need an <a href="%1$s">authentication key</a> to use fonts from Fonts.com.', 'lerp' ), array( 'a' => array( 'href' => array() ) ) ), esc_url( 'https://webfonts.fonts.com/en-US/Account/AccountInformation' ) );
 	}
 
 	/**
@@ -846,7 +846,7 @@ class UncodeFont {
 	 * @return array
 	 */
 	function validate_options($options) {
-		$current_options = get_option('uncode_font_options');
+		$current_options = get_option('lerp_font_options');
 		if (isset($current_options) && is_array($current_options)) {
 			$options = array_merge($current_options, $options);
 		}
@@ -891,7 +891,7 @@ class UncodeFont {
 		if ($number_of_fonts > 0) { ?>
 			<div id="uf-font-details" class="uf-font-details">
 				<h2>预览</h2>
-				<p><?php esc_html_e( '从左边选择字体以查看其细节。', 'uncode' ); ?></p>
+				<p><?php esc_html_e( '从左边选择字体以查看其细节。', 'lerp' ); ?></p>
 
 			</div>
 			<?php
@@ -899,13 +899,13 @@ class UncodeFont {
 		else { ?>
 			<div id="uf-font-details" class="uf-font-details">
 				<h2>Add Fonts</h2>
-				<p><?php printf( wp_kses( __( 'You have no fonts in your stack. Please add a font first from the sources below. If you don\'t see any fonts below, make sure you have set up the <a href="%1$s">Font Sources</a> correctly.', 'uncode' ), array( 'a' => array( 'href' => array() ) ) ), '#font-source-typekit' ); ?></p>
+				<p><?php printf( wp_kses( __( 'You have no fonts in your stack. Please add a font first from the sources below. If you don\'t see any fonts below, make sure you have set up the <a href="%1$s">Font Sources</a> correctly.', 'lerp' ), array( 'a' => array( 'href' => array() ) ) ), '#font-source-typekit' ); ?></p>
 			</div>
 			<?php
 		}
 		?>
 
-			<input type='hidden' id="font_stack" name="uncode_font_options[font_stack]" value="<?php echo esc_attr($this->font_stack_string); ?>" />
+			<input type='hidden' id="font_stack" name="lerp_font_options[font_stack]" value="<?php echo esc_attr($this->font_stack_string); ?>" />
 		</div>
 	<?php
 	}
@@ -946,19 +946,19 @@ class UncodeFont {
 				$getSourceUrl = 'https://typekit.com/fonts/' . $font->slug;
 				break;
 		}
-		$preview = "<a href='".esc_url($getSourceUrl)."' target='_blank' class='uf-launch-preview' title='". esc_html__( 'Preview', 'uncode' ) . "'><i class='fa fa-search3'></i></a>";
+		$preview = "<a href='".esc_url($getSourceUrl)."' target='_blank' class='uf-launch-preview' title='". esc_html__( 'Preview', 'lerp' ) . "'><i class='fa fa-search3'></i></a>";
 		$add = "<a href='#' class='uf-add-font uf-add-font-$source_system_prefix' title='Add'><i class='fa fa-plus2'></i></a>";
 		if ($source_system == 'Font Squirrel') {
 			if (@file_exists($this->font_directory) && @file_exists(trailingslashit($this->font_directory).$font->{$args['stub']})) {
 				$download = '';
-				$delete_download = "<a href='#' class='uf-delete-download uf-delete-download-$source_system_prefix' title='". esc_html__( 'Delete Download', 'uncode' ) . "'><i class='fa fa-cross'></i></a>";
+				$delete_download = "<a href='#' class='uf-delete-download uf-delete-download-$source_system_prefix' title='". esc_html__( 'Delete Download', 'lerp' ) . "'><i class='fa fa-cross'></i></a>";
 				$variant_information = $this->font_squirrel_get_font_information($font->{$args['stub']});
 				if (isset($variant_information['variants'])) $variant_text = implode(',', $variant_information['variants']);
 				$variant_files_text = implode(',', $variant_information['files']);
 				$family_id_text = implode(',', array_unique($variant_information['family_ids']));
 			}
 			else {
-				$download = "<a href='#' class='uf-download-font uf-download-font-$source_system_prefix' title='". esc_html__( 'Download', 'uncode' ) . "'><i class='fa fa-arrow-down2'></i></a>";
+				$download = "<a href='#' class='uf-download-font uf-download-font-$source_system_prefix' title='". esc_html__( 'Download', 'lerp' ) . "'><i class='fa fa-arrow-down2'></i></a>";
 				$add = '';
 				$delete_download = '';
 			}
@@ -1038,7 +1038,7 @@ class UncodeFont {
 	 * @return string
 	 */
 	function connection_failed($to_what, $echo = true) {
-		$ret = sprintf(esc_html__('Sorry, there was an error accessing %1$s', 'uncodefont'), $to_what);
+		$ret = sprintf(esc_html__('Sorry, there was an error accessing %1$s', 'lerpfont'), $to_what);
 		if ($echo) {
 			echo wp_kses_post($ret);
 		}
@@ -1046,7 +1046,7 @@ class UncodeFont {
 	}
 
 	/**
-	 * This method is meant for themes to invoke, so that the fonts defined by UncodeFont are added to the drop-down lists of fonts
+	 * This method is meant for themes to invoke, so that the fonts defined by LerpFont are added to the drop-down lists of fonts
 	 * that the themes define.
 	 *
 	 * @param mixed $fonts The current list of fonts
@@ -1082,7 +1082,7 @@ class UncodeFont {
 	}
 
 	/**
-	 * This tokenizes the format string for a font drop-down and adds UncodeFont's fonts in the specified format. The tokens
+	 * This tokenizes the format string for a font drop-down and adds LerpFont's fonts in the specified format. The tokens
 	 * are marked using % characters. E.g. %family% will be replaced by the font family.
 	 *
 	 * @param $font
@@ -1139,7 +1139,7 @@ class UncodeFont {
 	}
 
 	/**
-	 * Adds UncodeFont fonts to the TinyMCE drop-down. Typekit fonts don't render properly in the drop-down and in the editor,
+	 * Adds LerpFont fonts to the TinyMCE drop-down. Typekit fonts don't render properly in the drop-down and in the editor,
 	 * because Typekit needs JS and TinyMCE doesn't support that.
 	 *
 	 * @param $opt
@@ -1155,12 +1155,12 @@ class UncodeFont {
 		$fontdeck_included = false;
 
 		$style_formats = array();
-		$custom_fonts_array = ot_get_option('_uncode_font_groups');
+		$custom_fonts_array = ot_get_option('_lerp_font_groups');
 		if (!empty($custom_fonts_array)) {
 			foreach ($custom_fonts_array as $key => $value) {
 				$style_formats[] = array(
-		        		'title' => ($value['_uncode_font_group'] === 'manual') ? $value['title'] : $value['_uncode_font_group'],
-		        		'classes' => $value['_uncode_font_group_unique_id'],
+		        		'title' => ($value['_lerp_font_group'] === 'manual') ? $value['title'] : $value['_lerp_font_group'],
+		        		'classes' => $value['_lerp_font_group_unique_id'],
 		        		'block' => 'span',
 		        		'wrapper' => true,
 		    		);
@@ -1168,7 +1168,7 @@ class UncodeFont {
 		}
 
 		foreach ($this->font_stack as $font) {
-			if (@file_exists(trailingslashit($this->font_directory).'uncodefont.css')) $content_css[] = trailingslashit($this->font_directory_url).'uncodefont.css';
+			if (@file_exists(trailingslashit($this->font_directory).'lerpfont.css')) $content_css[] = trailingslashit($this->font_directory_url).'lerpfont.css';
 
 			if (isset($font['source']) && $font['source'] == 'Google Web Fonts') {
 				$google_font_counter++;
@@ -1219,7 +1219,7 @@ class UncodeFont {
 	}
 
 	/**
-	 * Downloads a fontface kit from Font Squirrel and unzips the file to uploads/uncodefont. Unzipping makes use of the
+	 * Downloads a fontface kit from Font Squirrel and unzips the file to uploads/lerpfont. Unzipping makes use of the
 	 * WP call <code>unzip_file</code>, which in turn needs <code>WP_Filesystem</code>
 	 *
 	 * @return bool
@@ -1228,7 +1228,7 @@ class UncodeFont {
 		if ( ! current_user_can( apply_filters( 'ot_theme_options_capability', 'edit_theme_options' ) ) )  {
         return;
     }
-    if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'uncode_font_download' ) ) {
+    if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'lerp_font_download' ) ) {
          return;
     }
 		if (isset($_REQUEST['font_url'])) {
@@ -1237,7 +1237,7 @@ class UncodeFont {
 			if (!@file_exists($this->font_directory)) {
 				if (!wp_mkdir_p($this->font_directory)) {
 					echo json_encode(array(
-						'error' => sprintf( esc_html__( 'Failed to create directory %1$s. Please make sure that you have permissions to create the folder.', 'uncode' ), esc_url( $this->font_directory ) )
+						'error' => sprintf( esc_html__( 'Failed to create directory %1$s. Please make sure that you have permissions to create the folder.', 'lerp' ), esc_url( $this->font_directory ) )
 					));
 					die();
 				}
@@ -1257,26 +1257,26 @@ class UncodeFont {
 
 			$this->setup_wp_filesystem();
 
-			global $uncodefont_file_response;
+			global $lerpfont_file_response;
 			$args = array(
 				'sslverify' => false,
 				'timeout' => 20000,
 			);
-			if (!isset($uncodefont_file_response)) $uncodefont_file_response = wp_remote_request($font_url, $args);
+			if (!isset($lerpfont_file_response)) $lerpfont_file_response = wp_remote_request($font_url, $args);
 
-			if (!is_wp_error($uncodefont_file_response)) {
-				$zip_file = wp_remote_retrieve_body($uncodefont_file_response);
+			if (!is_wp_error($lerpfont_file_response)) {
+				$zip_file = wp_remote_retrieve_body($lerpfont_file_response);
 				global $wp_filesystem;
 				if (isset($wp_filesystem) && !$wp_filesystem->put_contents(trailingslashit($this->font_directory).$zip_file_name, $zip_file, $this->mod_file)) {
 					echo json_encode(array(
-						'error' => sprintf( esc_html__( 'Failed to save %1$s to %2$s. Please ensure that the directory exists and is writable.', 'uncode' ), esc_url( $zip_file_name ), esc_url( $this->font_directory ) )
+						'error' => sprintf( esc_html__( 'Failed to save %1$s to %2$s. Please ensure that the directory exists and is writable.', 'lerp' ), esc_url( $zip_file_name ), esc_url( $this->font_directory ) )
 					));
 					die();
 				}
 			}
 			else {
 				echo json_encode(array(
-					'error' => sprintf( esc_html__( 'Failed to download file to %1$s. Please ensure that the directory exists and is writable.', 'uncode' ), esc_url( $this->font_directory ) )
+					'error' => sprintf( esc_html__( 'Failed to download file to %1$s. Please ensure that the directory exists and is writable.', 'lerp' ), esc_url( $this->font_directory ) )
 				));
 				die();
 			}
@@ -1310,7 +1310,7 @@ class UncodeFont {
 			$family_id = implode(',', array_unique($variants['family_ids']));
 
 			echo json_encode(array(
-				'success' => esc_html__( "Font downloaded and extracted successfully.", "uncode" ),
+				'success' => esc_html__( "Font downloaded and extracted successfully.", "lerp" ),
 				'variants' => $variant_names,
 				'files' => $variant_files,
 				'family_id' => $family_id,
@@ -1320,7 +1320,7 @@ class UncodeFont {
 	}
 
 	/**
-	 * Deletes a downloaded zip file and the associated unzipped directory from uploads/uncodefont. Since the directory
+	 * Deletes a downloaded zip file and the associated unzipped directory from uploads/lerpfont. Since the directory
 	 * has been unzipped using the WP call unzip_file, the deletion requires WP_Filesystem.
 	 */
 	function delete_download() {
@@ -1332,7 +1332,7 @@ class UncodeFont {
 			if (@file_exists($fontkit_zip)) {
 				if (!@unlink($fontkit_zip)) {
 					echo json_encode(array(
-						'error' => sprintf( esc_html__( 'Failed to delete @fontface kit zip %1$s.', 'uncode' ), $fontkit_zip )
+						'error' => sprintf( esc_html__( 'Failed to delete @fontface kit zip %1$s.', 'lerp' ), $fontkit_zip )
 					));
 					die();
 				}
@@ -1374,5 +1374,5 @@ class UncodeFont {
 	}
 }
 
-global $uncodefont;
-$uncodefont = new UncodeFont();
+global $lerpfont;
+$lerpfont = new LerpFont();

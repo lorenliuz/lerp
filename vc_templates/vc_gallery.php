@@ -193,7 +193,7 @@ $medias = array();//reinit $medias
 foreach ($old_medias as $key => $value) {//check if albums are set among medias
 	if ( get_post_mime_type($value) == 'oembed/gallery' && wp_get_post_parent_id($value) ) {
 		$parent_id = wp_get_post_parent_id($value);
-		$media_album_ids = get_post_meta($parent_id, '_uncode_featured_media', true);//string of images in the album
+		$media_album_ids = get_post_meta($parent_id, '_lerp_featured_media', true);//string of images in the album
 		$media_album_ids_arr = explode(',', $media_album_ids);//array of images in the album
 
 		if ( $explode_albums != 'yes' ) {
@@ -234,7 +234,7 @@ $categories_array = get_terms('media-category' , array('orderby' => 'name', 'hid
 
 if ($posts_counter) {
 	foreach ($album_parents as $key_item => $item_thumb_id) {
-		$album_categories_array = wp_get_post_terms($item_thumb_id, 'uncode_gallery_category', array('orderby' => 'name', 'hide_empty' => true));
+		$album_categories_array = wp_get_post_terms($item_thumb_id, 'lerp_gallery_category', array('orderby' => 'name', 'hide_empty' => true));
 		if ( ! empty( $album_categories_array ) && ! is_wp_error( $album_categories_array ) ) {
 			foreach ( $album_categories_array as $cat ) {
 				if (!isset($categories[$cat->term_id][$cat->name])) $categories[$cat->term_id][$cat->name] = array($item_thumb_id);
@@ -316,7 +316,7 @@ $general_images_size = $images_size;
 
 $main_container_classes[] = $this->getExtraClass( $el_class );
 
-$media_blocks = uncode_flatArray(vc_sorted_list_parse_value( $media_items ));
+$media_blocks = lerp_flatArray(vc_sorted_list_parse_value( $media_items ));
 
 
 /*** data module preparation ***/
@@ -388,7 +388,7 @@ switch ($type) {
 							<li class="<?php echo esc_attr($show_all_class); ?>">
 								<span>
 									<a href="#" data-filter="*" class="active">
-										<?php esc_html_e( 'Show all', 'uncode' ) ?></a>
+										<?php esc_html_e( 'Show all', 'lerp' ) ?></a>
 									</a>
 								</span>
 							</li>
@@ -450,8 +450,8 @@ if (count($medias) > 0) {
 		$typeLayout = $media_blocks;
 
 		if (isset($item_prop['single_layout_media_items'])) {
-			if (function_exists('uncode_flatArray')) {
-				$typeLayout = uncode_flatArray(vc_sorted_list_parse_value($item_prop['single_layout_media_items']));
+			if (function_exists('lerp_flatArray')) {
+				$typeLayout = lerp_flatArray(vc_sorted_list_parse_value($item_prop['single_layout_media_items']));
 			} else {
 				$typeLayout = array();
 			}
@@ -657,7 +657,7 @@ if (count($medias) > 0) {
 		$block_classes[] = $categories_css;
 		$block_data['classes'] = $block_classes;
 		$block_data['tmb_data'] = $tmb_data;
-		$block_data['media_id'] = apply_filters('uncode_vc_gallery_thumb_id', $item_thumb_id);
+		$block_data['media_id'] = apply_filters('lerp_vc_gallery_thumb_id', $item_thumb_id);
 		$block_data['images_size'] = $images_size;
 		$block_data['single_style'] = $single_style;
 		$block_data['single_text'] = $single_text;
@@ -739,7 +739,7 @@ if (count($medias) > 0) {
 			$no_album_counter++;
 		}
 
-		echo uncode_create_single_block($block_data, $_el_id, $style_preset, $typeLayout, $lightbox_classes, $carousel_textual);
+		echo lerp_create_single_block($block_data, $_el_id, $style_preset, $typeLayout, $lightbox_classes, $carousel_textual);
 
 	}
 } ?>

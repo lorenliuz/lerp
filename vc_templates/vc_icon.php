@@ -95,7 +95,7 @@ if ($link['target'] !== '') $a_target = ' target="' . esc_attr( trim($link['targ
 if ($link['rel'] !== '') $a_rel = ' rel="' . esc_attr( trim($link['rel']) ) . '"';
 
 if ($media_lightbox !== '') {
-	$media_attributes = uncode_get_media_info($media_lightbox);
+	$media_attributes = lerp_get_media_info($media_lightbox);
 	if (!isset($media_attributes)) $media_attributes = new stdClass();
 	$media_metavalues = unserialize($media_attributes->metadata);
 	$media_mime = $media_attributes->post_mime_type;
@@ -104,13 +104,13 @@ if ($media_lightbox !== '') {
 	if (strpos($media_mime, 'image/') !== false && $media_mime !== 'image/url' && isset($media_metavalues['width']) && isset($media_metavalues['height'])) {
 		$image_orig_w = $media_metavalues['width'];
 		$image_orig_h = $media_metavalues['height'];
-		$big_image = uncode_resize_image($media_attributes->id, $media_attributes->guid, $media_attributes->path, $image_orig_w, $image_orig_h, 12, null, false);
+		$big_image = lerp_resize_image($media_attributes->id, $media_attributes->guid, $media_attributes->path, $image_orig_w, $image_orig_h, 12, null, false);
 		$a_href = $big_image['url'];
 	} else {
 		if ($media_mime === 'image/url') {
 			$a_href = $media_attributes->guid;
 		} else {
-			$media_oembed = uncode_get_oembed($media_lightbox, $media_attributes->guid, $media_attributes->post_mime_type, false, $media_attributes->post_excerpt, $media_attributes->post_content, true);
+			$media_oembed = lerp_get_oembed($media_lightbox, $media_attributes->guid, $media_attributes->post_mime_type, false, $media_attributes->post_excerpt, $media_attributes->post_content, true);
 			$a_href = $media_oembed['code'];
 		}
 	}
@@ -120,9 +120,9 @@ if ($media_lightbox !== '') {
 	}
 	if (isset($media_attributes->post_mime_type) && strpos($media_attributes->post_mime_type, 'video/') !== false) {
 		$video_src .= 'html5video:{preload:\'true\',';
-		$video_autoplay = get_post_meta($media_lightbox, "_uncode_video_autoplay", true);
+		$video_autoplay = get_post_meta($media_lightbox, "_lerp_video_autoplay", true);
 		if ($video_autoplay) $video_src .= 'autoplay:\'true\',';
-		$alt_videos = get_post_meta($media_lightbox, "_uncode_video_alternative", true);
+		$alt_videos = get_post_meta($media_lightbox, "_lerp_video_alternative", true);
 		if (!empty($alt_videos)) {
 			foreach ($alt_videos as $key => $value) {
 				$exloded_url = explode(".", strtolower($value));
@@ -182,7 +182,7 @@ else {
 	$block_data['media_id'] = $icon_image;
 	$block_data['single_width'] = 12;
 	if (isset($div_data['data-delay']) && $div_data['data-delay'] !== '') $block_data['delay'] = $animation_delay;
-	$media_code = uncode_create_single_block($block_data, rand(), 'masonry', '', $lightbox_classes, false, false);
+	$media_code = lerp_create_single_block($block_data, rand(), 'masonry', '', $lightbox_classes, false, false);
 	$media_alt = (isset($media_code['alt'])) ? $media_code['alt'] : '';
 
 	if ($media_code['type'] === 'image') $output_icon .= '<img'. (($position === 'right' || $position === 'left') ? ' style="max-width:none;"' : '').' src="' . esc_attr( $media_code['code'] ) .'" width="' . esc_attr( $media_code['width'] ) .'" height="' . esc_attr( $media_code['height'] ) .'" alt="' . esc_attr( $media_alt ) . '" />';

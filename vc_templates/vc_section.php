@@ -52,7 +52,7 @@ if (!empty($back_image) || $overlay_color !== '') {
 		'background-attachment' => $back_attachment,
 	);
 
-	$back_result_array = uncode_get_back_html($back_array, $overlay_color, $overlay_alpha, '', 'row');
+	$back_result_array = lerp_get_back_html($back_array, $overlay_color, $overlay_alpha, '', 'row');
 	$background_div = $back_result_array['back_html'];
 }
 
@@ -62,7 +62,7 @@ $row_classes[] = 'no-top-padding';
 $row_classes[] = 'no-bottom-padding';
 $row_classes[] = 'no-h-padding';
 
-$boxed = ot_get_option('_uncode_boxed');
+$boxed = ot_get_option('_lerp_boxed');
 
 if ($boxed !== 'on')
 	$row_classes[] = 'full-width';
@@ -76,16 +76,16 @@ if ($desktop_visibility === 'yes') $row_cont_classes[] = 'desktop-hidden';
 if ($medium_visibility === 'yes') $row_cont_classes[] = 'tablet-hidden';
 if ($mobile_visibility === 'yes') $row_cont_classes[] = 'mobile-hidden';
 
-global $uncode_row_parent;
-$uncode_row_parent = 12;
+global $lerp_row_parent;
+$lerp_row_parent = 12;
 $css_class = preg_replace( '/\s+/', ' ', apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, implode( ' ', array_filter( $row_cont_classes ) ), $this->settings['base'], $atts ) );
 $output.= '<section data-parent="true" class="' . esc_attr(trim($css_class)) . '"' . $row_style . '>';
 $output.= $background_div;
 $output.= '<div class="' . esc_attr(trim(implode(' ', $row_classes))) . '"' . $row_inline_style . '>';
 $output.= $content;
-echo uncode_remove_wpautop($output);
+echo lerp_remove_wpautop($output);
 $output = '';
 $output.= '</div>';
 $output.= '</section>';
 
-echo uncode_remove_wpautop($output);
+echo lerp_remove_wpautop($output);

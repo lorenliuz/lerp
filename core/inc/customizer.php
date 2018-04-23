@@ -1,9 +1,9 @@
 <?php
 
 /**
- * uncode Theme Customizer
+ * lerp Theme Customizer
  *
- * @package uncode
+ * @package lerp
  */
 
 /**
@@ -11,30 +11,30 @@
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-function uncode_customize_register($wp_customize)
+function lerp_customize_register($wp_customize)
 {
 	$wp_customize->get_setting('blogname')->transport = 'postMessage';
 	$wp_customize->get_setting('blogdescription')->transport = 'postMessage';
 	$wp_customize->get_setting('header_textcolor')->transport = 'postMessage';
 }
-add_action('customize_register', 'uncode_customize_register');
+add_action('customize_register', 'lerp_customize_register');
 
-function uncode_custom_excerpt_length($length)
+function lerp_custom_excerpt_length($length)
 {
 	return 20;
 }
-add_filter('excerpt_length', 'uncode_custom_excerpt_length', 999);
+add_filter('excerpt_length', 'lerp_custom_excerpt_length', 999);
 
-function uncode_wpcf7_ajax_loader() {
+function lerp_wpcf7_ajax_loader() {
 	return get_template_directory_uri() . '/lib/assets/img/fading-squares.gif';
 }
 
-add_filter( 'wpcf7_ajax_loader', 'uncode_wpcf7_ajax_loader', 10 );
+add_filter( 'wpcf7_ajax_loader', 'lerp_wpcf7_ajax_loader', 10 );
 
 add_filter( 'rp4wp_append_content', '__return_false' );
 
 // add Facebook oEmbed
-function uncode_oembed_add_provider() {
+function lerp_oembed_add_provider() {
 	$endpoints = array(
 		'#https?://www\.facebook\.com/video.php.*#i'          => 'https://www.facebook.com/plugins/video/oembed.json/',
 		'#https?://www\.facebook\.com/.*/videos/.*#i'         => 'https://www.facebook.com/plugins/video/oembed.json/',
@@ -51,9 +51,9 @@ function uncode_oembed_add_provider() {
 	}
 }
 
-add_action('init', 'uncode_oembed_add_provider');
+add_action('init', 'lerp_oembed_add_provider');
 
-function uncode_oembed_fetch_url($provider, $url, $args) {
+function lerp_oembed_fetch_url($provider, $url, $args) {
 	if (strpos($url, 'facebook') !== false) {
 		$locale = (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) ? substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,5) : get_locale();
 		$locale = str_replace('-','_',$locale);
@@ -70,10 +70,10 @@ function uncode_oembed_fetch_url($provider, $url, $args) {
 	return $provider;
 }
 
-add_filter('oembed_fetch_url', 'uncode_oembed_fetch_url', 10 ,3);
+add_filter('oembed_fetch_url', 'lerp_oembed_fetch_url', 10 ,3);
 
 
-function uncode_the_content($the_content) {
+function lerp_the_content($the_content) {
 
 	$oembed = new WP_Embed();
 	$the_content = $oembed->autoembed($the_content);
@@ -86,7 +86,7 @@ function uncode_the_content($the_content) {
 	return $the_content;
 }
 
-function uncode_remove_wpautop( $content, $autop = false ) {
+function lerp_remove_wpautop( $content, $autop = false ) {
 
 	if ( $autop ) {
 		$content = wpautop( preg_replace( '/<\/?p\>/', "\n", $content ) . "\n" );
@@ -95,24 +95,24 @@ function uncode_remove_wpautop( $content, $autop = false ) {
 	return do_shortcode( shortcode_unautop( $content ) );
 }
 
-add_filter('wpseo_sitemap_urlimages', 'uncode_add_images_yoast_sitemap', NULL, 2);
-function uncode_add_images_yoast_sitemap($images, $post_id) {
+add_filter('wpseo_sitemap_urlimages', 'lerp_add_images_yoast_sitemap', NULL, 2);
+function lerp_add_images_yoast_sitemap($images, $post_id) {
 
 	$post = get_post($post_id);
 	$content = $post->post_content;
 
 	$image_ids = array();
 
-	//Find uncode_index occurences and match IDs inside them
-	preg_match_all( '/\[uncode_index ([^\]]*)by_id:(.*?)[\||"]/', $content, $uncode_index );
+	//Find lerp_index occurences and match IDs inside them
+	preg_match_all( '/\[lerp_index ([^\]]*)by_id:(.*?)[\||"]/', $content, $lerp_index );
 
-	if ( isset( $uncode_index[2] ) && !empty($uncode_index[2]) ) { //If "by_id" values exist
-		$uncode_index_ids = $uncode_index[2];
-	    foreach ( $uncode_index_ids as $uncode_index_ids_occurence ) {
-	    	$uncode_index_ids_occurence_list = explode(',',$uncode_index_ids_occurence);
+	if ( isset( $lerp_index[2] ) && !empty($lerp_index[2]) ) { //If "by_id" values exist
+		$lerp_index_ids = $lerp_index[2];
+	    foreach ( $lerp_index_ids as $lerp_index_ids_occurence ) {
+	    	$lerp_index_ids_occurence_list = explode(',',$lerp_index_ids_occurence);
 
-	    	foreach ($uncode_index_ids_occurence_list as $uncode_index_id) {
-	            $thumb_id_here = get_post_thumbnail_id($uncode_index_id);//Get featured image IDs from post ID
+	    	foreach ($lerp_index_ids_occurence_list as $lerp_index_id) {
+	            $thumb_id_here = get_post_thumbnail_id($lerp_index_id);//Get featured image IDs from post ID
 	            $image_ids[] = $thumb_id_here; //Store featured image ID
 	    	}
 	    }
@@ -142,7 +142,7 @@ function uncode_add_images_yoast_sitemap($images, $post_id) {
 	    }
 	}
 
-	$media = get_post_meta($post->ID, '_uncode_featured_media', 1);
+	$media = get_post_meta($post->ID, '_lerp_featured_media', 1);
 	if ($media !== '') $image_ids = array_merge($image_ids, explode(',', $media));
 
 

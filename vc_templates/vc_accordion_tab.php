@@ -3,7 +3,7 @@ global $history_tab;
 $output = $title = $id = $active = $tab_id = $slug = '';
 
 extract(shortcode_atts(array(
-	'title' => esc_html__("Section", "uncode"),
+	'title' => esc_html__("Section", "lerp"),
 	'id' => '',
 	'active' => '',
 	'tab_id' => '',
@@ -27,9 +27,9 @@ $output .= '<p class="panel-title'.($active ? ' active' : '').'"><a data-toggle=
 $output .= '</div>';
 $output .= '<div ' . esc_attr( $history_tag ) . '="' . esc_attr( $hash ) . '" class="panel-collapse collapse'.($active ? ' in' : '').'" role="tabpanel">';
 $output .= '<div class="panel-body">';
-$output .= ($content=='' || $content==' ') ? esc_html__("Empty section. Edit page to add content here.", "uncode") : "\n\t\t\t\t\t\t" . $content;
+$output .= ($content=='' || $content==' ') ? esc_html__("Empty section. Edit page to add content here.", "lerp") : "\n\t\t\t\t\t\t" . $content;
 $output .= '</div>';
 $output .= '</div>';
 $output .= '</div>';
 
-echo uncode_remove_wpautop($output);
+echo lerp_remove_wpautop($output);

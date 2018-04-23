@@ -1,6 +1,6 @@
 <?php if (!class_exists('Envato')): ?>
 <?php
-class Envato extends UncodeAPI {
+class Envato extends LerpAPI {
     var $api_key;
 
     function __construct($baseUrl='https://api.envato.com/v3/market') {
@@ -61,7 +61,7 @@ class Envato extends UncodeAPI {
      * @return Array || null
      */
     function getToolkitData() {
-        $option = get_option('uncode-wordpress-data');
+        $option = get_option('lerp-wordpress-data');
         $option = (Array)json_decode($option); 
 
         if (!empty($option)) {

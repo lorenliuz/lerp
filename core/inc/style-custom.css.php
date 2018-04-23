@@ -7,45 +7,45 @@ global $front_background_colors, $menutype;
 *****/
 
 if ( is_multisite() ) {
-  $uncode_option = get_blog_option( get_current_blog_id(), uncode_id() );
+  $lerp_option = get_blog_option( get_current_blog_id(), lerp_id() );
 } else {
-	$uncode_option = get_option(uncode_id());
+	$lerp_option = get_option(lerp_id());
 }
 
-if (empty($uncode_option)) {
+if (empty($lerp_option)) {
 	echo 'exit';
 	return;
 }
 
-$cs_logo_color_light = $uncode_option['_uncode_logo_color_light'];
-$cs_menu_color_light = $uncode_option['_uncode_menu_color_light'];
-$cs_menu_bg_color_light = $uncode_option['_uncode_menu_bg_color_light'];
-$cs_submenu_bg_color_light = $uncode_option['_uncode_submenu_bg_color_light'];
-$cs_menu_bg_alpha_light = $uncode_option['_uncode_menu_bg_alpha_light'];
-$cs_menu_border_color_light = $uncode_option['_uncode_menu_border_color_light'];
-$cs_menu_border_alpha_light = $uncode_option['_uncode_menu_border_alpha_light'];
-$cs_heading_color_light = $uncode_option['_uncode_heading_color_light'];
-$cs_text_color_light = $uncode_option['_uncode_text_color_light'];
-$cs_bg_color_light = $uncode_option['_uncode_background_color_light'];
+$cs_logo_color_light = $lerp_option['_lerp_logo_color_light'];
+$cs_menu_color_light = $lerp_option['_lerp_menu_color_light'];
+$cs_menu_bg_color_light = $lerp_option['_lerp_menu_bg_color_light'];
+$cs_submenu_bg_color_light = $lerp_option['_lerp_submenu_bg_color_light'];
+$cs_menu_bg_alpha_light = $lerp_option['_lerp_menu_bg_alpha_light'];
+$cs_menu_border_color_light = $lerp_option['_lerp_menu_border_color_light'];
+$cs_menu_border_alpha_light = $lerp_option['_lerp_menu_border_alpha_light'];
+$cs_heading_color_light = $lerp_option['_lerp_heading_color_light'];
+$cs_text_color_light = $lerp_option['_lerp_text_color_light'];
+$cs_bg_color_light = $lerp_option['_lerp_background_color_light'];
 
-$cs_logo_color_dark = $uncode_option['_uncode_logo_color_dark'];
-$cs_menu_color_dark = $uncode_option['_uncode_menu_color_dark'];
-$cs_menu_bg_color_dark = $uncode_option['_uncode_menu_bg_color_dark'];
-$cs_submenu_bg_color_dark = $uncode_option['_uncode_submenu_bg_color_dark'];
-$cs_menu_bg_alpha_dark = $uncode_option['_uncode_menu_bg_alpha_dark'];
-$cs_menu_border_color_dark = $uncode_option['_uncode_menu_border_color_dark'];
-$cs_menu_border_alpha_dark = $uncode_option['_uncode_menu_border_alpha_dark'];
-$cs_heading_color_dark = $uncode_option['_uncode_heading_color_dark'];
-$cs_text_color_dark = $uncode_option['_uncode_text_color_dark'];
-$cs_bg_color_dark = $uncode_option['_uncode_background_color_dark'];
+$cs_logo_color_dark = $lerp_option['_lerp_logo_color_dark'];
+$cs_menu_color_dark = $lerp_option['_lerp_menu_color_dark'];
+$cs_menu_bg_color_dark = $lerp_option['_lerp_menu_bg_color_dark'];
+$cs_submenu_bg_color_dark = $lerp_option['_lerp_submenu_bg_color_dark'];
+$cs_menu_bg_alpha_dark = $lerp_option['_lerp_menu_bg_alpha_dark'];
+$cs_menu_border_color_dark = $lerp_option['_lerp_menu_border_color_dark'];
+$cs_menu_border_alpha_dark = $lerp_option['_lerp_menu_border_alpha_dark'];
+$cs_heading_color_dark = $lerp_option['_lerp_heading_color_dark'];
+$cs_text_color_dark = $lerp_option['_lerp_text_color_dark'];
+$cs_bg_color_dark = $lerp_option['_lerp_background_color_dark'];
 
-$cs_accent_color = $uncode_option['_uncode_accent_color'];
+$cs_accent_color = $lerp_option['_lerp_accent_color'];
 
-$cs_body_font_family = $uncode_option['_uncode_body_font_family'];
-$cs_ui_font_family = $uncode_option['_uncode_ui_font_family'];
-$cs_menu_font_family = $uncode_option['_uncode_menu_font_family'];
-$cs_heading_font_family = $uncode_option['_uncode_heading_font_family'];
-$cs_buttons_font_family = $uncode_option['_uncode_buttons_font_family'];
+$cs_body_font_family = $lerp_option['_lerp_body_font_family'];
+$cs_ui_font_family = $lerp_option['_lerp_ui_font_family'];
+$cs_menu_font_family = $lerp_option['_lerp_menu_font_family'];
+$cs_heading_font_family = $lerp_option['_lerp_heading_font_family'];
+$cs_buttons_font_family = $lerp_option['_lerp_buttons_font_family'];
 
 $btn_outline = $front_background_colors[$cs_heading_color_light];
 
@@ -102,8 +102,8 @@ foreach ($front_background_colors as $key => $value)
 		echo "\n" . '.text-' . $key . '-color > * { background: none !important \0/IE9; }';
 		echo "\n" . '@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { .text-' . $key . '-color > * { background: none !important; } }';
 	} else {
-		if ( function_exists('uncode_darken_color'))
-			$darken_value = uncode_darken_color( $value );
+		if ( function_exists('lerp_darken_color'))
+			$darken_value = lerp_darken_color( $value );
 		else
 			$darken_value = $value;
 		echo "\n" . '.style-' . $key . '-bg { background-color: ' . $value . '; }';
@@ -193,13 +193,13 @@ echo "\n" . "----------------------------------------------------------";
 echo "\n" . "*/";
 
 /** Loop fonts **/
-if (isset($uncode_option['_uncode_font_groups'])) {
-	$fonts = $uncode_option['_uncode_font_groups'];
+if (isset($lerp_option['_lerp_font_groups'])) {
+	$fonts = $lerp_option['_lerp_font_groups'];
 	if (!empty($fonts) && is_array($fonts)) {
 		foreach ($fonts as $key => $value) {
-			$font_class = $value['_uncode_font_group_unique_id'];
-			$font_name = urldecode($value['_uncode_font_group']);
-			if ($font_name === 'manual') $font_name = $value['_uncode_font_manual'];
+			$font_class = $value['_lerp_font_group_unique_id'];
+			$font_name = urldecode($value['_lerp_font_group']);
+			if ($font_name === 'manual') $font_name = $value['_lerp_font_manual'];
 			if (strpos($font_name, ' ') > 0 && strpos($font_name, "'") === false && strpos($font_name, "\"") === false) {
 				$font_name = "'" . $font_name . "'";
 			}
@@ -221,48 +221,48 @@ if (isset($uncode_option['_uncode_font_groups'])) {
 }
 
 /** Loop font sizes **/
-if (isset($uncode_option['_uncode_heading_font_sizes'])) {
-	$font_sizes = $uncode_option['_uncode_heading_font_sizes'];
+if (isset($lerp_option['_lerp_heading_font_sizes'])) {
+	$font_sizes = $lerp_option['_lerp_heading_font_sizes'];
 	if (!empty($font_sizes) && is_array($font_sizes)) {
 		foreach ($font_sizes as $key => $value) {
 			echo "\n\n" . '/*----------------------------------------------------------';
-			echo "\n" . '#Font-size: '.$value['_uncode_heading_font_size'].'px';
+			echo "\n" . '#Font-size: '.$value['_lerp_heading_font_size'].'px';
 			echo "\n" . '----------------------------------------------------------*/';
-			echo "\n" . '.' . $value['_uncode_heading_font_size_unique_id'] . ' { font-size: ' . $value['_uncode_heading_font_size'] . 'px; }';
-			$first_mquery = $value['_uncode_heading_font_size'] / 1.5;
-			if ($value['_uncode_heading_font_size'] > 35) {
-				echo "\n" . '@media (max-width: 959px) { .' . $value['_uncode_heading_font_size_unique_id'] . ' { font-size: ' . $first_mquery . 'px; }}';
-				if ($first_mquery > 35) echo "\n" . '@media (max-width: 569px) { .' . $value['_uncode_heading_font_size_unique_id'] . ' { font-size: 35px; }}';
+			echo "\n" . '.' . $value['_lerp_heading_font_size_unique_id'] . ' { font-size: ' . $value['_lerp_heading_font_size'] . 'px; }';
+			$first_mquery = $value['_lerp_heading_font_size'] / 1.5;
+			if ($value['_lerp_heading_font_size'] > 35) {
+				echo "\n" . '@media (max-width: 959px) { .' . $value['_lerp_heading_font_size_unique_id'] . ' { font-size: ' . $first_mquery . 'px; }}';
+				if ($first_mquery > 35) echo "\n" . '@media (max-width: 569px) { .' . $value['_lerp_heading_font_size_unique_id'] . ' { font-size: 35px; }}';
 			}
 			if ($first_mquery > 28) {
-				echo "\n" . '@media (max-width: 320px) { .' . $value['_uncode_heading_font_size_unique_id'] . ' { font-size: 28px; }}';
+				echo "\n" . '@media (max-width: 320px) { .' . $value['_lerp_heading_font_size_unique_id'] . ' { font-size: 28px; }}';
 			}
 		}
 	}
 }
 
 /** Loop font height **/
-if (isset($uncode_option['_uncode_heading_font_heights'])) {
-	$font_heights = $uncode_option['_uncode_heading_font_heights'];
+if (isset($lerp_option['_lerp_heading_font_heights'])) {
+	$font_heights = $lerp_option['_lerp_heading_font_heights'];
 	if (!empty($font_heights) && is_array($font_heights)) {
 		foreach ($font_heights as $key => $value) {
 			echo "\n\n" . '/*----------------------------------------------------------';
-			echo "\n" . '#Line-height: '.$value['_uncode_heading_font_height'];
+			echo "\n" . '#Line-height: '.$value['_lerp_heading_font_height'];
 			echo "\n" . '----------------------------------------------------------*/';
-			echo "\n" . '.' . $value['_uncode_heading_font_height_unique_id'] . ' { line-height: ' . $value['_uncode_heading_font_height'] . '; }';
+			echo "\n" . '.' . $value['_lerp_heading_font_height_unique_id'] . ' { line-height: ' . $value['_lerp_heading_font_height'] . '; }';
 		}
 	}
 }
 
 /** Loop letter spacings **/
-if (isset($uncode_option['_uncode_heading_font_spacings'])) {
-	$font_spacings = $uncode_option['_uncode_heading_font_spacings'];
+if (isset($lerp_option['_lerp_heading_font_spacings'])) {
+	$font_spacings = $lerp_option['_lerp_heading_font_spacings'];
 	if (!empty($font_spacings) && is_array($font_spacings)) {
 		foreach ($font_spacings as $key => $value) {
 			echo "\n\n" . '/*----------------------------------------------------------';
-			echo "\n" . '#Letter-spacing: '.$value['_uncode_heading_font_spacing'];
+			echo "\n" . '#Letter-spacing: '.$value['_lerp_heading_font_spacing'];
 			echo "\n" . '----------------------------------------------------------*/';
-			echo "\n" . '.' . $value['_uncode_heading_font_spacing_unique_id'] . ' { letter-spacing: ' . $value['_uncode_heading_font_spacing'] . '; }';
+			echo "\n" . '.' . $value['_lerp_heading_font_spacing_unique_id'] . ' { letter-spacing: ' . $value['_lerp_heading_font_spacing'] . '; }';
 		}
 	}
 }
@@ -273,13 +273,13 @@ $admin_css = ob_get_contents();
 echo "\n\n" . '/*----------------------------------------------------------';
 echo "\n" . '#Standard font size';
 echo "\n" . '----------------------------------------------------------*/';
-$default_font_size = isset($uncode_option['_uncode_font_size']) ? $uncode_option['_uncode_font_size'] : '';
-$h1 = isset($uncode_option['_uncode_heading_h1']) ? $uncode_option['_uncode_heading_h1'] : '';
-$h2 = isset($uncode_option['_uncode_heading_h2']) ? $uncode_option['_uncode_heading_h2'] : '';
-$h3 = isset($uncode_option['_uncode_heading_h3']) ? $uncode_option['_uncode_heading_h3'] : '';
-$h4 = isset($uncode_option['_uncode_heading_h4']) ? $uncode_option['_uncode_heading_h4'] : '';
-$h5 = isset($uncode_option['_uncode_heading_h5']) ? $uncode_option['_uncode_heading_h5'] : '';
-$h6 = isset($uncode_option['_uncode_heading_h6']) ? $uncode_option['_uncode_heading_h6'] : '';
+$default_font_size = isset($lerp_option['_lerp_font_size']) ? $lerp_option['_lerp_font_size'] : '';
+$h1 = isset($lerp_option['_lerp_heading_h1']) ? $lerp_option['_lerp_heading_h1'] : '';
+$h2 = isset($lerp_option['_lerp_heading_h2']) ? $lerp_option['_lerp_heading_h2'] : '';
+$h3 = isset($lerp_option['_lerp_heading_h3']) ? $lerp_option['_lerp_heading_h3'] : '';
+$h4 = isset($lerp_option['_lerp_heading_h4']) ? $lerp_option['_lerp_heading_h4'] : '';
+$h5 = isset($lerp_option['_lerp_heading_h5']) ? $lerp_option['_lerp_heading_h5'] : '';
+$h6 = isset($lerp_option['_lerp_heading_h6']) ? $lerp_option['_lerp_heading_h6'] : '';
 if ($default_font_size !== '') {
 	echo "\n" . 'p,li,dt,dd,dl,address,label,small,pre,code { font-size: ' . $default_font_size . 'px; }';
 }
@@ -357,38 +357,38 @@ $color_primary = $cs_accent_color;
 /** Light skin **/
 $color_logo = $cs_logo_color_light;
 $color_menu_text = $cs_menu_color_light;
-$color_menu_background_alpha_light = uncode_hex2rgb($cs_menu_bg_color_light);
+$color_menu_background_alpha_light = lerp_hex2rgb($cs_menu_bg_color_light);
 $color_menu_background_alpha_light = 'rgba('.$color_menu_background_alpha_light[0].','.$color_menu_background_alpha_light[1].','.$color_menu_background_alpha_light[2].','.($cs_menu_bg_alpha_light / 100).')';
 $color_menu_background_light = $cs_menu_bg_color_light;
 $color_submenu_background_light = $cs_submenu_bg_color_light;
-$color_menu_border_light_transparent = uncode_hex2rgb($cs_menu_border_color_light);
+$color_menu_border_light_transparent = lerp_hex2rgb($cs_menu_border_color_light);
 $color_menu_border_light = $color_submenu_border_light = $color_menu_border_light_transparent = 'rgba('.$color_menu_border_light_transparent[0].','.$color_menu_border_light_transparent[1].','.$color_menu_border_light_transparent[2].','.($cs_menu_border_alpha_light / 100).')';
-$get_menu_hover_color = $uncode_option['_uncode_menu_color_hover'];
+$get_menu_hover_color = $lerp_option['_lerp_menu_color_hover'];
 if ($get_menu_hover_color === '') {
-	$color_menu_text_hover = uncode_hex2rgb($cs_menu_color_light);
+	$color_menu_text_hover = lerp_hex2rgb($cs_menu_color_light);
 	$color_menu_text_hover = 'rgba('.$color_menu_text_hover[0].','.$color_menu_text_hover[1].','.$color_menu_text_hover[2].',.5)';
 } else {
 	$color_menu_text_hover = $front_background_colors[$get_menu_hover_color];
 }
-$color_menu_text_hover_static = uncode_hex2rgb($cs_menu_color_light);
+$color_menu_text_hover_static = lerp_hex2rgb($cs_menu_color_light);
 	$color_menu_text_hover_static = 'rgba('.$color_menu_text_hover_static[0].','.$color_menu_text_hover_static[1].','.$color_menu_text_hover_static[2].',.5)';
 
 /** Dark skin **/
 $color_logo_inverted = $cs_logo_color_dark;
 $color_menu_text_inverted = $cs_menu_color_dark;
-$color_menu_background_alpha_dark = uncode_hex2rgb($cs_menu_bg_color_dark);
+$color_menu_background_alpha_dark = lerp_hex2rgb($cs_menu_bg_color_dark);
 $color_menu_background_alpha_dark = 'rgba('.$color_menu_background_alpha_dark[0].','.$color_menu_background_alpha_dark[1].','.$color_menu_background_alpha_dark[2].','.($cs_menu_bg_alpha_dark / 100).')';
 $color_menu_background_dark = $cs_menu_bg_color_dark;
 $color_submenu_background_dark = $cs_submenu_bg_color_dark;
-$color_menu_border_dark_transparent = uncode_hex2rgb($cs_menu_border_color_dark);
+$color_menu_border_dark_transparent = lerp_hex2rgb($cs_menu_border_color_dark);
 $color_menu_border_dark = $color_submenu_border_dark = $color_menu_border_dark_transparent = 'rgba('.$color_menu_border_dark_transparent[0].','.$color_menu_border_dark_transparent[1].','.$color_menu_border_dark_transparent[2].','.($cs_menu_border_alpha_dark / 100).')';
 if ($get_menu_hover_color === '') {
-	$color_menu_text_inverted_hover = uncode_hex2rgb($cs_menu_color_dark);
+	$color_menu_text_inverted_hover = lerp_hex2rgb($cs_menu_color_dark);
 	$color_menu_text_inverted_hover = 'rgba('.$color_menu_text_inverted_hover[0].','.$color_menu_text_inverted_hover[1].','.$color_menu_text_inverted_hover[2].',.5)';
 } else {
 	$color_menu_text_inverted_hover = $front_background_colors[$get_menu_hover_color];
 }
-$color_menu_text_inverted_hover_static = uncode_hex2rgb($cs_menu_color_dark);
+$color_menu_text_inverted_hover_static = lerp_hex2rgb($cs_menu_color_dark);
 $color_menu_text_inverted_hover_static = 'rgba('.$color_menu_text_inverted_hover_static[0].','.$color_menu_text_inverted_hover_static[1].','.$color_menu_text_inverted_hover_static[2].',.5)';
 
 $color_heading = $cs_heading_color_light;
@@ -402,28 +402,28 @@ $font_family_headings = $cs_heading_font_family;
 $font_family_btn = $cs_buttons_font_family;
 $font_family_ui = $cs_ui_font_family;
 
-$menu_font_weight = $uncode_option['_uncode_menu_font_weight'];
-$menu_font_size = $uncode_option['_uncode_menu_font_size'];
+$menu_font_weight = $lerp_option['_lerp_menu_font_weight'];
+$menu_font_size = $lerp_option['_lerp_menu_font_size'];
 if ($menu_font_size === '') $menu_font_size = 12;
-$submenu_font_size = $uncode_option['_uncode_submenu_font_size'];
+$submenu_font_size = $lerp_option['_lerp_submenu_font_size'];
 if ($submenu_font_size === '') $submenu_font_size = 12;
-$menu_mobile_font_size = $uncode_option['_uncode_menu_mobile_font_size'];
+$menu_mobile_font_size = $lerp_option['_lerp_menu_mobile_font_size'];
 if ($menu_mobile_font_size === '') $menu_mobile_font_size = 12;
-$heading_font_weight = $uncode_option['_uncode_heading_font_weight'];
-$btn_font_weight = $uncode_option['_uncode_buttons_font_weight'];
-$ui_font_weight = $uncode_option['_uncode_ui_font_weight'];
-$btn_text_transform = $uncode_option['_uncode_buttons_text_transform'];
-$btn_letter_spacing = !isset($uncode_option['_uncode_buttons_letter_spacing']) || $uncode_option['_uncode_buttons_letter_spacing'] == '' ? '0.1em' : $uncode_option['_uncode_buttons_letter_spacing'];
-$btn_letter_spacing = $btn_letter_spacing == 'uncode-fontspace-zero' ? '0em' : $btn_letter_spacing;
-$btn_border_width = !isset($uncode_option['_uncode_buttons_border_width']) || $uncode_option['_uncode_buttons_border_width'] == '' ? '1' : $uncode_option['_uncode_buttons_border_width'];
+$heading_font_weight = $lerp_option['_lerp_heading_font_weight'];
+$btn_font_weight = $lerp_option['_lerp_buttons_font_weight'];
+$ui_font_weight = $lerp_option['_lerp_ui_font_weight'];
+$btn_text_transform = $lerp_option['_lerp_buttons_text_transform'];
+$btn_letter_spacing = !isset($lerp_option['_lerp_buttons_letter_spacing']) || $lerp_option['_lerp_buttons_letter_spacing'] == '' ? '0.1em' : $lerp_option['_lerp_buttons_letter_spacing'];
+$btn_letter_spacing = $btn_letter_spacing == 'lerp-fontspace-zero' ? '0em' : $btn_letter_spacing;
+$btn_border_width = !isset($lerp_option['_lerp_buttons_border_width']) || $lerp_option['_lerp_buttons_border_width'] == '' ? '1' : $lerp_option['_lerp_buttons_border_width'];
 
 /** Loop letter spacings (again) **/
-if (isset($uncode_option['_uncode_heading_font_spacings'])) {
-	$font_spacings = $uncode_option['_uncode_heading_font_spacings'];
+if (isset($lerp_option['_lerp_heading_font_spacings'])) {
+	$font_spacings = $lerp_option['_lerp_heading_font_spacings'];
 	if (!empty($font_spacings) && is_array($font_spacings)) {
 		foreach ($font_spacings as $key => $value) {
-			if ( $value['_uncode_heading_font_spacing_unique_id'] === $btn_letter_spacing )
-				$btn_letter_spacing = $value['_uncode_heading_font_spacing'];
+			if ( $value['_lerp_heading_font_spacing_unique_id'] === $btn_letter_spacing )
+				$btn_letter_spacing = $value['_lerp_heading_font_spacing'];
 		}
 	}
 }

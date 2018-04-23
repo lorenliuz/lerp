@@ -1,20 +1,20 @@
 <?php
 /**
- * Show support page in Uncode menu
+ * Show support page in Lerp menu
  */
 
 if ( !defined('ABSPATH') ) {
     exit;
 }
 
-if ( !class_exists('Uncode_Menu_Support_Page') ) :
+if ( !class_exists('Lerp_Menu_Support_Page') ) :
 
     /**
-     * Uncode_Menu_Support_Page Class
+     * Lerp_Menu_Support_Page Class
      *
      * Creates the Support page.
      */
-    class Uncode_Menu_Support_Page
+    class Lerp_Menu_Support_Page
     {
         /**
          * Constructor.
@@ -30,7 +30,7 @@ if ( !class_exists('Uncode_Menu_Support_Page') ) :
          */
         public function add_to_menu()
         {
-            add_submenu_page('uncode-system-status', esc_html__('支持', 'uncode'), esc_html__('支持', 'uncode'), 'edit_theme_options', 'uncode-support', array($this, 'output'));
+            add_submenu_page('lerp-system-status', esc_html__('支持', 'lerp'), esc_html__('支持', 'lerp'), 'edit_theme_options', 'lerp-support', array($this, 'output'));
         }
 
         /**
@@ -41,56 +41,56 @@ if ( !class_exists('Uncode_Menu_Support_Page') ) :
             $cards = array(
                 array(
                     'id' => 'general',
-                    'title' => esc_html__('常规', 'uncode'),
-                    'description' => esc_html__('General information about WordPress, Server Requirements and Uncode Theme versions.', 'uncode'),
+                    'title' => esc_html__('常规', 'lerp'),
+                    'description' => esc_html__('General information about WordPress, Server Requirements and Lerp Theme versions.', 'lerp'),
                     'url' => '//support.undsgn.com/hc/en-us/articles/213452809',
                 ),
                 array(
                     'id' => 'first-steps',
-                    'title' => esc_html__('入门', 'uncode'),
-                    'description' => esc_html__('Uncode Theme and plugins installation guide, Demo Contents import and theme update.', 'uncode'),
+                    'title' => esc_html__('入门', 'lerp'),
+                    'description' => esc_html__('Lerp Theme and plugins installation guide, Demo Contents import and theme update.', 'lerp'),
                     'url' => '//support.undsgn.com/hc/en-us/articles/213454309',
                 ),
                 array(
                     'id' => 'theme-options',
-                    'title' => esc_html__('主题设置', 'uncode'),
-                    'description' => esc_html__('Options are the backbone of Uncode and they give you full control over your website.', 'uncode'),
+                    'title' => esc_html__('主题设置', 'lerp'),
+                    'description' => esc_html__('Options are the backbone of Lerp and they give you full control over your website.', 'lerp'),
                     'url' => '//support.undsgn.com/hc/en-us/articles/213455189',
                 ),
                 array(
                     'id' => 'pages-posts',
-                    'title' => esc_html__('页面 & 文章', 'uncode'),
-                    'description' => esc_html__('Discover how to create, customise and manage pages, blog posts and portfolio items.', 'uncode'),
+                    'title' => esc_html__('页面 & 文章', 'lerp'),
+                    'description' => esc_html__('Discover how to create, customise and manage pages, blog posts and portfolio items.', 'lerp'),
                     'url' => '//support.undsgn.com/hc/en-us/articles/214002625',
                 ),
                 array(
                     'id' => 'page-builder',
-                    'title' => esc_html__('页面生成器', 'uncode'),
-                    'description' => esc_html__('Learn how to create beautiful pages quickly with the powerful Uncode’s Page Builder.', 'uncode'),
+                    'title' => esc_html__('页面生成器', 'lerp'),
+                    'description' => esc_html__('Learn how to create beautiful pages quickly with the powerful Lerp’s Page Builder.', 'lerp'),
                     'url' => '//support.undsgn.com/hc/en-us/articles/213456589',
                 ),
                 array(
                     'id' => 'header',
-                    'title' => esc_html__('页眉', 'uncode'),
-                    'description' => esc_html__('Uncode works with 4 different header types fully integrated with the Theme Options.', 'uncode'),
+                    'title' => esc_html__('页眉', 'lerp'),
+                    'description' => esc_html__('Lerp works with 4 different header types fully integrated with the Theme Options.', 'lerp'),
                     'url' => '//support.undsgn.com/hc/en-us/articles/213456989',
                 ),
                 array(
                     'id' => 'extra',
-                    'title' => esc_html__('扩展', 'uncode'),
-                    'description' => esc_html__('Advanced features and additional plugins to boost your Uncode Theme functionalities.', 'uncode'),
+                    'title' => esc_html__('扩展', 'lerp'),
+                    'description' => esc_html__('Advanced features and additional plugins to boost your Lerp Theme functionalities.', 'lerp'),
                     'url' => '//support.undsgn.com/hc/en-us/articles/213457109',
                 ),
                 array(
                     'id' => 'how-to',
-                    'title' => esc_html__('操作方式', 'uncode'),
-                    'description' => esc_html__('Discover how to work with some of the most common elements and features of Uncode.', 'uncode'),
+                    'title' => esc_html__('操作方式', 'lerp'),
+                    'description' => esc_html__('Discover how to work with some of the most common elements and features of Lerp.', 'lerp'),
                     'url' => '//support.undsgn.com/hc/en-us/articles/213459529',
                 ),
                 array(
                     'id' => 'faq',
-                    'title' => esc_html__('F & Q', 'uncode'),
-                    'description' => esc_html__('Search the frequent asked questions from the customer community before open a ticket.', 'uncode'),
+                    'title' => esc_html__('F & Q', 'lerp'),
+                    'description' => esc_html__('Search the frequent asked questions from the customer community before open a ticket.', 'lerp'),
                     'url' => '//support.undsgn.com/hc/en-us/categories/201692765',
                 ),
             );
@@ -104,31 +104,31 @@ if ( !class_exists('Uncode_Menu_Support_Page') ) :
         public function output()
         {
             ?>
-            <div class="wrap uncode-wrap" id="uncode-support">
-                <?php echo uncode_admin_panel_page_title('support'); ?>
+            <div class="wrap lerp-wrap" id="lerp-support">
+                <?php echo lerp_admin_panel_page_title('support'); ?>
 
-                <div class="uncode-admin-panel">
-                    <?php //echo uncode_admin_panel_title(); ?>
-                    <?php echo uncode_admin_panel_menu('support'); ?>
+                <div class="lerp-admin-panel">
+                    <?php //echo lerp_admin_panel_title(); ?>
+                    <?php echo lerp_admin_panel_menu('support'); ?>
 
-                    <div class="uncode-admin-panel__content uncode-admin-panel__content--two-cols">
-                        <div class="uncode-admin-panel__left-w">
-                            <h2 class="uncode-admin-panel__heading"><?php esc_html_e('教程', 'uncode'); ?></h2>
+                    <div class="lerp-admin-panel__content lerp-admin-panel__content--two-cols">
+                        <div class="lerp-admin-panel__left-w">
+                            <h2 class="lerp-admin-panel__heading"><?php esc_html_e('教程', 'lerp'); ?></h2>
 
                             <div class="box-cards">
-                                <ul class="box-cards__list uncode-ui-layout uncode-ui-layout--three-cols">
+                                <ul class="box-cards__list lerp-ui-layout lerp-ui-layout--three-cols">
 
                                     <?php
                                     $card_i = 0;
                                     foreach ( $this->get_cards() as $card ) : ?>
 
-                                        <li class="box-card box-card--<?php echo esc_attr($card['id']); ?> uncode-ui-layout__item uncode-ui-layout__item--three-cols<?php echo ($card_i % 3 == 0) ? ' clear-left' : ''; ?>">
+                                        <li class="box-card box-card--<?php echo esc_attr($card['id']); ?> lerp-ui-layout__item lerp-ui-layout__item--three-cols<?php echo ($card_i % 3 == 0) ? ' clear-left' : ''; ?>">
                                             <a target="_blank" tabindex="-1" href="<?php echo esc_url($card['url']); ?>"
                                                class="box-card__link box-card__link--<?php echo esc_attr($card['id']); ?>">
                                                 <h3 class="box-card__title"><?php echo esc_html($card['title']); ?></h3>
                                                 <?php /*<p class="box-card__description"><?php echo esc_html( $card[ 'description' ] ); ?></p>
 
-											<span class="box-card__button"><?php esc_html_e( 'See all guides', 'uncode' ); ?></span>*/ ?>
+											<span class="box-card__button"><?php esc_html_e( 'See all guides', 'lerp' ); ?></span>*/ ?>
                                             </a>
                                         </li>
 
@@ -139,44 +139,44 @@ if ( !class_exists('Uncode_Menu_Support_Page') ) :
                                 </ul>
                             </div>
 
-                        </div><!-- .uncode-admin-panel__left-w -->
+                        </div><!-- .lerp-admin-panel__left-w -->
 
-                        <div class="uncode-admin-panel__right-w">
+                        <div class="lerp-admin-panel__right-w">
 
-                            <h2 class="uncode-admin-panel__heading"><?php esc_html_e('帮助中心', 'uncode'); ?></h2>
+                            <h2 class="lerp-admin-panel__heading"><?php esc_html_e('帮助中心', 'lerp'); ?></h2>
 
-                            <div class="uncode-info-box">
+                            <div class="lerp-info-box">
 
-                                <p class="uncode-admin-panel__description"><?php printf(esc_html__('According to Envato’s terms, Uncode comes with 6 months of support for every purchase, and free lifetime theme updates. This support can be %s via ThemeForest.', 'uncode'), '<a href="//themeforest.net/item/uncode-creative-multiuse-wordpress-theme/13373220?utm_source=undsgn_support&ref=undsgn&license=regular&open_purchase_for_item_id=13373220&purchasable=source" target="_blank" tabindex="-1">' . esc_html__('extended through subscriptions', 'uncode') . '</a>'); ?></p>
+                                <p class="lerp-admin-panel__description"><?php printf(esc_html__('According to Envato’s terms, Lerp comes with 6 months of support for every purchase, and free lifetime theme updates. This support can be %s via ThemeForest.', 'lerp'), '<a href="//themeforest.net/item/lerp-creative-multiuse-wordpress-theme/13373220?utm_source=undsgn_support&ref=undsgn&license=regular&open_purchase_for_item_id=13373220&purchasable=source" target="_blank" tabindex="-1">' . esc_html__('extended through subscriptions', 'lerp') . '</a>'); ?></p>
 
-                                <p class="uncode-admin-panel__description"><?php esc_html_e('Support is limited to questions regarding the Uncode\'s features, or problems with the theme. To open a support ticket, please navigate to our Help Center homepage and click the \'Submit a request\' in the top right corner. One of our Support Team members will respond to you shortly.', 'uncode'); ?></p>
+                                <p class="lerp-admin-panel__description"><?php esc_html_e('Support is limited to questions regarding the Lerp\'s features, or problems with the theme. To open a support ticket, please navigate to our Help Center homepage and click the \'Submit a request\' in the top right corner. One of our Support Team members will respond to you shortly.', 'lerp'); ?></p>
 
-                                <p class="uncode-admin-panel__description"><?php esc_html_e('Item Support DOES include:', 'uncode'); ?></p>
+                                <p class="lerp-admin-panel__description"><?php esc_html_e('Item Support DOES include:', 'lerp'); ?></p>
                                 <ul class="checklist">
-                                    <li><?php esc_html_e('Availability of the theme\'s authors to answer questions;', 'uncode'); ?></li>
-                                    <li><?php esc_html_e('Answers to technical queries about the theme\'s features;', 'uncode'); ?></li>
-                                    <li><?php esc_html_e('Assistance with reported bugs and issues.', 'uncode'); ?></li>
+                                    <li><?php esc_html_e('Availability of the theme\'s authors to answer questions;', 'lerp'); ?></li>
+                                    <li><?php esc_html_e('Answers to technical queries about the theme\'s features;', 'lerp'); ?></li>
+                                    <li><?php esc_html_e('Assistance with reported bugs and issues.', 'lerp'); ?></li>
                                 </ul>
 
-                                <p class="uncode-admin-panel__description"><?php esc_html_e('Item Support DOES NOT include:', 'uncode'); ?></p>
+                                <p class="lerp-admin-panel__description"><?php esc_html_e('Item Support DOES NOT include:', 'lerp'); ?></p>
                                 <ul class="errorlist">
-                                    <li><?php esc_html_e('Customization services;', 'uncode'); ?></li>
-                                    <li><?php esc_html_e('Installation services;', 'uncode'); ?></li>
-                                    <li><?php esc_html_e('Help and support for non-bundled third-party plugins that you install.', 'uncode'); ?></li>
+                                    <li><?php esc_html_e('Customization services;', 'lerp'); ?></li>
+                                    <li><?php esc_html_e('Installation services;', 'lerp'); ?></li>
+                                    <li><?php esc_html_e('Help and support for non-bundled third-party plugins that you install.', 'lerp'); ?></li>
                                 </ul>
 
                                 <a target="_blank" tabindex="-1"
                                    class="button button-primary button--view-documentation"
-                                   href="//support.undsgn.com/hc/en-us"><?php esc_html_e('查看教程', 'uncode'); ?></a>
+                                   href="//support.undsgn.com/hc/en-us"><?php esc_html_e('查看教程', 'lerp'); ?></a>
 
-                            </div><!-- .uncode-info-box -->
+                            </div><!-- .lerp-info-box -->
 
-                        </div><!-- .uncode-admin-panel__right-w -->
-                    </div><!-- .uncode-admin-panel__content -->
+                        </div><!-- .lerp-admin-panel__right-w -->
+                    </div><!-- .lerp-admin-panel__content -->
 
-                </div><!-- .uncode-admin-panel -->
+                </div><!-- .lerp-admin-panel -->
 
-            </div><!-- .uncode-wrap -->
+            </div><!-- .lerp-wrap -->
 
             <?php
         }
@@ -184,4 +184,4 @@ if ( !class_exists('Uncode_Menu_Support_Page') ) :
 
 endif;
 
-return new Uncode_Menu_Support_Page();
+return new Lerp_Menu_Support_Page();

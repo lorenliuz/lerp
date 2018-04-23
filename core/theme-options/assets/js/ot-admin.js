@@ -118,7 +118,7 @@
 					$("<div />").text(option_tree.setting_limit).dialog({
 						autoOpen: true,
 						modal: true,
-						dialogClass: 'uncode-modal',
+						dialogClass: 'lerp-modal',
 						title: "Confirmation Required",
 						minHeight: 500,
 						minWidth: 500,
@@ -153,7 +153,7 @@
 					$("<div />").text(option_tree.remove_no).dialog({
 						autoOpen: true,
 						modal: true,
-						dialogClass: 'uncode-modal',
+						dialogClass: 'lerp-modal',
 						title: "Confirmation Required",
 						minHeight: 500,
 						minWidth: 500,
@@ -164,7 +164,7 @@
 				$("<div />").text(option_tree.remove_agree).dialog({
 					autoOpen: true,
 					modal: true,
-					dialogClass: 'uncode-modal',
+					dialogClass: 'lerp-modal',
 					title: "Confirmation Required",
 					minHeight: 500,
 					minWidth: 500,
@@ -220,7 +220,7 @@
 				$("<div />").text(option_tree.activate_layout_agree).dialog({
 					autoOpen: true,
 					modal: true,
-					dialogClass: 'uncode-modal',
+					dialogClass: 'lerp-modal',
 					title: "Confirmation Required",
 					minHeight: 500,
 					minWidth: 500,
@@ -555,7 +555,7 @@
 				$("<div />").text(option_tree.remove_agree).dialog({
 					autoOpen: true,
 					modal: true,
-					dialogClass: 'uncode-modal',
+					dialogClass: 'lerp-modal',
 					title: "Confirmation Required",
 					minHeight: 500,
 					minWidth: 500,
@@ -607,7 +607,7 @@
 	slider_refreshalue: function($value, $el) {
 		var $input = $el.closest(".ot-numeric-slider-wrap").find("input"),
 			$marker = $el.closest(".ot-numeric-slider-wrap").find(".ot-numeric-slider-helper-input");
-		if ($input.attr("id") == '_uncode_scroll_additional_padding') {
+		if ($input.attr("id") == '_lerp_scroll_additional_padding') {
 			switch (parseInt($value)) {
 				case 18:
 					$marker.html('0.5x').val('0.5x');
@@ -683,7 +683,7 @@
 				}
 			});
 			$('.page-options-header-section').on("click", function(event, ui) {
-				$('li[aria-controls="setting__uncode_header_tab"] a').trigger('click');
+				$('li[aria-controls="setting__lerp_header_tab"] a').trigger('click');
 			});
 		},
 		init_radio_image_select: function() {
@@ -895,7 +895,7 @@
 				$("<div />").text(option_tree.reset_agree).dialog({
 					autoOpen: true,
 					modal: true,
-					dialogClass: 'uncode-modal',
+					dialogClass: 'lerp-modal',
 					title: "Confirmation Required",
 					minHeight: 500,
 					minWidth: 500,
@@ -1092,7 +1092,7 @@
 			$("<div />").text(option_tree.confirm).dialog({
 				autoOpen: true,
 				modal: true,
-				dialogClass: 'uncode-modal',
+				dialogClass: 'lerp-modal',
 				title: "Confirmation Required",
 				minHeight: 500,
 				minWidth: 500,
@@ -1521,7 +1521,7 @@
 		// detect mousedown and store all checked radio buttons
 		$('.option-tree-save-layout.active-layout').each(function(){
 			var $form = $(this),
-				$input = $('input[name="uncode_layouts[_add_new_layout_]"]', $form),
+				$input = $('input[name="lerp_layouts[_add_new_layout_]"]', $form),
 				$button = $('.option-tree-ui-button.button.save-layout', $form).prop('disabled',true);
 
 			var checkVal = function(){

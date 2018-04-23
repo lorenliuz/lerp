@@ -1,9 +1,9 @@
 <?php
-require_once get_template_directory() . '/core/inc/UncodeAPI.class.php';
-require_once get_template_directory() . '/core/inc/UncodeHotfix.class.php';
+require_once get_template_directory() . '/core/inc/LerpAPI.class.php';
+require_once get_template_directory() . '/core/inc/LerpHotfix.class.php';
 
 
-function uncode_add_news_notification() {
+function lerp_add_news_notification() {
     global $menu;
 
     $total_count = 0;
@@ -11,10 +11,10 @@ function uncode_add_news_notification() {
     $unread_mess = 0;
     $update_count = 0;
 
-    $hotfix = new UncodeHotfix('http://static.undsgn.com/uncode/endpoint');
+    $hotfix = new LerpHotfix('http://static.undsgn.com/lerp/endpoint');
     $envato = new Envato();
     $envato->setAPIKey(ENVATO_KEY);
-    $communicator = new UncodeCommunicator();
+    $communicator = new LerpCommunicator();
 
     if (isInstallationLegit() && !requiredDataEmpty()) {
         $patches_count = $hotfix->countCommittedPatches(array(
@@ -35,7 +35,7 @@ function uncode_add_news_notification() {
 
     foreach ( $menu as $key => $value ) {
 
-        if ( $menu[$key][2] == 'uncode-system-status') {
+        if ( $menu[$key][2] == 'lerp-system-status') {
             $menu[$key][0] .= ' ' . "<span class='update-plugins count-$total_count'><span class='update-count'>$total_count</span></span>";
             return;
 
@@ -43,4 +43,4 @@ function uncode_add_news_notification() {
 
     }
 }
-//add_action( 'admin_menu', 'uncode_add_news_notification' );
+//add_action( 'admin_menu', 'lerp_add_news_notification' );

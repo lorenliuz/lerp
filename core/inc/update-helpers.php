@@ -1,15 +1,15 @@
 <?php
 
-require_once get_template_directory() . '/core/inc/UncodeAPI.class.php';
+require_once get_template_directory() . '/core/inc/LerpAPI.class.php';
 require_once get_template_directory() . '/core/inc/Envato.class.php';
-require_once get_template_directory() . '/core/inc/UncodeCommunicator.class.php';
+require_once get_template_directory() . '/core/inc/LerpCommunicator.class.php';
 
 function isInstallationLegit( $data = false ) {
 	if (!class_exists('Envato')) {
 		return;
 	}
 
-    $communicator = new UncodeCommunicator();
+    $communicator = new LerpCommunicator();
 
     $envato = new Envato();
     $data = $data ? $data : $envato->getToolkitData();
@@ -30,8 +30,8 @@ function isInstallationLegit( $data = false ) {
 
             // Return early if the connected domain is a subdomain of the current
             // domain we are trying to register (or viceversa)
-            $real_con_domain = uncodeGetDomain( $connected_domain );
-            $real_current_domain = uncodeGetDomain( $server_name );
+            $real_con_domain = lerpGetDomain( $connected_domain );
+            $real_current_domain = lerpGetDomain( $server_name );
 
             if ( $real_con_domain === $real_current_domain ) {
             	return true;
@@ -52,7 +52,7 @@ function isInstallationLegit( $data = false ) {
 }
 
 function requiredDataEmpty() {
-    $communicator = new UncodeCommunicator();
+    $communicator = new LerpCommunicator();
 
 	if (!class_exists('Envato')) {
 		return;
@@ -65,7 +65,7 @@ function requiredDataEmpty() {
 /**
  * Extract domain from hostname
  */
-function uncodeGetDomain( $url ) {
+function lerpGetDomain( $url ) {
 	$pieces = parse_url( $url );
 	$domain = isset( $pieces[ 'path' ] ) ? $pieces[ 'path' ] : '';
 
@@ -83,11 +83,11 @@ function uncodeGetDomain( $url ) {
  */
 function licenseNeedsDeactivation( $toolkitData ) {
 	if ( $toolkitData && isset( $toolkitData[ 'purchase_code' ] ) ) {
-		$communicator = new UncodeCommunicator();
+		$communicator = new LerpCommunicator();
 		$connected_domain = $communicator->getConnectedDomains( $toolkitData[ 'purchase_code' ] );
 
 		if ( ! $connected_domain ) {
-			delete_option( 'uncode-wordpress-data' );
+			delete_option( 'lerp-wordpress-data' );
 
 			return true;
 		} else {

@@ -22,7 +22,7 @@
  */
 require_once dirname(__FILE__) . '/class-tgm-plugin-activation.php';
 
-add_action('tgmpa_register', 'uncode_register_required_plugins');
+add_action('tgmpa_register', 'lerp_register_required_plugins');
 /**
  * Register the required plugins for this theme.
  *
@@ -37,7 +37,7 @@ add_action('tgmpa_register', 'uncode_register_required_plugins');
  * This function is hooked into tgmpa_init, which is fired within the
  * TGM_Plugin_Activation class constructor.
  */
-function uncode_register_required_plugins()
+function lerp_register_required_plugins()
 {
     /*
      * Array of plugin arrays. Required keys are name and slug.
@@ -47,9 +47,9 @@ function uncode_register_required_plugins()
 
         // This is an example of how to include a plugin bundled with a theme.
         array(
-            'name' => 'Uncode Core', // The plugin name.
-            'slug' => 'uncode-core', // The plugin slug (typically the folder name).
-            'source' => get_template_directory() . '/core/plugins_activation/plugins/uncode-core.zip', // The plugin source.
+            'name' => 'Lerp Core', // The plugin name.
+            'slug' => 'lerp-core', // The plugin slug (typically the folder name).
+            'source' => get_template_directory() . '/core/plugins_activation/plugins/lerp-core.zip', // The plugin source.
             'required' => true, // If false, the plugin is only 'recommended' instead of required.
             'version' => '1.5.2', // E.g. 1.0.0. If set, the active plugin must be this version or higher. If the plugin version is higher than the plugin version installed, the user will be notified to update the plugin.
             'force_activation' => true, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
@@ -58,9 +58,9 @@ function uncode_register_required_plugins()
             'is_callable' => '', // If set, this callable will be be checked for availability to determine if a plugin is active.
         ),
         array(
-            'name' => 'Uncode Page Builder (Visual Composer)', // The plugin name.
-            'slug' => 'uncode-js_composer', // The plugin slug (typically the folder name).
-            'source' => get_template_directory() . '/core/plugins_activation/plugins/uncode-js_composer.zip', // The plugin source.
+            'name' => 'Lerp Page Builder (Visual Composer)', // The plugin name.
+            'slug' => 'lerp-js_composer', // The plugin slug (typically the folder name).
+            'source' => get_template_directory() . '/core/plugins_activation/plugins/lerp-js_composer.zip', // The plugin source.
             'required' => true, // If false, the plugin is only 'recommended' instead of required.
             'version' => '5.4.5', // E.g. 1.0.0. If set, the active plugin must be this version or higher. If the plugin version is higher than the plugin version installed, the user will be notified to update the plugin.
             'force_activation' => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
@@ -69,9 +69,9 @@ function uncode_register_required_plugins()
             'is_callable' => '', // If set, this callable will be be checked for availability to determine if a plugin is active.
         ),
         array(
-            'name' => 'Uncode Dave\'s WordPress Live Search', // The plugin name.
-            'slug' => 'uncode-daves-wordpress-live-search', // The plugin slug (typically the folder name).
-            'source' => get_template_directory() . '/core/plugins_activation/plugins/uncode-daves-wordpress-live-search.zip', // The plugin source.
+            'name' => 'Lerp Dave\'s WordPress Live Search', // The plugin name.
+            'slug' => 'lerp-daves-wordpress-live-search', // The plugin slug (typically the folder name).
+            'source' => get_template_directory() . '/core/plugins_activation/plugins/lerp-daves-wordpress-live-search.zip', // The plugin source.
             'required' => false, // If false, the plugin is only 'recommended' instead of required.
             'version' => '1.0.3', // E.g. 1.0.0. If set, the active plugin must be this version or higher. If the plugin version is higher than the plugin version installed, the user will be notified to update the plugin.
             'force_activation' => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
@@ -103,7 +103,7 @@ function uncode_register_required_plugins()
         )
     );
 
-    if ( !is_plugin_active('uncode-related-posts-for-wp/uncode-related-posts-for-wp.php') ) {
+    if ( !is_plugin_active('lerp-related-posts-for-wp/lerp-related-posts-for-wp.php') ) {
         $plugins[] = array(
             'name' => 'Related Posts for WordPress',
             'slug' => 'related-posts-for-wp',
@@ -123,7 +123,7 @@ function uncode_register_required_plugins()
     $config = array(
         'id' => 'tgmpa',                 // Unique ID for hashing notices for multiple instances of TGMPA.
         'default_path' => '',                      // Default absolute path to bundled plugins.
-        'menu' => 'uncode-plugins',            // Menu slug.
+        'menu' => 'lerp-plugins',            // Menu slug.
         'parent_slug' => 'admin.php',            // Parent menu slug.
         'capability' => 'edit_theme_options',    // Capability needed to view plugin install page, should be a capability associated with the parent menu used.
         'has_notices' => true,                    // Show admin notices or not.
@@ -136,39 +136,39 @@ function uncode_register_required_plugins()
     tgmpa($plugins, $config);
 }
 
-function uncode_plugins_menu_args($args)
+function lerp_plugins_menu_args($args)
 {
-    $args['parent_slug'] = 'uncode-system-status';
+    $args['parent_slug'] = 'lerp-system-status';
     return $args;
 }
 
-add_filter('tgmpa_admin_menu_args', 'uncode_plugins_menu_args');
+add_filter('tgmpa_admin_menu_args', 'lerp_plugins_menu_args');
 
 /**
  * Force Visual Composer to initialize as "built into the theme". This will hide certain tabs under the Settings->Visual Composer page
  */
-add_action('vc_before_init', 'uncode_vcSetAsTheme');
-function uncode_vcSetAsTheme()
+add_action('vc_before_init', 'lerp_vcSetAsTheme');
+function lerp_vcSetAsTheme()
 {
     vc_set_as_theme($disable_updater = true);
 }
 
 // Register your custom function to override some LayerSlider data
-add_action('layerslider_ready', 'uncode_layerslider_overrides');
-function uncode_layerslider_overrides()
+add_action('layerslider_ready', 'lerp_layerslider_overrides');
+function lerp_layerslider_overrides()
 {
     // Disable auto-updates
     $GLOBALS['lsAutoUpdateBox'] = false;
 }
 
-function uncode_layerslider_notification()
+function lerp_layerslider_notification()
 {
     if ( defined('LS_PLUGIN_BASE') ) {
         remove_action('after_plugin_row_' . LS_PLUGIN_BASE, 'layerslider_plugins_purchase_notice', 10, 3);
     }
 }
 
-add_action('layerslider_ready', 'uncode_layerslider_notification');
+add_action('layerslider_ready', 'lerp_layerslider_notification');
 
 add_filter('site_transient_update_plugins', 'remove_update_notifications');
 function remove_update_notifications($value)

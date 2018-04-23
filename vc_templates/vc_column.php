@@ -105,9 +105,9 @@ $stylesArray = array(
 );
 
 global $metabox_data, $inner_column_style;
-if (isset($metabox_data['_uncode_specific_style'][0]) && $metabox_data['_uncode_specific_style'][0] !== '') {
-	$general_style = $metabox_data['_uncode_specific_style'][0];
-} else $general_style = ot_get_option('_uncode_general_style');
+if (isset($metabox_data['_lerp_specific_style'][0]) && $metabox_data['_lerp_specific_style'][0] !== '') {
+	$general_style = $metabox_data['_lerp_specific_style'][0];
+} else $general_style = ot_get_option('_lerp_general_style');
 
 if ($style === '') $style = $general_style;
 
@@ -146,13 +146,13 @@ if ($override_padding === 'yes') {
 if ($expand_height === 'yes') $uncol_classes[] = 'unexpand';
 if ($sticky === 'yes') $uncol_classes[] = 'sticky-element sticky-sidebar';
 
-if (substr_count($content, '[uncode_slider')) {
+if (substr_count($content, '[lerp_slider')) {
 	$is_carousel = true;
 	$el_class.= ' column_container';
 	if ($override_padding === 'yes' && $column_padding === 0) {
 		$slider_padding = ' limit_content="no" top_padding="0" bottom_padding="0" h_padding="0"';
 	} else $slider_padding = '';
-	$content = str_replace('[uncode_slider','[uncode_slider'.$slider_padding.' style="' . esc_attr( $style ) . '"', $content);
+	$content = str_replace('[lerp_slider','[lerp_slider'.$slider_padding.' style="' . esc_attr( $style ) . '"', $content);
 }
 
 if ($this->settings['base'] == 'vc_column') $col_classes[] = 'column_parent';
@@ -337,7 +337,7 @@ if (!empty($back_image) || $overlay_color !== '')
         $background_div_width .= 'margin-left: auto; margin-right: auto;';
     }
 
-    $back_result_array = uncode_get_back_html($back_array, $overlay_color, $overlay_alpha, '', 'column');
+    $back_result_array = lerp_get_back_html($back_array, $overlay_color, $overlay_alpha, '', 'column');
     $background_div = $back_result_array['back_html'];
 }
 
@@ -509,13 +509,13 @@ if ($uncoltable_style != '') $uncoltable_style = ' style="' . esc_attr( $uncolta
 if ($is_carousel && $width_media === 12) {
 	$output.= $content;
 } else {
-	global $uncode_row_parent, $uncode_vc_block, $uncode_vc_index;
-	if ( !$uncode_vc_block && !$uncode_vc_index ) {
-		$uncode_row_parent -= $width_media;
-		if ($uncode_row_parent < 0) {
+	global $lerp_row_parent, $lerp_vc_block, $lerp_vc_index;
+	if ( !$lerp_vc_block && !$lerp_vc_index ) {
+		$lerp_row_parent -= $width_media;
+		if ($lerp_row_parent < 0) {
 			$output.= '</div><div class="row-inner">';
-			$uncode_row_parent = 12;
-			$uncode_row_parent -= $width_media;
+			$lerp_row_parent = 12;
+			$lerp_row_parent -= $width_media;
 		}
 	}
 	$output.= '<div class="' . esc_attr(trim(implode(' ', $col_classes))) . '"' . $col_style . '>';
@@ -534,4 +534,4 @@ if ($is_carousel && $width_media === 12) {
 	$output.= '</div>';
 }
 
-echo uncode_remove_wpautop($output);
+echo lerp_remove_wpautop($output);

@@ -1,7 +1,7 @@
-<?php if (!class_exists('UncodeHotfix')): ?>
+<?php if (!class_exists('LerpHotfix')): ?>
 <?php
-class UncodeHotfix extends UncodeAPI {
-    function __construct($baseUrl='http://static.undsgn.com/uncode/endpoint') {
+class LerpHotfix extends LerpAPI {
+    function __construct($baseUrl='http://static.undsgn.com/lerp/endpoint') {
         parent::__construct($baseUrl);
     }
 
@@ -112,7 +112,7 @@ class UncodeHotfix extends UncodeAPI {
      * @return Array<Object>
      */
     function getCommittedPatches($filter=null, $sortby=null) {
-        $existing_patches = get_option('uncode_patches');
+        $existing_patches = get_option('lerp_patches');
         $_patches = array();
 
         if (empty($existing_patches)) { return $_patches; }
@@ -171,7 +171,7 @@ class UncodeHotfix extends UncodeAPI {
             $_patches[] = $e_patch;
         }
 
-        return update_option('uncode_patches', json_encode($_patches));
+        return update_option('lerp_patches', json_encode($_patches));
     }
     
     /**
@@ -200,7 +200,7 @@ class UncodeHotfix extends UncodeAPI {
             }
         }
 
-        return update_option('uncode_patches', json_encode($existing_patches));
+        return update_option('lerp_patches', json_encode($existing_patches));
     }
 
     /**
@@ -222,7 +222,7 @@ class UncodeHotfix extends UncodeAPI {
             $_patches[] = $e_patch;
         }
 
-        return update_option('uncode_patches', json_encode($_patches));
+        return update_option('lerp_patches', json_encode($_patches));
     }
 
     /**

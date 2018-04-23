@@ -78,7 +78,7 @@ $width_media = ((int) trim($width_array[0]) / trim($width_array[1])) * 12;
 $width = wpb_translateColumnWidthToSpan($width);
 
 if (substr_count($content, '[vc_single_image')) {
-    $content = uncode_replace_inner_single_width($content, $width_media);
+    $content = lerp_replace_inner_single_width($content, $width_media);
 }
 
 if ($position_vertical !== '') $col_classes[] = 'pos-' . $position_vertical;
@@ -101,9 +101,9 @@ if ($column_width_use_pixel === 'yes' && $column_width_pixel !== '')
 }
 
 global $metabox_data;
-if (isset($metabox_data['_uncode_specific_style'][0]) && $metabox_data['_uncode_specific_style'][0] !== '') {
-    $general_style = $metabox_data['_uncode_specific_style'][0];
-} else $general_style = ot_get_option('_uncode_general_style');
+if (isset($metabox_data['_lerp_specific_style'][0]) && $metabox_data['_lerp_specific_style'][0] !== '') {
+    $general_style = $metabox_data['_lerp_specific_style'][0];
+} else $general_style = ot_get_option('_lerp_general_style');
 
 if ($style === '') $style = $general_style;
 
@@ -141,7 +141,7 @@ if ($override_padding === 'yes') {
 if ($expand_height === 'yes') $uncol_classes[] = 'unexpand';
 if ($sticky === 'yes') $uncol_classes[] = 'sticky-element sticky-sidebar';
 
-if (substr_count($content, '[uncode_slider')) {
+if (substr_count($content, '[lerp_slider')) {
     //$is_carousel = true;
     $el_class.= ' column_container';
 }
@@ -329,7 +329,7 @@ if (!empty($back_image) || $overlay_color !== '')
         $background_div_width .= 'margin-left: auto; margin-right: auto;';
     }
 
-    $back_result_array = uncode_get_back_html($back_array, $overlay_color, $overlay_alpha, '', 'column');
+    $back_result_array = lerp_get_back_html($back_array, $overlay_color, $overlay_alpha, '', 'column');
     $background_div = $back_result_array['back_html'];
 }
 
@@ -498,13 +498,13 @@ if ($uncoltable_style != '') $uncoltable_style = ' style="' . esc_attr( $uncolta
 if ($is_carousel) {
     $output.= $content;
 } else {
-    global $uncode_row_child, $uncode_vc_block;
-    if ( !$uncode_vc_block ) {
-        $uncode_row_child -= $width_media;
-        if ($uncode_row_child < 0) {
+    global $lerp_row_child, $lerp_vc_block;
+    if ( !$lerp_vc_block ) {
+        $lerp_row_child -= $width_media;
+        if ($lerp_row_child < 0) {
             $output.= '</div><div class="row-inner">';
-            $uncode_row_child = 12;
-            $uncode_row_child -= $width_media;
+            $lerp_row_child = 12;
+            $lerp_row_child -= $width_media;
         }
     }
     $div_data_attributes = array_map(function ($v, $k) { return $k . '="' . $v . '"'; }, $div_data, array_keys($div_data));
@@ -523,4 +523,4 @@ if ($is_carousel) {
     $output.= '</div>';
 }
 
-echo uncode_remove_wpautop($output);
+echo lerp_remove_wpautop($output);

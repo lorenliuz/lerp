@@ -27,5 +27,5 @@ $div_data_attributes = array_map(function ($v, $k) { return $k . '="' . $v . '"'
 
 ?>
 <div class="<?php echo esc_attr($css_class); ?>" <?php echo implode(' ', $div_data_attributes); ?>>
-	<div class="messagebox_text<?php echo esc_attr($message_color); ?>"><?php echo uncode_remove_wpautop($content, true); ?></div>
+	<div class="messagebox_text<?php echo esc_attr($message_color); ?>"><?php echo lerp_remove_wpautop($content, true); ?></div>
 </div>

@@ -1,6 +1,6 @@
 <?php
 
-function uncode_ajax_update_license() {
+function lerp_ajax_update_license() {
     $postdata = (Array)json_decode(file_get_contents("php://input"));
 
     $user_name = str_replace(' ', '', isset($postdata['user_name']) ? $postdata['user_name'] : '');
@@ -8,7 +8,7 @@ function uncode_ajax_update_license() {
     $purchase_code = str_replace(' ', '', isset($postdata['purchase_code']) ? $postdata['purchase_code'] : '');
     $force_activation = isset( $postdata[ 'force_activation' ] ) && $postdata[ 'force_activation' ] ? true : false;
 
-    $communicator = new UncodeCommunicator();
+    $communicator = new LerpCommunicator();
     $envato = new Envato();
     $envato->setAPIKey(ENVATO_KEY);
 
@@ -52,7 +52,7 @@ function uncode_ajax_update_license() {
     if (!empty($errors) || !$ok_purchase_code) {
         wp_send_json_error(array("ERROR"));
     } else {
-        update_option('uncode-wordpress-data', json_encode($data));
+        update_option('lerp-wordpress-data', json_encode($data));
 
         if ( ! $already_in_use || $force_activation ) {
 			$server_name = empty($_SERVER['SERVER_NAME']) ? $_SERVER['HTTP_HOST']: $_SERVER['SERVER_NAME'];
@@ -68,4 +68,4 @@ function uncode_ajax_update_license() {
 
     wp_die();
 }
-add_action( 'wp_ajax_update_license', 'uncode_ajax_update_license' );
+add_action( 'wp_ajax_update_license', 'lerp_ajax_update_license' );

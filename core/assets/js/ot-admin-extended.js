@@ -1,5 +1,5 @@
 (function($) {
-	OT_UI.uncode_init = function() {
+	OT_UI.lerp_init = function() {
 			OT_UI.adaptive();
 		},
 		OT_UI.adaptive = function() {
@@ -12,7 +12,7 @@
 						action: 'list_images',
 					},
 					complete: function(data) {
-						$('#setting__uncode_adaptive').append('<div id="ai-space-wrap" />');
+						$('#setting__lerp_adaptive').append('<div id="ai-space-wrap" />');
 						$('#ai-space-wrap').append('<div class="ai-space">' + data.responseText + '</div>');
 						var button = $('<button class="option-tree-ui-button button">Delete all AI images</button>');
 						button.on('click', function(e) {
@@ -48,8 +48,8 @@
 				if (!$(this).parent().hasClass('select-wrapper')) {
 					$(this).wrap('<div class="select-wrapper" />');
 				}
-				if ($(this).hasClass('uncode-color-select')) {
-					$(this).closest('.select-wrapper').addClass('select-uncode-colors');
+				if ($(this).hasClass('lerp-color-select')) {
+					$(this).closest('.select-wrapper').addClass('select-lerp-colors');
 					if (window.navigator.userAgent.indexOf("Windows NT 10.0") == -1) {
 						$(this).easyDropDown({
 							cutOff: 10
@@ -85,8 +85,8 @@
 			// Open up the media manager to handle editing image metadata.
 			$(document).on('click', '.ot_upload_media', function(e) {
 				e.preventDefault();
-				var uncode_frames = {}, // Store our workflows in an object
-					frame_id = 'uncode-editor', // Unique ID for each workflow
+				var lerp_frames = {}, // Store our workflows in an object
+					frame_id = 'lerp-editor', // Unique ID for each workflow
 					default_view = wp.media.view.AttachmentsBrowser, // Store the default view to restore it later
 					media = wp.media,
 					field_id = $(this).parent('.option-tree-ui-upload-parent').find('input').attr('id'),
@@ -94,14 +94,14 @@
 					save_attachment_id = $('#' + field_id).val(),
 					btnContent = '';
 				// If the media frame already exists, reopen it.
-				if (uncode_frames[frame_id]) {
-					uncode_frames[frame_id].open();
+				if (lerp_frames[frame_id]) {
+					lerp_frames[frame_id].open();
 					return;
 				}
 				media.view.uploadMediaView = media.View.extend({
 					tagName: 'div',
-					className: 'uploader-uncode-media',
-					template: media.template('uploader-uncode-media'),
+					className: 'uploader-lerp-media',
+					template: media.template('uploader-lerp-media'),
 					events: {
 						'click .close': 'hide',
 						'paste #mle-code': 'entercode',
@@ -139,8 +139,8 @@
 					recordmedia: function() {
 						var $this = this,
 							$el = $(this.$el),
-							$button = uncode_frames[frame_id].$el.find('.media-button-select');
-						if (uncode_frames[frame_id].content.get().el.className == 'uploader-uncode-media') {
+							$button = lerp_frames[frame_id].$el.find('.media-button-select');
+						if (lerp_frames[frame_id].content.get().el.className == 'uploader-lerp-media') {
 							$button.attr('disabled', 'disabled');
 							$.ajax({
 								type: 'POST',
@@ -157,8 +157,8 @@
 										$('#' + field_id + '_media .oembed').get_oembed(null, true);
 										$('#' + field_id + '_media .spinner').removeClass('visible');
 										$button.removeAttr('disabled');
-										uncode_frames[frame_id].off('select');
-										uncode_frames[frame_id].close();
+										lerp_frames[frame_id].off('select');
+										lerp_frames[frame_id].close();
 									}
 								}
 							});
@@ -168,7 +168,7 @@
 					},
 					ready: function() {
 						var $this = this,
-							$button = uncode_frames[frame_id].$el.find('.media-button-select');
+							$button = lerp_frames[frame_id].$el.find('.media-button-select');
 						$button.off('click').on('click', function() {
 							$this.recordmedia();
 						});
@@ -179,14 +179,14 @@
 					}
 				});
 				// Create the media frame.
-				uncode_frames[frame_id] = media({
+				lerp_frames[frame_id] = media({
 					title: $(this).attr('title'),
 					button: {
 						text: option_tree.upload_text
 					},
 					multiple: false
 				});
-				uncode_frames[frame_id].on('router:render:browse', function(routerView) {
+				lerp_frames[frame_id].on('router:render:browse', function(routerView) {
 					routerView.set({
 						upload: {
 							text: 'Upload Files',
@@ -196,22 +196,22 @@
 							text: 'Media Library',
 							priority: 40
 						},
-						uncode: {
+						lerp: {
 							text: 'Upload oEmbed',
 							priority: 30
 						}
 					});
 				});
-				uncode_frames[frame_id].on('content:render:uncode', function() {
-					uncode_frames[frame_id].content.set(new media.view.uploadMediaView({
+				lerp_frames[frame_id].on('content:render:lerp', function() {
+					lerp_frames[frame_id].content.set(new media.view.uploadMediaView({
 						controller: this
 					}));
 				});
-				uncode_frames[frame_id].on('close', function() {
+				lerp_frames[frame_id].on('close', function() {
 					wp.media.view.AttachmentsBrowser = default_view;
 				});
-				uncode_frames[frame_id].on('select', function() {
-					var attachment = uncode_frames[frame_id].state().get('selection').first(),
+				lerp_frames[frame_id].on('select', function() {
+					var attachment = lerp_frames[frame_id].state().get('selection').first(),
 						href = attachment.attributes.url,
 						attachment_id = attachment.attributes.id,
 						mime = attachment.attributes.mime,
@@ -230,21 +230,21 @@
 					$('#' + field_id).parent().parent('div').append('<div class="option-tree-ui-media-wrap" id="' + field_id + '_media" />');
 					$('#' + field_id + '_media').append(btnContent).slideDown();
 					$('#' + field_id + '_media .oembed').get_oembed();
-					uncode_frames[frame_id].off('select');
-					uncode_frames[frame_id].close();
+					lerp_frames[frame_id].off('select');
+					lerp_frames[frame_id].close();
 				});
-				uncode_frames[frame_id].on('open',function() {
-					var selection = uncode_frames[frame_id].state().get('selection'),
+				lerp_frames[frame_id].on('open',function() {
+					var selection = lerp_frames[frame_id].state().get('selection'),
 				  attachment = media.attachment(save_attachment_id);
 				  attachment.fetch();
 				  selection.set( attachment );
 				});
 				// Finally, open the modal.
-				uncode_frames[frame_id].open();
+				lerp_frames[frame_id].open();
 			});
 		},
 		$(document).ready(function() {
-			OT_UI.uncode_init();
+			OT_UI.lerp_init();
 		});
 })(jQuery);
 /*!

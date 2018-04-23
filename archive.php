@@ -8,7 +8,7 @@
  * E.g., it puts together the home page when no home.php file exists.
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package uncode
+ * @package lerp
  */
 
 get_header();
@@ -32,27 +32,27 @@ else {
 if (is_author()) $post_type = 'author_index';
 
 $tax = (isset(get_queried_object()->term_id)) ? get_queried_object()->term_id : '';
-$single_post_width = ot_get_option('_uncode_' . $post_type . '_single_width');
-$single_text_length = ot_get_option('_uncode_' . $post_type . '_single_text_length');
+$single_post_width = ot_get_option('_lerp_' . $post_type . '_single_width');
+$single_text_length = ot_get_option('_lerp_' . $post_type . '_single_text_length');
 set_query_var( 'single_post_width', $single_post_width );
 if ($single_text_length !== '') set_query_var( 'single_text_length', $single_text_length );
 
 /** Get general datas **/
-$style = ot_get_option('_uncode_general_style');
-$bg_color = ot_get_option('_uncode_general_bg_color');
+$style = ot_get_option('_lerp_general_style');
+$bg_color = ot_get_option('_lerp_general_bg_color');
 $bg_color = ($bg_color == '') ? ' style-'.$style.'-bg' : ' style-'.$bg_color.'-bg';
 
 /** Get page width info **/
-$generic_content_full = ot_get_option('_uncode_' . $post_type . '_layout_width');
+$generic_content_full = ot_get_option('_lerp_' . $post_type . '_layout_width');
 if ($generic_content_full === '')
 {
-	$main_content_full = ot_get_option('_uncode_body_full');
+	$main_content_full = ot_get_option('_lerp_body_full');
 	if ($main_content_full === '' || $main_content_full === 'off') $limit_content_width = ' limit-width';
 }
 else
 {
 	if ($generic_content_full === 'limit') {
-		$generic_custom_width = ot_get_option('_uncode_'.$post_type.'_layout_width_custom');
+		$generic_custom_width = ot_get_option('_lerp_'.$post_type.'_layout_width_custom');
 		if (isset($generic_custom_width[0]) && isset($generic_custom_width[1])) {
 			if ($generic_custom_width[1] === 'px') {
 				$page_custom_width[0] = 12 * round(($generic_custom_width[0]) / 12);
@@ -67,52 +67,52 @@ else
 }
 
 /** Collect header data **/
-$page_header_type = ot_get_option('_uncode_' . $post_type . '_header');
+$page_header_type = ot_get_option('_lerp_' . $post_type . '_header');
 if ($page_header_type !== '' && $page_header_type !== 'none')
 {
-	$metabox_data['_uncode_header_type'] = array($page_header_type);
-	$term_back = get_option( '_uncode_taxonomy_' . $tax );
+	$metabox_data['_lerp_header_type'] = array($page_header_type);
+	$term_back = get_option( '_lerp_taxonomy_' . $tax );
 
 	$author = get_user_by( 'slug', get_query_var( 'author_name' ) );
 	if ( is_author() )
-		$user_uncode_meta = get_the_author_meta( 'user_uncode_meta', $author->ID );
+		$user_lerp_meta = get_the_author_meta( 'user_lerp_meta', $author->ID );
 
 	if (isset($term_back['term_media']) && $term_back['term_media'] !== '') {
 		$featured_image = $term_back['term_media'];
-	} elseif ( isset($user_uncode_meta['term_media']) && $user_uncode_meta['term_media'] !== '' ) {
-		$featured_image = $user_uncode_meta['term_media'];
+	} elseif ( isset($user_lerp_meta['term_media']) && $user_lerp_meta['term_media'] !== '' ) {
+		$featured_image = $user_lerp_meta['term_media'];
 	} else {
 		$featured_image = '';
 	}
-	$meta_data = uncode_get_general_header_data($metabox_data, $post_type, $featured_image);
+	$meta_data = lerp_get_general_header_data($metabox_data, $post_type, $featured_image);
 	$metabox_data = $meta_data['meta'];
 	$show_title = $meta_data['show_title'];
 }
 
 /** Get layout info **/
-$activate_sidebar = ot_get_option('_uncode_' . $post_type . '_activate_sidebar');
+$activate_sidebar = ot_get_option('_lerp_' . $post_type . '_activate_sidebar');
 if ($activate_sidebar !== 'off')
 {
-	$layout = ot_get_option('_uncode_' . $post_type . '_sidebar_position');
+	$layout = ot_get_option('_lerp_' . $post_type . '_sidebar_position');
 	if ($layout === '') $layout = 'sidebar_right';
-	$sidebar = ot_get_option('_uncode_' . $post_type . '_sidebar');
-	$sidebar_style = ot_get_option('_uncode_' . $post_type . '_sidebar_style');
-	$sidebar_size = ot_get_option('_uncode_' . $post_type . '_sidebar_size');
-	$sidebar_sticky = ot_get_option('_uncode_' . $post_type . '_sidebar_sticky');
+	$sidebar = ot_get_option('_lerp_' . $post_type . '_sidebar');
+	$sidebar_style = ot_get_option('_lerp_' . $post_type . '_sidebar_style');
+	$sidebar_size = ot_get_option('_lerp_' . $post_type . '_sidebar_size');
+	$sidebar_sticky = ot_get_option('_lerp_' . $post_type . '_sidebar_sticky');
 	$sidebar_sticky = ($sidebar_sticky === 'on') ? ' sticky-element sticky-sidebar' : '';
-	$sidebar_fill = ot_get_option('_uncode_' . $post_type . '_sidebar_fill');
-	$sidebar_bg_color = ot_get_option('_uncode_' . $post_type . '_sidebar_bgcolor');
+	$sidebar_fill = ot_get_option('_lerp_' . $post_type . '_sidebar_fill');
+	$sidebar_bg_color = ot_get_option('_lerp_' . $post_type . '_sidebar_bgcolor');
 	$sidebar_bg_color = ($sidebar_bg_color !== '') ? ' style-' . $sidebar_bg_color . '-bg' : '';
 	if ($sidebar_style === '') $sidebar_style = $style;
 }
 
 /** Get breadcrumb info **/
-$generic_breadcrumb = ot_get_option('_uncode_' . $post_type . '_breadcrumb');
+$generic_breadcrumb = ot_get_option('_lerp_' . $post_type . '_breadcrumb');
 $show_breadcrumb = ($generic_breadcrumb === 'off') ? false : true;
-if ($show_breadcrumb) $breadcrumb_align = ot_get_option('_uncode_' . $post_type . '_breadcrumb_align');
+if ($show_breadcrumb) $breadcrumb_align = ot_get_option('_lerp_' . $post_type . '_breadcrumb_align');
 
 /** Get title info **/
-$generic_show_title = ot_get_option('_uncode_' . $post_type . '_title');
+$generic_show_title = ot_get_option('_lerp_' . $post_type . '_title');
 $show_title = ($generic_show_title === 'off') ? false : true;
 
 /**
@@ -125,14 +125,14 @@ $posts_counter = $wp_query->post_count;
 /** Build header **/
 if ($page_header_type !== '' && $page_header_type !== 'none')
 {
-	$get_title = uncode_archive_title();
+	$get_title = lerp_archive_title();
 	$get_subtitle = isset(get_queried_object()->description) ? get_queried_object()->description : '';
 	$page_header = new unheader($metabox_data, $get_title, $get_subtitle);
 
 	$header_html = $page_header->html;
 	if ($header_html !== '') {
 		echo '<div id="page-header">';
-		echo uncode_remove_wpautop( $page_header->html );
+		echo lerp_remove_wpautop( $page_header->html );
 		echo '</div>';
 	}
 }
@@ -145,16 +145,16 @@ if ($show_breadcrumb)
 	if ($breadcrumb_align === '') $breadcrumb_align = 'right';
 	$breadcrumb_align = ' text-' . $breadcrumb_align;
 
-	$content_breadcrumb = uncode_breadcrumbs();
-	$breadcrumb_title = '<div class="breadcrumb-title h5 text-bold">' . uncode_archive_title() . '</div>';
-	echo uncode_get_row_template($breadcrumb_title . $content_breadcrumb, '', ($page_custom_width !== '' ? ' limit-width' : $limit_content_width), $style, ' row-breadcrumb row-breadcrumb-' . $style . $breadcrumb_align, 'half', true, 'half');
+	$content_breadcrumb = lerp_breadcrumbs();
+	$breadcrumb_title = '<div class="breadcrumb-title h5 text-bold">' . lerp_archive_title() . '</div>';
+	echo lerp_get_row_template($breadcrumb_title . $content_breadcrumb, '', ($page_custom_width !== '' ? ' limit-width' : $limit_content_width), $style, ' row-breadcrumb row-breadcrumb-' . $style . $breadcrumb_align, 'half', true, 'half');
 }
 
 /** Build title **/
 
 if ($show_title)
 {
-	$get_title = uncode_archive_title();
+	$get_title = lerp_archive_title();
 	$title_content = '<div class="post-title-wrapper"><h1 class="post-title">' . $get_title . '</h1></div>';
 }
 
@@ -162,7 +162,7 @@ $the_content .= $title_content;
 
 if (have_posts()):
 
-	$generic_body_content_block = ot_get_option('_uncode_' . $post_type . '_content_block');
+	$generic_body_content_block = ot_get_option('_lerp_' . $post_type . '_content_block');
 
 	if ($generic_body_content_block === '') {
 
@@ -193,7 +193,7 @@ if (have_posts()):
 	} else {
 
 		$generic_body_content_block = apply_filters( 'wpml_object_id', $generic_body_content_block, 'post' );
-		$uncode_block = get_post_field('post_content', $generic_body_content_block);
+		$lerp_block = get_post_field('post_content', $generic_body_content_block);
 		$archive_query = ' loop="size:'.get_option('posts_per_page').'|order_by:date|post_type:'.(!is_date() ? $post->post_type : 'post');
 
 		if (is_author()) {
@@ -221,9 +221,9 @@ if (have_posts()):
 			else $archive_query .= '"';
 		}
 
-		$regex = '/\[uncode_index(.*?)\]/';
+		$regex = '/\[lerp_index(.*?)\]/';
 		$regex_attr = '/(.*?)=\"(.*?)\"/';
-		preg_match_all($regex, $uncode_block, $matches, PREG_SET_ORDER);
+		preg_match_all($regex, $lerp_block, $matches, PREG_SET_ORDER);
 		foreach ($matches as $key => $value) {
 			$index_found = false;
 			$index_pagination = false;
@@ -249,12 +249,12 @@ if (have_posts()):
 				if ($index_count === 0) {
 					$value[1] .= $archive_query;
 				}
-				$replacement = '[uncode_index' . $value[1] . ']';
-				$uncode_block = str_replace($value[0], $replacement, $uncode_block);
+				$replacement = '[lerp_index' . $value[1] . ']';
+				$lerp_block = str_replace($value[0], $replacement, $lerp_block);
 				if ($index_pagination || $index_infinite) $index_has_navigation = true;
 			}
 		}
-		$the_content .= $uncode_block;
+		$the_content .= $lerp_block;
 
 	}
 
@@ -358,18 +358,18 @@ if (have_posts()):
 	} else {
 
 		/** Create html without sidebar **/
-		if ($generic_body_content_block === '') $the_content = '<div class="post-content"' . $page_custom_width . '>' . uncode_get_row_template($the_content, $limit_width, $limit_content_width, $style, '', 'double', true, 'double') . '</div>';
+		if ($generic_body_content_block === '') $the_content = '<div class="post-content"' . $page_custom_width . '>' . lerp_get_row_template($the_content, $limit_width, $limit_content_width, $style, '', 'double', true, 'double') . '</div>';
 		else $the_content = '<div class="post-content"' . $page_custom_width . '>' . $the_content . '</div>';
 
 	}
 
 	/** Build and display navigation html **/
 	if (!$index_has_navigation) {
-		$navigation_option = ot_get_option('_uncode_' . $post_type . '_navigation_activate');
+		$navigation_option = ot_get_option('_lerp_' . $post_type . '_navigation_activate');
 		if ($navigation_option !== 'off')
 		{
-			$navigation = uncode_posts_navigation();
-			if (!empty($navigation) && $navigation !== '') $navigation_content = uncode_get_row_template($navigation, '', $limit_content_width, $style, ' row-navigation row-navigation-' . $style, true, true, true);
+			$navigation = lerp_posts_navigation();
+			if (!empty($navigation) && $navigation !== '') $navigation_content = lerp_get_row_template($navigation, '', $limit_content_width, $style, ' row-navigation row-navigation-' . $style, true, true, true);
 		}
 	}
 

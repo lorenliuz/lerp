@@ -25,75 +25,75 @@ add_filter('ot_show_docs', '__return_false');
  */
 add_filter('ot_meta_boxes', '__return_true');
 
-function uncode_upload_text() {
+function lerp_upload_text() {
     return 'Insert to options';
 }
-add_filter('ot_upload_text', 'uncode_upload_text', 10, 2);
+add_filter('ot_upload_text', 'lerp_upload_text', 10, 2);
 
-function uncode_id()
+function lerp_id()
 {
-	return 'uncode';
+	return 'lerp';
 }
 
-add_filter('ot_options_id', 'uncode_id', 10, 2);
+add_filter('ot_options_id', 'lerp_id', 10, 2);
 
-function uncode_settings_id()
+function lerp_settings_id()
 {
-	return 'uncode_settings';
+	return 'lerp_settings';
 }
 
-add_filter('ot_settings_id', 'uncode_settings_id', 10, 2);
+add_filter('ot_settings_id', 'lerp_settings_id', 10, 2);
 
-function uncode_layouts_id()
+function lerp_layouts_id()
 {
-	return 'uncode_layouts';
+	return 'lerp_layouts';
 }
 
-add_filter('ot_layouts_id', 'uncode_layouts_id', 10, 2);
+add_filter('ot_layouts_id', 'lerp_layouts_id', 10, 2);
 
-function uncode_header_logo_link()
+function lerp_header_logo_link()
 {
 	return '';
 }
 
-add_filter('ot_header_logo_link', 'uncode_header_logo_link', 10, 2);
+add_filter('ot_header_logo_link', 'lerp_header_logo_link', 10, 2);
 
 function custom_theme_options_menu_slug() {
-    return 'uncode-options';
+    return 'lerp-options';
 }
 add_filter('ot_theme_options_menu_slug', 'custom_theme_options_menu_slug', 10, 2);
 
-function uncode_admin_slug() {
-	return 'uncode-system-status';
+function lerp_admin_slug() {
+	return 'lerp-system-status';
 }
 
-add_filter('ot_theme_options_parent_slug', 'uncode_admin_slug');
+add_filter('ot_theme_options_parent_slug', 'lerp_admin_slug');
 
-function uncode_to_title() {
-	return esc_html__('Theme Options','uncode');
+function lerp_to_title() {
+	return esc_html__('Theme Options','lerp');
 }
 
-add_filter('ot_theme_options_menu_title', 'uncode_to_title');
-add_filter('ot_theme_options_page_title', 'uncode_to_title');
+add_filter('ot_theme_options_menu_title', 'lerp_to_title');
+add_filter('ot_theme_options_page_title', 'lerp_to_title');
 
 function custom_register_pages_array($array) {
 	unset($array[0]);
-  $array[1]['parent_slug'] = 'uncode-system-status';
-  $array[1]['page_title'] = esc_html__('Options Import/Export','uncode');
-  $array[1]['menu_title'] = esc_html__('Options Utils','uncode');
+  $array[1]['parent_slug'] = 'lerp-system-status';
+  $array[1]['page_title'] = esc_html__('Options Import/Export','lerp');
+  $array[1]['menu_title'] = esc_html__('Options Utils','lerp');
   return $array;
 }
 add_filter('ot_register_pages_array', 'custom_register_pages_array', 10, 2);
 
 //ot_register_pages_array
-function uncode_header_version_text()
+function lerp_header_version_text()
 {
-	return esc_html__('Version','uncode') . ' ' . UNCODE_VERSION;
+	return esc_html__('Version','lerp') . ' ' . UNCODE_VERSION;
 }
 
-add_filter('ot_header_version_text', 'uncode_header_version_text', 10, 2);
+add_filter('ot_header_version_text', 'lerp_header_version_text', 10, 2);
 
-function uncode_type_background_size_choices()
+function lerp_type_background_size_choices()
 {
 	return array(
 		array(
@@ -115,32 +115,32 @@ function uncode_type_background_size_choices()
 	);
 }
 
-add_filter('ot_type_background_size_choices', 'uncode_type_background_size_choices', 10, 2);
+add_filter('ot_type_background_size_choices', 'lerp_type_background_size_choices', 10, 2);
 
-if (!function_exists('ot_recognized_uncode_color'))
+if (!function_exists('ot_recognized_lerp_color'))
 {
 
-	function ot_recognized_uncode_color($field_id = '')
+	function ot_recognized_lerp_color($field_id = '')
 	{
 
 		global $UNCODE_COLORS;
 
-		return apply_filters('ot_recognized_uncode_color', $UNCODE_COLORS, $field_id);
+		return apply_filters('ot_recognized_lerp_color', $UNCODE_COLORS, $field_id);
 	}
 }
 
-if (!function_exists('ot_recognized_uncode_colors_w_transp'))
+if (!function_exists('ot_recognized_lerp_colors_w_transp'))
 {
 
-	function ot_recognized_uncode_colors_w_transp($field_id = '')
+	function ot_recognized_lerp_colors_w_transp($field_id = '')
 	{
 
 		global $UNCODE_COLORS;
 
-		return apply_filters('ot_recognized_uncode_colors_w_transp', array_merge(array(
+		return apply_filters('ot_recognized_lerp_colors_w_transp', array_merge(array(
 			array(
 				'value' => 'transparent',
-				'label' => esc_html__('Transparent', 'uncode')
+				'label' => esc_html__('Transparent', 'lerp')
 			)
 		) , $UNCODE_COLORS) , $field_id);
 	}
@@ -196,9 +196,9 @@ function ot_type_background($args = array())
 
 		$background_color = isset($field_value['background-color']) ? esc_attr($field_value['background-color']) : '';
 
-		echo '<select name="' . esc_attr($field_name) . '[background-color]" id="' . esc_attr($field_id) . '-color" class="option-tree-ui-select uncode-color-select ' . esc_attr($field_class) . '">';
+		echo '<select name="' . esc_attr($field_name) . '[background-color]" id="' . esc_attr($field_id) . '-color" class="option-tree-ui-select lerp-color-select ' . esc_attr($field_class) . '">';
 
-		$colors_array = ot_recognized_uncode_color($field_id);
+		$colors_array = ot_recognized_lerp_color($field_id);
 
 		array_unshift($colors_array, array(
 			'value' => '',
@@ -225,7 +225,7 @@ function ot_type_background($args = array())
 
 		echo '<select name="' . esc_attr($field_name) . '[background-repeat]" id="' . esc_attr($field_id) . '-repeat" class="option-tree-ui-select ' . esc_attr($field_class) . '">';
 
-		echo '<option value="">' . esc_html__('background-repeat', 'uncode') . '</option>';
+		echo '<option value="">' . esc_html__('background-repeat', 'lerp') . '</option>';
 		foreach (ot_recognized_background_repeat($field_id) as $key => $value)
 		{
 
@@ -243,7 +243,7 @@ function ot_type_background($args = array())
 
 		echo '<select name="' . esc_attr($field_name) . '[background-attachment]" id="' . esc_attr($field_id) . '-attachment" class="option-tree-ui-select ' . $field_class . '">';
 
-		echo '<option value="">' . esc_html__('background-attachment', 'uncode') . '</option>';
+		echo '<option value="">' . esc_html__('background-attachment', 'lerp') . '</option>';
 
 		foreach (ot_recognized_background_attachment($field_id) as $key => $value)
 		{
@@ -262,7 +262,7 @@ function ot_type_background($args = array())
 
 		echo '<select name="' . esc_attr($field_name) . '[background-position]" id="' . esc_attr($field_id) . '-position" class="option-tree-ui-select ' . esc_attr($field_class) . '">';
 
-		echo '<option value="">' . esc_html__('background-position', 'uncode') . '</option>';
+		echo '<option value="">' . esc_html__('background-position', 'lerp') . '</option>';
 
 		foreach (ot_recognized_background_position($field_id) as $key => $value)
 		{
@@ -298,7 +298,7 @@ function ot_type_background($args = array())
 		else
 		{
 
-			echo '<input type="text" name="' . esc_attr($field_name) . '[background-size]" id="' . esc_attr($field_id) . '-size" value="' . (isset($field_value['background-size']) ? esc_attr($field_value['background-size']) : '') . '" class="widefat ot-background-size-input option-tree-ui-input ' . esc_attr($field_class) . '" placeholder="' . esc_html__('background-size', 'uncode') . '" />';
+			echo '<input type="text" name="' . esc_attr($field_name) . '[background-size]" id="' . esc_attr($field_id) . '-size" value="' . (isset($field_value['background-size']) ? esc_attr($field_value['background-size']) : '') . '" class="widefat ot-background-size-input option-tree-ui-input ' . esc_attr($field_class) . '" placeholder="' . esc_html__('background-size', 'lerp') . '" />';
 		}
 	}
 
@@ -313,7 +313,7 @@ function ot_type_background($args = array())
             echo '<input type="text" name="' . esc_attr( $field_name ) . '[background-image]" id="' . esc_attr( $field_id ) . '" value="' . ( isset( $field_value['background-image'] ) ? esc_attr( $field_value['background-image'] ) : '' ) . '" class="widefat option-tree-ui-upload-input ' . esc_attr( $field_class ) . '" />';
 
             /* add media button */
-            echo '<a href="javascript:void(0);" class="ot_upload_media option-tree-ui-button button button-secondary light" rel="' . $post_id . '" title="' . esc_html__( 'Add Media', 'uncode' ) . '"><span class="icon fa fa-plus2"></span>' . esc_html__( 'Add Media', 'uncode' ) . '</a>';
+            echo '<a href="javascript:void(0);" class="ot_upload_media option-tree-ui-button button button-secondary light" rel="' . $post_id . '" title="' . esc_html__( 'Add Media', 'lerp' ) . '"><span class="icon fa fa-plus2"></span>' . esc_html__( 'Add Media', 'lerp' ) . '</a>';
 
           echo '</div>';
 
@@ -328,7 +328,7 @@ function ot_type_background($args = array())
               else echo '<div class="option-tree-ui-image-wrap"><div class="oembed"><span class="spinner" style="display: block; float: left;"></span></div><div class="oembed_code" style="display: none;">' . esc_url( $post->guid ) . '</div></div>';
             }
 
-              echo '<a href="javascript:(void);" class="option-tree-ui-remove-media option-tree-ui-button button button-secondary light" title="' . esc_html__( 'Remove Media', 'uncode' ) . '"><span class="icon fa fa-minus2"></span>' . esc_html__( 'Remove Media', 'uncode' ) . '</a>';
+              echo '<a href="javascript:(void);" class="option-tree-ui-remove-media option-tree-ui-button button button-secondary light" title="' . esc_html__( 'Remove Media', 'lerp' ) . '"><span class="icon fa fa-minus2"></span>' . esc_html__( 'Remove Media', 'lerp' ) . '</a>';
 
             echo '</div>';
 
@@ -392,7 +392,7 @@ if ( ! function_exists( 'ot_type_upload' ) ) {
           echo '<input type="text" name="' . esc_attr( $field_name ) . '" id="' . esc_attr( $field_id ) . '" value="' . esc_attr( $field_value ) . '" class="widefat option-tree-ui-upload-input ' . esc_attr( $field_class ) . '" readonly />';
 
           /* add media button */
-          echo '<a href="javascript:void(0);" class="ot_upload_media option-tree-ui-button button button-secondary light" rel="' . $post_id . '" title="' . esc_html__( 'Add Media', 'uncode' ) . '"><span class="icon fa fa-plus2"></span>' . esc_html__( 'Add Media', 'uncode' ) . '</a>';
+          echo '<a href="javascript:void(0);" class="ot_upload_media option-tree-ui-button button button-secondary light" rel="' . $post_id . '" title="' . esc_html__( 'Add Media', 'lerp' ) . '"><span class="icon fa fa-plus2"></span>' . esc_html__( 'Add Media', 'lerp' ) . '</a>';
 
         echo '</div>';
 
@@ -411,7 +411,7 @@ if ( ! function_exists( 'ot_type_upload' ) ) {
               echo '<div class="option-tree-ui-image-wrap"><img src="' . esc_url( $field_value ) . '" alt="" /></div>';
             else echo '<div class="option-tree-ui-image-wrap"><div class="option-tree-ui-image-wrap"><div class="oembed" onload="alert(\'load\');"><span class="spinner" style="display: block; float: left;"></span></div><div class="oembed_code" style="display: none;">' . esc_url( $field_value ) . '</div></div></div>';
 
-            echo '<a href="javascript:(void);" class="option-tree-ui-remove-media option-tree-ui-button button button-secondary light" title="' . esc_html__( 'Remove Media', 'uncode' ) . '"><span class="icon fa fa-minus2"></span>' . esc_html__( 'Remove Media', 'uncode' ) . '</a>';
+            echo '<a href="javascript:(void);" class="option-tree-ui-remove-media option-tree-ui-button button button-secondary light" title="' . esc_html__( 'Remove Media', 'lerp' ) . '"><span class="icon fa fa-minus2"></span>' . esc_html__( 'Remove Media', 'lerp' ) . '</a>';
 
           echo '</div>';
 
@@ -448,7 +448,7 @@ if ( ! function_exists( 'ot_list_item_view' ) ) {
     $required_setting = array(
 		array(
 			'id'        => 'title',
-			'label'     => esc_html__( 'Title', 'uncode' ),
+			'label'     => esc_html__( 'Title', 'lerp' ),
 			'desc'      => '',
 			'std'       => '',
 			'type'      => 'text',
@@ -481,11 +481,11 @@ if ( ! function_exists( 'ot_list_item_view' ) ) {
     <div class="option-tree-setting">
       <div class="open">' . ( isset( $list_item['title'] ) ? esc_attr( $list_item['title'] ) : '' ) . '</div>
       <div class="button-section">
-        <a href="javascript:void(0);" class="option-tree-setting-edit option-tree-ui-button button" title="' . esc_html__( 'Edit', 'uncode' ) . '">
-          <span class="icon ot-icon-pencil"></span>' . esc_html__( 'Edit', 'uncode' ) . '
+        <a href="javascript:void(0);" class="option-tree-setting-edit option-tree-ui-button button" title="' . esc_html__( 'Edit', 'lerp' ) . '">
+          <span class="icon ot-icon-pencil"></span>' . esc_html__( 'Edit', 'lerp' ) . '
         </a>
-        <a href="javascript:void(0);" class="option-tree-setting-remove option-tree-ui-button button button-secondary light" title="' . esc_html__( 'Delete', 'uncode' ) . '">
-          <span class="icon ot-icon-trash-o"></span>' . esc_html__( 'Delete', 'uncode' ) . '
+        <a href="javascript:void(0);" class="option-tree-setting-remove option-tree-ui-button button button-secondary light" title="' . esc_html__( 'Delete', 'lerp' ) . '">
+          <span class="icon ot-icon-trash-o"></span>' . esc_html__( 'Delete', 'lerp' ) . '
         </a>
       </div>
       <div class="option-tree-setting-body">';
@@ -605,7 +605,7 @@ if ( ! function_exists( 'ot_list_item_view' ) ) {
 }
 
 /**
- * Uncode color select option type.
+ * Lerp color select option type.
  *
  * See @ot_display_by_type to see the full list of available arguments.
  *
@@ -615,10 +615,10 @@ if ( ! function_exists( 'ot_list_item_view' ) ) {
  * @access    public
  * @since     2.0
  */
-if (!function_exists('ot_type_uncode_color'))
+if (!function_exists('ot_type_lerp_color'))
 {
 
-	function ot_type_uncode_color($args = array())
+	function ot_type_lerp_color($args = array())
 	{
 
 		/* turns arguments array into variables */
@@ -634,9 +634,9 @@ if (!function_exists('ot_type_uncode_color'))
 		//if ($has_desc) echo '<div class="description">' . htmlspecialchars_decode($field_desc) . '</div>';
 
 		/* filter choices array */
-		$field_choices = apply_filters('ot_recognized_uncode_color', $field_choices, $field_id);
+		$field_choices = apply_filters('ot_recognized_lerp_color', $field_choices, $field_id);
 
-		$colors_array = ot_recognized_uncode_color($field_id);
+		$colors_array = ot_recognized_lerp_color($field_id);
 		array_unshift($colors_array, array(
 			'value' => '',
 			'label' => 'Select…'
@@ -646,7 +646,7 @@ if (!function_exists('ot_type_uncode_color'))
 		echo '<div class="format-setting-inner">';
 
 		/* build select */
-		echo '<select name="' . esc_attr($field_name) . '" id="' . esc_attr($field_id) . '" class="option-tree-ui-select uncode-color-select ' . esc_attr($field_class) . '">';
+		echo '<select name="' . esc_attr($field_name) . '" id="' . esc_attr($field_id) . '" class="option-tree-ui-select lerp-color-select ' . esc_attr($field_class) . '">';
 		foreach ($colors_array as $key => $value)
 		{
 			if (isset($value['disabled'])) echo '<option value="" disabled>' . esc_attr($value['label']) . '</option>';
@@ -665,7 +665,7 @@ if (!function_exists('ot_type_uncode_color'))
 }
 
 /**
- * Uncode color with transparense select option type.
+ * Lerp color with transparense select option type.
  *
  * See @ot_display_by_type to see the full list of available arguments.
  *
@@ -675,10 +675,10 @@ if (!function_exists('ot_type_uncode_color'))
  * @access    public
  * @since     2.0
  */
-if (!function_exists('ot_type_uncode_colors_w_transp'))
+if (!function_exists('ot_type_lerp_colors_w_transp'))
 {
 
-	function ot_type_uncode_colors_w_transp($args = array())
+	function ot_type_lerp_colors_w_transp($args = array())
 	{
 
 		/* turns arguments array into variables */
@@ -694,9 +694,9 @@ if (!function_exists('ot_type_uncode_colors_w_transp'))
 		//if ($has_desc) echo '<div class="description">' . htmlspecialchars_decode($field_desc) . '</div>';
 
 		/* filter choices array */
-		$field_choices = apply_filters('ot_recognized_uncode_colors_w_transp', $field_choices, $field_id);
+		$field_choices = apply_filters('ot_recognized_lerp_colors_w_transp', $field_choices, $field_id);
 
-		$colors_array = ot_recognized_uncode_colors_w_transp($field_id);
+		$colors_array = ot_recognized_lerp_colors_w_transp($field_id);
 		array_unshift($colors_array, array(
 			'value' => '',
 			'label' => 'Select…'
@@ -706,7 +706,7 @@ if (!function_exists('ot_type_uncode_colors_w_transp'))
 		echo '<div class="format-setting-inner">';
 
 		/* build select */
-		echo '<select name="' . esc_attr($field_name) . '" id="' . esc_attr($field_id) . '" class="option-tree-ui-select uncode-color-select ' . esc_attr($field_class) . '">';
+		echo '<select name="' . esc_attr($field_name) . '" id="' . esc_attr($field_id) . '" class="option-tree-ui-select lerp-color-select ' . esc_attr($field_class) . '">';
 		foreach ($colors_array as $key => $value)
 		{
 			if (isset($value['disabled'])) echo '<option value="" disabled>' . esc_attr($value['label']) . '</option>';
@@ -732,20 +732,20 @@ function big_rand( $len = 6 ) {
     return substr( $rand , 0 , $len );
 }
 
-function uncode_is_not_null($val){
+function lerp_is_not_null($val){
 	return !empty($val);
 }
 
-function uncode_css_upload_error_notice() {
+function lerp_css_upload_error_notice() {
     ?>
     <div class="error">
-        <p><?php esc_html_e( 'Failed to save the dynamics css files!', 'uncode' ); ?></p>
+        <p><?php esc_html_e( 'Failed to save the dynamics css files!', 'lerp' ); ?></p>
     </div>
     <?php
 }
 
-if (!function_exists('uncode_create_dynamic_css')) {
-	function uncode_create_dynamic_css() {
+if (!function_exists('lerp_create_dynamic_css')) {
+	function lerp_create_dynamic_css() {
 
 		$css_dir = get_template_directory() . '/lib/assets/css/';
 		ob_start(); // Capture all output (output buffering)
@@ -784,22 +784,22 @@ if (!function_exists('uncode_create_dynamic_css')) {
 			);
 	}
 }
-add_action('ot_after_theme_options_save', 'uncode_create_dynamic_css');
+add_action('ot_after_theme_options_save', 'lerp_create_dynamic_css');
 
-add_action('wp_ajax_css_compile_ajax', 'uncode_create_dynamic_css_ajax');
-if (!function_exists('uncode_create_dynamic_css_ajax')):
+add_action('wp_ajax_css_compile_ajax', 'lerp_create_dynamic_css_ajax');
+if (!function_exists('lerp_create_dynamic_css_ajax')):
 /**
- * @since Uncode 1.5.0
+ * @since Lerp 1.5.0
  */
-function uncode_create_dynamic_css_ajax() {
+function lerp_create_dynamic_css_ajax() {
 
-	uncode_create_dynamic_css();
+	lerp_create_dynamic_css();
 
 	die();
 }
-endif;//uncode_create_dynamic_css_ajax
+endif;//lerp_create_dynamic_css_ajax
 
-function uncode_init_color() {
+function lerp_init_color() {
 	if (is_admin() && isset($_GET['first'] )) {
 		global $front_background_colors;
 		$front_background_colors = array(
@@ -820,17 +820,17 @@ function uncode_init_color() {
 	    'color-zsdf' => '#FFC42E',
 	    'accent' => '#0cb4ce',
 		);
-		uncode_create_dynamic_css();
+		lerp_create_dynamic_css();
 	}
 }
 
-add_action('admin_init', 'uncode_init_color');
+add_action('admin_init', 'lerp_init_color');
 
-if ( ! function_exists( 'uncode_darken_color' ) ) :
+if ( ! function_exists( 'lerp_darken_color' ) ) :
 /**
- * @since Uncode 1.6.0
+ * @since Lerp 1.6.0
  */
-function uncode_darken_color($hex, $steps=-12.75) {
+function lerp_darken_color($hex, $steps=-12.75) {
     $steps = max(-255, min(255, $steps));
 
     $hex = str_replace('#', '', $hex);
@@ -849,37 +849,37 @@ function uncode_darken_color($hex, $steps=-12.75) {
 
     return $return;
 }
-endif;//uncode_darken_color
+endif;//lerp_darken_color
 
-if ( ! function_exists( 'uncode_get_colors_via_ajax' ) ) :
+if ( ! function_exists( 'lerp_get_colors_via_ajax' ) ) :
 /**
- * @since Uncode 2.0.0
+ * @since Lerp 2.0.0
  */
-function uncode_get_colors_via_ajax() {
-	$colors_array = ot_recognized_uncode_color();
+function lerp_get_colors_via_ajax() {
+	$colors_array = ot_recognized_lerp_color();
 
 	wp_send_json( $colors_array );
 }
 endif;
-add_action( 'wp_ajax_uncode_get_colors', 'uncode_get_colors_via_ajax' );
+add_action( 'wp_ajax_lerp_get_colors', 'lerp_get_colors_via_ajax' );
 
-if ( ! function_exists( 'uncode_get_font_family_via_ajax' ) ) :
+if ( ! function_exists( 'lerp_get_font_family_via_ajax' ) ) :
 /**
- * @since Uncode 2.0.0
+ * @since Lerp 2.0.0
  */
-function uncode_get_font_family_via_ajax() {
+function lerp_get_font_family_via_ajax() {
 	$custom_fonts = array(
 		array(
 			'value' => '',
-			'label' => esc_html__('Default CSS', "uncode"),
+			'label' => esc_html__('Default CSS', "lerp"),
 		)
 	);
 
-	$custom_fonts_array = ot_get_option('_uncode_font_groups');
+	$custom_fonts_array = ot_get_option('_lerp_font_groups');
 	if (!empty($custom_fonts_array)) {
 		foreach ($custom_fonts_array as $key => $value) {
 			$custom_fonts[] = array(
-				'value' => $value['_uncode_font_group_unique_id'],
+				'value' => $value['_lerp_font_group_unique_id'],
 				'label' => $value['title'],
 			);
 		}
@@ -888,45 +888,45 @@ function uncode_get_font_family_via_ajax() {
 	wp_send_json( $custom_fonts );
 }
 endif;
-add_action( 'wp_ajax_uncode_get_font_family', 'uncode_get_font_family_via_ajax' );
+add_action( 'wp_ajax_lerp_get_font_family', 'lerp_get_font_family_via_ajax' );
 
-if ( ! function_exists( 'uncode_get_font_size_via_ajax' ) ) :
+if ( ! function_exists( 'lerp_get_font_size_via_ajax' ) ) :
 /**
- * @since Uncode 2.0.0
+ * @since Lerp 2.0.0
  */
-function uncode_get_font_size_via_ajax() {
+function lerp_get_font_size_via_ajax() {
 	$title_size = array(
 		array(
 			'value' => 'h1',
-			'label' => esc_html__('h1', 'uncode')
+			'label' => esc_html__('h1', 'lerp')
 		),
 		array(
 			'value' => 'h2',
-			'label' => esc_html__('h2', 'uncode'),
+			'label' => esc_html__('h2', 'lerp'),
 		),
 		array(
 			'value' => 'h3',
-			'label' => esc_html__('h3', 'uncode'),
+			'label' => esc_html__('h3', 'lerp'),
 		),
 		array(
 			'value' => 'h4',
-			'label' => esc_html__('h4', 'uncode'),
+			'label' => esc_html__('h4', 'lerp'),
 		),
 		array(
 			'value' => 'h5',
-			'label' => esc_html__('h5', 'uncode'),
+			'label' => esc_html__('h5', 'lerp'),
 		),
 		array(
 			'value' => 'h6',
-			'label' => esc_html__('h6', 'uncode'),
+			'label' => esc_html__('h6', 'lerp'),
 		),
 	);
 
-	$font_sizes = ot_get_option('_uncode_heading_font_sizes');
+	$font_sizes = ot_get_option('_lerp_heading_font_sizes');
 	if (!empty($font_sizes)) {
 		foreach ($font_sizes as $key => $value) {
 			$title_size[] = array(
-				'value' => $value['_uncode_heading_font_size_unique_id'],
+				'value' => $value['_lerp_heading_font_size_unique_id'],
 				'label' => $value['title'],
 			);
 		}
@@ -934,31 +934,31 @@ function uncode_get_font_size_via_ajax() {
 
 	$title_size[] = array(
 		'value' => 'bigtext',
-		'label' => esc_html__('BigText', 'uncode'),
+		'label' => esc_html__('BigText', 'lerp'),
 	);
 
 	wp_send_json( $title_size );
 }
 endif;
-add_action( 'wp_ajax_uncode_get_font_size', 'uncode_get_font_size_via_ajax' );
+add_action( 'wp_ajax_lerp_get_font_size', 'lerp_get_font_size_via_ajax' );
 
-if ( ! function_exists( 'uncode_get_line_height_via_ajax' ) ) :
+if ( ! function_exists( 'lerp_get_line_height_via_ajax' ) ) :
 /**
- * @since Uncode 2.0.0
+ * @since Lerp 2.0.0
  */
-function uncode_get_line_height_via_ajax() {
+function lerp_get_line_height_via_ajax() {
 	$title_height = array(
 		array(
 			'value' => '',
-			'label' => esc_html__('Default CSS', "uncode")
+			'label' => esc_html__('Default CSS', "lerp")
 		),
 	);
 
-	$font_heights = ot_get_option('_uncode_heading_font_heights');
+	$font_heights = ot_get_option('_lerp_heading_font_heights');
 	if (!empty($font_heights)) {
 		foreach ($font_heights as $key => $value) {
 			$title_height[] = array(
-				'value' => $value['_uncode_heading_font_height_unique_id'],
+				'value' => $value['_lerp_heading_font_height_unique_id'],
 				'label' => $value['title'],
 			);
 		}
@@ -967,25 +967,25 @@ function uncode_get_line_height_via_ajax() {
 	wp_send_json( $title_height );
 }
 endif;
-add_action( 'wp_ajax_uncode_get_line_height', 'uncode_get_line_height_via_ajax' );
+add_action( 'wp_ajax_lerp_get_line_height', 'lerp_get_line_height_via_ajax' );
 
-if ( ! function_exists( 'uncode_get_letter_spacing_via_ajax' ) ) :
+if ( ! function_exists( 'lerp_get_letter_spacing_via_ajax' ) ) :
 /**
- * @since Uncode 2.0.0
+ * @since Lerp 2.0.0
  */
-function uncode_get_letter_spacing_via_ajax() {
+function lerp_get_letter_spacing_via_ajax() {
 	$title_spacing = array(
 		array(
 			'value' => '',
-			'label' => esc_html__('Default CSS', "uncode")
+			'label' => esc_html__('Default CSS', "lerp")
 		),
 	);
 
-	$font_spacings = ot_get_option('_uncode_heading_font_spacings');
+	$font_spacings = ot_get_option('_lerp_heading_font_spacings');
 	if (!empty($font_spacings)) {
 		foreach ($font_spacings as $key => $value) {
 			$title_spacing[] = array(
-				'value' => $value['_uncode_heading_font_spacing_unique_id'],
+				'value' => $value['_lerp_heading_font_spacing_unique_id'],
 				'label' => $value['title'],
 			);
 		}
@@ -994,22 +994,22 @@ function uncode_get_letter_spacing_via_ajax() {
 	wp_send_json( $title_spacing );
 }
 endif;
-add_action( 'wp_ajax_uncode_get_letter_spacing', 'uncode_get_letter_spacing_via_ajax' );
+add_action( 'wp_ajax_lerp_get_letter_spacing', 'lerp_get_letter_spacing_via_ajax' );
 
-if ( ! function_exists( 'uncode_process_toggle_ajax_theme_panel' ) ) :
+if ( ! function_exists( 'lerp_process_toggle_ajax_theme_panel' ) ) :
 /**
- * @since Uncode 2.0.0
+ * @since Lerp 2.0.0
  */
-function uncode_process_toggle_ajax_theme_panel() {
-	if ( isset( $_POST[ 'toggle_ajax' ] ) && isset( $_POST[ 'uncode_toggle_ajax_theme_panel_nonce' ] ) && wp_verify_nonce( $_POST[ 'uncode_toggle_ajax_theme_panel_nonce' ], 'uncode_toggle_ajax_theme_panel' ) ) {
+function lerp_process_toggle_ajax_theme_panel() {
+	if ( isset( $_POST[ 'toggle_ajax' ] ) && isset( $_POST[ 'lerp_toggle_ajax_theme_panel_nonce' ] ) && wp_verify_nonce( $_POST[ 'lerp_toggle_ajax_theme_panel_nonce' ], 'lerp_toggle_ajax_theme_panel' ) ) {
 		$action = $_POST[ 'toggle_ajax' ];
 
 		if ( $action == 'enable-ajax' ) {
-			update_option( 'uncode_ajax_theme_panel', true );
+			update_option( 'lerp_ajax_theme_panel', true );
 		} else {
-			update_option( 'uncode_ajax_theme_panel', false );
+			update_option( 'lerp_ajax_theme_panel', false );
 		}
 	}
 }
 endif;
-add_action( 'wp_loaded', 'uncode_process_toggle_ajax_theme_panel' );
+add_action( 'wp_loaded', 'lerp_process_toggle_ajax_theme_panel' );

@@ -1,16 +1,16 @@
 <?php
 
-function uncode_add_enhanced_panel(){
-	add_submenu_page( 'upload.php', esc_html__("Add oEmbed, external IMG, SVG code, HTML or Shortcode",'uncode'), esc_html__("Add Multimedia",'uncode'), 'manage_options', 'add-other', 'uncode_addOtherMedia');
+function lerp_add_enhanced_panel(){
+	add_submenu_page( 'upload.php', esc_html__("Add oEmbed, external IMG, SVG code, HTML or Shortcode",'lerp'), esc_html__("Add Multimedia",'lerp'), 'manage_options', 'add-other', 'lerp_addOtherMedia');
 }
-add_action('admin_menu', 'uncode_add_enhanced_panel');
+add_action('admin_menu', 'lerp_add_enhanced_panel');
 
 
-function uncode_recordMedia(){
+function lerp_recordMedia(){
 
   global $wpdb;
 
-  check_ajax_referer( 'uncode-recordmedia-nonce', 'nonce' );
+  check_ajax_referer( 'lerp-recordmedia-nonce', 'nonce' );
 
 	$user_id = get_current_user_id();
 	$title = $_POST['mle-title'];
@@ -88,10 +88,10 @@ function uncode_recordMedia(){
 	die();
 }
 
-add_action('wp_ajax_recordMedia', 'uncode_recordMedia');
+add_action('wp_ajax_recordMedia', 'lerp_recordMedia');
 
 
-function uncode_addScripts() {
+function lerp_addScripts() {
 
 	?>
 	<style type="text/css">
@@ -255,7 +255,7 @@ function uncode_addScripts() {
 
 }
 
-function uncode_addOtherMedia() {
+function lerp_addOtherMedia() {
 
 	global $wpdb;
 
@@ -263,7 +263,7 @@ function uncode_addOtherMedia() {
 		$post = get_post($_REQUEST['postid']);
 	}
 
-	uncode_addScripts();
+	lerp_addScripts();
 ?>
 
 	<script>
@@ -294,17 +294,17 @@ function uncode_addOtherMedia() {
 	</script>
 	<div class="wrap">
 		<div id="icon-upload" class="icon32"><br></div>
-		<h2><?php esc_html_e("Add oEmbed, external IMG, SVG code, HTML or Shortcode",'uncode'); ?> <a href="upload.php?page=add-other" class="add-new-h2"><?php esc_html_e('Add New','uncode'); ?></a></h2>
+		<h2><?php esc_html_e("Add oEmbed, external IMG, SVG code, HTML or Shortcode",'lerp'); ?> <a href="upload.php?page=add-other" class="add-new-h2"><?php esc_html_e('Add New','lerp'); ?></a></h2>
 		<div id="poststuff">
 			<?php
 			if (isset($_REQUEST['postid'])) { ?>
-			<div id="message" class="updated below-h2"><p><?php esc_html_e('Item added to library.','uncode'); ?></p></div>
+			<div id="message" class="updated below-h2"><p><?php esc_html_e('Item added to library.','lerp'); ?></p></div>
 			<?php } ?>
 			<?php
 			if (isset($_REQUEST['updated'])) { ?>
-			<div id="message" class="updated below-h2"><p><?php esc_html_e('Item updated.','uncode'); ?></p></div>
+			<div id="message" class="updated below-h2"><p><?php esc_html_e('Item updated.','lerp'); ?></p></div>
 			<?php } ?>
-			<div id="fillError" class='error'><p><?php esc_html_e('Fill all the required fields.','uncode'); ?></p></div>
+			<div id="fillError" class='error'><p><?php esc_html_e('Fill all the required fields.','lerp'); ?></p></div>
 			<div id="post-body" class="columns-2">
 				<div id="post-body-content">
 					<form id="media-submit" method="post">
@@ -312,7 +312,7 @@ function uncode_addOtherMedia() {
 							<div id="content">
 								<div id="titlediv" class="controls">
 									<div id="titlewrap">
-										<input placeholder="<?php esc_html_e('Enter title here*','uncode'); ?>" type="text" name="mle-title" size="30" value="<?php if (isset($post)) echo esc_attr($post->post_title); ?>" id="title" autocomplete="off">
+										<input placeholder="<?php esc_html_e('Enter title here*','lerp'); ?>" type="text" name="mle-title" size="30" value="<?php if (isset($post)) echo esc_attr($post->post_title); ?>" id="title" autocomplete="off">
 									</div>
 									<?php
 										if (isset($_REQUEST['postid'])) {
@@ -320,25 +320,25 @@ function uncode_addOtherMedia() {
 									?>
 									<div class="inside">
 										<div id="edit-slug-box" class="hide-if-no-js">
-										<strong><?php esc_html_e('Permalink:','uncode'); ?></strong>
+										<strong><?php esc_html_e('Permalink:','lerp'); ?></strong>
 										<span id="sample-permalink" tabindex="-1"><?php echo get_site_url().'/?attachment_id='.$_REQUEST['postid']; ?></span>
-										<span id="view-post-btn"><a href="<?php echo get_site_url().'/?attachment_id='.$_REQUEST['postid']; ?>" class="button button-small"><?php esc_html_e('View Post','uncode'); ?></a></span>
+										<span id="view-post-btn"><a href="<?php echo get_site_url().'/?attachment_id='.$_REQUEST['postid']; ?>" class="button button-small"><?php esc_html_e('View Post','lerp'); ?></a></span>
 										</div>
 									</div>
 									<?php } ?>
 								</div>
 								<div class="media-embed controls section">
-									<p><strong><?php esc_html_e('Insert from URL*','uncode'); ?></strong></p>
+									<p><strong><?php esc_html_e('Insert from URL*','lerp'); ?></strong></p>
 									<textarea id="linkUrl" rows="10" name="mle-code" class="embed"><?php if (isset($post)) wp_kses_post($get_code); ?></textarea>
 									<input type="hidden" name="mle-mime" id="mle-mime" value="<?php if (isset($post)) echo esc_attr($post->post_mime_type); ?>">
 									<div class="oembed"></div><div class="oembed_code" style="display: none;"></div>
 								</div>
 								<div class="media-caption controls section">
-									<p><strong><?php esc_html_e('Caption','uncode'); ?></strong></p>
+									<p><strong><?php esc_html_e('Caption','lerp'); ?></strong></p>
 									<input type="text" name="mle-caption" class="alignment" data-setting="caption" value="<?php if (isset($post)) echo esc_attr($post->post_excerpt); ?>">
 								</div>
 								<div class="media-description section">
-									<p><strong><?php esc_html_e('Description','uncode'); ?></strong></p>
+									<p><strong><?php esc_html_e('Description','lerp'); ?></strong></p>
 									<?php
 									$quicktags_settings = array( 'buttons' => 'strong,em,link,block,del,ins,img,ul,ol,li,code,spell,close' );
 									$editor_args = array(
@@ -351,7 +351,7 @@ function uncode_addOtherMedia() {
 									wp_editor( (isset($post) && ($post->post_mime_type !== 'oembed/svg' && $post->post_mime_type !== 'oembed/html' && $post->post_mime_type !== 'oembed/iframe')) ? $post->post_content : '', 'attachment_content', $editor_args ); ?>
 								</div>
 							</div>
-							<input type="hidden" name="nonce" value="<?php echo wp_create_nonce("uncode-recordmedia-nonce"); ?>">
+							<input type="hidden" name="nonce" value="<?php echo wp_create_nonce("lerp-recordmedia-nonce"); ?>">
 							<?php
 									if (isset($_REQUEST['postid'])) { ?>
 							<input type="hidden" name="postid" value="<?php echo esc_attr($_REQUEST['postid']); ?>">
@@ -363,20 +363,20 @@ function uncode_addOtherMedia() {
 				<div id="postbox-container-1" class="postbox-container">
 					<div id="postimagediv" class="postbox ">
 						<div class="handlediv" title="Click to toggle"><br></div>
-						<h3 class="hndle"><span><?php esc_html_e('Publish','uncode'); ?></span></h3>
+						<h3 class="hndle"><span><?php esc_html_e('Publish','lerp'); ?></span></h3>
 						<div class="inside">
 							<div class="submitbox" id="submitpost">
 								<div id="major-publishing-actions">
 									<div id="publishing-action">
 										<span class="spinner"></span>
-										<input name="original_publish" type="hidden" id="original_publish" value="<?php esc_html_e('Publish','uncode'); ?>">
+										<input name="original_publish" type="hidden" id="original_publish" value="<?php esc_html_e('Publish','lerp'); ?>">
 										<?php
 										if (!isset($_REQUEST['postid'])) { ?>
-										<input name="save" type="submit" class="button button-primary button-large" id="publish" data-url="<?php echo get_site_url().'/wp-admin/upload.php?page=add-other'; ?>" value="<?php esc_html_e('Save','uncode'); ?>">
+										<input name="save" type="submit" class="button button-primary button-large" id="publish" data-url="<?php echo get_site_url().'/wp-admin/upload.php?page=add-other'; ?>" value="<?php esc_html_e('Save','lerp'); ?>">
 										<?php } ?>
 										<?php
 										if (isset($_REQUEST['postid'])) { ?>
-										<input name="save" type="submit" class="button button-primary button-large" id="publish" data-url="<?php echo get_site_url().'/wp-admin/upload.php?page=add-other&postid='.$_REQUEST['postid'].'&updated=1'; ?>" value="<?php esc_html_e('Update','uncode'); ?>">
+										<input name="save" type="submit" class="button button-primary button-large" id="publish" data-url="<?php echo get_site_url().'/wp-admin/upload.php?page=add-other&postid='.$_REQUEST['postid'].'&updated=1'; ?>" value="<?php esc_html_e('Update','lerp'); ?>">
 										<?php } ?>
 									</div>
 									<div class="clear"></div>

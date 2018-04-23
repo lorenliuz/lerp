@@ -23,20 +23,20 @@ extract(shortcode_atts(array(
 
 $el_class = $this->getExtraClass( $el_class );
 
-$output = '<div class="vc_wp_search wpb_content_element' . esc_attr( $el_class ) . (($live_search === 'yes') ? ' uncode-live-search' : '') . '">';
+$output = '<div class="vc_wp_search wpb_content_element' . esc_attr( $el_class ) . (($live_search === 'yes') ? ' lerp-live-search' : '') . '">';
 $type = 'WP_Widget_Search';
 $args = array();
 global $wp_widget_factory, $use_live_search;
 // to avoid unwanted warnings let's check before using widget
 if ( is_object( $wp_widget_factory ) && isset( $wp_widget_factory->widgets, $wp_widget_factory->widgets[ $type ] ) ) {
-	if ( function_exists('uncode_sidebar_al') ) {
+	if ( function_exists('lerp_sidebar_al') ) {
 		ob_start();
 		if ($live_search === 'yes') {
 			$use_live_search = 'yes';
 		} else {
 			$use_live_search = 'no';
 		}
-		uncode_sidebar_al( $type, $atts, $args );
+		lerp_sidebar_al( $type, $atts, $args );
 		$output .= ob_get_clean();
 	}
 	$use_live_search = '';

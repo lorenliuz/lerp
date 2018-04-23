@@ -61,7 +61,7 @@ if ($media_lightbox !== '') {
 	if ( get_post_mime_type($media_lightbox) == 'oembed/gallery' && wp_get_post_parent_id($media_lightbox) ) {
 
 		$parent_id = wp_get_post_parent_id($media_lightbox);
-		$media_album_ids = get_post_meta($parent_id, '_uncode_featured_media', true);//string of images in the album
+		$media_album_ids = get_post_meta($parent_id, '_lerp_featured_media', true);//string of images in the album
 		$media_album_ids_arr = explode(',', $media_album_ids);//array of images in the album
 		$a_href = '#';
 		$media_album = '';
@@ -69,17 +69,17 @@ if ($media_lightbox !== '') {
 		$album_item_dimensions = '';
 
 		foreach ($media_album_ids_arr as $_key => $_value) {
-			$album_item_attributes = uncode_get_album_item($_value);
+			$album_item_attributes = lerp_get_album_item($_value);
 			$album_th_id = $album_item_attributes['poster'];
 			if ( $album_th_id == '' )
 				continue;
-			$thumb_attributes = uncode_get_media_info($album_th_id);
+			$thumb_attributes = lerp_get_media_info($album_th_id);
 			$album_th_metavalues = unserialize($thumb_attributes->metadata);
 			$album_th_w = $album_th_metavalues['width'];
 			$album_th_h = $album_th_metavalues['height'];
 			if ($album_item_attributes) {
-				$album_item_title = (isset($lightbox_classes['data-title']) && $lightbox_classes['data-title'] === true) ? apply_filters( 'uncode_media_attribute_title', $thumb_attributes->post_title, $_value) : '';
-				$album_item_caption = (isset($lightbox_classes['data-caption']) && $lightbox_classes['data-caption'] === true) ? apply_filters( 'uncode_media_attribute_excerpt', $thumb_attributes->post_excerpt, $_value) : '';
+				$album_item_title = (isset($lightbox_classes['data-title']) && $lightbox_classes['data-title'] === true) ? apply_filters( 'lerp_media_attribute_title', $thumb_attributes->post_title, $_value) : '';
+				$album_item_caption = (isset($lightbox_classes['data-caption']) && $lightbox_classes['data-caption'] === true) ? apply_filters( 'lerp_media_attribute_excerpt', $thumb_attributes->post_excerpt, $_value) : '';
 				if (isset($album_item_attributes['width']) && isset($album_item_attributes['height'])) {
 					$album_item_dimensions .= '{"width":"' . $album_item_attributes['width'] . '",';
 					$album_item_dimensions .= '"height":"' . $album_item_attributes['height'] . '",';
@@ -111,7 +111,7 @@ if ($media_lightbox !== '') {
 
 	} else {
 
-		$media_attributes = uncode_get_media_info($media_lightbox);
+		$media_attributes = lerp_get_media_info($media_lightbox);
 		if (isset($media_attributes)) {
 			$media_metavalues = unserialize($media_attributes->metadata);
 			$media_mime = $media_attributes->post_mime_type;
@@ -122,10 +122,10 @@ if ($media_lightbox !== '') {
 				$image_orig_h = $media_metavalues['height'];
 				if ($adaptive_images === 'on') {
 					$adaptive_images = 'off';
-					$big_image = uncode_resize_image($media_attributes->id, $media_attributes->guid, $media_attributes->path, $image_orig_w, $image_orig_h, 12, null, false);
+					$big_image = lerp_resize_image($media_attributes->id, $media_attributes->guid, $media_attributes->path, $image_orig_w, $image_orig_h, 12, null, false);
 					$adaptive_images = 'on';
 				} else {
-					$big_image = uncode_resize_image($media_attributes->id, $media_attributes->guid, $media_attributes->path, $image_orig_w, $image_orig_h, 12, null, false);
+					$big_image = lerp_resize_image($media_attributes->id, $media_attributes->guid, $media_attributes->path, $image_orig_w, $image_orig_h, 12, null, false);
 				}
 
 				$a_href = $big_image['url'];
@@ -137,7 +137,7 @@ if ($media_lightbox !== '') {
 				if ($media_mime === 'image/url') {
 					$a_href = $media_attributes->guid;
 				} else {
-					$media_oembed = uncode_get_oembed($media_lightbox, $media_attributes->guid, $media_attributes->post_mime_type, false, $media_attributes->post_excerpt, $media_attributes->post_content, true);
+					$media_oembed = lerp_get_oembed($media_lightbox, $media_attributes->guid, $media_attributes->post_mime_type, false, $media_attributes->post_excerpt, $media_attributes->post_content, true);
 					if ($media_mime === 'oembed/html' || $media_mime === 'oembed/iframe') {
 						$frame_id = 'frame-' . big_rand();
 						$a_href = '#' . $frame_id;
@@ -152,9 +152,9 @@ if ($media_lightbox !== '') {
 
 			if (isset($media_attributes->post_mime_type) && strpos($media_attributes->post_mime_type, 'video/') !== false) {
 				$video_src .= 'html5video:{preload:\'true\',';
-				$video_autoplay = get_post_meta($media_lightbox, "_uncode_video_autoplay", true);
+				$video_autoplay = get_post_meta($media_lightbox, "_lerp_video_autoplay", true);
 				if ($video_autoplay) $video_src .= 'autoplay:\'true\',';
-				$alt_videos = get_post_meta($media_lightbox, "_uncode_video_alternative", true);
+				$alt_videos = get_post_meta($media_lightbox, "_lerp_video_alternative", true);
 				if (!empty($alt_videos)) {
 					foreach ($alt_videos as $key => $value) {
 						$exloded_url = explode(".", strtolower($value));
@@ -236,7 +236,7 @@ else $classes[] = 'text-' . $button_color . '-color';
 if ($radius) $classes[] = $radius;
 
 // Hover effect
-$hover_fx = $hover_fx=='' ? ot_get_option('_uncode_button_hover') : $hover_fx;
+$hover_fx = $hover_fx=='' ? ot_get_option('_lerp_button_hover') : $hover_fx;
 
 // Outlined and flat classes
 if ( $hover_fx == '' || $hover_fx == 'outlined' ) {
