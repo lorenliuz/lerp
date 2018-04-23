@@ -1,12 +1,13 @@
 <?php
 
-function lerp_ajax_update_license() {
+function lerp_ajax_update_license()
+{
     $postdata = (Array)json_decode(file_get_contents("php://input"));
 
     $user_name = str_replace(' ', '', isset($postdata['user_name']) ? $postdata['user_name'] : '');
     $api_key = str_replace(' ', '', isset($postdata['api_key']) ? $postdata['api_key'] : '');
     $purchase_code = str_replace(' ', '', isset($postdata['purchase_code']) ? $postdata['purchase_code'] : '');
-    $force_activation = isset( $postdata[ 'force_activation' ] ) && $postdata[ 'force_activation' ] ? true : false;
+    $force_activation = isset($postdata['force_activation']) && $postdata['force_activation'] ? true : false;
 
     $communicator = new LerpCommunicator();
     $envato = new Envato();
@@ -26,18 +27,18 @@ function lerp_ajax_update_license() {
 
     $ok_purchase_code = $communicator->isPurchaseCodeLegit($purchase_code);
 
-    if (!empty($errors)) {
+    if ( !empty($errors) ) {
         $err_keys = array_keys($errors);
         $_errors = array();
 
-        foreach($err_keys as $errkey) {
+        foreach ( $err_keys as $errkey ) {
             $_errors[] = $errors[$errkey];
         }
 
         wp_send_json_error($_errors);
     }
 
-    if ($ok_purchase_code) {
+    if ( $ok_purchase_code ) {
         $data = array(
             'user_name' => $user_name,
             'purchase_code' => $purchase_code,
@@ -47,20 +48,20 @@ function lerp_ajax_update_license() {
         wp_send_json_error(array("Invalid purchase_code"));
     }
 
-    $already_in_use = ! isInstallationLegit( $data );
+    $already_in_use = !isInstallationLegit($data);
 
-    if (!empty($errors) || !$ok_purchase_code) {
+    if ( !empty($errors) || !$ok_purchase_code ) {
         wp_send_json_error(array("ERROR"));
     } else {
         update_option('lerp-wordpress-data', json_encode($data));
 
-        if ( ! $already_in_use || $force_activation ) {
-			$server_name = empty($_SERVER['SERVER_NAME']) ? $_SERVER['HTTP_HOST']: $_SERVER['SERVER_NAME'];
+        if ( !$already_in_use || $force_activation ) {
+            $server_name = empty($_SERVER['SERVER_NAME']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 
-			// Deregister any connected domain first
-			$communicator->unRegisterDomains( $data[ 'purchase_code' ] );
+            // Deregister any connected domain first
+            $communicator->unRegisterDomains($data['purchase_code']);
 
-			$communicator->registerDomain($data['purchase_code'], $server_name, $data['user_name']);
+            $communicator->registerDomain($data['purchase_code'], $server_name, $data['user_name']);
         }
     }
 
@@ -68,4 +69,5 @@ function lerp_ajax_update_license() {
 
     wp_die();
 }
-add_action( 'wp_ajax_update_license', 'lerp_ajax_update_license' );
+
+add_action('wp_ajax_update_license', 'lerp_ajax_update_license');

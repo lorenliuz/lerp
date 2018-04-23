@@ -13,7 +13,7 @@ function custom_theme_options()
 
     global $wpdb, $lerp_colors, $lerp_post_types;
 
-    if (!isset($lerp_post_types)) $lerp_post_types = lerp_get_post_types();
+    if ( !isset($lerp_post_types) ) $lerp_post_types = lerp_get_post_types();
     /**
      * Get a copy of the saved settings array.
      */
@@ -24,7 +24,7 @@ function custom_theme_options()
      * passes to the OptionTree Settings API Class.
      */
 
-    if (!function_exists('ot_filter_measurement_unit_types')) {
+    if ( !function_exists('ot_filter_measurement_unit_types') ) {
         function ot_filter_measurement_unit_types($array, $field_id)
         {
             return array(
@@ -61,14 +61,14 @@ function custom_theme_options()
         'value' => '',
         'label' => esc_html__('Inherit', 'lerp')
     );
-    foreach ($menus as $menu) {
+    foreach ( $menus as $menu ) {
         $menus_array[] = array(
             'value' => $menu->slug,
             'label' => $menu->name
         );
     }
 
-    if (is_plugin_active('lerp-core/lerp-core.php')) {
+    if ( is_plugin_active('lerp-core/lerp-core.php') ) {
 
         $lerpblock = array(
             'value' => 'header_lerpblock',
@@ -86,7 +86,7 @@ function custom_theme_options()
 
         $blocks_query = new WP_Query('post_type=lerpblock&posts_per_page=-1&post_status=publish');
 
-        foreach ($blocks_query->posts as $block) {
+        foreach ( $blocks_query->posts as $block ) {
             $lerpblocks[] = array(
                 'value' => $block->ID,
                 'label' => $block->post_title,
@@ -94,7 +94,7 @@ function custom_theme_options()
             );
         }
 
-        if ($blocks_query->post_count === 0) {
+        if ( $blocks_query->post_count === 0 ) {
             $lerpblocks[] = array(
                 'value' => '',
                 'label' => esc_html__('No Content Blocks found', 'lerp')
@@ -136,7 +136,7 @@ function custom_theme_options()
         $lerpblocks = array();
     }
 
-    if (is_plugin_active('revslider/revslider.php')) {
+    if ( is_plugin_active('revslider/revslider.php') ) {
 
         $revslider = array(
             'value' => 'header_revslider',
@@ -145,8 +145,8 @@ function custom_theme_options()
 
         $rs = $wpdb->get_results("SELECT id, title, alias FROM " . $wpdb->prefix . "revslider_sliders WHERE type != 'template' ORDER BY id ASC LIMIT 999");
         $revsliders = array();
-        if ($rs) {
-            foreach ($rs as $slider) {
+        if ( $rs ) {
+            foreach ( $rs as $slider ) {
                 $revsliders[] = array(
                     'value' => $slider->alias,
                     'label' => $slider->title,
@@ -161,7 +161,7 @@ function custom_theme_options()
         }
     } else $revslider = $revsliders = '';
 
-    if (is_plugin_active('LayerSlider/layerslider.php')) {
+    if ( is_plugin_active('LayerSlider/layerslider.php') ) {
 
         $layerslider = array(
             'value' => 'header_layerslider',
@@ -170,8 +170,8 @@ function custom_theme_options()
 
         $ls = $wpdb->get_results("SELECT id, name FROM " . $wpdb->prefix . "layerslider WHERE flag_deleted != '1' ORDER BY id ASC LIMIT 999");
         $layersliders = array();
-        if ($ls) {
-            foreach ($ls as $slider) {
+        if ( $ls ) {
+            foreach ( $ls as $slider ) {
                 $layersliders[] = array(
                     'value' => $slider->id,
                     'label' => $slider->name,
@@ -214,8 +214,8 @@ function custom_theme_options()
     );
 
     $font_sizes = ot_get_option('_lerp_heading_font_sizes');
-    if (!empty($font_sizes)) {
-        foreach ($font_sizes as $key => $value) {
+    if ( !empty($font_sizes) ) {
+        foreach ( $font_sizes as $key => $value ) {
             $title_size[] = array(
                 'value' => $value['_lerp_heading_font_size_unique_id'],
                 'label' => $value['title'],
@@ -236,8 +236,8 @@ function custom_theme_options()
     );
 
     $font_heights = ot_get_option('_lerp_heading_font_heights');
-    if (!empty($font_heights)) {
-        foreach ($font_heights as $key => $value) {
+    if ( !empty($font_heights) ) {
+        foreach ( $font_heights as $key => $value ) {
             $title_height[] = array(
                 'value' => $value['_lerp_heading_font_height_unique_id'],
                 'label' => $value['title'],
@@ -259,8 +259,8 @@ function custom_theme_options()
     );
 
     $font_spacings = ot_get_option('_lerp_heading_font_spacings');
-    if (!empty($font_spacings)) {
-        foreach ($font_spacings as $key => $value) {
+    if ( !empty($font_spacings) ) {
+        foreach ( $font_spacings as $key => $value ) {
             $btn_letter_spacing[] = $title_spacing[] = array(
                 'value' => $value['_lerp_heading_font_spacing_unique_id'],
                 'label' => $value['title'],
@@ -271,27 +271,27 @@ function custom_theme_options()
     $fonts = get_option('lerp_font_options');
     $title_font = array();
 
-    if (isset($fonts['font_stack']) && $fonts['font_stack'] !== '[]') {
+    if ( isset($fonts['font_stack']) && $fonts['font_stack'] !== '[]' ) {
         $font_stack_string = $fonts['font_stack'];
         $font_stack = json_decode(str_replace('&quot;', '"', $font_stack_string), true);
 
-        foreach ($font_stack as $font) {
-            if ($font['source'] === 'Font Squirrel') {
+        foreach ( $font_stack as $font ) {
+            if ( $font['source'] === 'Font Squirrel' ) {
                 $variants = explode(',', $font['variants']);
                 $label = (string)$font['family'] . ' - ';
                 $weight = array();
-                foreach ($variants as $variant) {
-                    if (strpos(strtolower($variant), 'hairline') !== false) {
+                foreach ( $variants as $variant ) {
+                    if ( strpos(strtolower($variant), 'hairline') !== false ) {
                         $weight[] = 100;
-                    } else if (strpos(strtolower($variant), 'light') !== false) {
+                    } else if ( strpos(strtolower($variant), 'light') !== false ) {
                         $weight[] = 200;
-                    } else if (strpos(strtolower($variant), 'regular') !== false) {
+                    } else if ( strpos(strtolower($variant), 'regular') !== false ) {
                         $weight[] = 400;
-                    } else if (strpos(strtolower($variant), 'semibold') !== false) {
+                    } else if ( strpos(strtolower($variant), 'semibold') !== false ) {
                         $weight[] = 500;
-                    } else if (strpos(strtolower($variant), 'bold') !== false) {
+                    } else if ( strpos(strtolower($variant), 'bold') !== false ) {
                         $weight[] = 600;
-                    } else if (strpos(strtolower($variant), 'black') !== false) {
+                    } else if ( strpos(strtolower($variant), 'black') !== false ) {
                         $weight[] = 800;
                     } else {
                         $weight[] = 400;
@@ -302,16 +302,16 @@ function custom_theme_options()
                     'value' => urlencode((string)$font['family']),
                     'label' => $label
                 );
-            } else if ($font['source'] === 'Google Web Fonts') {
+            } else if ( $font['source'] === 'Google Web Fonts' ) {
                 $label = (string)$font['family'] . ' - ' . $font['variants'];
                 $title_font[] = array(
                     'value' => urlencode((string)$font['family']),
                     'label' => $label
                 );
-            } else if ($font['source'] === 'Typekit') {
+            } else if ( $font['source'] === 'Typekit' ) {
                 $label = (string)$font['family'] . ' - ';
                 $variants = explode(',', $font['variants']);
-                foreach ($variants as $key => $variant) {
+                foreach ( $variants as $key => $variant ) {
                     preg_match("|\d+|", $variants[$key], $weight);
                     $variants[$key] = $weight[0] . '00';
                 }
@@ -349,8 +349,8 @@ function custom_theme_options()
     );
 
     $custom_fonts_array = ot_get_option('_lerp_font_groups');
-    if (!empty($custom_fonts_array)) {
-        foreach ($custom_fonts_array as $key => $value) {
+    if ( !empty($custom_fonts_array) ) {
+        foreach ( $custom_fonts_array as $key => $value ) {
             $custom_fonts[] = array(
                 'value' => $value['_lerp_font_group_unique_id'],
                 'label' => $value['title'],
@@ -499,7 +499,7 @@ function custom_theme_options()
         'section' => 'lerp_%section%_section',
     );
 
-    if (is_plugin_active('lerp-core/lerp-core.php')) {
+    if ( is_plugin_active('lerp-core/lerp-core.php') ) {
 
         $header_lerp_block = array(
             'id' => '_lerp_%section%_blocks',
@@ -1628,7 +1628,7 @@ function custom_theme_options()
         'section' => 'lerp_%section%_section',
     );
 
-    if (is_plugin_active('lerp-core/lerp-core.php')) {
+    if ( is_plugin_active('lerp-core/lerp-core.php') ) {
 
         $footer_lerp_block = array(
             'id' => '_lerp_%section%_footer_block',
@@ -1693,19 +1693,19 @@ function custom_theme_options()
     );
 
     $portfolio_cpt_name = ot_get_option('_lerp_portfolio_cpt');
-    if ($portfolio_cpt_name == '') $portfolio_cpt_name = 'portfolio';
+    if ( $portfolio_cpt_name == '' ) $portfolio_cpt_name = 'portfolio';
 
     $cpt_single_sections = array();
     $cpt_index_sections = array();
     $cpt_single_options = array();
     $cpt_index_options = array();
 
-    if (count($lerp_post_types) > 0) {
-        foreach ($lerp_post_types as $key => $value) {
-            if ($value !== 'portfolio' && $value !== 'product') {
+    if ( count($lerp_post_types) > 0 ) {
+        foreach ( $lerp_post_types as $key => $value ) {
+            if ( $value !== 'portfolio' && $value !== 'product' ) {
                 $cpt_obj = get_post_type_object($value);
 
-                if (is_object($cpt_obj)) {
+                if ( is_object($cpt_obj) ) {
                     $cpt_name = $cpt_obj->labels->name;
                     $cpt_sing_name = $cpt_obj->labels->singular_name;
                     $cpt_single_sections[] = array(
@@ -1718,7 +1718,7 @@ function custom_theme_options()
                         'title' => '<span class="smaller"><i class="fa fa-archive2"></i> ' . ucfirst($cpt_name) . '</span>',
                         'group' => esc_html__('Archives', 'lerp')
                     );
-                } elseif ($value == 'author') {
+                } elseif ( $value == 'author' ) {
                     $cpt_index_sections[] = array(
                         'id' => 'lerp_' . $value . '_index_section',
                         'title' => '<span class="smaller"><i class="fa fa-archive2"></i> ' . esc_html__('Authors', 'lerp') . '</span>',
@@ -1728,8 +1728,8 @@ function custom_theme_options()
             }
         }
 
-        foreach ($lerp_post_types as $key => $value) {
-            if ($value !== 'portfolio' && $value !== 'product' && $value !== 'author') {
+        foreach ( $lerp_post_types as $key => $value ) {
+            if ( $value !== 'portfolio' && $value !== 'product' && $value !== 'author' ) {
                 $cpt_single_options[] = str_replace('%section%', $value, $menu_section_title);
                 $cpt_single_options[] = str_replace('%section%', $value, $menu);
                 $cpt_single_options[] = str_replace('%section%', $value, $menu_width);
@@ -1805,8 +1805,8 @@ function custom_theme_options()
                 $cpt_single_options[] = str_replace('%section%', $value, $custom_fields_list);
             }
         }
-        foreach ($lerp_post_types as $key => $value) {
-            if ($value !== 'portfolio' && $value !== 'product') {
+        foreach ( $lerp_post_types as $key => $value ) {
+            if ( $value !== 'portfolio' && $value !== 'product' ) {
                 $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu_section_title);
                 $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu);
                 $cpt_index_options[] = str_replace('%section%', $value . '_index', $menu_width);
@@ -4491,7 +4491,7 @@ function custom_theme_options()
     $custom_settings = apply_filters(ot_settings_id() . '_args', $custom_settings);
 
     /* settings are not the same update the DB */
-    if ($saved_settings !== $custom_settings) {
+    if ( $saved_settings !== $custom_settings ) {
         update_option(ot_settings_id(), $custom_settings);
     }
 
@@ -4502,7 +4502,7 @@ function custom_theme_options()
     {
 
         /* only run the filter where the field ID is my_radio_images */
-        if ($layout == '_lerp_headers') {
+        if ( $layout == '_lerp_headers' ) {
             $array = array(
                 array(
                     'value' => 'hmenu-right',

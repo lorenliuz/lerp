@@ -13,147 +13,155 @@
  */
 function lerp_customize_register($wp_customize)
 {
-	$wp_customize->get_setting('blogname')->transport = 'postMessage';
-	$wp_customize->get_setting('blogdescription')->transport = 'postMessage';
-	$wp_customize->get_setting('header_textcolor')->transport = 'postMessage';
+    $wp_customize->get_setting('blogname')->transport = 'postMessage';
+    $wp_customize->get_setting('blogdescription')->transport = 'postMessage';
+    $wp_customize->get_setting('header_textcolor')->transport = 'postMessage';
 }
+
 add_action('customize_register', 'lerp_customize_register');
 
 function lerp_custom_excerpt_length($length)
 {
-	return 20;
+    return 20;
 }
+
 add_filter('excerpt_length', 'lerp_custom_excerpt_length', 999);
 
-function lerp_wpcf7_ajax_loader() {
-	return get_template_directory_uri() . '/lib/assets/img/fading-squares.gif';
+function lerp_wpcf7_ajax_loader()
+{
+    return get_template_directory_uri() . '/lib/assets/img/fading-squares.gif';
 }
 
-add_filter( 'wpcf7_ajax_loader', 'lerp_wpcf7_ajax_loader', 10 );
+add_filter('wpcf7_ajax_loader', 'lerp_wpcf7_ajax_loader', 10);
 
-add_filter( 'rp4wp_append_content', '__return_false' );
+add_filter('rp4wp_append_content', '__return_false');
 
 // add Facebook oEmbed
-function lerp_oembed_add_provider() {
-	$endpoints = array(
-		'#https?://www\.facebook\.com/video.php.*#i'          => 'https://www.facebook.com/plugins/video/oembed.json/',
-		'#https?://www\.facebook\.com/.*/videos/.*#i'         => 'https://www.facebook.com/plugins/video/oembed.json/',
-		'#https?://www\.facebook\.com/.*/posts/.*#i'          => 'https://www.facebook.com/plugins/post/oembed.json/',
-		'#https?://www\.facebook\.com/.*/activity/.*#i'       => 'https://www.facebook.com/plugins/post/oembed.json/',
-		'#https?://www\.facebook\.com/photo(s/|.php).*#i'     => 'https://www.facebook.com/plugins/post/oembed.json/',
-		'#https?://www\.facebook\.com/permalink.php.*#i'      => 'https://www.facebook.com/plugins/post/oembed.json/',
-		'#https?://www\.facebook\.com/media/.*#i'             => 'https://www.facebook.com/plugins/post/oembed.json/',
-		'#https?://www\.facebook\.com/questions/.*#i'         => 'https://www.facebook.com/plugins/post/oembed.json/',
-		'#https?://www\.facebook\.com/notes/.*#i'             => 'https://www.facebook.com/plugins/post/oembed.json/'
-	);
-	foreach($endpoints as $pattern => $endpoint) {
-		wp_oembed_add_provider( $pattern, $endpoint, true );
-	}
+function lerp_oembed_add_provider()
+{
+    $endpoints = array(
+        '#https?://www\.facebook\.com/video.php.*#i' => 'https://www.facebook.com/plugins/video/oembed.json/',
+        '#https?://www\.facebook\.com/.*/videos/.*#i' => 'https://www.facebook.com/plugins/video/oembed.json/',
+        '#https?://www\.facebook\.com/.*/posts/.*#i' => 'https://www.facebook.com/plugins/post/oembed.json/',
+        '#https?://www\.facebook\.com/.*/activity/.*#i' => 'https://www.facebook.com/plugins/post/oembed.json/',
+        '#https?://www\.facebook\.com/photo(s/|.php).*#i' => 'https://www.facebook.com/plugins/post/oembed.json/',
+        '#https?://www\.facebook\.com/permalink.php.*#i' => 'https://www.facebook.com/plugins/post/oembed.json/',
+        '#https?://www\.facebook\.com/media/.*#i' => 'https://www.facebook.com/plugins/post/oembed.json/',
+        '#https?://www\.facebook\.com/questions/.*#i' => 'https://www.facebook.com/plugins/post/oembed.json/',
+        '#https?://www\.facebook\.com/notes/.*#i' => 'https://www.facebook.com/plugins/post/oembed.json/'
+    );
+    foreach ( $endpoints as $pattern => $endpoint ) {
+        wp_oembed_add_provider($pattern, $endpoint, true);
+    }
 }
 
 add_action('init', 'lerp_oembed_add_provider');
 
-function lerp_oembed_fetch_url($provider, $url, $args) {
-	if (strpos($url, 'facebook') !== false) {
-		$locale = (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) ? substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,5) : get_locale();
-		$locale = str_replace('-','_',$locale);
-		$locale = explode('_', $locale);
-		if (isset($locale[0]) && isset($locale[1])) {
-			$locale = strtolower($locale[0]) . '_' . strtoupper($locale[1]);
-		} else {
-			$locale = 'en_US';
-		}
+function lerp_oembed_fetch_url($provider, $url, $args)
+{
+    if ( strpos($url, 'facebook') !== false ) {
+        $locale = (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) ? substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 5) : get_locale();
+        $locale = str_replace('-', '_', $locale);
+        $locale = explode('_', $locale);
+        if ( isset($locale[0]) && isset($locale[1]) ) {
+            $locale = strtolower($locale[0]) . '_' . strtoupper($locale[1]);
+        } else {
+            $locale = 'en_US';
+        }
 
-		$provider = add_query_arg( 'locale', (string)$locale, $provider );
-	}
+        $provider = add_query_arg('locale', (string)$locale, $provider);
+    }
 
-	return $provider;
+    return $provider;
 }
 
-add_filter('oembed_fetch_url', 'lerp_oembed_fetch_url', 10 ,3);
+add_filter('oembed_fetch_url', 'lerp_oembed_fetch_url', 10, 3);
 
 
-function lerp_the_content($the_content) {
+function lerp_the_content($the_content)
+{
 
-	$oembed = new WP_Embed();
-	$the_content = $oembed->autoembed($the_content);
-	$the_content = wptexturize($the_content);
-	$the_content = convert_smilies($the_content);
-	$the_content = convert_chars($the_content);
-	$the_content = wpautop($the_content);
-	$the_content = shortcode_unautop($the_content);
-	$the_content = do_shortcode($the_content);
-	return $the_content;
+    $oembed = new WP_Embed();
+    $the_content = $oembed->autoembed($the_content);
+    $the_content = wptexturize($the_content);
+    $the_content = convert_smilies($the_content);
+    $the_content = convert_chars($the_content);
+    $the_content = wpautop($the_content);
+    $the_content = shortcode_unautop($the_content);
+    $the_content = do_shortcode($the_content);
+    return $the_content;
 }
 
-function lerp_remove_wpautop( $content, $autop = false ) {
+function lerp_remove_wpautop($content, $autop = false)
+{
 
-	if ( $autop ) {
-		$content = wpautop( preg_replace( '/<\/?p\>/', "\n", $content ) . "\n" );
-	}
+    if ( $autop ) {
+        $content = wpautop(preg_replace('/<\/?p\>/', "\n", $content) . "\n");
+    }
 
-	return do_shortcode( shortcode_unautop( $content ) );
+    return do_shortcode(shortcode_unautop($content));
 }
 
 add_filter('wpseo_sitemap_urlimages', 'lerp_add_images_yoast_sitemap', NULL, 2);
-function lerp_add_images_yoast_sitemap($images, $post_id) {
+function lerp_add_images_yoast_sitemap($images, $post_id)
+{
 
-	$post = get_post($post_id);
-	$content = $post->post_content;
+    $post = get_post($post_id);
+    $content = $post->post_content;
 
-	$image_ids = array();
+    $image_ids = array();
 
-	//Find lerp_index occurences and match IDs inside them
-	preg_match_all( '/\[lerp_index ([^\]]*)by_id:(.*?)[\||"]/', $content, $lerp_index );
+    //Find lerp_index occurences and match IDs inside them
+    preg_match_all('/\[lerp_index ([^\]]*)by_id:(.*?)[\||"]/', $content, $lerp_index);
 
-	if ( isset( $lerp_index[2] ) && !empty($lerp_index[2]) ) { //If "by_id" values exist
-		$lerp_index_ids = $lerp_index[2];
-	    foreach ( $lerp_index_ids as $lerp_index_ids_occurence ) {
-	    	$lerp_index_ids_occurence_list = explode(',',$lerp_index_ids_occurence);
+    if ( isset($lerp_index[2]) && !empty($lerp_index[2]) ) { //If "by_id" values exist
+        $lerp_index_ids = $lerp_index[2];
+        foreach ( $lerp_index_ids as $lerp_index_ids_occurence ) {
+            $lerp_index_ids_occurence_list = explode(',', $lerp_index_ids_occurence);
 
-	    	foreach ($lerp_index_ids_occurence_list as $lerp_index_id) {
-	            $thumb_id_here = get_post_thumbnail_id($lerp_index_id);//Get featured image IDs from post ID
-	            $image_ids[] = $thumb_id_here; //Store featured image ID
-	    	}
-	    }
-	}
+            foreach ( $lerp_index_ids_occurence_list as $lerp_index_id ) {
+                $thumb_id_here = get_post_thumbnail_id($lerp_index_id);//Get featured image IDs from post ID
+                $image_ids[] = $thumb_id_here; //Store featured image ID
+            }
+        }
+    }
 
-	//Find vc_single_image occurences and match IDs inside them
-	preg_match_all( '/\[vc_single_image([^\]]*) media="(.*?)"/', $content, $vc_single_image );
+    //Find vc_single_image occurences and match IDs inside them
+    preg_match_all('/\[vc_single_image([^\]]*) media="(.*?)"/', $content, $vc_single_image);
 
-	if ( isset( $vc_single_image[2] ) && !empty($vc_single_image[2]) ) { //If "media" values exist
-		$vc_single_image_ids = $vc_single_image[2];
-	    foreach ( $vc_single_image_ids as $vc_single_image_ids_occurence ) {
+    if ( isset($vc_single_image[2]) && !empty($vc_single_image[2]) ) { //If "media" values exist
+        $vc_single_image_ids = $vc_single_image[2];
+        foreach ( $vc_single_image_ids as $vc_single_image_ids_occurence ) {
             $image_ids[] = $vc_single_image_ids_occurence; //Store single image ID
-	    }
-	}
+        }
+    }
 
-	//Find vc_gallery occurences and match IDs inside them
-	preg_match_all( '/\[vc_gallery([^\]]*) medias="(.*?)"/', $content, $vc_gallery );
+    //Find vc_gallery occurences and match IDs inside them
+    preg_match_all('/\[vc_gallery([^\]]*) medias="(.*?)"/', $content, $vc_gallery);
 
-	if ( isset( $vc_gallery[2] ) && !empty($vc_gallery[2]) ) { //If "medias" values exist
-		$vc_gallery_ids = $vc_gallery[2];
-	    foreach ( $vc_gallery_ids as $vc_gallery_ids_occurence ) {
-	    	$vc_gallery_ids_occurence_list = explode(',',$vc_gallery_ids_occurence);
+    if ( isset($vc_gallery[2]) && !empty($vc_gallery[2]) ) { //If "medias" values exist
+        $vc_gallery_ids = $vc_gallery[2];
+        foreach ( $vc_gallery_ids as $vc_gallery_ids_occurence ) {
+            $vc_gallery_ids_occurence_list = explode(',', $vc_gallery_ids_occurence);
 
-	    	foreach ($vc_gallery_ids_occurence_list as $vc_gallery_id) {
-	            $image_ids[] = $vc_gallery_id; //Store image ID
-	    	}
-	    }
-	}
+            foreach ( $vc_gallery_ids_occurence_list as $vc_gallery_id ) {
+                $image_ids[] = $vc_gallery_id; //Store image ID
+            }
+        }
+    }
 
-	$media = get_post_meta($post->ID, '_lerp_featured_media', 1);
-	if ($media !== '') $image_ids = array_merge($image_ids, explode(',', $media));
+    $media = get_post_meta($post->ID, '_lerp_featured_media', 1);
+    if ( $media !== '' ) $image_ids = array_merge($image_ids, explode(',', $media));
 
 
     foreach ( $image_ids as $image_id ) { //Populate an array with URLs taken from featured image IDs
-    	$image_url = wp_get_attachment_image_src($image_id, 'large');
-    	$image_title = get_the_title($image_id);
-    	$image_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true);
-    	$new_data_img = array( 'src' => $image_url[0], 'title' => esc_html($image_title), 'alt' => $image_alt );
-    	$images[] = $new_data_img;
+        $image_url = wp_get_attachment_image_src($image_id, 'large');
+        $image_title = get_the_title($image_id);
+        $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+        $new_data_img = array('src' => $image_url[0], 'title' => esc_html($image_title), 'alt' => $image_alt);
+        $images[] = $new_data_img;
     }
 
-	return $images;
+    return $images;
 
 }

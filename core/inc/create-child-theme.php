@@ -18,7 +18,7 @@ $child_theme_author = $_POST['child_theme_author'];
 $child_theme_version = $_POST['child_theme_version'];
 $child_theme_template = $_POST['child_theme_template'];
 
-if ($child_theme_title === "") {
+if ( $child_theme_title === "" ) {
     wp_die("No child theme title");
 }
 
@@ -37,8 +37,8 @@ $child_theme_dir_path = get_template_directory() . '-child';
 
 $postfix = 0;
 
-while (file_exists($child_theme_dir_path . '-' . $postfix)) {
-  $postfix++;
+while ( file_exists($child_theme_dir_path . '-' . $postfix) ) {
+    $postfix++;
 }
 
 $child_theme_dir_path .= '-' . $postfix;

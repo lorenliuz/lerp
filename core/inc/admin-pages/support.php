@@ -108,7 +108,8 @@ if ( !class_exists('Lerp_Menu_Support_Page') ) :
                 <?php echo lerp_admin_panel_page_title('support'); ?>
 
                 <div class="lerp-admin-panel">
-                    <?php //echo lerp_admin_panel_title(); ?>
+                    <?php //echo lerp_admin_panel_title();
+                    ?>
                     <?php echo lerp_admin_panel_menu('support'); ?>
 
                     <div class="lerp-admin-panel__content lerp-admin-panel__content--two-cols">

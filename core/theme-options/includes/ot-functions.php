@@ -1,4 +1,4 @@
-<?php if ( ! defined( 'OT_VERSION' ) ) exit( 'No direct script access allowed' );
+<?php if ( !defined('OT_VERSION') ) exit('No direct script access allowed');
 /**
  * OptionTree functions
  *
@@ -16,13 +16,14 @@
  * @access    public
  * @since     2.3.0
  */
-if ( ! function_exists( 'ot_options_id' ) ) {
+if ( !function_exists('ot_options_id') ) {
 
-  function ot_options_id() {
+    function ot_options_id()
+    {
 
-    return apply_filters( 'ot_options_id', 'option_tree' );
+        return apply_filters('ot_options_id', 'option_tree');
 
-  }
+    }
 
 }
 
@@ -34,13 +35,14 @@ if ( ! function_exists( 'ot_options_id' ) ) {
  * @access    public
  * @since     2.3.0
  */
-if ( ! function_exists( 'ot_settings_id' ) ) {
+if ( !function_exists('ot_settings_id') ) {
 
-  function ot_settings_id() {
+    function ot_settings_id()
+    {
 
-    return apply_filters( 'ot_settings_id', 'option_tree_settings' );
+        return apply_filters('ot_settings_id', 'option_tree_settings');
 
-  }
+    }
 
 }
 
@@ -52,13 +54,14 @@ if ( ! function_exists( 'ot_settings_id' ) ) {
  * @access    public
  * @since     2.3.0
  */
-if ( ! function_exists( 'ot_layouts_id' ) ) {
+if ( !function_exists('ot_layouts_id') ) {
 
-  function ot_layouts_id() {
+    function ot_layouts_id()
+    {
 
-    return apply_filters( 'ot_layouts_id', 'option_tree_layouts' );
+        return apply_filters('ot_layouts_id', 'option_tree_layouts');
 
-  }
+    }
 
 }
 
@@ -75,23 +78,24 @@ if ( ! function_exists( 'ot_layouts_id' ) ) {
  * @access    public
  * @since     2.0
  */
-if ( ! function_exists( 'ot_get_option' ) ) {
+if ( !function_exists('ot_get_option') ) {
 
-  function ot_get_option( $option_id, $default = '' ) {
+    function ot_get_option($option_id, $default = '')
+    {
 
-    /* get the saved options */
-    $options = get_option( ot_options_id() );
+        /* get the saved options */
+        $options = get_option(ot_options_id());
 
-    /* look for the saved value */
-    if ( isset( $options[$option_id] ) && '' != $options[$option_id] ) {
+        /* look for the saved value */
+        if ( isset($options[$option_id]) && '' != $options[$option_id] ) {
 
-      return ot_wpml_filter( $options, $option_id );
+            return ot_wpml_filter($options, $option_id);
+
+        }
+
+        return $default;
 
     }
-
-    return $default;
-
-  }
 
 }
 
@@ -108,101 +112,103 @@ if ( ! function_exists( 'ot_get_option' ) ) {
  * @access    public
  * @since     2.2.0
  */
-if ( ! function_exists( 'ot_echo_option' ) ) {
+if ( !function_exists('ot_echo_option') ) {
 
-  function ot_echo_option( $option_id, $default = '' ) {
+    function ot_echo_option($option_id, $default = '')
+    {
 
-    echo ot_get_option( $option_id, $default );
+        echo ot_get_option($option_id, $default);
 
-  }
+    }
 
 }
 
 /**
  * Filter the return values through WPML
  *
- * @param     array     $options The current options
- * @param     string    $option_id The option ID
+ * @param     array $options The current options
+ * @param     string $option_id The option ID
  * @return    mixed
  *
  * @access    public
  * @since     2.1
  */
-if ( ! function_exists( 'ot_wpml_filter' ) ) {
+if ( !function_exists('ot_wpml_filter') ) {
 
-  function ot_wpml_filter( $options, $option_id ) {
-    
-    // Return translated strings using WMPL
-    if ( function_exists('icl_t') ) {
+    function ot_wpml_filter($options, $option_id)
+    {
 
-      $settings = get_option( ot_settings_id() );
+        // Return translated strings using WMPL
+        if ( function_exists('icl_t') ) {
 
-      if ( isset( $settings['settings'] ) ) {
+            $settings = get_option(ot_settings_id());
 
-        foreach( $settings['settings'] as $setting ) {
+            if ( isset($settings['settings']) ) {
 
-          // List Item & Slider
-          if ( $option_id == $setting['id'] && in_array( $setting['type'], array( 'list-item', 'slider' ) ) ) {
+                foreach ( $settings['settings'] as $setting ) {
 
-            foreach( $options[$option_id] as $key => $value ) {
+                    // List Item & Slider
+                    if ( $option_id == $setting['id'] && in_array($setting['type'], array('list-item', 'slider')) ) {
 
-              foreach( $value as $ckey => $cvalue ) {
+                        foreach ( $options[$option_id] as $key => $value ) {
 
-                $id = $option_id . '_' . $ckey . '_' . $key;
-                $_string = icl_t( 'Theme Options', $id, $cvalue );
+                            foreach ( $value as $ckey => $cvalue ) {
 
-                if ( ! empty( $_string ) ) {
+                                $id = $option_id . '_' . $ckey . '_' . $key;
+                                $_string = icl_t('Theme Options', $id, $cvalue);
 
-                  $options[$option_id][$key][$ckey] = $_string;
+                                if ( !empty($_string) ) {
+
+                                    $options[$option_id][$key][$ckey] = $_string;
+
+                                }
+
+                            }
+
+                        }
+
+                        // List Item & Slider
+                    } else if ( $option_id == $setting['id'] && $setting['type'] == 'social-links' ) {
+
+                        foreach ( $options[$option_id] as $key => $value ) {
+
+                            foreach ( $value as $ckey => $cvalue ) {
+
+                                $id = $option_id . '_' . $ckey . '_' . $key;
+                                $_string = icl_t('Theme Options', $id, $cvalue);
+
+                                if ( !empty($_string) ) {
+
+                                    $options[$option_id][$key][$ckey] = $_string;
+
+                                }
+
+                            }
+
+                        }
+
+                        // All other acceptable option types
+                    } else if ( $option_id == $setting['id'] && in_array($setting['type'], apply_filters('ot_wpml_option_types', array('text', 'textarea', 'textarea-simple'))) ) {
+
+                        $_string = icl_t('Theme Options', $option_id, $options[$option_id]);
+
+                        if ( !empty($_string) ) {
+
+                            $options[$option_id] = $_string;
+
+                        }
+
+                    }
 
                 }
 
-              }
-
             }
-
-          // List Item & Slider
-          } else if ( $option_id == $setting['id'] && $setting['type'] == 'social-links' ) {
-
-            foreach( $options[$option_id] as $key => $value ) {
-
-              foreach( $value as $ckey => $cvalue ) {
-
-                $id = $option_id . '_' . $ckey . '_' . $key;
-                $_string = icl_t( 'Theme Options', $id, $cvalue );
-
-                if ( ! empty( $_string ) ) {
-
-                  $options[$option_id][$key][$ckey] = $_string;
-
-                }
-
-              }
-
-            }
-
-          // All other acceptable option types
-          } else if ( $option_id == $setting['id'] && in_array( $setting['type'], apply_filters( 'ot_wpml_option_types', array( 'text', 'textarea', 'textarea-simple' ) ) ) ) {
-
-            $_string = icl_t( 'Theme Options', $option_id, $options[$option_id] );
-
-            if ( ! empty( $_string ) ) {
-
-              $options[$option_id] = $_string;
-
-            }
-
-          }
 
         }
 
-      }
+        return $options[$option_id];
 
     }
-
-    return $options[$option_id];
-
-  }
 
 }
 
@@ -214,53 +220,54 @@ if ( ! function_exists( 'ot_wpml_filter' ) ) {
  * @access    public
  * @since     2.0
  */
-if ( ! function_exists( 'ot_load_dynamic_css' ) ) {
+if ( !function_exists('ot_load_dynamic_css') ) {
 
-  function ot_load_dynamic_css() {
+    function ot_load_dynamic_css()
+    {
 
-    /* don't load in the admin */
-    if ( is_admin() )
-      return;
+        /* don't load in the admin */
+        if ( is_admin() )
+            return;
 
-    /* grab a copy of the paths */
-    $ot_css_file_paths = get_option( 'ot_css_file_paths', array() );
-    if ( is_multisite() ) {
-      $ot_css_file_paths = get_blog_option( get_current_blog_id(), 'ot_css_file_paths', $ot_css_file_paths );
-    }
+        /* grab a copy of the paths */
+        $ot_css_file_paths = get_option('ot_css_file_paths', array());
+        if ( is_multisite() ) {
+            $ot_css_file_paths = get_blog_option(get_current_blog_id(), 'ot_css_file_paths', $ot_css_file_paths);
+        }
 
-    if ( ! empty( $ot_css_file_paths ) ) {
+        if ( !empty($ot_css_file_paths) ) {
 
-      $last_css = '';
+            $last_css = '';
 
-      /* loop through paths */
-      foreach( $ot_css_file_paths as $key => $path ) {
+            /* loop through paths */
+            foreach ( $ot_css_file_paths as $key => $path ) {
 
-        if ( '' != $path && file_exists( $path ) ) {
+                if ( '' != $path && file_exists($path) ) {
 
-          $parts = explode( '/wp-content', $path );
+                    $parts = explode('/wp-content', $path);
 
-          if ( isset( $parts[1] ) ) {
+                    if ( isset($parts[1]) ) {
 
-            $css = set_url_scheme( WP_CONTENT_URL ) . $parts[1];
+                        $css = set_url_scheme(WP_CONTENT_URL) . $parts[1];
 
-            if ( $last_css !== $css ) {
+                        if ( $last_css !== $css ) {
 
-              /* enqueue filtered file */
-              wp_enqueue_style( 'ot-dynamic-' . $key, $css, false, OT_VERSION );
+                            /* enqueue filtered file */
+                            wp_enqueue_style('ot-dynamic-' . $key, $css, false, OT_VERSION);
 
-              $last_css = $css;
+                            $last_css = $css;
+
+                        }
+
+                    }
+
+                }
 
             }
 
-          }
-
         }
 
-      }
-
     }
-
-  }
 
 }
 
@@ -272,73 +279,74 @@ if ( ! function_exists( 'ot_load_dynamic_css' ) ) {
  * @access    public
  * @since     2.5.0
  */
-if ( ! function_exists( 'ot_load_google_fonts_css' ) ) {
+if ( !function_exists('ot_load_google_fonts_css') ) {
 
-  function ot_load_google_fonts_css() {
+    function ot_load_google_fonts_css()
+    {
 
-    /* don't load in the admin */
-    if ( is_admin() )
-      return;
+        /* don't load in the admin */
+        if ( is_admin() )
+            return;
 
-    $ot_google_fonts      = get_theme_mod( 'ot_google_fonts', array() );
-    $ot_set_google_fonts  = get_theme_mod( 'ot_set_google_fonts', array() );
-    $families             = array();
-    $subsets              = array();
-    $append               = '';
+        $ot_google_fonts = get_theme_mod('ot_google_fonts', array());
+        $ot_set_google_fonts = get_theme_mod('ot_set_google_fonts', array());
+        $families = array();
+        $subsets = array();
+        $append = '';
 
-    if ( ! empty( $ot_set_google_fonts ) ) {
+        if ( !empty($ot_set_google_fonts) ) {
 
-      foreach( $ot_set_google_fonts as $id => $fonts ) {
+            foreach ( $ot_set_google_fonts as $id => $fonts ) {
 
-        foreach( $fonts as $font ) {
+                foreach ( $fonts as $font ) {
 
-          // Can't find the font, bail!
-          if ( ! isset( $ot_google_fonts[$font['family']]['family'] ) ) {
-            continue;
-          }
+                    // Can't find the font, bail!
+                    if ( !isset($ot_google_fonts[$font['family']]['family']) ) {
+                        continue;
+                    }
 
-          // Set variants & subsets
-          if ( ! empty( $font['variants'] ) && is_array( $font['variants'] ) ) {
+                    // Set variants & subsets
+                    if ( !empty($font['variants']) && is_array($font['variants']) ) {
 
-            // Variants string
-            $variants = ':' . implode( ',', $font['variants'] );
+                        // Variants string
+                        $variants = ':' . implode(',', $font['variants']);
 
-            // Add subsets to array
-            if ( ! empty( $font['subsets'] ) && is_array( $font['subsets'] ) ) {
-              foreach( $font['subsets'] as $subset ) {
-                $subsets[] = $subset;
-              }
+                        // Add subsets to array
+                        if ( !empty($font['subsets']) && is_array($font['subsets']) ) {
+                            foreach ( $font['subsets'] as $subset ) {
+                                $subsets[] = $subset;
+                            }
+                        }
+
+                    }
+
+                    // Add family & variants to array
+                    if ( isset($variants) ) {
+                        $families[] = str_replace(' ', '+', $ot_google_fonts[$font['family']]['family']) . $variants;
+                    }
+
+                }
+
             }
 
-          }
-
-          // Add family & variants to array
-          if ( isset( $variants ) ) {
-            $families[] = str_replace( ' ', '+', $ot_google_fonts[$font['family']]['family'] ) . $variants;
-          }
-
         }
 
-      }
+        if ( !empty($families) ) {
 
-    }
+            $families = array_unique($families);
 
-    if ( ! empty( $families ) ) {
+            // Append all subsets to the path, unless the only subset is latin.
+            if ( !empty($subsets) ) {
+                $subsets = implode(',', array_unique($subsets));
+                if ( $subsets != 'latin' ) {
+                    $append = '&subset=' . $subsets;
+                }
+            }
 
-      $families = array_unique( $families );
-
-      // Append all subsets to the path, unless the only subset is latin.
-      if ( ! empty( $subsets ) ) {
-        $subsets = implode( ',', array_unique( $subsets ) );
-        if ( $subsets != 'latin' ) {
-          $append = '&subset=' . $subsets;
+            wp_enqueue_style('ot-google-fonts', esc_url('//fonts.googleapis.com/css?family=' . implode('|', $families)) . $append, false, null);
         }
-      }
 
-      wp_enqueue_style( 'ot-google-fonts', esc_url( '//fonts.googleapis.com/css?family=' . implode( '|', $families ) ) . $append, false, null );
     }
-
-  }
 
 }
 
@@ -350,20 +358,21 @@ if ( ! function_exists( 'ot_load_google_fonts_css' ) ) {
  * @access    public
  * @since     2.1
  */
-if ( ! function_exists( 'ot_register_theme_options_admin_bar_menu' ) ) {
+if ( !function_exists('ot_register_theme_options_admin_bar_menu') ) {
 
-  function ot_register_theme_options_admin_bar_menu( $wp_admin_bar ) {
+    function ot_register_theme_options_admin_bar_menu($wp_admin_bar)
+    {
 
-    if ( ! current_user_can( apply_filters( 'ot_theme_options_capability', 'edit_theme_options' ) ) || ! is_admin_bar_showing() )
-      return;
+        if ( !current_user_can(apply_filters('ot_theme_options_capability', 'edit_theme_options')) || !is_admin_bar_showing() )
+            return;
 
-    $wp_admin_bar->add_node( array(
-      'parent'  => 'appearance',
-      'id'      => apply_filters( 'ot_theme_options_menu_slug', 'ot-theme-options' ),
-      'title'   => apply_filters( 'ot_theme_options_page_title', esc_html__( 'Theme Options', 'option-tree' ) ),
-      'href'    => admin_url( 'admin.php' ) . '?page=' . apply_filters( 'ot_theme_options_menu_slug', 'ot-theme-options' )
-    ) );
-  }
+        $wp_admin_bar->add_node(array(
+            'parent' => 'appearance',
+            'id' => apply_filters('ot_theme_options_menu_slug', 'ot-theme-options'),
+            'title' => apply_filters('ot_theme_options_page_title', esc_html__('Theme Options', 'option-tree')),
+            'href' => admin_url('admin.php') . '?page=' . apply_filters('ot_theme_options_menu_slug', 'ot-theme-options')
+        ));
+    }
 
 }
 

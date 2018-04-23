@@ -3,7 +3,7 @@
 /**
  * Load functions for the Lerp panel menu.
  */
-if (is_admin()) {
+if ( is_admin() ) {
     require_once 'admin-pages/lerp-panel-functions.php';
     require_once 'admin-pages/support.php';
 }
@@ -15,7 +15,7 @@ function lerp_welcome_page()
 
 function lerp_admin_menu()
 {
-    if (current_user_can('edit_theme_options')) {
+    if ( current_user_can('edit_theme_options') ) {
         add_menu_page('UNCODE', UNCODE_NAME, 'administrator', 'lerp-system-status', 'lerp_welcome_page', 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjAwIDIwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGcgaWQ9Imljb21vb24taWdub3JlIiBkaXNwbGF5PSJub25lIj48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQxNS4xIiB5MT0iLTQxMiIgeDI9IjQxNS4xIiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDE4LjIiIHkxPSItNDEyIiB4Mj0iNDE4LjIiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI0MjEuNCIgeTE9Ii00MTIiIHgyPSI0MjEuNCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjQyNC41IiB5MT0iLTQxMiIgeDI9IjQyNC41IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDI3LjYiIHkxPSItNDEyIiB4Mj0iNDI3LjYiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MzAuOCIgeTE9Ii00MTIiIHgyPSI0MzAuOCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQzMy45IiB5MT0iLTQxMiIgeDI9IjQzMy45IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDM3IiB5MT0iLTQxMiIgeDI9IjQzNyIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQ0MC4xIiB5MT0iLTQxMiIgeDI9IjQ0MC4xIiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDQzLjIiIHkxPSItNDEyIiB4Mj0iNDQzLjIiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI0NDYuNCIgeTE9Ii00MTIiIHgyPSI0NDYuNCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjQ0OS41IiB5MT0iLTQxMiIgeDI9IjQ0OS41IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDUyLjYiIHkxPSItNDEyIiB4Mj0iNDUyLjYiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0NTUuOCIgeTE9Ii00MTIiIHgyPSI0NTUuOCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQ1OC45IiB5MT0iLTQxMiIgeDI9IjQ1OC45IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDYyIiB5MT0iLTQxMiIgeDI9IjQ2MiIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQ2NS4xIiB5MT0iLTQxMiIgeDI9IjQ2NS4xIiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDY4LjIiIHkxPSItNDEyIiB4Mj0iNDY4LjIiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI0NzEuNCIgeTE9Ii00MTIiIHgyPSI0NzEuNCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjQ3NC41IiB5MT0iLTQxMiIgeDI9IjQ3NC41IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDc3LjYiIHkxPSItNDEyIiB4Mj0iNDc3LjYiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0ODAuOCIgeTE9Ii00MTIiIHgyPSI0ODAuOCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQ4My45IiB5MT0iLTQxMiIgeDI9IjQ4My45IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDg3IiB5MT0iLTQxMiIgeDI9IjQ4NyIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQ5MC4xIiB5MT0iLTQxMiIgeDI9IjQ5MC4xIiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDkzLjIiIHkxPSItNDEyIiB4Mj0iNDkzLjIiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI0OTYuNCIgeTE9Ii00MTIiIHgyPSI0OTYuNCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjQ5OS41IiB5MT0iLTQxMiIgeDI9IjQ5OS41IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNTAyLjYiIHkxPSItNDEyIiB4Mj0iNTAyLjYiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI1MDUuOCIgeTE9Ii00MTIiIHgyPSI1MDUuOCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjUwOC45IiB5MT0iLTQxMiIgeDI9IjUwOC45IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNTEyIiB5MT0iLTQxMiIgeDI9IjUxMiIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjUxNS4xIiB5MT0iLTQxMiIgeDI9IjUxNS4xIiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNTE4LjIiIHkxPSItNDEyIiB4Mj0iNTE4LjIiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI1MjEuNCIgeTE9Ii00MTIiIHgyPSI1MjEuNCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjUyNC41IiB5MT0iLTQxMiIgeDI9IjUyNC41IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNTI3LjYiIHkxPSItNDEyIiB4Mj0iNTI3LjYiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI1MzAuOCIgeTE9Ii00MTIiIHgyPSI1MzAuOCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjUzMy45IiB5MT0iLTQxMiIgeDI9IjUzMy45IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNTM3IiB5MT0iLTQxMiIgeDI9IjUzNyIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjU0MC4xIiB5MT0iLTQxMiIgeDI9IjU0MC4xIiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNTQzLjIiIHkxPSItNDEyIiB4Mj0iNTQzLjIiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI1NDYuNCIgeTE9Ii00MTIiIHgyPSI1NDYuNCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjU0OS41IiB5MT0iLTQxMiIgeDI9IjU0OS41IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNTUyLjYiIHkxPSItNDEyIiB4Mj0iNTUyLjYiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI1NTUuOCIgeTE9Ii00MTIiIHgyPSI1NTUuOCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjU1OC45IiB5MT0iLTQxMiIgeDI9IjU1OC45IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNTYyIiB5MT0iLTQxMiIgeDI9IjU2MiIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjU2NS4xIiB5MT0iLTQxMiIgeDI9IjU2NS4xIiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNTY4LjIiIHkxPSItNDEyIiB4Mj0iNTY4LjIiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI1NzEuNCIgeTE9Ii00MTIiIHgyPSI1NzEuNCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjU3NC41IiB5MT0iLTQxMiIgeDI9IjU3NC41IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNTc3LjYiIHkxPSItNDEyIiB4Mj0iNTc3LjYiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI1ODAuOCIgeTE9Ii00MTIiIHgyPSI1ODAuOCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjU4My45IiB5MT0iLTQxMiIgeDI9IjU4My45IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNTg3IiB5MT0iLTQxMiIgeDI9IjU4NyIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjU5MC4xIiB5MT0iLTQxMiIgeDI9IjU5MC4xIiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNTkzLjIiIHkxPSItNDEyIiB4Mj0iNTkzLjIiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI1OTYuNCIgeTE9Ii00MTIiIHgyPSI1OTYuNCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjU5OS41IiB5MT0iLTQxMiIgeDI9IjU5OS41IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNjAyLjYiIHkxPSItNDEyIiB4Mj0iNjAyLjYiIHkyPSItMjEyIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI2MDUuOCIgeTE9Ii00MTIiIHgyPSI2MDUuOCIgeTI9Ii0yMTIiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjYwOC45IiB5MT0iLTQxMiIgeDI9IjYwOC45IiB5Mj0iLTIxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTQwOC45IiB4Mj0iNjEyIiB5Mj0iLTQwOC45Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItNDA1LjgiIHgyPSI2MTIiIHkyPSItNDA1LjgiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQxMiIgeTE9Ii00MDIuNiIgeDI9IjYxMiIgeTI9Ii00MDIuNiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDEyIiB5MT0iLTM5OS41IiB4Mj0iNjEyIiB5Mj0iLTM5OS41Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI0MTIiIHkxPSItMzk2LjQiIHgyPSI2MTIiIHkyPSItMzk2LjQiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjQxMiIgeTE9Ii0zOTMuMiIgeDI9IjYxMiIgeTI9Ii0zOTMuMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTM5MC4xIiB4Mj0iNjEyIiB5Mj0iLTM5MC4xIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMzg3IiB4Mj0iNjEyIiB5Mj0iLTM4NyIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTM4My45IiB4Mj0iNjEyIiB5Mj0iLTM4My45Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMzgwLjgiIHgyPSI2MTIiIHkyPSItMzgwLjgiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQxMiIgeTE9Ii0zNzcuNiIgeDI9IjYxMiIgeTI9Ii0zNzcuNiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDEyIiB5MT0iLTM3NC41IiB4Mj0iNjEyIiB5Mj0iLTM3NC41Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI0MTIiIHkxPSItMzcxLjQiIHgyPSI2MTIiIHkyPSItMzcxLjQiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjQxMiIgeTE9Ii0zNjguMiIgeDI9IjYxMiIgeTI9Ii0zNjguMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTM2NS4xIiB4Mj0iNjEyIiB5Mj0iLTM2NS4xIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMzYyIiB4Mj0iNjEyIiB5Mj0iLTM2MiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTM1OC45IiB4Mj0iNjEyIiB5Mj0iLTM1OC45Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMzU1LjgiIHgyPSI2MTIiIHkyPSItMzU1LjgiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQxMiIgeTE9Ii0zNTIuNiIgeDI9IjYxMiIgeTI9Ii0zNTIuNiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDEyIiB5MT0iLTM0OS41IiB4Mj0iNjEyIiB5Mj0iLTM0OS41Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI0MTIiIHkxPSItMzQ2LjQiIHgyPSI2MTIiIHkyPSItMzQ2LjQiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjQxMiIgeTE9Ii0zNDMuMiIgeDI9IjYxMiIgeTI9Ii0zNDMuMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTM0MC4xIiB4Mj0iNjEyIiB5Mj0iLTM0MC4xIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMzM3IiB4Mj0iNjEyIiB5Mj0iLTMzNyIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTMzMy45IiB4Mj0iNjEyIiB5Mj0iLTMzMy45Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMzMwLjgiIHgyPSI2MTIiIHkyPSItMzMwLjgiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQxMiIgeTE9Ii0zMjcuNiIgeDI9IjYxMiIgeTI9Ii0zMjcuNiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDEyIiB5MT0iLTMyNC41IiB4Mj0iNjEyIiB5Mj0iLTMyNC41Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI0MTIiIHkxPSItMzIxLjQiIHgyPSI2MTIiIHkyPSItMzIxLjQiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjQxMiIgeTE9Ii0zMTguMiIgeDI9IjYxMiIgeTI9Ii0zMTguMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTMxNS4xIiB4Mj0iNjEyIiB5Mj0iLTMxNS4xIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMzEyIiB4Mj0iNjEyIiB5Mj0iLTMxMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTMwOC45IiB4Mj0iNjEyIiB5Mj0iLTMwOC45Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMzA1LjgiIHgyPSI2MTIiIHkyPSItMzA1LjgiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQxMiIgeTE9Ii0zMDIuNiIgeDI9IjYxMiIgeTI9Ii0zMDIuNiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDEyIiB5MT0iLTI5OS41IiB4Mj0iNjEyIiB5Mj0iLTI5OS41Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI0MTIiIHkxPSItMjk2LjQiIHgyPSI2MTIiIHkyPSItMjk2LjQiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjQxMiIgeTE9Ii0yOTMuMiIgeDI9IjYxMiIgeTI9Ii0yOTMuMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTI5MC4xIiB4Mj0iNjEyIiB5Mj0iLTI5MC4xIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMjg3IiB4Mj0iNjEyIiB5Mj0iLTI4NyIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTI4My45IiB4Mj0iNjEyIiB5Mj0iLTI4My45Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMjgwLjgiIHgyPSI2MTIiIHkyPSItMjgwLjgiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQxMiIgeTE9Ii0yNzcuNiIgeDI9IjYxMiIgeTI9Ii0yNzcuNiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDEyIiB5MT0iLTI3NC41IiB4Mj0iNjEyIiB5Mj0iLTI3NC41Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI0MTIiIHkxPSItMjcxLjQiIHgyPSI2MTIiIHkyPSItMjcxLjQiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjQxMiIgeTE9Ii0yNjguMiIgeDI9IjYxMiIgeTI9Ii0yNjguMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTI2NS4xIiB4Mj0iNjEyIiB5Mj0iLTI2NS4xIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMjYyIiB4Mj0iNjEyIiB5Mj0iLTI2MiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTI1OC45IiB4Mj0iNjEyIiB5Mj0iLTI1OC45Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMjU1LjgiIHgyPSI2MTIiIHkyPSItMjU1LjgiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQxMiIgeTE9Ii0yNTIuNiIgeDI9IjYxMiIgeTI9Ii0yNTIuNiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDEyIiB5MT0iLTI0OS41IiB4Mj0iNjEyIiB5Mj0iLTI0OS41Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI0MTIiIHkxPSItMjQ2LjQiIHgyPSI2MTIiIHkyPSItMjQ2LjQiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjQxMiIgeTE9Ii0yNDMuMiIgeDI9IjYxMiIgeTI9Ii0yNDMuMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTI0MC4xIiB4Mj0iNjEyIiB5Mj0iLTI0MC4xIi8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMjM3IiB4Mj0iNjEyIiB5Mj0iLTIzNyIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTIzMy45IiB4Mj0iNjEyIiB5Mj0iLTIzMy45Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIHgxPSI0MTIiIHkxPSItMjMwLjgiIHgyPSI2MTIiIHkyPSItMjMwLjgiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIG9wYWNpdHk9IjAuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgeDE9IjQxMiIgeTE9Ii0yMjcuNiIgeDI9IjYxMiIgeTI9Ii0yMjcuNiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ5RkRCIiB4MT0iNDEyIiB5MT0iLTIyNC41IiB4Mj0iNjEyIiB5Mj0iLTIyNC41Ii8+PGxpbmUgZGlzcGxheT0iaW5saW5lIiBvcGFjaXR5PSIwLjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAgICAiIHgxPSI0MTIiIHkxPSItMjIxLjQiIHgyPSI2MTIiIHkyPSItMjIxLjQiLz48bGluZSBkaXNwbGF5PSJpbmxpbmUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0OUZEQiIgeDE9IjQxMiIgeTE9Ii0yMTguMiIgeDI9IjYxMiIgeTI9Ii0yMTguMiIvPjxsaW5lIGRpc3BsYXk9ImlubGluZSIgb3BhY2l0eT0iMC4zIiBmaWxsPSJub25lIiBzdHJva2U9IiM0NDlGREIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiB4MT0iNDEyIiB5MT0iLTIxNS4xIiB4Mj0iNjEyIiB5Mj0iLTIxNS4xIi8+PC9nPjxwYXRoIGZpbGw9IiM5RUEzQTgiIHN0cm9rZT0iIzlFQTNBOCIgc3Ryb2tlLXdpZHRoPSIxMSIgZD0iTTE4MS40LDUwLjdsLTY1LTM2LjdjLTguOS01LTI0LjEtNS0zMi45LDBsLTY1LDM2LjdjLTUsMi44LTcuNyw2LjctNy43LDExLjFzMi43LDguMyw3LjcsMTEuMWw2NSwzNi43YzQuNCwyLjUsMTAuMywzLjksMTYuNSwzLjlzMTItMS40LDE2LjUtMy45bDY1LTM2LjdjNS0yLjgsNy43LTYuNyw3LjctMTEuMVMxODYuMyw1My41LDE4MS40LDUwLjdMMTgxLjQsNTAuN3ogTTE3OC40LDY3LjZsLTY1LDM2LjdjLTcsMy45LTIwLDQtMjcsMGwtNjUtMzYuN2MtMy0xLjctNC42LTMuOC00LjYtNS44YzAtMiwxLjctNC4yLDQuNi01LjhsNjUtMzYuN2MzLjUtMiw4LjQtMy4xLDEzLjUtMy4xYzUuMSwwLDEwLDEuMSwxMy41LDMuMWw2NSwzNi43YzMsMS43LDQuNiwzLjgsNC42LDUuOEMxODMuMSw2My44LDE4MS40LDY1LjksMTc4LjQsNjcuNnogTTE4MS40LDg5LjJjLTEuNC0wLjgtMy4zLTAuMy00LjEsMS4xYy0wLjgsMS40LTAuMywzLjMsMS4xLDQuMWMzLDEuNyw0LjYsMy44LDQuNiw1LjhzLTEuNyw0LjItNC42LDUuOGwtNjUsMzYuN2MtNy4zLDQuMS0xOS43LDQuMS0yNywwbC02NS0zNi43Yy0zLTEuNy00LjYtMy44LTQuNi01LjhzMS43LTQuMiw0LjYtNS44YzEuNC0wLjgsMi0yLjcsMS4xLTQuMWMtMC44LTEuNS0yLjctMi00LjEtMS4xYy01LDIuOC03LjcsNi43LTcuNywxMS4xczIuNyw4LjMsNy43LDExLjFsNjUsMzYuN0M4OCwxNTAuNyw5NCwxNTIsOTkuOSwxNTJzMTEuOS0xLjMsMTYuNS0zLjlsNjUtMzYuN2M1LTIuOCw3LjctNi43LDcuNy0xMS4xQzE4OS4xLDk2LDE4Ni4zLDkyLDE4MS40LDg5LjJMMTgxLjQsODkuMnogTTE4MS40LDEyN2MtMS40LTAuOC0zLjMtMC4zLTQuMSwxLjFjLTAuOCwxLjQtMC4zLDMuMywxLjEsNC4xYzMsMS43LDQuNiwzLjgsNC42LDUuOGMwLDItMS43LDQuMi00LjYsNS44bC02NSwzNi43Yy03LjMsNC4xLTE5LjcsNC4xLTI3LDBsLTY1LTM2LjdjLTMtMS43LTQuNi0zLjgtNC42LTUuOGMwLTIsMS43LTQuMiw0LjYtNS44YzEuNC0wLjgsMi0yLjcsMS4xLTQuMWMtMC44LTEuNC0yLjctMi00LjEtMS4xYy01LDIuOC03LjcsNi43LTcuNywxMS4xYzAsNC4zLDIuNyw4LjMsNy43LDExLjFsNjUsMzYuN2M0LjYsMi42LDEwLjUsMy45LDE2LjUsMy45czExLjktMS4zLDE2LjUtMy45bDY1LTM2LjdjNS0yLjgsNy43LTYuNyw3LjctMTEuMUMxODkuMSwxMzMuNywxODYuMywxMjkuOCwxODEuNCwxMjdMMTgxLjQsMTI3eiIvPjwvc3ZnPg==', 4);
         add_submenu_page('lerp-system-status', 'UNCODE', esc_html__('系统状态', 'lerp'), 'administrator', 'lerp-system-status', 'lerp_welcome_page');
     }
@@ -33,7 +33,7 @@ function lerp_remove_adminbar_margin()
 
 add_action('get_header', 'lerp_remove_adminbar_margin');
 
-if (is_admin() && isset($_GET['activated']) && $pagenow == "themes.php") {
+if ( is_admin() && isset($_GET['activated']) && $pagenow == "themes.php" ) {
     header('Location: ' . admin_url() . 'admin.php?page=lerp-system-status&first=true');
 }
 
@@ -99,21 +99,21 @@ function lerp_init_admin_css()
     wp_enqueue_style('admin-lerp-icons', get_template_directory_uri() . '/lib/assets/css/lerp-icons.css', false, $resources_version);
     $back_css = get_template_directory() . '/core/assets/css/';
     $ot_id = is_multisite() ? get_current_blog_id() : '';
-    if (file_exists($back_css . 'admin-custom' . $ot_id . '.css') && wp_is_writable($back_css . 'admin-custom' . $ot_id . '.css')) {
+    if ( file_exists($back_css . 'admin-custom' . $ot_id . '.css') && wp_is_writable($back_css . 'admin-custom' . $ot_id . '.css') ) {
         wp_enqueue_style('lerp-custom-style', get_template_directory_uri() . '/core/assets/css/admin-custom' . $ot_id . '.css', false, $resources_version);
     } else {
         $styles = lerp_create_dynamic_css();
         wp_add_inline_style('ot-admin', lerp_compress_css_inline($styles['admin']));
     }
     $fonts = get_option('lerp_font_options');
-    if (isset($fonts['font_stack']) && $fonts['font_stack'] !== '[]') {
+    if ( isset($fonts['font_stack']) && $fonts['font_stack'] !== '[]' ) {
 
         $upload_dir = wp_upload_dir();
         $site_url = get_option('upload_url_path');
         $scheme = parse_url($site_url, PHP_URL_SCHEME);
         $upload_dir_url = set_url_scheme($upload_dir['baseurl'], $scheme);
 
-        if (@file_exists(trailingslashit($upload_dir['basedir']) . 'lerp-fonts/lerpfont.css')) wp_enqueue_style('uf-font-squirrel', $upload_dir_url . '/lerp-fonts/lerpfont.css', false, $resources_version);
+        if ( @file_exists(trailingslashit($upload_dir['basedir']) . 'lerp-fonts/lerpfont.css') ) wp_enqueue_style('uf-font-squirrel', $upload_dir_url . '/lerp-fonts/lerpfont.css', false, $resources_version);
     }
 }
 
@@ -168,10 +168,10 @@ add_filter('wp_check_filetype_and_ext', 'fix_mime_type_svg', 75, 4);
 function fix_mime_type_svg($data = null, $file = null, $filename = null, $mimes = null)
 {
     $ext = isset($data['ext']) ? $data['ext'] : '';
-    if (strlen($ext) < 1) {
+    if ( strlen($ext) < 1 ) {
         $ext = strtolower(end(explode('.', $filename)));
     }
-    if ($ext === 'svg') {
+    if ( $ext === 'svg' ) {
         $data['type'] = 'image/svg+xml';
         $data['ext'] = 'svg';
     }
@@ -185,7 +185,7 @@ function fix_mime_type_svg($data = null, $file = null, $filename = null, $mimes 
 function lerp_add_additional_fields($form_fields, $post)
 {
     // Don't show fields on gallery attachments
-    if ($post->post_mime_type == 'oembed/gallery') {
+    if ( $post->post_mime_type == 'oembed/gallery' ) {
         return $form_fields;
     }
 
@@ -207,9 +207,9 @@ function lerp_add_additional_fields($form_fields, $post)
     $checked_loop = ($video_loop) ? 'checked="checked"' : '';
     $checked_auto = ($video_auto) ? 'checked="checked"' : '';
 
-    if ($post->post_mime_type === 'oembed/svg') {
+    if ( $post->post_mime_type === 'oembed/svg' ) {
         $alt = get_post_meta($post->ID, '_wp_attachment_image_alt', true);
-        if (empty($alt))
+        if ( empty($alt) )
             $alt = '';
         $form_fields['svg_alt'] = array(
             'value' => $alt,
@@ -217,9 +217,9 @@ function lerp_add_additional_fields($form_fields, $post)
         );
     }
 
-    if (strpos($post->post_mime_type, 'image') === false || $post->post_mime_type === 'image/svg+xml') {
+    if ( strpos($post->post_mime_type, 'image') === false || $post->post_mime_type === 'image/svg+xml' ) {
         $dimensions = get_post_meta($post->ID, "_wp_attachment_metadata", true);
-        if (!empty($dimensions)) {
+        if ( !empty($dimensions) ) {
             $width = isset($dimensions['width']) ? $dimensions['width'] : 1;
             $height = isset($dimensions['height']) ? $dimensions['height'] : 1;
         } else {
@@ -241,7 +241,7 @@ function lerp_add_additional_fields($form_fields, $post)
         );
     }
 
-    if (strpos($post->post_mime_type, 'video/') !== false) {
+    if ( strpos($post->post_mime_type, 'video/') !== false ) {
         $form_fields["video_loop"] = array(
             "label" => esc_html__("Loop?", 'lerp'),
             "input" => 'html',
@@ -264,7 +264,7 @@ function lerp_add_additional_fields($form_fields, $post)
         );
     }
 
-    if (strpos($post->post_mime_type, 'oembed/svg') !== false || $post->post_mime_type === 'image/svg+xml') {
+    if ( strpos($post->post_mime_type, 'oembed/svg') !== false || $post->post_mime_type === 'image/svg+xml' ) {
         $form_fields["animated_svg"] = array(
             "label" => esc_html__("Animated?", 'lerp'),
             "input" => 'html',
@@ -273,7 +273,7 @@ function lerp_add_additional_fields($form_fields, $post)
         );
     }
 
-    if ($animated_svg) {
+    if ( $animated_svg ) {
         $form_fields["animated_svg_time"] = array(
             "label" => esc_html__("Animation time (default 100)", 'lerp'),
             "input" => 'html',
@@ -281,7 +281,7 @@ function lerp_add_additional_fields($form_fields, $post)
         );
     }
 
-    if (strpos($post->post_mime_type, 'image') !== false) {
+    if ( strpos($post->post_mime_type, 'image') !== false ) {
         $form_fields["media_id"] = array(
             "label" => esc_html__("ID", 'lerp'),
             "input" => 'html',
@@ -289,7 +289,7 @@ function lerp_add_additional_fields($form_fields, $post)
         );
     }
 
-    if ($post->post_mime_type === 'oembed/twitter') {
+    if ( $post->post_mime_type === 'oembed/twitter' ) {
         $form_fields["social_original"] = array(
             "label" => esc_html__("Twitter original", 'lerp'),
             "input" => 'html',
@@ -305,7 +305,7 @@ function lerp_add_additional_fields($form_fields, $post)
         "value" => $team
     );
 
-    if ($team) {
+    if ( $team ) {
         $form_fields["team_member_social"] = array(
             "label" => esc_html__("Socials", 'lerp'),
             "input" => 'textarea',
@@ -315,10 +315,10 @@ function lerp_add_additional_fields($form_fields, $post)
 
     $taxonomies = apply_filters('media-taxonomies', get_object_taxonomies('attachment', 'objects'));
 
-    if (!$taxonomies)
+    if ( !$taxonomies )
         return $form_fields;
 
-    foreach ($taxonomies as $taxonomyname => $taxonomy) :
+    foreach ( $taxonomies as $taxonomyname => $taxonomy ) :
         $form_fields[$taxonomyname] = array(
             'label' => $taxonomy->labels->singular_name,
             'input' => 'html',
@@ -333,73 +333,73 @@ function lerp_add_additional_fields($form_fields, $post)
 function lerp_save_additional_fields($attachment_id)
 {
 
-    if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save-attachment-compat') {
+    if ( isset($_REQUEST['action']) && $_REQUEST['action'] == 'save-attachment-compat' ) {
 
-        if (isset($_REQUEST['attachments'][$attachment_id]['svg_alt'])) {
+        if ( isset($_REQUEST['attachments'][$attachment_id]['svg_alt']) ) {
             $alt_text = $_REQUEST['attachments'][$attachment_id]['svg_alt'];
             update_post_meta($attachment_id, '_wp_attachment_image_alt', $alt_text);
         }
 
-        if (isset($_REQUEST['attachments'][$attachment_id]['team_member'])) {
+        if ( isset($_REQUEST['attachments'][$attachment_id]['team_member']) ) {
             $team = ($_REQUEST['attachments'][$attachment_id]['team_member'] == 'on') ? '1' : '0';
             update_post_meta($attachment_id, '_lerp_team_member', $team);
         } else {
             delete_post_meta($attachment_id, '_lerp_team_member', '1');
         }
 
-        if (isset($_REQUEST['attachments'][$attachment_id]['social_original'])) {
+        if ( isset($_REQUEST['attachments'][$attachment_id]['social_original']) ) {
             $social_original = ($_REQUEST['attachments'][$attachment_id]['social_original'] == 'on') ? '1' : '0';
             update_post_meta($attachment_id, '_lerp_social_original', $social_original);
         } else {
             delete_post_meta($attachment_id, '_lerp_social_original', '1');
         }
 
-        if (isset($_REQUEST['attachments'][$attachment_id]['animated_svg'])) {
+        if ( isset($_REQUEST['attachments'][$attachment_id]['animated_svg']) ) {
             $animated = ($_REQUEST['attachments'][$attachment_id]['animated_svg'] == 'on') ? '1' : '0';
             update_post_meta($attachment_id, '_lerp_animated_svg', $animated);
         } else {
             delete_post_meta($attachment_id, '_lerp_animated_svg', '1');
         }
 
-        if (isset($_REQUEST['attachments'][$attachment_id]['animated_svg_time'])) {
+        if ( isset($_REQUEST['attachments'][$attachment_id]['animated_svg_time']) ) {
             $animated_svg_time = $_REQUEST['attachments'][$attachment_id]['animated_svg_time'];
             update_post_meta($attachment_id, '_lerp_animated_svg_time', $animated_svg_time);
         } else {
             delete_post_meta($attachment_id, '_lerp_animated_svg_time');
         }
 
-        if (isset($_REQUEST['attachments'][$attachment_id]['video_loop'])) {
+        if ( isset($_REQUEST['attachments'][$attachment_id]['video_loop']) ) {
             $video_loop = ($_REQUEST['attachments'][$attachment_id]['video_loop'] == 'on') ? '1' : '0';
             update_post_meta($attachment_id, '_lerp_video_loop', $video_loop);
         } else {
             delete_post_meta($attachment_id, '_lerp_video_loop', '1');
         }
 
-        if (isset($_REQUEST['attachments'][$attachment_id]['video_autoplay'])) {
+        if ( isset($_REQUEST['attachments'][$attachment_id]['video_autoplay']) ) {
             $video_auto = ($_REQUEST['attachments'][$attachment_id]['video_autoplay'] == 'on') ? '1' : '0';
             update_post_meta($attachment_id, '_lerp_video_autoplay', $video_auto);
         } else {
             delete_post_meta($attachment_id, '_lerp_video_autoplay', '1');
         }
 
-        if (isset($_REQUEST['attachments'][$attachment_id]['team_member_social']) && isset($_REQUEST['attachments'][$attachment_id]['team_member_social']) !== '') {
+        if ( isset($_REQUEST['attachments'][$attachment_id]['team_member_social']) && isset($_REQUEST['attachments'][$attachment_id]['team_member_social']) !== '' ) {
             $team_social = $_REQUEST['attachments'][$attachment_id]['team_member_social'];
             update_post_meta($attachment_id, '_lerp_team_member_social', $team_social);
         }
 
-        if (isset($_REQUEST['attachments'][$attachment_id]['media_width']) && isset($_REQUEST['attachments'][$attachment_id]['media_width']) !== '' && isset($_REQUEST['attachments'][$attachment_id]['media_height']) && isset($_REQUEST['attachments'][$attachment_id]['media_height']) !== '') {
+        if ( isset($_REQUEST['attachments'][$attachment_id]['media_width']) && isset($_REQUEST['attachments'][$attachment_id]['media_width']) !== '' && isset($_REQUEST['attachments'][$attachment_id]['media_height']) && isset($_REQUEST['attachments'][$attachment_id]['media_height']) !== '' ) {
             $dimensions = array('width' => $_REQUEST['attachments'][$attachment_id]['media_width'], 'height' => $_REQUEST['attachments'][$attachment_id]['media_height']);
             update_post_meta($attachment_id, '_wp_attachment_metadata', $dimensions);
         }
 
-        if (isset($_REQUEST['attachments'][$attachment_id]['poster_image']) && $_REQUEST['attachments'][$attachment_id]['poster_image'] !== '') {
+        if ( isset($_REQUEST['attachments'][$attachment_id]['poster_image']) && $_REQUEST['attachments'][$attachment_id]['poster_image'] !== '' ) {
             $poster = $_REQUEST['attachments'][$attachment_id]['poster_image'];
             update_post_meta($attachment_id, '_lerp_poster_image', $poster);
         } else {
             delete_post_meta($attachment_id, '_lerp_poster_image');
         }
 
-        if (!isset($_REQUEST['attachments'][$attachment_id]['video_alt_1']) && !isset($_REQUEST['attachments'][$attachment_id]['video_alt_2'])) {
+        if ( !isset($_REQUEST['attachments'][$attachment_id]['video_alt_1']) && !isset($_REQUEST['attachments'][$attachment_id]['video_alt_2']) ) {
             delete_post_meta($attachment_id, '_lerp_video_alternative');
         } else {
             $alt_array = array();
@@ -408,10 +408,10 @@ function lerp_save_additional_fields($attachment_id)
             update_post_meta($attachment_id, '_lerp_video_alternative', $alt_array);
         }
 
-        if (isset($_REQUEST['changes'])) {
+        if ( isset($_REQUEST['changes']) ) {
             $changes = $_REQUEST['changes'];
 
-            if (isset($changes['url']) && isset($_REQUEST['id']) && $_REQUEST['id'] !== '') {
+            if ( isset($changes['url']) && isset($_REQUEST['id']) && $_REQUEST['id'] !== '' ) {
                 global $wpdb;
                 $id = esc_sql($_REQUEST['id']);
                 $code = esc_sql($changes['url']);
@@ -427,7 +427,7 @@ add_action('edit_attachment', 'lerp_save_additional_fields');
 
 function lerp_terms_checkboxes($taxonomy, $post_id)
 {
-    if (!is_object($taxonomy)) :
+    if ( !is_object($taxonomy) ) :
         $taxonomy = get_taxonomy($taxonomy);
     endif;
     $terms = get_terms($taxonomy->name, array(
@@ -461,7 +461,7 @@ function lerp_terms_checkboxes($taxonomy, $post_id)
             <input type="text" value="">
 
             <?php
-            if (1 == $taxonomy->hierarchical) :
+            if ( 1 == $taxonomy->hierarchical ) :
                 wp_dropdown_categories(array(
                     'taxonomy' => $taxonomy->name,
                     'class' => 'parent-' . $taxonomy->name,
@@ -491,7 +491,7 @@ add_filter("attachment_fields_to_edit", "lerp_add_additional_fields", 10, 2);
 function lerp_save_media_terms()
 {
     $post_id = intval($_REQUEST['attachment_id']);
-    if (!current_user_can('edit_post', $post_id))
+    if ( !current_user_can('edit_post', $post_id) )
         die();
     $term_ids = array_map('intval', $_REQUEST['term_ids']);
     $response = wp_set_post_terms($post_id, $term_ids, sanitize_text_field($_REQUEST['taxonomy']));
@@ -507,7 +507,7 @@ function lerp_add_media_term()
     // Check if term already exists
     $term = get_term_by('name', sanitize_text_field($_REQUEST['term']), $taxonomy->name);
     // No, so lets add it
-    if (!$term) :
+    if ( !$term ) :
         $term = wp_insert_term(sanitize_text_field($_REQUEST['term']), $taxonomy->name, array('parent' => $parent));
         $term = get_term_by('id', $term['term_id'], $taxonomy->name);
     endif;
@@ -571,7 +571,7 @@ function lerp_taxonomy_add_meta_field()
         <label for="term_meta[term_color]"><?php esc_html_e('Color', 'lerp'); ?></label>
         <select name="term_meta[term_color]" id="term_meta[term_color]" class="term_color">
             <?php
-            foreach ($lerp_colors as $key => $value) {
+            foreach ( $lerp_colors as $key => $value ) {
                 ?>
                 <option class="<?php echo esc_attr($value[0]); ?>"
                         value="<?php echo esc_attr($value[0]); ?>"><?php echo esc_html($value[1]); ?></option><?php
@@ -637,20 +637,20 @@ function lerp_taxonomy_edit_meta_field($term)
                 </div>
             </div>
             <?php
-            if ($term_meta['term_media'] && wp_attachment_is_image($term_meta['term_media'])) {
+            if ( $term_meta['term_media'] && wp_attachment_is_image($term_meta['term_media']) ) {
                 $attachment_data = wp_get_attachment_image_src($term_meta['term_media'], 'original');
                 /* check for attachment data */
-                if ($attachment_data) {
+                if ( $attachment_data ) {
                     $field_src = $attachment_data[0];
                 }
                 echo '<div class="option-tree-ui-media-wrap" id="term_media_media">';
                 /* replace image src */
-                if (isset($field_src))
+                if ( isset($field_src) )
                     $term_meta['term_media'] = $field_src;
 
                 $post = get_post($term_meta['term_media']);
-                if (isset($post->post_mime_type) && $post->post_mime_type === 'oembed/svg') echo '<div class="option-tree-ui-image-wrap">' . $post->post_content . '</div>';
-                else if (preg_match('/\.(?:jpe?g|png|gif|ico)$/i', $term_meta['term_media']))
+                if ( isset($post->post_mime_type) && $post->post_mime_type === 'oembed/svg' ) echo '<div class="option-tree-ui-image-wrap">' . $post->post_content . '</div>';
+                else if ( preg_match('/\.(?:jpe?g|png|gif|ico)$/i', $term_meta['term_media']) )
                     echo '<div class="option-tree-ui-image-wrap"><img src="' . esc_url($term_meta['term_media']) . '" alt="" /></div>';
                 else echo '<div class="option-tree-ui-image-wrap"><div class="option-tree-ui-image-wrap"><div class="oembed" onload="alert(\'load\');"><span class="spinner" style="display: block; float: left;"></span></div><div class="oembed_code" style="display: none;">' . esc_url($term_meta['term_media']) . '</div></div></div>';
                 echo '<a href="#" class="option-tree-ui-remove-media option-tree-ui-button button button-secondary light" title="' . esc_html__('Remove Media', 'lerp') . '"><span class="icon fa fa-minus2"></span>' . esc_html__('Remove Media', 'lerp') . '</a>';
@@ -667,7 +667,7 @@ function lerp_taxonomy_edit_meta_field($term)
         <td>
             <select name="term_meta[term_color]" id="term_meta[term_color]" class="term_color">
                 <?php
-                foreach ($lerp_colors as $key => $value) {
+                foreach ( $lerp_colors as $key => $value ) {
                     $selected = (isset($term_meta['term_color']) && $term_meta['term_color'] === $value[0]) ? ' selected="selected"' : '';
                     ?>
                     <option
@@ -704,12 +704,12 @@ add_action('portfolio_category_edit_form_fields', 'lerp_taxonomy_edit_meta_field
 // Save extra taxonomy fields callback function.
 function lerp_save_taxonomy_custom_meta($term_id)
 {
-    if (isset($_POST['term_meta'])) {
+    if ( isset($_POST['term_meta']) ) {
         $t_id = $term_id;
         $term_meta = get_option("_lerp_taxonomy_$t_id");
         $cat_keys = array_keys($_POST['term_meta']);
-        foreach ($cat_keys as $key) {
-            if (isset ($_POST['term_meta'][$key])) {
+        foreach ( $cat_keys as $key ) {
+            if ( isset ($_POST['term_meta'][$key]) ) {
                 $term_meta[$key] = $_POST['term_meta'][$key];
             }
         }
@@ -747,15 +747,15 @@ function lerp_update_custom_nav_fields($menu_id, $menu_item_db_id, $args)
 {
 
     // Check if element is properly sent
-    if (isset($_REQUEST['menu-item-icon']) && is_array($_REQUEST['menu-item-icon'])) {
+    if ( isset($_REQUEST['menu-item-icon']) && is_array($_REQUEST['menu-item-icon']) ) {
         $icon_value = (array_key_exists($menu_item_db_id, $_REQUEST['menu-item-icon'])) ? $_REQUEST['menu-item-icon'][$menu_item_db_id] : '';
         update_post_meta($menu_item_db_id, '_menu_item_icon', $icon_value);
     } else update_post_meta($menu_item_db_id, '_menu_item_icon', '');
-    if (isset($_REQUEST['menu-item-megamenu']) && is_array($_REQUEST['menu-item-megamenu'])) {
+    if ( isset($_REQUEST['menu-item-megamenu']) && is_array($_REQUEST['menu-item-megamenu']) ) {
         $megamenu_value = (array_key_exists($menu_item_db_id, $_REQUEST['menu-item-megamenu'])) ? $_REQUEST['menu-item-megamenu'][$menu_item_db_id] : '';
         update_post_meta($menu_item_db_id, '_menu_item_megamenu', $megamenu_value);
     } else update_post_meta($menu_item_db_id, '_menu_item_megamenu', '');
-    if (isset($_REQUEST['menu-item-button']) && is_array($_REQUEST['menu-item-button'])) {
+    if ( isset($_REQUEST['menu-item-button']) && is_array($_REQUEST['menu-item-button']) ) {
         $button_value = (array_key_exists($menu_item_db_id, $_REQUEST['menu-item-button'])) ? $_REQUEST['menu-item-button'][$menu_item_db_id] : '';
         update_post_meta($menu_item_db_id, '_menu_item_button', $button_value);
     } else update_post_meta($menu_item_db_id, '_menu_item_button', '');
@@ -787,15 +787,15 @@ function lerp_display_metabox()
 
     $ids = get_post_meta($post->ID, '_lerp_featured_media', 1);
 
-    if (function_exists('vc_editor_post_types')) {
+    if ( function_exists('vc_editor_post_types') ) {
         $vc_post_type = vc_editor_post_types();
-        if (!in_array($post->post_type, $vc_post_type)) $vc_message = esc_html__('Visual Composer is not active for this post type. Please activate it inside "Visual Composer > Role Manager"', 'lerp');
+        if ( !in_array($post->post_type, $vc_post_type) ) $vc_message = esc_html__('Visual Composer is not active for this post type. Please activate it inside "Visual Composer > Role Manager"', 'lerp');
         else $vc_message = '';
     } else {
         $vc_message = esc_html__('Visual Composer is not active. Please activate it inside "Lerp > Install Plugins > Lerp Visual Composer"', 'lerp');
     }
 
-    if ($vc_message !== '') $vc_message = '<p class="notice notice-warning"><b>' . $vc_message . '</b></p>';
+    if ( $vc_message !== '' ) $vc_message = '<p class="notice notice-warning"><b>' . $vc_message . '</b></p>';
 
     ?>
 
@@ -810,7 +810,7 @@ function lerp_display_metabox()
         <a class="add_media_widget vc_btn vc_btn-sm vc_btn-primary add_media_widget--with-galleries" href="#"
            use-single="false" title="Add media"><?php esc_html_e('Select medias', 'lerp'); ?></a>
         <a href="#"
-           class="vc_btn vc_btn-sm vc_btn-grey btn-remove-all"<?php if ($ids === '') echo ' style="display:none;"'; ?>><?php esc_html_e('Remove All', 'lerp'); ?></a>
+           class="vc_btn vc_btn-sm vc_btn-grey btn-remove-all"<?php if ( $ids === '' ) echo ' style="display:none;"'; ?>><?php esc_html_e('Remove All', 'lerp'); ?></a>
         <div class="lerp_widget_attached_images">
             <ul class="lerp_widget_attached_images_list">
                 <?php echo(($ids != '' && function_exists('lerp_fieldAttachedMedia')) ? lerp_fieldAttachedMedia(explode(",", $ids)) : ''); ?>
@@ -819,7 +819,7 @@ function lerp_display_metabox()
         </div>
     </div>
 
-    <?php if ($post->post_type != 'lerp_gallery') : ?>
+    <?php if ( $post->post_type != 'lerp_gallery' ) : ?>
     <?php
     $media_display = get_post_meta($post->ID, '_lerp_featured_media_display', 1);
     ?>
@@ -832,11 +832,11 @@ function lerp_display_metabox()
         </p>
         <p>
             <select name="media_display">
-                <option value="carousel" <?php if (isset ($media_display)) selected($media_display, 'carousel'); ?>><?php esc_html_e('Carousel', 'lerp') ?></option>
+                <option value="carousel" <?php if ( isset ($media_display) ) selected($media_display, 'carousel'); ?>><?php esc_html_e('Carousel', 'lerp') ?></option>
                 ';
-                <option value="stack" <?php if (isset ($media_display)) selected($media_display, 'stack'); ?>><?php esc_html_e('Stack', 'lerp') ?></option>
+                <option value="stack" <?php if ( isset ($media_display) ) selected($media_display, 'stack'); ?>><?php esc_html_e('Stack', 'lerp') ?></option>
                 ';
-                <option value="isotope" <?php if (isset ($media_display)) selected($media_display, 'isotope'); ?>><?php esc_html_e('Isotope', 'lerp') ?></option>
+                <option value="isotope" <?php if ( isset ($media_display) ) selected($media_display, 'isotope'); ?>><?php esc_html_e('Isotope', 'lerp') ?></option>
                 ';
             </select>
         </p>
@@ -850,7 +850,7 @@ function lerp_register_metabox()
     $lerp_post_types = lerp_get_post_types(true);
     $lerp_post_types[] = 'lerp_gallery';
 
-    foreach ($lerp_post_types as $post_type) {
+    foreach ( $lerp_post_types as $post_type ) {
         add_meta_box('lerp_gallery_div', esc_html__('Medias', 'lerp'), 'lerp_display_metabox', $post_type, 'normal', 'default');
     }
 }
@@ -860,15 +860,15 @@ add_action('add_meta_boxes', 'lerp_register_metabox');
 function lerp_save_media_metadata($post_id, $post)
 {
 
-    if (empty($_POST['lerp_medias_noncedata'])) {
+    if ( empty($_POST['lerp_medias_noncedata']) ) {
         return;
     }
 
-    if (!wp_verify_nonce($_POST['lerp_medias_noncedata'], 'lerp_medias_noncedata')) {
+    if ( !wp_verify_nonce($_POST['lerp_medias_noncedata'], 'lerp_medias_noncedata') ) {
         return;
     }
 
-    if (!current_user_can('edit_post', $post->ID)) {
+    if ( !current_user_can('edit_post', $post->ID) ) {
         return;
     }
 
@@ -878,25 +878,25 @@ function lerp_save_media_metadata($post_id, $post)
     $value_display = $_POST['media_display'];
     $key_display = '_lerp_featured_media_display';
 
-    if ($post->post_type == 'revision') {
+    if ( $post->post_type == 'revision' ) {
         return;
     }
 
-    if (get_post_meta($post->ID, $key_id, FALSE)) {
+    if ( get_post_meta($post->ID, $key_id, FALSE) ) {
         update_post_meta($post->ID, $key_id, $value_id);
     } else {
         add_post_meta($post->ID, $key_id, $value_id);
     }
-    if (!$value_id) {
+    if ( !$value_id ) {
         delete_post_meta($post->ID, $key_id);
     }
 
-    if (get_post_meta($post->ID, $key_display, FALSE)) {
+    if ( get_post_meta($post->ID, $key_display, FALSE) ) {
         update_post_meta($post->ID, $key_display, $value_display);
     } else {
         add_post_meta($post->ID, $key_display, $value_display);
     }
-    if (!$value_display) {
+    if ( !$value_display ) {
         delete_post_meta($post->ID, $key_display);
     }
 
@@ -920,7 +920,7 @@ function lerp_admin_get_oembed()
     $WP_oembed = new WP_oEmbed();
     $raw_provider = parse_url($WP_oembed->get_provider($urlEnterd));
 
-    if (isset($raw_provider['host'])) {
+    if ( isset($raw_provider['host']) ) {
         $host = $raw_provider['host'];
         $strip = array(
             "www.",
@@ -943,14 +943,14 @@ function lerp_admin_get_oembed()
 
         $code = wp_oembed_get($urlEnterd);
         preg_match_all('/(width|height)=("[^"]*")/i', $code, $img_attr);
-        if (isset($img_attr[2][0])) $width = preg_replace('/\D/', '', $img_attr[2][0]);
-        if (isset($img_attr[2][1])) $height = preg_replace('/\D/', '', $img_attr[2][1]);
+        if ( isset($img_attr[2][0]) ) $width = preg_replace('/\D/', '', $img_attr[2][0]);
+        if ( isset($img_attr[2][1]) ) $height = preg_replace('/\D/', '', $img_attr[2][1]);
 
-        if ($bare_host[0] === 'youtube') {
+        if ( $bare_host[0] === 'youtube' ) {
             $parts = parse_url($urlEnterd);
-            if (isset($parts['query'])) {
+            if ( isset($parts['query']) ) {
                 parse_str($parts['query'], $query);
-                if (isset($query['v'])) $idvideo = $query['v'];
+                if ( isset($query['v']) ) $idvideo = $query['v'];
                 else {
                     $idvideo = $parts['path'];
                     $idvideo = str_replace('/', '', $idvideo);
@@ -962,46 +962,46 @@ function lerp_admin_get_oembed()
             $data = wp_remote_fopen("https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails&id=" . $idvideo . "&" . $key);
             $json = json_decode($data);
             $code = '<img src="' . $json->items[0]->snippet->thumbnails->default->url . '" />';
-        } else if ($bare_host[0] === 'vimeo') {
+        } else if ( $bare_host[0] === 'vimeo' ) {
             $urlEnterd = preg_replace('/#.*/', '', $urlEnterd);
             $vimeo = unserialize(wp_remote_fopen("http://vimeo.com/api/v2/video/" . basename(strtok($urlEnterd, '?')) . ".php"));
             $code = '<img src="' . $vimeo[0]['thumbnail_large'] . '" />';
-        } else if ($bare_host[0] === 'flickr') {
+        } else if ( $bare_host[0] === 'flickr' ) {
             $code = preg_replace('/<\/?a[^>]*>/', '', $code);
         }
     } else {
-        if (preg_match('/(\.jpg|\.jpeg|\.png|\.bmp)$/i', $urlEnterd) || preg_match('/(\.jpg?|\.jpeg?|\.png?|\.bmp?)/i', $urlEnterd) || strpos($urlEnterd, 'imgix') !== false) {
+        if ( preg_match('/(\.jpg|\.jpeg|\.png|\.bmp)$/i', $urlEnterd) || preg_match('/(\.jpg?|\.jpeg?|\.png?|\.bmp?)/i', $urlEnterd) || strpos($urlEnterd, 'imgix') !== false ) {
             $code = '<img src="' . $urlEnterd . '" />';
             $mime = 'image/url';
-            if ($onlycode == 'false') {
-                if ($getsize = @getimagesize($urlEnterd)) {
-                    if (isset($getsize[0])) $width = $getsize[0];
-                    if (isset($getsize[1])) $height = $getsize[1];
+            if ( $onlycode == 'false' ) {
+                if ( $getsize = @getimagesize($urlEnterd) ) {
+                    if ( isset($getsize[0]) ) $width = $getsize[0];
+                    if ( isset($getsize[1]) ) $height = $getsize[1];
                 } else {
                     $width = 'indefinit';
                     $height = 'indefinit';
                 }
             }
         } else {
-            if (strpos(strtolower($urlEnterd), '<iframe') !== false) {
+            if ( strpos(strtolower($urlEnterd), '<iframe') !== false ) {
                 $mime = 'oembed/iframe';
                 preg_match_all('/(width|height)=("[^"]*")/i', $urlEnterd, $iframe_size);
-                if (isset($iframe_size[2][0])) {
+                if ( isset($iframe_size[2][0]) ) {
                     preg_match("|\d+|", $iframe_size[2][0], $width);
                     $width = $width[0];
                 }
-                if (isset($iframe_size[2][1])) {
+                if ( isset($iframe_size[2][1]) ) {
                     preg_match("|\d+|", $iframe_size[2][1], $height);
                     $height = $height[0];
                 }
-            } else if (strpos(strtolower($urlEnterd), '<svg') !== false) {
+            } else if ( strpos(strtolower($urlEnterd), '<svg') !== false ) {
                 $mime = 'oembed/svg';
                 preg_match_all('/(width|height)=("[^"]*")/i', $urlEnterd, $svg_size);
-                if (isset($svg_size[2][0])) {
+                if ( isset($svg_size[2][0]) ) {
                     preg_match("|\d+|", $svg_size[2][0], $width);
                     $width = $width[0];
                 }
-                if (isset($svg_size[2][1])) {
+                if ( isset($svg_size[2][1]) ) {
                     preg_match("|\d+|", $svg_size[2][1], $height);
                     $height = $height[0];
                 }
@@ -1010,7 +1010,7 @@ function lerp_admin_get_oembed()
         }
     }
 
-    if ($code == '' && $urlEnterd != '') $code = 'null';
+    if ( $code == '' && $urlEnterd != '' ) $code = 'null';
 
     echo json_encode(array(
         'code' => $code,
@@ -1026,17 +1026,17 @@ function lerp_action_add_attachment($metadata, $attachment_id)
 {
     $width = $height = '';
     $attachment = get_post($attachment_id);
-    if ($attachment && $attachment->post_mime_type === 'image/svg+xml') {
+    if ( $attachment && $attachment->post_mime_type === 'image/svg+xml' ) {
         global $wp_filesystem;
-        if (empty($wp_filesystem)) {
+        if ( empty($wp_filesystem) ) {
             require_once(ABSPATH . '/wp-admin/includes/file.php');
             WP_Filesystem();
         }
         $xmlget = $wp_filesystem->get_contents($attachment->guid);
         preg_match_all('/(width|height)=("[^"]*")/i', $xmlget, $img_attr);
-        if (isset($img_attr[2][0])) $width = preg_replace('/\D/', '', $img_attr[2][0]);
-        if (isset($img_attr[2][1])) $height = preg_replace('/\D/', '', $img_attr[2][1]);
-        if ($width !== '' && $height !== '') {
+        if ( isset($img_attr[2][0]) ) $width = preg_replace('/\D/', '', $img_attr[2][0]);
+        if ( isset($img_attr[2][1]) ) $height = preg_replace('/\D/', '', $img_attr[2][1]);
+        if ( $width !== '' && $height !== '' ) {
             $metadata['width'] = (int)$width;
             $metadata['height'] = (int)$height;
         }
@@ -1060,8 +1060,8 @@ add_action('wp_ajax_nopriv_get_oembed', 'lerp_admin_get_oembed');
  */
 function lerp_php_test_memory()
 {
-    if (defined('DOING_AJAX') && DOING_AJAX) {
-        for ($i = 1; $i < 100; $i++) {
+    if ( defined('DOING_AJAX') && DOING_AJAX ) {
+        for ( $i = 1; $i < 100; $i++ ) {
             $a = loadmem($i);
             echo '<div data-mb="' . $i . '" class="memory-mb"></div>';
             unset($a);
@@ -1090,7 +1090,7 @@ add_action('wp_ajax_php_test_memory', 'lerp_php_test_memory');
 function lerp_list_images()
 {
 
-    if (!function_exists('disk_free_space')) {
+    if ( !function_exists('disk_free_space') ) {
         die();
     }
 
@@ -1102,16 +1102,16 @@ function lerp_list_images()
     $query_images = new WP_Query($query_images_args);
     $images_block = array();
     $files = array();
-    foreach ($query_images->posts as $image) {
+    foreach ( $query_images->posts as $image ) {
         $filename = get_attached_file($image->ID);
-        if ($filename != '') {
+        if ( $filename != '' ) {
             $extension_pos = strrpos($filename, '.');
             $filename_wildcard = substr($filename, 0, $extension_pos) . '*' . substr($filename, $extension_pos);
             $image_block = glob($filename_wildcard);
-            if (is_array($image_block)) {
-                foreach ($image_block as $key => $image) {
-                    if (strpos($image_block[$key], '-uai-') !== false) {
-                        if ($erase) unlink($image_block[$key]);
+            if ( is_array($image_block) ) {
+                foreach ( $image_block as $key => $image ) {
+                    if ( strpos($image_block[$key], '-uai-') !== false ) {
+                        if ( $erase ) unlink($image_block[$key]);
                         else $files[] = $image_block[$key];
                     }
                 }
@@ -1122,7 +1122,7 @@ function lerp_list_images()
 
     $files_size = 0;
 
-    foreach ($files as $image) {
+    foreach ( $files as $image ) {
         $files_size += filesize($image);
     }
 
@@ -1151,12 +1151,12 @@ function lerp_delete_uia_files($postId)
 {
     global $wpdb;
     $filename = get_attached_file($postId);
-    if ($filename != '') {
+    if ( $filename != '' ) {
         $extension_pos = strrpos($filename, '.');
         $filename_wildcard = substr($filename, 0, $extension_pos) . '*' . substr($filename, $extension_pos);
         $image_block = glob($filename_wildcard);
-        foreach ($image_block as $key => $image) {
-            if (strpos($image_block[$key], '-uai-') !== false) {
+        foreach ( $image_block as $key => $image ) {
+            if ( strpos($image_block[$key], '-uai-') !== false ) {
                 unlink($image_block[$key]);
             }
         }
@@ -1181,54 +1181,54 @@ function lerp_header_export_xml()
 {
     global $pagenow;
 
-    if ('tools.php' == $pagenow && isset($_GET['page']) && 'lerp-export' == $_GET['page'] && isset($_GET['download']) && 'true' == $_GET['download']) {
+    if ( 'tools.php' == $pagenow && isset($_GET['page']) && 'lerp-export' == $_GET['page'] && isset($_GET['download']) && 'true' == $_GET['download'] ) {
 
         $sitename = sanitize_key(get_bloginfo('name'));
-        if (!empty($sitename)) $sitename .= '.';
+        if ( !empty($sitename) ) $sitename .= '.';
         $filename = $sitename . 'wordpress.' . date('Y-m-d') . '.xml';
 
         header('Content-Description: File Transfer');
         header('Content-Disposition: attachment; filename=' . $filename);
         header('Content-Type: text/xml; charset=' . get_option('blog_charset'), true);
 
-        if (defined('UNCODE_EXPORT_TEMPLATE'))
+        if ( defined('UNCODE_EXPORT_TEMPLATE') )
             require_once(UNCODE_EXPORT_TEMPLATE);
         else
             require_once('export/lerp_export_template.php');
 
-        if (isset($_GET['download'])) {
+        if ( isset($_GET['download']) ) {
             $args = array();
 
-            if (!isset($_GET['content']) || 'all' == $_GET['content']) {
+            if ( !isset($_GET['content']) || 'all' == $_GET['content'] ) {
                 $args['content'] = 'all';
-            } else if ('posts' == $_GET['content']) {
+            } else if ( 'posts' == $_GET['content'] ) {
                 $args['content'] = 'post';
 
-                if ($_GET['cat'])
+                if ( $_GET['cat'] )
                     $args['category'] = (int)$_GET['cat'];
 
-                if ($_GET['post_author'])
+                if ( $_GET['post_author'] )
                     $args['author'] = (int)$_GET['post_author'];
 
-                if ($_GET['post_start_date'] || $_GET['post_end_date']) {
+                if ( $_GET['post_start_date'] || $_GET['post_end_date'] ) {
                     $args['start_date'] = $_GET['post_start_date'];
                     $args['end_date'] = $_GET['post_end_date'];
                 }
 
-                if ($_GET['post_status'])
+                if ( $_GET['post_status'] )
                     $args['status'] = $_GET['post_status'];
-            } else if ('pages' == $_GET['content']) {
+            } else if ( 'pages' == $_GET['content'] ) {
                 $args['content'] = 'page';
 
-                if ($_GET['page_author'])
+                if ( $_GET['page_author'] )
                     $args['author'] = (int)$_GET['page_author'];
 
-                if ($_GET['page_start_date'] || $_GET['page_end_date']) {
+                if ( $_GET['page_start_date'] || $_GET['page_end_date'] ) {
                     $args['start_date'] = $_GET['page_start_date'];
                     $args['end_date'] = $_GET['page_end_date'];
                 }
 
-                if ($_GET['page_status'])
+                if ( $_GET['page_status'] )
                     $args['status'] = $_GET['page_status'];
             } else {
                 $args['content'] = $_GET['content'];
@@ -1265,7 +1265,7 @@ function lerp_mark_register_button($buttons)
     return $buttons;
 }
 
-if (!function_exists('lerp_get_current_post_type')) :
+if ( !function_exists('lerp_get_current_post_type') ) :
     /**
      * Get post type in any case.
      * @since Lerp 1.6.0
@@ -1273,22 +1273,22 @@ if (!function_exists('lerp_get_current_post_type')) :
     function lerp_get_current_post_type()
     {
         global $post, $typenow, $current_screen, $pagenow;
-        if ($post && $post->post_type) {
+        if ( $post && $post->post_type ) {
             return $post->post_type;
-        } elseif ($typenow) {
+        } elseif ( $typenow ) {
             return $typenow;
-        } elseif ($current_screen && $current_screen->post_type) {
+        } elseif ( $current_screen && $current_screen->post_type ) {
             return $current_screen->post_type;
-        } elseif (isset($_REQUEST['post_type'])) {
+        } elseif ( isset($_REQUEST['post_type']) ) {
             return sanitize_key($_REQUEST['post_type']);
-        } elseif (isset($_GET['post']) && $_GET['post'] != -1) {
+        } elseif ( isset($_GET['post']) && $_GET['post'] != -1 ) {
             $thispost = get_post($_GET['post']);
-            if ($thispost)
+            if ( $thispost )
                 return $thispost->post_type;
             else
                 return null;
         } else {
-            if ($pagenow === 'post-new.php')
+            if ( $pagenow === 'post-new.php' )
                 return 'post';
             else
                 return null;
@@ -1306,7 +1306,7 @@ function lerp_add_default_image_with_activation()
 {
     $default_back_media = get_page_by_title('lerp-default-back', OBJECT, 'attachment');
 
-    if (!isset($default_back_media)) {
+    if ( !isset($default_back_media) ) {
 
         // gives us access to the download_url() and wp_handle_sideload() functions
         require_once(ABSPATH . 'wp-admin/includes/file.php');
@@ -1318,7 +1318,7 @@ function lerp_add_default_image_with_activation()
         // download file to temp dir
         $temp_file = download_url($url, $timeout_seconds);
 
-        if (!is_wp_error($temp_file)) {
+        if ( !is_wp_error($temp_file) ) {
 
             // array based on $_FILE as seen in PHP file uploads
             $file = array(
@@ -1347,7 +1347,7 @@ function lerp_add_default_image_with_activation()
             // move the temporary file into the uploads directory
             $results = wp_handle_sideload($file, $overrides);
 
-            if (!empty($results['error'])) {
+            if ( !empty($results['error']) ) {
                 // insert any error handling here
             } else {
 
@@ -1393,14 +1393,14 @@ add_action('upgrader_process_complete', 'lerp_upgrader_process_complete', 10, 2)
 function lerp_upgrader_process_complete($upgrader, $data)
 {
     $result = $upgrader->result;
-    if (isset($result['destination_name']) && $result['destination_name'] === 'lerp') lerp_create_dynamic_css();
+    if ( isset($result['destination_name']) && $result['destination_name'] === 'lerp' ) lerp_create_dynamic_css();
 }
 
 /**
  * Detect js_composer plugin. For use in Admin area only.
  */
-if (function_exists('is_plugin_active')) {
-    if (is_plugin_active('js_composer/js_composer.php')) {
+if ( function_exists('is_plugin_active') ) {
+    if ( is_plugin_active('js_composer/js_composer.php') ) {
         function lerp_js_composer_nag()
         {
             ?>
@@ -1419,9 +1419,9 @@ if (function_exists('is_plugin_active')) {
 }
 
 $max_input_vars = ini_get('max_input_vars');
-if ($max_input_vars < 3000) {
+if ( $max_input_vars < 3000 ) {
     global $pagenow;
-    if (is_admin() && $pagenow === 'admin.php' && $_GET['page'] === 'lerp-options') {
+    if ( is_admin() && $pagenow === 'admin.php' && $_GET['page'] === 'lerp-options' ) {
         function lerp_php_max_vars_nag()
         {
             ?>
@@ -1442,31 +1442,31 @@ if ($max_input_vars < 3000) {
 
 function lerp_transparent_header_nag()
 {
-    if (!is_admin()) return false;
-    if (!isset($_GET['post'])) return false;
+    if ( !is_admin() ) return false;
+    if ( !isset($_GET['post']) ) return false;
     $lerp_post_types = lerp_get_post_types(true);
     $lerp_current_post_type = lerp_get_current_post_type();
-    if (in_array($lerp_current_post_type, $lerp_post_types)) {
+    if ( in_array($lerp_current_post_type, $lerp_post_types) ) {
         $general_style = ot_get_option('_lerp_general_style');
         $stylemain = ot_get_option('_lerp_primary_menu_style');
-        if ($stylemain === '') $stylemain = $general_style;
+        if ( $stylemain === '' ) $stylemain = $general_style;
         $transpmainheader = ot_get_option('_lerp_menu_bg_alpha_' . $stylemain);
-        if ($transpmainheader !== '100') {
+        if ( $transpmainheader !== '100' ) {
             $post_id = $_GET['post'];
             $metabox_data = get_post_custom($post_id);
             $show_nag = false;
             $get_post_type = get_post_type($post_id);
             $get_generic_header = ot_get_option('_lerp_' . $get_post_type . '_header');
-            if (isset($metabox_data['_lerp_specific_menu_opaque'][0]) && $metabox_data['_lerp_specific_menu_opaque'][0] !== 'on') {
-                if ($get_generic_header === 'none' || $get_generic_header === '') {
+            if ( isset($metabox_data['_lerp_specific_menu_opaque'][0]) && $metabox_data['_lerp_specific_menu_opaque'][0] !== 'on' ) {
+                if ( $get_generic_header === 'none' || $get_generic_header === '' ) {
                     $show_nag = true;
-                    if (!isset($metabox_data['_lerp_header_type']) || (isset($metabox_data['_lerp_header_type'][0]) && $metabox_data['_lerp_header_type'][0] === 'none')) {
+                    if ( !isset($metabox_data['_lerp_header_type']) || (isset($metabox_data['_lerp_header_type'][0]) && $metabox_data['_lerp_header_type'][0] === 'none') ) {
                         $show_nag = true;
                     } else {
                         $show_nag = false;
                     }
                 }
-                if ($show_nag) {
+                if ( $show_nag ) {
                     ?>
                     <div class="notice notice-success notice-warning is-dismissible">
                         <p><?php echo sprintf(wp_kses(__('The menu transparency will not be visible without a declared header <a class="page-options-header-section" href="%s">here</a>.', 'lerp'), array('a' => array('href' => array(), 'class' => array(), 'target' => array()))), '#_lerp_page_options'); ?></p>
@@ -1482,10 +1482,10 @@ add_action('admin_notices', 'lerp_transparent_header_nag');
 
 function lerp_core_update_nag()
 {
-    if (!is_admin() || !file_exists(WP_PLUGIN_DIR . '/lerp-core/lerp-core.php')) return false;
+    if ( !is_admin() || !file_exists(WP_PLUGIN_DIR . '/lerp-core/lerp-core.php') ) return false;
     $lerp_core = get_plugin_data(WP_PLUGIN_DIR . '/lerp-core/lerp-core.php');
-    if (isset($GLOBALS['tgmpa']->plugins['lerp-core']['version']) && isset($lerp_core['Version'])) {
-        if (version_compare($GLOBALS['tgmpa']->plugins['lerp-core']['version'], $lerp_core['Version'], '>')) {
+    if ( isset($GLOBALS['tgmpa']->plugins['lerp-core']['version']) && isset($lerp_core['Version']) ) {
+        if ( version_compare($GLOBALS['tgmpa']->plugins['lerp-core']['version'], $lerp_core['Version'], '>') ) {
             ?>
             <div class="notice error is-dismissible">
                 <p><?php echo esc_html__('You need to update the Lerp Core plugin.', 'lerp'); ?></p>
@@ -1504,7 +1504,7 @@ add_action('admin_notices', 'lerp_core_update_nag');
 function lerp_support_admin_bar_menu($wp_admin_bar)
 {
 
-    if (!is_admin_bar_showing() || ot_get_option('_lerp_admin_help') === 'off')
+    if ( !is_admin_bar_showing() || ot_get_option('_lerp_admin_help') === 'off' )
         return;
 
     $wp_admin_bar->add_node(array(
@@ -1532,7 +1532,7 @@ function deactivate_js_composer()
 add_action('wp_ajax_deactivate_js_composer', 'deactivate_js_composer');
 add_action('wp_ajax_nopriv_deactivate_js_composer', 'deactivate_js_composer');
 
-if (!function_exists('lerp_get_post_types')) {
+if ( !function_exists('lerp_get_post_types') ) {
     function lerp_get_post_types($built_in = false)
     {
         $args = array(
@@ -1543,15 +1543,15 @@ if (!function_exists('lerp_get_post_types')) {
         $operator = 'and'; // 'and' or 'or'
         $get_post_types = get_post_types($args, $output, $operator);
         $lerp_post_types = array();
-        if (($key = array_search('lerpblock', $get_post_types)) !== false) {
+        if ( ($key = array_search('lerpblock', $get_post_types)) !== false ) {
             unset($get_post_types[$key]);
         }
-        if (($key = array_search('lerp_gallery', $get_post_types)) !== false) {
+        if ( ($key = array_search('lerp_gallery', $get_post_types)) !== false ) {
             unset($get_post_types[$key]);
         }
-        if ($built_in) $lerp_post_types[] = 'post';
-        if ($built_in) $lerp_post_types[] = 'page';
-        foreach ($get_post_types as $key => $value) {
+        if ( $built_in ) $lerp_post_types[] = 'post';
+        if ( $built_in ) $lerp_post_types[] = 'page';
+        foreach ( $get_post_types as $key => $value ) {
             $lerp_post_types[] = $key;
         }
 
@@ -1570,7 +1570,7 @@ function lerp_hex2rgb($hex)
 {
     $hex = str_replace("#", "", $hex);
 
-    if (strlen($hex) == 3) {
+    if ( strlen($hex) == 3 ) {
         $r = hexdec(substr($hex, 0, 1) . substr($hex, 0, 1));
         $g = hexdec(substr($hex, 1, 1) . substr($hex, 1, 1));
         $b = hexdec(substr($hex, 2, 1) . substr($hex, 2, 1));
@@ -1591,7 +1591,7 @@ function lerp_hex2rgb($hex)
 }
 
 add_filter('user_contactmethods', 'lerp_additional_contactmethods', 10, 1);
-if (!function_exists('lerp_additional_contactmethods')) :
+if ( !function_exists('lerp_additional_contactmethods') ) :
     /**
      * User profile socials.
      * @since Lerp 1.5.0
@@ -1625,7 +1625,7 @@ endif; //lerp_additional_contactmethods
 
 add_action('show_user_profile', 'lerp_user_add_meta_featured_image');
 add_action('edit_user_profile', 'lerp_user_add_meta_featured_image');
-if (!function_exists('lerp_user_add_meta_featured_image')) :
+if ( !function_exists('lerp_user_add_meta_featured_image') ) :
     /**
      * Edit user featured media.
      * @since Lerp 1.5.0
@@ -1659,20 +1659,20 @@ if (!function_exists('lerp_user_add_meta_featured_image')) :
                                         class="icon fa fa-plus2"></span><?php esc_html_e('Add media', 'lerp'); ?></a>
                         </div>
                         <?php
-                        if (isset($user_lerp_meta['term_media']) && wp_attachment_is_image($user_lerp_meta['term_media'])) {
+                        if ( isset($user_lerp_meta['term_media']) && wp_attachment_is_image($user_lerp_meta['term_media']) ) {
                             $attachment_data = wp_get_attachment_image_src($user_lerp_meta['term_media'], 'original');
                             /* check for attachment data */
-                            if ($attachment_data) {
+                            if ( $attachment_data ) {
                                 $field_src = $attachment_data[0];
                             }
                             echo '<div class="option-tree-ui-media-wrap" id="term_media_media">';
                             /* replace image src */
-                            if (isset($field_src))
+                            if ( isset($field_src) )
                                 $user_lerp_meta['term_media'] = $field_src;
 
                             $post = get_post($user_lerp_meta['term_media']);
-                            if (isset($post->post_mime_type) && $post->post_mime_type === 'oembed/svg') echo '<div class="option-tree-ui-image-wrap">' . $post->post_content . '</div>';
-                            else if (preg_match('/\.(?:jpe?g|png|gif|ico)$/i', $user_lerp_meta['term_media']))
+                            if ( isset($post->post_mime_type) && $post->post_mime_type === 'oembed/svg' ) echo '<div class="option-tree-ui-image-wrap">' . $post->post_content . '</div>';
+                            else if ( preg_match('/\.(?:jpe?g|png|gif|ico)$/i', $user_lerp_meta['term_media']) )
                                 echo '<div class="option-tree-ui-image-wrap"><img src="' . esc_url($user_lerp_meta['term_media']) . '" alt="" /></div>';
                             else echo '<div class="option-tree-ui-image-wrap"><div class="option-tree-ui-image-wrap"><div class="oembed" onload="alert(\'load\');"><span class="spinner" style="display: block; float: left;"></span></div><div class="oembed_code" style="display: none;">' . esc_url($user_lerp_meta['term_media']) . '</div></div></div>';
                             echo '<a href="#" class="option-tree-ui-remove-media option-tree-ui-button button button-secondary light" title="' . esc_html__('Remove Media', 'lerp') . '"><span class="icon fa fa-minus2"></span>' . esc_html__('Remove Media', 'lerp') . '</a>';
@@ -1695,7 +1695,7 @@ endif; //lerp_user_add_meta_featured_image
 
 add_action('personal_options_update', 'lerp_user_save_meta_featured_image');
 add_action('edit_user_profile_update', 'lerp_user_save_meta_featured_image');
-if (!function_exists('lerp_user_save_meta_featured_image')) :
+if ( !function_exists('lerp_user_save_meta_featured_image') ) :
     /**
      * Save user featured media.
      * @since Lerp 1.5.0
@@ -1703,10 +1703,10 @@ if (!function_exists('lerp_user_save_meta_featured_image')) :
     function lerp_user_save_meta_featured_image($user_id)
     {
 
-        if (!current_user_can('edit_user', $user_id))
+        if ( !current_user_can('edit_user', $user_id) )
             return false;
 
-        if (empty($_POST['user_lerp_meta']))
+        if ( empty($_POST['user_lerp_meta']) )
             return false;
 
         update_user_meta($user_id, 'user_lerp_meta', $_POST['user_lerp_meta']);
@@ -1714,7 +1714,7 @@ if (!function_exists('lerp_user_save_meta_featured_image')) :
 endif; //lerp_user_save_meta_featured_image
 
 add_action('admin_init', 'lerp_check_for_previous_consistency');
-if (!function_exists('lerp_check_for_previous_consistency')):
+if ( !function_exists('lerp_check_for_previous_consistency') ):
     /**
      * Check if author module exists from previous version, otherwise set default values.
      * Check a new version has installed.
@@ -1722,10 +1722,10 @@ if (!function_exists('lerp_check_for_previous_consistency')):
      */
     function lerp_check_for_previous_consistency()
     {
-        if (!get_option('lerp_check_for_author_module')) {
+        if ( !get_option('lerp_check_for_author_module') ) {
             $options = get_option(ot_options_id());
-            foreach ($options as $option => $value) {
-                if (strpos($option, '_lerp_post_index_') === 0) {
+            foreach ( $options as $option => $value ) {
+                if ( strpos($option, '_lerp_post_index_') === 0 ) {
                     $new_option = str_replace('_post_index_', '_author_index_', $option);
                     $options[$new_option] = $value;
                 }
@@ -1733,7 +1733,7 @@ if (!function_exists('lerp_check_for_previous_consistency')):
             update_option('lerp_check_for_author_module', true);
             update_option(ot_options_id(), $options);
         }
-        if (!get_option('lerp_latest_version') || version_compare(get_option('lerp_latest_version'), UNCODE_VERSION, '<')) {
+        if ( !get_option('lerp_latest_version') || version_compare(get_option('lerp_latest_version'), UNCODE_VERSION, '<') ) {
             update_option('lerp_latest_version', UNCODE_VERSION);
             do_action('lerp_upgraded');
         }
@@ -1743,7 +1743,7 @@ endif;//lerp_check_for_previous_consistency
 add_action('lerp_upgraded', 'lerp_create_dynamic_css');
 
 add_action('custom_menu_order', 'lerp_change_menu_cap', 50);
-if (!function_exists('lerp_change_menu_cap')):
+if ( !function_exists('lerp_change_menu_cap') ):
     /**
      * @since Lerp 1.5.0
      */
@@ -1751,58 +1751,58 @@ if (!function_exists('lerp_change_menu_cap')):
     {
         global $submenu;
 
-        if (!isset($submenu['lerp-system-status']))
+        if ( !isset($submenu['lerp-system-status']) )
             return $menu_ord;
 
-        foreach ($submenu['lerp-system-status'] as $position => $menu) {
-            if (isset($menu[2]) && $menu[2] == 'backups') {
+        foreach ( $submenu['lerp-system-status'] as $position => $menu ) {
+            if ( isset($menu[2]) && $menu[2] == 'backups' ) {
                 $backups = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
-            if (isset($menu[2]) && $menu[2] == 'communication') {
+            if ( isset($menu[2]) && $menu[2] == 'communication' ) {
                 $communication = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
-            if (isset($menu[2]) && $menu[2] == 'patches') {
+            if ( isset($menu[2]) && $menu[2] == 'patches' ) {
                 $patches = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
-            if (isset($menu[2]) && $menu[2] == 'updates') {
+            if ( isset($menu[2]) && $menu[2] == 'updates' ) {
                 $updates = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
-            if (isset($menu[2]) && $menu[2] == 'lerp-system-status') {
+            if ( isset($menu[2]) && $menu[2] == 'lerp-system-status' ) {
                 $status = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
-            if (isset($menu[2]) && $menu[2] == 'lerp-import-demo') {
+            if ( isset($menu[2]) && $menu[2] == 'lerp-import-demo' ) {
                 $demo = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
-            if (isset($menu[2]) && $menu[2] == 'lerp-plugins') {
+            if ( isset($menu[2]) && $menu[2] == 'lerp-plugins' ) {
                 $plugins = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
-            if (isset($menu[2]) && $menu[2] == 'lerp-options') {
+            if ( isset($menu[2]) && $menu[2] == 'lerp-options' ) {
                 $options = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
-            if (isset($menu[2]) && $menu[2] == 'lerp-settings') {
+            if ( isset($menu[2]) && $menu[2] == 'lerp-settings' ) {
                 $settings = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
-            if (isset($menu[2]) && $menu[2] == 'lerp-font-stacks') {
+            if ( isset($menu[2]) && $menu[2] == 'lerp-font-stacks' ) {
                 $fonts = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
-            if (isset($menu[2]) && $menu[2] == 'lerp-support') {
+            if ( isset($menu[2]) && $menu[2] == 'lerp-support' ) {
                 $support = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
         }
 
         array_unshift($submenu['lerp-system-status'], $options);
-        if (ot_get_option('_lerp_admin_help') !== 'off')
+        if ( ot_get_option('_lerp_admin_help') !== 'off' )
             array_unshift($submenu['lerp-system-status'], $support);
         array_unshift($submenu['lerp-system-status'], $settings);
         array_unshift($submenu['lerp-system-status'], $fonts);
@@ -1811,8 +1811,8 @@ if (!function_exists('lerp_change_menu_cap')):
         array_unshift($submenu['lerp-system-status'], $status);
 
         $i = 0;
-        foreach ($submenu['lerp-system-status'] as $position => $menu) {
-            if (isset($menu[2]) && $menu[2] == 'lerp-options') {
+        foreach ( $submenu['lerp-system-status'] as $position => $menu ) {
+            if ( isset($menu[2]) && $menu[2] == 'lerp-options' ) {
                 $options_pos = $i;
             }
             $i++;
@@ -1821,13 +1821,13 @@ if (!function_exists('lerp_change_menu_cap')):
         $array_first = array_slice($submenu['lerp-system-status'], 0, ($options_pos));
         $array_second = array_slice($submenu['lerp-system-status'], ($options_pos));
 
-        if (isset($backups))
+        if ( isset($backups) )
             $array_first[] = $backups;
-        if (isset($communication))
+        if ( isset($communication) )
             $array_first[] = $communication;
-        if (isset($patches))
+        if ( isset($patches) )
             $array_first[] = $patches;
-        if (isset($updates))
+        if ( isset($updates) )
             $array_first[] = $updates;
 
         $array_first = array_merge($array_first, $array_second);
@@ -1847,13 +1847,13 @@ if (!function_exists('lerp_change_menu_cap')):
 endif;//lerp_change_menu_cap
 
 add_action('admin_menu', 'lerp_related_post_submenu', 100);
-if (!function_exists('lerp_related_post_submenu')):
+if ( !function_exists('lerp_related_post_submenu') ):
     /**
      * @since Lerp 1.5.0
      */
     function lerp_related_post_submenu()
     {
-        if (is_plugin_active('related-posts-for-wp/related-posts-for-wp.php') && class_exists('RP4WP_Hook_Settings_Page')) {
+        if ( is_plugin_active('related-posts-for-wp/related-posts-for-wp.php') && class_exists('RP4WP_Hook_Settings_Page') ) {
             require_once get_template_directory() . '/core/inc/related-posts/class-hook-settings-page.php';
 
             remove_submenu_page('options-general.php', 'rp4wp');
@@ -1868,7 +1868,7 @@ if (!function_exists('lerp_related_post_submenu')):
 endif;//lerp_related_post_submenu
 
 add_action('admin_menu', 'lerp_VC_submenu_pages', 100);
-if (!function_exists('lerp_VC_submenu_pages')):
+if ( !function_exists('lerp_VC_submenu_pages') ):
     /**
      * @since Lerp 1.5.0
      */
@@ -1879,19 +1879,19 @@ if (!function_exists('lerp_VC_submenu_pages')):
 endif;//lerp_VC_submenu_pages
 
 add_action('init', 'lerp_VC_deregister_cpt', 100);
-if (!function_exists('lerp_VC_deregister_cpt')):
+if ( !function_exists('lerp_VC_deregister_cpt') ):
     /**
      * @since Lerp 1.5.0
      */
     function lerp_VC_deregister_cpt()
     {
-        if (function_exists('unregister_post_type'))//WP 4.5+
+        if ( function_exists('unregister_post_type') )//WP 4.5+
             unregister_post_type('vc_grid_item');
     }
 endif;//lerp_VC_deregister_cpt
 
 add_action('wp_ajax_lerp_vc_admin_notice_dismiss', 'lerp_vc_admin_notice_dismiss');
-if (!function_exists('lerp_vc_admin_notice_dismiss')) :
+if ( !function_exists('lerp_vc_admin_notice_dismiss') ) :
     /**
      * @since Lerp 1.5.0
      */
@@ -1905,23 +1905,23 @@ if (!function_exists('lerp_vc_admin_notice_dismiss')) :
 endif; //mood_dismiss_notice_updates
 
 add_action('admin_notices', 'lerp_vc_admin_notice');
-if (!function_exists('lerp_vc_admin_notice')) :
+if ( !function_exists('lerp_vc_admin_notice') ) :
     /**
      * @since Lerp 1.5.0
      */
     function lerp_vc_admin_notice()
     {
 
-        if (!function_exists('vc_editor_post_types'))
+        if ( !function_exists('vc_editor_post_types') )
             return;
 
         $post_type = lerp_get_current_post_type();
         $vc_post_type = vc_editor_post_types();
 
-        if (in_array($post_type, $vc_post_type))
+        if ( in_array($post_type, $vc_post_type) )
             return;
 
-        if (!get_option('lerp_vc_admin_notice') && $post_type == 'lerpblock') {
+        if ( !get_option('lerp_vc_admin_notice') && $post_type == 'lerpblock' ) {
             ?>
             <div class="notice error is-dismissible" id="lerp_vc_admin_notice">
                 <p><?php printf(wp_kses_post(__('Please activate page builder for Content Block in Visual Composer <a href="%1s">Role Manager</a>. More info on the documentation, <a href="%2s" target="_blank">click here</a>', 'lerp')), esc_url(admin_url('admin.php?page=vc-roles')), esc_url('https://support.undsgn.com/hc/en-us/articles/214006125')); ?></p>
@@ -1933,7 +1933,7 @@ if (!function_exists('lerp_vc_admin_notice')) :
 endif; //lerp_admin_notices
 
 add_action('wp_ajax_lerp_test_vars', 'lerp_test_vars');
-if (!function_exists('lerp_test_vars')) :
+if ( !function_exists('lerp_test_vars') ) :
     /**
      * @since Lerp 1.6.4
      */
@@ -1945,7 +1945,7 @@ if (!function_exists('lerp_test_vars')) :
 endif; //lerp_test_vars
 
 add_action('wp_ajax_lerp_update_max_input_vars', 'lerp_update_max_input_vars');
-if (!function_exists('lerp_update_max_input_vars')) :
+if ( !function_exists('lerp_update_max_input_vars') ) :
     /**
      * @since Lerp 1.7.0
      */

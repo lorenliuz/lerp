@@ -1374,10 +1374,9 @@ if ( !function_exists('lerp_create_single_block') ) {
 
             endif;
 
-            if ( ($single_text !== 'overlay' || $single_elements_click !== 'yes') && $media_type === 'image' )
-                {
-                    $output .= '</a>';
-                }
+            if ( ($single_text !== 'overlay' || $single_elements_click !== 'yes') && $media_type === 'image' ) {
+                $output .= '</a>';
+            }
 
             $output .= '</div>
 				</div>

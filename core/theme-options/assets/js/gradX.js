@@ -5,9 +5,9 @@
 //make me jquery UI  independent
 if (typeof jQuery.fn.draggable === "undefined") {
 
-    (function($) {
+    (function ($) {
 
-        $.fn.draggable = function() {
+        $.fn.draggable = function () {
             var ele = document.getElementById(this.attr("id"));
             ele.style.top = "121px";
             Drag.init(ele, null, 26, 426, 86, 86);
@@ -19,7 +19,7 @@ if (typeof jQuery.fn.draggable === "undefined") {
 }
 
 
-var gradX = function(id, _options) {
+var gradX = function (id, _options) {
 
 
     var options = {
@@ -30,7 +30,7 @@ var gradX = function(id, _options) {
         //if radial left | center | right , top | center | bottom
         type: 'linear', //linear | circle | ellipse
         code_shown: false, //false | true
-        change: function(sliders, styles) {
+        change: function (sliders, styles) {
             //nothing to do here by default
         }
     };
@@ -49,16 +49,16 @@ var gradX = function(id, _options) {
         slider_hovered: [],
         jQ_present: true,
         code_shown: false,
-        load_jQ: function() {
+        load_jQ: function () {
 
             //handle any library conflicts here
             this.gx = jQuery;
         },
         //very lazy to replace this by jQuery
-        add_event: function(el, evt, evt_func) {
+        add_event: function (el, evt, evt_func) {
             add_event(el, evt, evt_func);
         },
-        get_random_position: function() {
+        get_random_position: function () {
             var pos;
 
             do {
@@ -70,7 +70,7 @@ var gradX = function(id, _options) {
             return pos;
 
         },
-        get_random_rgb: function() {
+        get_random_rgb: function () {
 
             var R, G, B, color;
 
@@ -88,7 +88,7 @@ var gradX = function(id, _options) {
 
         },
         //if target element is specified the target's style (background) is updated
-        update_target: function(values) {
+        update_target: function (values) {
 
             if (this.targets.length > 0) {
                 //target elements exist
@@ -105,7 +105,7 @@ var gradX = function(id, _options) {
             }
         },
         //apply styles on fly
-        apply_style: function(ele, value) {
+        apply_style: function (ele, value) {
 
             var type = 'linear';
 
@@ -154,18 +154,18 @@ var gradX = function(id, _options) {
 
         },
         //on load
-        apply_default_styles: function() {
+        apply_default_styles: function () {
             this.update_style_array()
             var value = this.get_style_value();
             this.apply_style(this.panel, value);
         },
         //update the slider_values[] while dragging
-        update_style_array: function() {
+        update_style_array: function () {
 
             this.sliders = [];
 
             var len = gradx.slider_ids.length,
-                    i, offset, position, id;
+                i, offset, position, id;
 
             for (i = 0; i < len; i++) {
                 id = "#" + gradx.slider_ids[i];
@@ -176,7 +176,7 @@ var gradX = function(id, _options) {
 
             }
 
-            this.sliders.sort(function(A, B) {
+            this.sliders.sort(function (A, B) {
                 if (A[1] > B[1])
                     return 1;
                 else
@@ -184,7 +184,7 @@ var gradX = function(id, _options) {
             });
         },
         //creates the complete css background value to later apply style
-        get_style_value: function() {
+        get_style_value: function () {
 
             var len = gradx.slider_ids.length;
 
@@ -221,7 +221,7 @@ var gradX = function(id, _options) {
         },
         //@input rgb string rgb(<red>,<green>,<blue>)
         //@output rgb object of form { r: <red> , g: <green> , b : <blue>}
-        get_rgb_obj: function(rgb) {
+        get_rgb_obj: function (rgb) {
 
             //rgb(r,g,b)
             rgb = rgb.split("(");
@@ -237,7 +237,7 @@ var gradX = function(id, _options) {
             };
 
         },
-        load_info: function(ele) {
+        load_info: function (ele) {
             var id = "#" + ele.id;
             this.current_slider_id = id;
             //check if current clicked element is an slider
@@ -250,8 +250,8 @@ var gradX = function(id, _options) {
                 var left = gradx.gx(id).css("left");
                 if (parseInt(left) > 26 && parseInt(left) < 426) {
                     gradx.gx("#gradx_slider_info") //info element cached before
-                            .css("left", left)
-                            .show();
+                        .css("left", left)
+                        .show();
 
                 }
 
@@ -260,7 +260,7 @@ var gradX = function(id, _options) {
 
         },
         //add slider
-        add_slider: function(sliders) {
+        add_slider: function (sliders) {
 
 
             var id, slider, k, position, value, delta;
@@ -291,11 +291,11 @@ var gradX = function(id, _options) {
                 position = parseInt((obj[k].position * this.container_width) / 100) + delta + "px";
                 id = "gradx_slider_" + (this.slider_index); //create an id for this slider
                 this.sliders.push(
-                        [
-                            obj[k].color,
-                            obj[k].position
-                        ]
-                        );
+                    [
+                        obj[k].color,
+                        obj[k].position
+                    ]
+                );
 
                 this.slider_ids.push(id); //for reference wrt to id
 
@@ -311,11 +311,11 @@ var gradX = function(id, _options) {
                 gradx.gx('#' + this.slider_ids[i]).draggable({
                     containment: 'parent',
                     axis: 'x',
-                    start: function() {
+                    start: function () {
                         if (gradx.jQ_present)
                             gradx.current_slider_id = "#" + gradx.gx(this).attr("id"); //got full jQuery power here !
                     },
-                    drag: function() {
+                    drag: function () {
 
                         gradx.update_style_array();
                         gradx.apply_style(gradx.panel, gradx.get_style_value());
@@ -324,21 +324,22 @@ var gradX = function(id, _options) {
 
                         if (parseInt(left) > 26 && parseInt(left) < 426) {
                             gradx.gx("#gradx_slider_info") //info element cached before
-                                    .css("left", left)
-                                    .show();
+                                .css("left", left)
+                                .show();
 
-                        } /*else {
-                         if (parseInt(left) > 120) {
-                         left = "272px";
-                         } else {
-                         left = "120px";
-                         }
-
-                         gradx.gx("#gradx_slider_info") //info element cached before
-                         .css("left", left)
-                         .show();
-
-                         }*/
+                        }
+                        /*else {
+                                                if (parseInt(left) > 120) {
+                                                left = "272px";
+                                                } else {
+                                                left = "120px";
+                                                }
+                       
+                                                gradx.gx("#gradx_slider_info") //info element cached before
+                                                .css("left", left)
+                                                .show();
+                       
+                                                }*/
                         var color = gradx.gx(gradx.current_slider_id).css("backgroundColor");
                         //but what happens if @color is not in RGB ? :(
                         var rgb = gradx.get_rgb_obj(color);
@@ -346,7 +347,7 @@ var gradX = function(id, _options) {
 
                     }
 
-                }).click(function() {
+                }).click(function () {
                     gradx.load_info(this);
                     return false;
                 });
@@ -354,9 +355,9 @@ var gradX = function(id, _options) {
 
 
         },
-        set_colorpicker: function(clr) {
+        set_colorpicker: function (clr) {
             gradx.cp.spectrum({
-                move: function(color) {
+                move: function (color) {
                     if (gradx.current_slider_id != false) {
                         var rgba = color.toRgbString();
                         gradx.gx(gradx.current_slider_id).css('background-color', rgba);
@@ -364,7 +365,7 @@ var gradX = function(id, _options) {
                         gradx.apply_style(gradx.panel, gradx.get_style_value());
                     }
                 },
-                change: function() {
+                change: function () {
                     gradx.gx("#gradx_slider_info").hide();
                 },
                 flat: true,
@@ -376,11 +377,11 @@ var gradX = function(id, _options) {
 
             });
         },
-        generate_options: function(options) {
+        generate_options: function (options) {
 
             var len = options.length,
-                    name, state,
-                    str = '';
+                name, state,
+                str = '';
 
             for (var i = 0; i < len; i++) {
 
@@ -402,7 +403,7 @@ var gradX = function(id, _options) {
 
             return str;
         },
-        generate_radial_options: function() {
+        generate_radial_options: function () {
 
             var options;
             options = ["horizontal-center disabled", "center selected", "left", "right"];
@@ -412,7 +413,7 @@ var gradX = function(id, _options) {
             gradx.gx('#gradx_gradient_subtype2').html(gradx.generate_options(options)).parent().css('display', 'inline-block');
 
         },
-        generate_linear_options: function() {
+        generate_linear_options: function () {
 
             var options;
             options = ["horizontal-center disabled", "left selected", "right", "top", "bottom"];
@@ -421,7 +422,7 @@ var gradX = function(id, _options) {
             gradx.gx('#gradx_gradient_subtype2').parent().css('display', 'none');
 
         },
-        destroy: function() {
+        destroy: function () {
             var options = {
                 targets: [], //[element selector] -> array
                 sliders: [],
@@ -430,7 +431,7 @@ var gradX = function(id, _options) {
                 //if radial left | center | right , top | center | bottom
                 type: 'linear', //linear | circle | ellipse
                 code_shown: false, //false | true
-                change: function(sliders, styles) {
+                change: function (sliders, styles) {
                     //nothing to do here by default
                 }
             };
@@ -439,7 +440,7 @@ var gradX = function(id, _options) {
                 gradx[k] = options[k];
             }
         },
-        load_gradx: function(id, sliders) {
+        load_gradx: function (id, sliders) {
             this.me = gradx.gx(id);
             this.id = id.replace("#", "");
             id = this.id;
@@ -492,7 +493,7 @@ var gradX = function(id, _options) {
             //generates html to select the different gradient sizes
             // *only available for radial gradients
             var gradient_size_val = ["gradient-size disabled", "closest-side selected", "closest-corner", "farthest-side", "farthest-corner", "contain", "cover"],
-                    option_str = '';
+                option_str = '';
 
 
             option_str = gradx.generate_options(gradient_size_val);
@@ -509,7 +510,7 @@ var gradX = function(id, _options) {
             this.add_slider(sliders);
 
 
-            gradx.add_event(document, 'click', function() {
+            gradx.add_event(document, 'click', function () {
                 if (!gradx.slider_hovered[id]) {
                     gradx.gx("#gradx_slider_info").hide();
                     return false;
@@ -517,8 +518,7 @@ var gradX = function(id, _options) {
             });
 
 
-
-            gradx.gx('#gradx_add_slider').click(function() {
+            gradx.gx('#gradx_add_slider').click(function () {
                 gradx.add_slider([
                     {
                         color: gradx.get_random_rgb(),
@@ -536,7 +536,7 @@ var gradX = function(id, _options) {
             //call the colorpicker plugin
             gradx.set_colorpicker("blue");
 
-            gradx.gx('#gradx_delete_slider').click(function() {
+            gradx.gx('#gradx_delete_slider').click(function () {
                 gradx.gx(gradx.current_slider_id).remove();
                 gradx.gx("#gradx_slider_info").hide();
                 var id = gradx.current_slider_id.replace("#", "");
@@ -557,7 +557,7 @@ var gradX = function(id, _options) {
 
             });
 
-            gradx.gx('#gradx_gradient_type').change(function() {
+            gradx.gx('#gradx_gradient_type').change(function () {
 
                 var type = gradx.gx(this).val(), options, option_str = '';
 
@@ -614,7 +614,7 @@ var gradX = function(id, _options) {
                 }
             }
 
-            gradx.gx('#gradx_gradient_subtype').change(function() {
+            gradx.gx('#gradx_gradient_subtype').change(function () {
 
                 if (gradx.type === 'linear') {
                     gradx.direction = gradx.gx(this).val();
@@ -627,7 +627,7 @@ var gradX = function(id, _options) {
 
             });
 
-            gradx.gx('#gradx_gradient_subtype2').change(function() {
+            gradx.gx('#gradx_gradient_subtype2').change(function () {
 
                 var h = gradx.gx('#gradx_gradient_subtype').val();
                 var v = gradx.gx(this).val();
@@ -637,16 +637,16 @@ var gradX = function(id, _options) {
             });
 
             //not visible
-            gradx.gx('#gradx_radial_gradient_size').change(function() {
+            gradx.gx('#gradx_radial_gradient_size').change(function () {
                 gradx.shape = gradx.gx(this).val();
                 gradx.apply_style(gradx.panel, gradx.get_style_value());//(where,style)
 
             });
 
-            gradx.add_event(document.getElementById('gradx_slider_info'), 'mouseout', function() {
+            gradx.add_event(document.getElementById('gradx_slider_info'), 'mouseout', function () {
                 gradx.slider_hovered[id] = false;
             });
-            gradx.add_event(document.getElementById('gradx_slider_info'), 'mouseover', function() {
+            gradx.add_event(document.getElementById('gradx_slider_info'), 'mouseover', function () {
                 gradx.slider_hovered[id] = true;
 
             });
@@ -654,23 +654,18 @@ var gradX = function(id, _options) {
         }
 
 
-
-
     };
 
 
-
-    function  add_event(element, event, event_function)
-    {
+    function add_event(element, event, event_function) {
         if (element.attachEvent) //Internet Explorer
-            element.attachEvent("on" + event, function() {
+            element.attachEvent("on" + event, function () {
                 event_function.call(element);
             });
         else if (element.addEventListener) //Firefox & company
             element.addEventListener(event, event_function, false); //don't need the 'call' trick because in FF everything already works in the right way
     }
     ;
-
 
 
     //load jQuery library into gradx.gx

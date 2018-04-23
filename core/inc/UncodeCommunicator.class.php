@@ -1,251 +1,286 @@
-<?php if (!class_exists('LerpCommunicator')): ?>
-<?php
-class LerpCommunicator extends LerpAPI {
-    var $items;
+<?php if ( !class_exists('LerpCommunicator') ): ?>
+    <?php
 
-    function __construct($baseUrl='http://static.undsgn.com/lerp') {
-        parent::__construct($baseUrl);
-        $this->items = array();
-    }
+    class LerpCommunicator extends LerpAPI
+    {
+        var $items;
 
-    /**
-     * Used to fetch items from the specified endpoint.
-     *
-     * @return Array<LerpNewsItem>
-     */
-    function fetchItems() {
-        $last_time = get_option('lerp_messaging_last');
-        $this_time = time();
-        $_items = array();
-        $cached = false;
-
-        if (!empty($last_time)) {
-            $minutes_since = round(abs($this_time - $last_time) / 60,2);
-
-            if ($minutes_since <= 5) {
-                $_items = json_decode(get_option('lerp_messaging'));
-
-                if (!empty($_items)) {
-                    $this->items = $_items;
-                }
-
-                $cached = true;
-            }
+        function __construct($baseUrl = 'http://static.undsgn.com/lerp')
+        {
+            parent::__construct($baseUrl);
+            $this->items = array();
         }
 
-        if (!$cached) {
-            $response = $this->request('endpoint/communications.json');
+        /**
+         * Used to fetch items from the specified endpoint.
+         *
+         * @return Array<LerpNewsItem>
+         */
+        function fetchItems()
+        {
+            $last_time = get_option('lerp_messaging_last');
+            $this_time = time();
+            $_items = array();
+            $cached = false;
 
-            if (empty($response)) {
-                $this->items = array();
-                return $this->items;
-            } else {
-                $_items = json_decode($response);
-            }
+            if ( !empty($last_time) ) {
+                $minutes_since = round(abs($this_time - $last_time) / 60, 2);
 
-            foreach ($_items as $i => $it) {
-                if ($i <= sizeof($_items) -2) { continue; }
+                if ( $minutes_since <= 5 ) {
+                    $_items = json_decode(get_option('lerp_messaging'));
 
-                try {
-                    $type = isset($it->general) ? 'general' : 'specific';
-                    $name = $type;
-                    $_item = $it->$type;
-                    $blogversion = get_bloginfo('version');
-
-                    if ($type == 'specific') {
-                        if (!isset($_item->$blogversion)) {
-                            continue;
-                        } else {
-                            $_item = $_item->$blogversion;
-                            $name = $blogversion;
-                        }
+                    if ( !empty($_items) ) {
+                        $this->items = $_items;
                     }
 
-                    $date = isset($_item->date) ? $_item->date : null;
-                    $url = isset($_item->url) ? $_item->url : '#';
-
-                    $newsItem = new LerpNewsItem(
-                        $_item->title,
-                        $_item->body,
-                        $type,
-                        $name,
-                        $date,
-                        $url
-                    );
-
-                    $this->items[] = $newsItem;
-                } catch (Exception $e) {
-                    return array();
-                }
-            }
-        }
-
-        update_option('lerp_messaging_last', time());
-
-        return $this->items;
-    }
-
-    /**
-     * Get items which is not read.
-     *
-     * @return Iterator
-     */
-    function getUnreadItems() {
-        $items = array();
-        foreach ($this->fetchItems() as $item) {
-            if ($item instanceof LerpNewsItem) {
-                if($item->isRead()) { continue; }
-            } else {
-                if (isset($item->read)) {
-                    if ($item->read) { continue; }
+                    $cached = true;
                 }
             }
 
-            $items[] = $item;
-            
-        }
+            if ( !$cached ) {
+                $response = $this->request('endpoint/communications.json');
 
-        return $items;
-    }
+                if ( empty($response) ) {
+                    $this->items = array();
+                    return $this->items;
+                } else {
+                    $_items = json_decode($response);
+                }
 
-    /**
-     * Used to count unread items/messages.
-     *
-     * @return Integer
-     */
-    function countUnreadItems() {
-        $count = 0;
+                foreach ( $_items as $i => $it ) {
+                    if ( $i <= sizeof($_items) - 2 ) {
+                        continue;
+                    }
 
-        foreach ($this->fetchItems() as $item) {
-            if ($item instanceof LerpNewsItem) {
-                if($item->isRead()) { continue; }
-            } else {
-                if (isset($item->read)) {
-                    if ($item->read) { continue; }
+                    try {
+                        $type = isset($it->general) ? 'general' : 'specific';
+                        $name = $type;
+                        $_item = $it->$type;
+                        $blogversion = get_bloginfo('version');
+
+                        if ( $type == 'specific' ) {
+                            if ( !isset($_item->$blogversion) ) {
+                                continue;
+                            } else {
+                                $_item = $_item->$blogversion;
+                                $name = $blogversion;
+                            }
+                        }
+
+                        $date = isset($_item->date) ? $_item->date : null;
+                        $url = isset($_item->url) ? $_item->url : '#';
+
+                        $newsItem = new LerpNewsItem(
+                            $_item->title,
+                            $_item->body,
+                            $type,
+                            $name,
+                            $date,
+                            $url
+                        );
+
+                        $this->items[] = $newsItem;
+                    } catch ( Exception $e ) {
+                        return array();
+                    }
                 }
             }
 
-            $count++;
+            update_option('lerp_messaging_last', time());
+
+            return $this->items;
         }
 
-        return $count;
-    }
+        /**
+         * Get items which is not read.
+         *
+         * @return Iterator
+         */
+        function getUnreadItems()
+        {
+            $items = array();
+            foreach ( $this->fetchItems() as $item ) {
+                if ( $item instanceof LerpNewsItem ) {
+                    if ( $item->isRead() ) {
+                        continue;
+                    }
+                } else {
+                    if ( isset($item->read) ) {
+                        if ( $item->read ) {
+                            continue;
+                        }
+                    }
+                }
 
-    /**
-     * Render HTML for all items.
-     * (Puts HTML in buffer)
-     *
-     * @return Void
-     */
-    function render_items() {
-?>
-        <ul id="lerp-communicator-list">
-<?php
-        foreach ($this->getUnreadItems() as $item) {
-            if (isset($item->object)) {
-                $object = unserialize($item->object);
-                $object->render();
-            } else {
-                $item->render();
+                $items[] = $item;
+
             }
+
+            return $items;
         }
-?>
-        </ul>
-<?php
+
+        /**
+         * Used to count unread items/messages.
+         *
+         * @return Integer
+         */
+        function countUnreadItems()
+        {
+            $count = 0;
+
+            foreach ( $this->fetchItems() as $item ) {
+                if ( $item instanceof LerpNewsItem ) {
+                    if ( $item->isRead() ) {
+                        continue;
+                    }
+                } else {
+                    if ( isset($item->read) ) {
+                        if ( $item->read ) {
+                            continue;
+                        }
+                    }
+                }
+
+                $count++;
+            }
+
+            return $count;
+        }
+
+        /**
+         * Render HTML for all items.
+         * (Puts HTML in buffer)
+         *
+         * @return Void
+         */
+        function render_items()
+        {
+            ?>
+            <ul id="lerp-communicator-list">
+                <?php
+                foreach ( $this->getUnreadItems() as $item ) {
+                    if ( isset($item->object) ) {
+                        $object = unserialize($item->object);
+                        $object->render();
+                    } else {
+                        $item->render();
+                    }
+                }
+                ?>
+            </ul>
+            <?php
+        }
+
+        /**
+         * Regsiter a purchaseCode to a domain.
+         *
+         * @param String $purchaseCode
+         * @param String $domain
+         *
+         * @return Integer - ID of the inserted connection
+         */
+        function registerDomain($purchaseCode, $domain, $user_name)
+        {
+            $resp = $this->requestPost("license/add_license.php", array(
+                'purchase_code' => $purchaseCode,
+                'domain' => $domain,
+                'user_name' => $user_name,
+                'user_email' => "null@null.com"
+            ));
+
+            return empty($resp) ? null : $resp;
+        }
+
+        /**
+         * Unregister / delete domain connaction from purchaseCode.
+         *
+         * @param String $purchaseCode
+         *
+         * @return Boolean
+         */
+        function unRegisterDomains($purchaseCode)
+        {
+            $resp = $this->requestPost("license/delete_license.php", array(
+                'purchase_code' => $purchaseCode,
+            ));
+
+            if ( empty($resp) ) {
+                return false;
+            }
+
+            return substr_count(strtolower($resp), "true") > 0 ||
+                substr_count(strtolower($resp), "1") > 0;
+        }
+
+        /**
+         * Get domains where this theme is used with same
+         * purchase_code.
+         *
+         * @param String $purchaseCode
+         *
+         * @return Array<String> || null
+         */
+        function getConnectedDomains($purchaseCode)
+        {
+            $resp = $this->requestPost("license/get_license.php", array(
+                'purchase_code' => $purchaseCode
+            ));
+
+            if ( empty($resp) ) {
+                return null;
+            }
+
+            return $resp;
+        }
+
+        /**
+         * Get information about purchase_code
+         *
+         * @param String $purchaseCode
+         *
+         * @return Object || null
+         */
+        function getPurchaseInformation($purchaseCode)
+        {
+            $response = $this->requestPost("license/check_purchase.php", array(
+                'purchase_code' => $purchaseCode
+            ));
+
+            if ( empty($response) ) {
+                return null;
+            }
+
+            $decoded = json_decode($response);
+
+            if ( empty($decoded) ) {
+                return null;
+            }
+
+            $decoded = (Array)$decoded;
+
+            if ( !isset($decoded['verify-purchase']) ) {
+                return null;
+            }
+            if ( empty($decoded['verify-purchase']) ) {
+                return null;
+            }
+
+            return $decoded;
+        }
+
+        /**
+         * Check if purchase_code is valid.
+         *
+         * @param String $purchaseCode
+         *
+         * @return Boolean
+         */
+        function isPurchaseCodeLegit($purchaseCode)
+        {
+            $get_info = $this->getPurchaseInformation($purchaseCode);
+            return !empty($get_info);
+        }
     }
 
-    /**
-     * Regsiter a purchaseCode to a domain.
-     *
-     * @param String $purchaseCode
-     * @param String $domain
-     *
-     * @return Integer - ID of the inserted connection
-     */
-    function registerDomain($purchaseCode, $domain, $user_name) {
-        $resp = $this->requestPost("license/add_license.php", array(
-            'purchase_code' => $purchaseCode,
-            'domain' => $domain,
-            'user_name' => $user_name,
-            'user_email' => "null@null.com"
-        ));
-
-        return empty($resp) ? null : $resp;
-    }
-    
-    /**
-     * Unregister / delete domain connaction from purchaseCode.
-     *
-     * @param String $purchaseCode
-     *
-     * @return Boolean
-     */
-    function unRegisterDomains($purchaseCode) {
-        $resp = $this->requestPost("license/delete_license.php", array(
-            'purchase_code' => $purchaseCode,
-        ));
-
-        if (empty($resp)) { return false; }
-
-        return substr_count(strtolower($resp), "true") > 0 ||
-            substr_count(strtolower($resp), "1") > 0;
-    }
-
-    /**
-     * Get domains where this theme is used with same
-     * purchase_code.
-     *
-     * @param String $purchaseCode
-     *
-     * @return Array<String> || null
-     */
-    function getConnectedDomains($purchaseCode) {
-        $resp = $this->requestPost("license/get_license.php", array(
-            'purchase_code' => $purchaseCode
-        ));
-
-        if (empty($resp)) { return null; }
-
-        return $resp;
-    }
-
-    /**
-     * Get information about purchase_code
-     *
-     * @param String $purchaseCode
-     *
-     * @return Object || null
-     */
-    function getPurchaseInformation($purchaseCode) {
-        $response = $this->requestPost("license/check_purchase.php", array(
-            'purchase_code' => $purchaseCode
-        ));
-
-        if (empty($response)) { return null; }
-
-        $decoded = json_decode($response);
-
-        if (empty($decoded)) { return null; }
-
-        $decoded = (Array) $decoded;
-
-        if (!isset($decoded['verify-purchase'])) { return null; }
-        if (empty($decoded['verify-purchase'])) { return null; }
-        
-        return $decoded;
-    }
-
-    /**
-     * Check if purchase_code is valid.
-     *
-     * @param String $purchaseCode
-     *
-     * @return Boolean
-     */
-    function isPurchaseCodeLegit($purchaseCode) {
-        $get_info = $this->getPurchaseInformation($purchaseCode);
-        return !empty($get_info);
-    }
-}
-?>
+    ?>
 <?php endif ?>

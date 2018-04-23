@@ -4,10 +4,11 @@ require_once get_template_directory() . '/core/inc/LerpAPI.class.php';
 require_once get_template_directory() . '/core/inc/Envato.class.php';
 require_once get_template_directory() . '/core/inc/LerpCommunicator.class.php';
 
-function isInstallationLegit( $data = false ) {
-	if (!class_exists('Envato')) {
-		return;
-	}
+function isInstallationLegit($data = false)
+{
+    if ( !class_exists('Envato') ) {
+        return;
+    }
 
     $communicator = new LerpCommunicator();
 
@@ -15,26 +16,28 @@ function isInstallationLegit( $data = false ) {
     $data = $data ? $data : $envato->getToolkitData();
 
     $server_name = empty($_SERVER['SERVER_NAME']) ?
-        $_SERVER['HTTP_HOST']: $_SERVER['SERVER_NAME'];
+        $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 
     if (
         substr_count($server_name, '.dev') > 0 ||
         substr_count($server_name, '.local') > 0
-    ) { return true; }
+    ) {
+        return true;
+    }
 
-    if (isset($data['api_key'])) {
-        if (!empty($data['purchase_code'])) {
+    if ( isset($data['api_key']) ) {
+        if ( !empty($data['purchase_code']) ) {
             $connected_domain = $communicator->getConnectedDomains(
-                    $data['purchase_code']
-                );
+                $data['purchase_code']
+            );
 
             // Return early if the connected domain is a subdomain of the current
             // domain we are trying to register (or viceversa)
-            $real_con_domain = lerpGetDomain( $connected_domain );
-            $real_current_domain = lerpGetDomain( $server_name );
+            $real_con_domain = lerpGetDomain($connected_domain);
+            $real_current_domain = lerpGetDomain($server_name);
 
             if ( $real_con_domain === $real_current_domain ) {
-            	return true;
+                return true;
             }
 
             if (
@@ -51,12 +54,13 @@ function isInstallationLegit( $data = false ) {
     return true;
 }
 
-function requiredDataEmpty() {
+function requiredDataEmpty()
+{
     $communicator = new LerpCommunicator();
 
-	if (!class_exists('Envato')) {
-		return;
-	}
+    if ( !class_exists('Envato') ) {
+        return;
+    }
 
     $envato = new Envato();
     return $envato->toolkitDataEmpty();
@@ -65,15 +69,16 @@ function requiredDataEmpty() {
 /**
  * Extract domain from hostname
  */
-function lerpGetDomain( $url ) {
-	$pieces = parse_url( $url );
-	$domain = isset( $pieces[ 'path' ] ) ? $pieces[ 'path' ] : '';
+function lerpGetDomain($url)
+{
+    $pieces = parse_url($url);
+    $domain = isset($pieces['path']) ? $pieces['path'] : '';
 
-	if ( preg_match( '/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs ) ) {
-		return $regs[ 'domain' ];
-	}
+    if ( preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs) ) {
+        return $regs['domain'];
+    }
 
-	return false;
+    return false;
 }
 
 /**
@@ -81,19 +86,20 @@ function lerpGetDomain( $url ) {
  * If there's not a domain attached to the purchase code,
  * empty the license data on this installation.
  */
-function licenseNeedsDeactivation( $toolkitData ) {
-	if ( $toolkitData && isset( $toolkitData[ 'purchase_code' ] ) ) {
-		$communicator = new LerpCommunicator();
-		$connected_domain = $communicator->getConnectedDomains( $toolkitData[ 'purchase_code' ] );
+function licenseNeedsDeactivation($toolkitData)
+{
+    if ( $toolkitData && isset($toolkitData['purchase_code']) ) {
+        $communicator = new LerpCommunicator();
+        $connected_domain = $communicator->getConnectedDomains($toolkitData['purchase_code']);
 
-		if ( ! $connected_domain ) {
-			delete_option( 'lerp-wordpress-data' );
+        if ( !$connected_domain ) {
+            delete_option('lerp-wordpress-data');
 
-			return true;
-		} else {
-			return false;
-		}
-	}
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	return false;
+    return false;
 }

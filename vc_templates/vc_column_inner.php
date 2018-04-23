@@ -55,7 +55,7 @@ extract(shortcode_atts(array(
     'css' => '',
     'border_color' => '',
     'border_style' => '',
-) , $atts));
+), $atts));
 
 $col_classes = array();
 $uncol_classes = array(
@@ -74,165 +74,161 @@ $div_data = array();
 
 $el_class = $this->getExtraClass($el_class);
 $width_array = explode('/', $width);
-$width_media = ((int) trim($width_array[0]) / trim($width_array[1])) * 12;
+$width_media = ((int)trim($width_array[0]) / trim($width_array[1])) * 12;
 $width = wpb_translateColumnWidthToSpan($width);
 
-if (substr_count($content, '[vc_single_image')) {
+if ( substr_count($content, '[vc_single_image') ) {
     $content = lerp_replace_inner_single_width($content, $width_media);
 }
 
-if ($position_vertical !== '') $col_classes[] = 'pos-' . $position_vertical;
-if ($position_horizontal !== '') $col_classes[] = 'pos-' . $position_horizontal;
-if ($align_horizontal !== '') $col_classes[] = $align_horizontal;
-if ($align_medium !== '') $col_classes[] = $align_medium;
-if ($align_mobile !== '') $col_classes[] = $align_mobile;
+if ( $position_vertical !== '' ) $col_classes[] = 'pos-' . $position_vertical;
+if ( $position_horizontal !== '' ) $col_classes[] = 'pos-' . $position_horizontal;
+if ( $align_horizontal !== '' ) $col_classes[] = $align_horizontal;
+if ( $align_medium !== '' ) $col_classes[] = $align_medium;
+if ( $align_mobile !== '' ) $col_classes[] = $align_mobile;
 
-if ($column_width_use_pixel === 'yes' && $column_width_pixel !== '')
-{
+if ( $column_width_use_pixel === 'yes' && $column_width_pixel !== '' ) {
     $column_width_pixel = preg_replace("/[^0-9,.]/", "", $column_width_pixel);
     $column_width_pixel = 12 * round(($column_width_pixel) / 12);
-    $internal_width = ' style="max-width:' . esc_attr( $column_width_pixel ) . 'px;"';
-} else
-{
-    if (!empty($column_width_percent) && $column_width_percent !== '100')
-    {
-        $internal_width = ' style="max-width:' . esc_attr( $column_width_percent ) . '%;"';
+    $internal_width = ' style="max-width:' . esc_attr($column_width_pixel) . 'px;"';
+} else {
+    if ( !empty($column_width_percent) && $column_width_percent !== '100' ) {
+        $internal_width = ' style="max-width:' . esc_attr($column_width_percent) . '%;"';
     }
 }
 
 global $metabox_data;
-if (isset($metabox_data['_lerp_specific_style'][0]) && $metabox_data['_lerp_specific_style'][0] !== '') {
+if ( isset($metabox_data['_lerp_specific_style'][0]) && $metabox_data['_lerp_specific_style'][0] !== '' ) {
     $general_style = $metabox_data['_lerp_specific_style'][0];
 } else $general_style = ot_get_option('_lerp_general_style');
 
-if ($style === '') $style = $general_style;
+if ( $style === '' ) $style = $general_style;
 
 $uncol_classes[] = 'style-' . $style;
-if ($font_family !== '') $uncol_classes[] = $font_family;
+if ( $font_family !== '' ) $uncol_classes[] = $font_family;
 
-if (!empty($mobile_height)) $uncoltable_style .= 'min-height: ' . preg_replace("/[^0-9,.]/", "", $mobile_height) . 'px;';
+if ( !empty($mobile_height) ) $uncoltable_style .= 'min-height: ' . preg_replace("/[^0-9,.]/", "", $mobile_height) . 'px;';
 
-if ($override_padding === 'yes') {
-    switch ($column_padding) {
+if ( $override_padding === 'yes' ) {
+    switch ( $column_padding ) {
         case '0':
             $padding_class = 'no-block-padding';
-        break;
+            break;
         case '1':
             $padding_class = 'one-block-padding';
-        break;
+            break;
         case '2':
             $padding_class = 'single-block-padding';
-        break;
+            break;
         case '3':
             $padding_class = 'double-block-padding';
-        break;
+            break;
         case '4':
             $padding_class = 'triple-block-padding';
-        break;
+            break;
         case '5':
             $padding_class = 'quad-block-padding';
-        break;
+            break;
     }
 } else {
-    if ((empty($back_image) && empty($back_color))) $padding_class = 'no-block-padding';
+    if ( (empty($back_image) && empty($back_color)) ) $padding_class = 'no-block-padding';
     else $padding_class = 'single-block-padding';
 }
 
-if ($expand_height === 'yes') $uncol_classes[] = 'unexpand';
-if ($sticky === 'yes') $uncol_classes[] = 'sticky-element sticky-sidebar';
+if ( $expand_height === 'yes' ) $uncol_classes[] = 'unexpand';
+if ( $sticky === 'yes' ) $uncol_classes[] = 'sticky-element sticky-sidebar';
 
-if (substr_count($content, '[lerp_slider')) {
+if ( substr_count($content, '[lerp_slider') ) {
     //$is_carousel = true;
-    $el_class.= ' column_container';
+    $el_class .= ' column_container';
 }
 
-if ($this->settings['base'] == 'vc_column') $col_classes[] = 'column_parent';
-else
-{
+if ( $this->settings['base'] == 'vc_column' ) $col_classes[] = 'column_parent';
+else {
     $col_classes[] = 'column_child';
 }
 
 $temp_class = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $width . $el_class, $this->settings['base'], $atts);
-if ($temp_class !== '') $col_classes[] = $temp_class;
+if ( $temp_class !== '' ) $col_classes[] = $temp_class;
 
-if ($desktop_visibility === 'yes') $col_classes[] = 'desktop-hidden';
-if ($medium_visibility === 'yes') $col_classes[] = 'tablet-hidden';
-if ($mobile_visibility === 'yes') $col_classes[] = 'mobile-hidden';
+if ( $desktop_visibility === 'yes' ) $col_classes[] = 'desktop-hidden';
+if ( $medium_visibility === 'yes' ) $col_classes[] = 'tablet-hidden';
+if ( $mobile_visibility === 'yes' ) $col_classes[] = 'mobile-hidden';
 
-$temp_class = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, vc_shortcode_custom_css_class($css, ' ') , $this->settings['base'], $atts);
-if ($temp_class !== '') $uncell_classes[] = $temp_class;
+$temp_class = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, vc_shortcode_custom_css_class($css, ' '), $this->settings['base'], $atts);
+if ( $temp_class !== '' ) $uncell_classes[] = $temp_class;
 
-if ($border_color !== '') {
+if ( $border_color !== '' ) {
     $uncell_classes[] = 'border-' . $border_color . '-color';
-    if ($border_style !== '') $uncell_style = ' style="border-style: ' . esc_attr( $border_style ) . ';"';
+    if ( $border_style !== '' ) $uncell_style = ' style="border-style: ' . esc_attr($border_style) . ';"';
 }
 
 global $row_cols_md_counter, $row_cols_sm_counter;
 
 $col_perc_md = $col_perc_sm = 0;
 
-switch ($medium_width) {
+switch ( $medium_width ) {
     case 1:
         $col_classes[] = 'col-md-16';
-        $col_perc_md = 100/6;
-    break;
+        $col_perc_md = 100 / 6;
+        break;
     case 2:
         $col_classes[] = 'col-md-25';
         $col_perc_md = 25;
-    break;
+        break;
     case 3:
         $col_classes[] = 'col-md-33';
-        $col_perc_md = 100/3;
-    break;
+        $col_perc_md = 100 / 3;
+        break;
     case 4:
         $col_classes[] = 'col-md-50';
         $col_perc_md = 50;
-    break;
+        break;
     case 5:
         $col_classes[] = 'col-md-66';
-        $col_perc_md = 100/1.5;
-    break;
+        $col_perc_md = 100 / 1.5;
+        break;
     case 6:
         $col_classes[] = 'col-md-75';
         $col_perc_md = 75;
-    break;
+        break;
     case 7:
         $col_classes[] = 'col-md-100';
         $col_perc_md = 100;
-    break;
+        break;
 }
 if ( $row_cols_md_counter >= 100 )
     $col_classes[] = 'col-md-clear';
 
-switch ($mobile_width) {
+switch ( $mobile_width ) {
     case 1:
         $col_classes[] = 'col-sm-16';
-        $col_perc_sm = 100/6;
-    break;
+        $col_perc_sm = 100 / 6;
+        break;
     case 2:
         $col_classes[] = 'col-sm-25';
         $col_perc_sm = 25;
-    break;
+        break;
     case 3:
         $col_classes[] = 'col-sm-33';
-        $col_perc_sm = 100/3;
-    break;
+        $col_perc_sm = 100 / 3;
+        break;
     case 4:
         $col_classes[] = 'col-sm-50';
         $col_perc_sm = 50;
-    break;
+        break;
     case 5:
         $col_classes[] = 'col-sm-66';
-        $col_perc_sm = 100/1.5;
-    break;
+        $col_perc_sm = 100 / 1.5;
+        break;
     case 6:
         $col_classes[] = 'col-sm-75';
         $col_perc_sm = 75;
-    break;
+        break;
     case 7:
         $col_classes[] = 'col-sm-100';
         $col_perc_sm = 100;
-    break;
+        break;
 }
 if ( $row_cols_sm_counter >= 100 )
     $col_classes[] = 'col-sm-clear';
@@ -241,9 +237,9 @@ if ( $row_cols_sm_counter >= 100 )
 $row_cols_md_counter = $row_cols_md_counter + $col_perc_md;
 $row_cols_sm_counter = $row_cols_sm_counter + $col_perc_sm;
 
-if ($gutter_size === '') $gutter_size = 3;
+if ( $gutter_size === '' ) $gutter_size = 3;
 
-switch ($gutter_size) {
+switch ( $gutter_size ) {
     case 0:
         $col_classes[] = 'no-internal-gutter';
         break;
@@ -269,40 +265,39 @@ switch ($gutter_size) {
 }
 
 if ( $shadow_darker !== '' )
-  $shadow = 'darker-' . $shadow;
+    $shadow = 'darker-' . $shadow;
 $shadow_classes = $shadow !== '' ? 'unshadow-' . $shadow : '';
 $radius_classes = $radius !== '' ? 'unradius-' . $radius : '';
 
-if ($internal_width !== '' && $this->settings['base'] == 'vc_column' && $width === 'vc_col-sm-12') {
+if ( $internal_width !== '' && $this->settings['base'] == 'vc_column' && $width === 'vc_col-sm-12' ) {
     $uncont_classes[] = $padding_class;
     $uncont_classes[] = 'col-custom-width';
-    if (!empty($back_color)) $uncont_classes[] = 'style-' . $back_color . '-bg';
+    if ( !empty($back_color) ) $uncont_classes[] = 'style-' . $back_color . '-bg';
     $uncont_classes[] = $shadow_classes;
     $uncont_classes[] = $radius_classes;
 } else {
     $uncell_classes[] = $padding_class;
-    if (!empty($back_color)) $uncell_classes[] = 'style-' . $back_color . '-bg';
+    if ( !empty($back_color) ) $uncell_classes[] = 'style-' . $back_color . '-bg';
     $uncell_classes[] = $shadow_classes;
     $uncell_classes[] = $radius_classes;
 }
 
 /** BEGIN - background construction **/
-if (!empty($back_image) || $overlay_color !== '')
-{
-	if ($parallax === 'yes' || $kburns === 'yes') {
-		$back_attachment = '';
-		$back_size = 'cover';
-		if ($parallax === 'yes')
-			$uncell_classes[] = 'with-parallax';
-		if ($kburns === 'yes')
-			$uncell_classes[] = 'with-kburns';
+if ( !empty($back_image) || $overlay_color !== '' ) {
+    if ( $parallax === 'yes' || $kburns === 'yes' ) {
+        $back_attachment = '';
+        $back_size = 'cover';
+        if ( $parallax === 'yes' )
+            $uncell_classes[] = 'with-parallax';
+        if ( $kburns === 'yes' )
+            $uncell_classes[] = 'with-kburns';
     } else {
-        if ($back_size === '') $back_size = 'cover';
+        if ( $back_size === '' ) $back_size = 'cover';
     }
 
-    if ($back_repeat === '') $back_repeat = 'no-repeat';
+    if ( $back_repeat === '' ) $back_repeat = 'no-repeat';
 
-    $back_array = array (
+    $back_array = array(
         'background-image' => $back_image,
         'background-color' => $back_color,
         'background-repeat' => $back_repeat,
@@ -313,19 +308,16 @@ if (!empty($back_image) || $overlay_color !== '')
 
     $background_div_width = '';
 
-    if ($column_width_use_pixel === 'yes' && $column_width_pixel !== '')
-    {
+    if ( $column_width_use_pixel === 'yes' && $column_width_pixel !== '' ) {
         $column_width_pixel = preg_replace("/[^0-9,.]/", "", $column_width_pixel);
         $column_width_pixel = 12 * round(($column_width_pixel) / 12);
         $background_div_width .= 'max-width: ' . $column_width_pixel . 'px;';
-    } else
-    {
-        if (!empty($column_width_percent) && $column_width_percent !== '100')
-        {
+    } else {
+        if ( !empty($column_width_percent) && $column_width_percent !== '100' ) {
             $background_div_width .= 'max-width: ' . $column_width_percent . '%;';
         }
     }
-    if ($background_div_width !== '') {
+    if ( $background_div_width !== '' ) {
         $background_div_width .= 'margin-left: auto; margin-right: auto;';
     }
 
@@ -336,191 +328,193 @@ if (!empty($back_image) || $overlay_color !== '')
 /** END - background construction **/
 
 /** BEGIN - shift construction **/
-if (($zoom_width != '0' && $zoom_width != '') || ($zoom_height != '0' && $zoom_height != '') || ($shift_x != '0' && $shift_x != '') || ($shift_y != '0' && $shift_y != '') || ($shift_y_down != '0' && $shift_y_down != '')) {
-    switch ($zoom_width) {
+if ( ($zoom_width != '0' && $zoom_width != '') || ($zoom_height != '0' && $zoom_height != '') || ($shift_x != '0' && $shift_x != '') || ($shift_y != '0' && $shift_y != '') || ($shift_y_down != '0' && $shift_y_down != '') ) {
+    switch ( $zoom_width ) {
         case 1:
             $uncol_classes[] = 'zoom_width_half';
-        break;
+            break;
         case 2:
             $uncol_classes[] = 'zoom_width_single';
-        break;
+            break;
         case 3:
             $uncol_classes[] = 'zoom_width_double';
-        break;
+            break;
         case 4:
             $uncol_classes[] = 'zoom_width_triple';
-        break;
+            break;
         case 5:
             $uncol_classes[] = 'zoom_width_quad';
-        break;
+            break;
     }
-    switch ($zoom_height) {
+    switch ( $zoom_height ) {
         case 1:
             $uncol_classes[] = 'zoom_height_half';
-        break;
+            break;
         case 2:
             $uncol_classes[] = 'zoom_height_single';
-        break;
+            break;
         case 3:
             $uncol_classes[] = 'zoom_height_double';
-        break;
+            break;
         case 4:
             $uncol_classes[] = 'zoom_height_triple';
-        break;
+            break;
         case 5:
             $uncol_classes[] = 'zoom_height_quad';
-        break;
+            break;
     }
-    switch ($shift_x) {
+    switch ( $shift_x ) {
         case 1:
             $uncol_classes[] = 'shift_x_half';
-        break;
+            break;
         case 2:
             $uncol_classes[] = 'shift_x_single';
-        break;
+            break;
         case 3:
             $uncol_classes[] = 'shift_x_double';
-        break;
+            break;
         case 4:
             $uncol_classes[] = 'shift_x_triple';
-        break;
+            break;
         case 5:
             $uncol_classes[] = 'shift_x_quad';
-        break;
+            break;
         case -1:
             $uncol_classes[] = 'shift_x_neg_half';
-        break;
+            break;
         case -2:
             $uncol_classes[] = 'shift_x_neg_single';
-        break;
+            break;
         case -3:
             $uncol_classes[] = 'shift_x_neg_double';
-        break;
+            break;
         case -4:
             $uncol_classes[] = 'shift_x_neg_triple';
-        break;
+            break;
         case -5:
             $uncol_classes[] = 'shift_x_neg_quad';
-        break;
+            break;
     }
-    switch ($shift_y) {
+    switch ( $shift_y ) {
         case 1:
             $uncol_classes[] = 'shift_y_half';
-        break;
+            break;
         case 2:
             $uncol_classes[] = 'shift_y_single';
-        break;
+            break;
         case 3:
             $uncol_classes[] = 'shift_y_double';
-        break;
+            break;
         case 4:
             $uncol_classes[] = 'shift_y_triple';
-        break;
+            break;
         case 5:
             $uncol_classes[] = 'shift_y_quad';
-        break;
+            break;
         case -1:
             $uncol_classes[] = 'shift_y_neg_half';
-        break;
+            break;
         case -2:
             $uncol_classes[] = 'shift_y_neg_single';
-        break;
+            break;
         case -3:
             $uncol_classes[] = 'shift_y_neg_double';
-        break;
+            break;
         case -4:
             $uncol_classes[] = 'shift_y_neg_triple';
-        break;
+            break;
         case -5:
             $uncol_classes[] = 'shift_y_neg_quad';
-        break;
+            break;
     }
 
-    switch ($shift_y_down) {
+    switch ( $shift_y_down ) {
         case 1:
             $uncol_classes[] = 'shift_y_down_half';
-        break;
+            break;
         case 2:
             $uncol_classes[] = 'shift_y_down_single';
-        break;
+            break;
         case 3:
             $uncol_classes[] = 'shift_y_down_double';
-        break;
+            break;
         case 4:
             $uncol_classes[] = 'shift_y_down_triple';
-        break;
+            break;
         case 5:
             $uncol_classes[] = 'shift_y_down_quad';
-        break;
+            break;
         case -1:
             $uncol_classes[] = 'shift_y_down_neg_half';
-        break;
+            break;
         case -2:
             $uncol_classes[] = 'shift_y_down_neg_single';
-        break;
+            break;
         case -3:
             $uncol_classes[] = 'shift_y_down_neg_double';
-        break;
+            break;
         case -4:
             $uncol_classes[] = 'shift_y_down_neg_triple';
-        break;
+            break;
         case -5:
             $uncol_classes[] = 'shift_y_down_neg_quad';
-        break;
+            break;
     }
-    if ($shift_x_fixed === 'yes') $uncol_classes[] = 'shift_x_fixed';
-    if ($shift_y_fixed === 'yes') $uncol_classes[] = 'shift_y_fixed';
-    if ($shift_y_down_fixed === 'yes') $uncol_classes[] = 'shift_y_down_fixed';
+    if ( $shift_x_fixed === 'yes' ) $uncol_classes[] = 'shift_x_fixed';
+    if ( $shift_y_fixed === 'yes' ) $uncol_classes[] = 'shift_y_fixed';
+    if ( $shift_y_down_fixed === 'yes' ) $uncol_classes[] = 'shift_y_down_fixed';
 }
 
-if ($shift_y_down != '0' && $shift_y_down != '')
+if ( $shift_y_down != '0' && $shift_y_down != '' )
     $col_classes[] = 'shift-col-wa';//workaround to remove vertical-align on mobile devices when shift bottom is enabled
 
-if ($z_index !== '0' && $z_index !== '') {
-    $col_classes[] = 'z_index_' . str_replace('-','neg_', $z_index);
+if ( $z_index !== '0' && $z_index !== '' ) {
+    $col_classes[] = 'z_index_' . str_replace('-', 'neg_', $z_index);
 }
 /** END - shift construction **/
 
-if ($css_animation !== '') {
+if ( $css_animation !== '' ) {
     $uncol_classes[] = 'animate_when_almost_visible ' . $css_animation;
-    if ($animation_delay !== '') $div_data['data-delay'] = $animation_delay;
-    if ($animation_speed !== '') $div_data['data-speed'] = $animation_speed;
+    if ( $animation_delay !== '' ) $div_data['data-delay'] = $animation_delay;
+    if ( $animation_speed !== '' ) $div_data['data-speed'] = $animation_speed;
 }
 
-if ($link_to !== '') {
-    $link = vc_build_link( $link_to );
-    if ($link['url'] !== '') $link_div = '<a class="col-link custom-link" href="'.esc_url($link['url']).'" target="'.($link['target'] !== '' ? esc_attr( $link['target'] ) : '_self').'" title="' . esc_attr( $link['title'] ) . '"></a>';
+if ( $link_to !== '' ) {
+    $link = vc_build_link($link_to);
+    if ( $link['url'] !== '' ) $link_div = '<a class="col-link custom-link" href="' . esc_url($link['url']) . '" target="' . ($link['target'] !== '' ? esc_attr($link['target']) : '_self') . '" title="' . esc_attr($link['title']) . '"></a>';
 }
 
 
-if ($uncoltable_style != '') $uncoltable_style = ' style="' . esc_attr( $uncoltable_style ) . '"';
+if ( $uncoltable_style != '' ) $uncoltable_style = ' style="' . esc_attr($uncoltable_style) . '"';
 
-if ($is_carousel) {
-    $output.= $content;
+if ( $is_carousel ) {
+    $output .= $content;
 } else {
     global $lerp_row_child, $lerp_vc_block;
     if ( !$lerp_vc_block ) {
         $lerp_row_child -= $width_media;
-        if ($lerp_row_child < 0) {
-            $output.= '</div><div class="row-inner">';
+        if ( $lerp_row_child < 0 ) {
+            $output .= '</div><div class="row-inner">';
             $lerp_row_child = 12;
             $lerp_row_child -= $width_media;
         }
     }
-    $div_data_attributes = array_map(function ($v, $k) { return $k . '="' . $v . '"'; }, $div_data, array_keys($div_data));
-    $output.= '<div class="' . esc_attr(trim(implode(' ', $col_classes))) . '"' . $col_style . '>';
-    $output.= '<div class="' . esc_attr(trim(implode(' ', $uncol_classes))) . '"' . $uncol_style . ' '.implode(' ', $div_data_attributes).'>';
-    $output.= '<div class="' . esc_attr(trim(implode(' ', $uncoltable_classes))) . '"' . $uncoltable_style . '>';
-    $output.= '<div class="' . esc_attr(trim(implode(' ', $uncell_classes))) . '"'.$uncell_style.'>';
-    $output.= $background_div;
-    $output.= '<div class="' . esc_attr(trim(implode(' ', $uncont_classes))) . '"' . $internal_width . '>';
-    $output.= $content;
-    $output.= '</div>';
-    $output.= '</div>';
-    $output.= '</div>';
-    $output.= '</div>';
-    $output.= $link_div;
-    $output.= '</div>';
+    $div_data_attributes = array_map(function ($v, $k) {
+        return $k . '="' . $v . '"';
+    }, $div_data, array_keys($div_data));
+    $output .= '<div class="' . esc_attr(trim(implode(' ', $col_classes))) . '"' . $col_style . '>';
+    $output .= '<div class="' . esc_attr(trim(implode(' ', $uncol_classes))) . '"' . $uncol_style . ' ' . implode(' ', $div_data_attributes) . '>';
+    $output .= '<div class="' . esc_attr(trim(implode(' ', $uncoltable_classes))) . '"' . $uncoltable_style . '>';
+    $output .= '<div class="' . esc_attr(trim(implode(' ', $uncell_classes))) . '"' . $uncell_style . '>';
+    $output .= $background_div;
+    $output .= '<div class="' . esc_attr(trim(implode(' ', $uncont_classes))) . '"' . $internal_width . '>';
+    $output .= $content;
+    $output .= '</div>';
+    $output .= '</div>';
+    $output .= '</div>';
+    $output .= '</div>';
+    $output .= $link_div;
+    $output .= '</div>';
 }
 
 echo lerp_remove_wpautop($output);

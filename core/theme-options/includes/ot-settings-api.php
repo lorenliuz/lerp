@@ -1,4 +1,4 @@
-<?php if ( ! defined( 'OT_VERSION') ) exit( 'No direct script access allowed' );
+<?php if ( !defined('OT_VERSION') ) exit('No direct script access allowed');
 /**
  * OptionTree Settings API
  *
@@ -8,1150 +8,1169 @@
  * @author    Derek Herman <derek@valendesigns.com>
  * @copyright Copyright (c) 2013, Derek Herman
  */
-if ( ! class_exists( 'OT_Settings' ) ) {
-
-	class OT_Settings {
-
-		/* the options array */
-		private $options;
-
-		/* hooks for targeting admin pages */
-		private $page_hook;
-
-		/**
-		 * Constructor
-		 *
-		 * @param     array     An array of options
-		 * @return    void
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function __construct( $args ) {
-
-			$this->options = $args;
-
-			/* return early if not viewing an admin page or no options */
-			if ( ! is_admin() || ! is_array( $this->options ) )
-				return false;
-
-			/* load everything */
-			$this->hooks();
-
-		}
-
-		/**
-		 * Execute the WordPress Hooks
-		 *
-		 * @return    void
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function hooks() {
-
-			/**
-			 * Filter the `admin_menu` action hook priority.
-			 *
-			 * @since 2.5.0
-			 *
-			 * @param int $priority The priority. Default '10'.
-			 */
-			$priority = apply_filters( 'ot_admin_menu_priority', 10 );
-
-			/* add pages & menu items */
-			//if (isInstallationLegit()) {
-					add_action( 'admin_menu', array( $this, 'add_page' ), $priority );
-			//}
-
-			/* register sections */
-			add_action( 'admin_init', array( $this, 'add_sections' ) );
-
-			/* register settings */
-			add_action( 'admin_init', array( $this, 'add_settings' ) );
-
-			/* reset options */
-			add_action( 'admin_init', array( $this, 'reset_options' ), 10 );
-
-			/* initialize settings */
-			add_action( 'admin_init', array( $this, 'initialize_settings' ), 11 );
-
-		}
-
-		/**
-		 * Loads each admin page
-		 *
-		 * @return    void
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function add_page() {
-
-			/* loop through options */
-			foreach( (array) $this->options as $option ) {
-
-				/* loop through pages */
-				foreach( (array) $this->get_pages( $option ) as $page ) {
-
-					/**
-					 * Theme Check... stop nagging me about this kind of stuff.
-					 * The damn admin pages are required for OT to function, duh!
-					 */
-					$theme_check_bs   = 'add_menu_page';
-					$theme_check_bs2  = 'add_submenu_page';
-
-					/* load page in WP top level menu */
-					if ( ! isset( $page['parent_slug'] ) || empty( $page['parent_slug'] ) ) {
-						$page_hook = $theme_check_bs(
-							$page['page_title'],
-							$page['menu_title'],
-							$page['capability'],
-							$page['menu_slug'],
-							array( $this, 'display_page' ),
-							$page['icon_url'],
-							$page['position']
-						);
-					/* load page in WP sub menu */
-					} else {
-						$page_hook = $theme_check_bs2(
-							$page['parent_slug'],
-							$page['page_title'],
-							$page['menu_title'],
-							$page['capability'],
-							$page['menu_slug'],
-							array( $this, 'display_page' )
-						);
-					}
-
-					/* only load if not a hidden page */
-					if ( ! isset( $page['hidden_page'] ) ) {
-
-						/* associate $page_hook with page id */
-						$this->page_hook[$page['id']] = $page_hook;
-
-						/* add scripts */
-						add_action( 'admin_print_scripts-' . $page_hook, array( $this, 'scripts' ) );
-
-						/* add styles */
-						add_action( 'admin_print_styles-' . $page_hook, array( $this, 'styles' ) );
-
-						/* add contextual help */
-						add_action( 'load-' . $page_hook, array( $this, 'help' ) );
-
-					}
-
-				}
-
-			}
-
-			return false;
-		}
-
-		/**
-		 * Loads the scripts
-		 *
-		 * @return    void
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function scripts() {
-			ot_admin_scripts();
-		}
-
-		/**
-		 * Loads the styles
-		 *
-		 * @return    void
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function styles() {
-			ot_admin_styles();
-		}
-
-		/**
-		 * Loads the contextual help for each page
-		 *
-		 * @return    void
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function help() {
-			$screen = get_current_screen();
-
-			/* loop through options */
-			foreach( (array) $this->options as $option ) {
-
-				/* loop through pages */
-				foreach( (array) $this->get_pages( $option ) as $page ) {
-
-					/* verify page */
-					if ( ! isset( $page['hidden_page'] ) && $screen->id == $this->page_hook[$page['id']] ) {
-
-						/* set up the help tabs */
-						if ( ! empty( $page['contextual_help']['content'] ) ) {
-							foreach( $page['contextual_help']['content'] as $contextual_help ) {
-								$screen->add_help_tab(
-									array(
-										'id'      => esc_attr( $contextual_help['id'] ),
-										'title'   => esc_attr( $contextual_help['title'] ),
-										'content' => htmlspecialchars_decode( $contextual_help['content'] ),
-									)
-								);
-							}
-						}
+if ( !class_exists('OT_Settings') ) {
+
+    class OT_Settings
+    {
+
+        /* the options array */
+        private $options;
+
+        /* hooks for targeting admin pages */
+        private $page_hook;
+
+        /**
+         * Constructor
+         *
+         * @param     array     An array of options
+         * @return    void
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function __construct($args)
+        {
+
+            $this->options = $args;
+
+            /* return early if not viewing an admin page or no options */
+            if ( !is_admin() || !is_array($this->options) )
+                return false;
+
+            /* load everything */
+            $this->hooks();
+
+        }
+
+        /**
+         * Execute the WordPress Hooks
+         *
+         * @return    void
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function hooks()
+        {
+
+            /**
+             * Filter the `admin_menu` action hook priority.
+             *
+             * @since 2.5.0
+             *
+             * @param int $priority The priority. Default '10'.
+             */
+            $priority = apply_filters('ot_admin_menu_priority', 10);
+
+            /* add pages & menu items */
+            //if (isInstallationLegit()) {
+            add_action('admin_menu', array($this, 'add_page'), $priority);
+            //}
+
+            /* register sections */
+            add_action('admin_init', array($this, 'add_sections'));
+
+            /* register settings */
+            add_action('admin_init', array($this, 'add_settings'));
+
+            /* reset options */
+            add_action('admin_init', array($this, 'reset_options'), 10);
+
+            /* initialize settings */
+            add_action('admin_init', array($this, 'initialize_settings'), 11);
+
+        }
+
+        /**
+         * Loads each admin page
+         *
+         * @return    void
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function add_page()
+        {
+
+            /* loop through options */
+            foreach ( (array)$this->options as $option ) {
+
+                /* loop through pages */
+                foreach ( (array)$this->get_pages($option) as $page ) {
+
+                    /**
+                     * Theme Check... stop nagging me about this kind of stuff.
+                     * The damn admin pages are required for OT to function, duh!
+                     */
+                    $theme_check_bs = 'add_menu_page';
+                    $theme_check_bs2 = 'add_submenu_page';
+
+                    /* load page in WP top level menu */
+                    if ( !isset($page['parent_slug']) || empty($page['parent_slug']) ) {
+                        $page_hook = $theme_check_bs(
+                            $page['page_title'],
+                            $page['menu_title'],
+                            $page['capability'],
+                            $page['menu_slug'],
+                            array($this, 'display_page'),
+                            $page['icon_url'],
+                            $page['position']
+                        );
+                        /* load page in WP sub menu */
+                    } else {
+                        $page_hook = $theme_check_bs2(
+                            $page['parent_slug'],
+                            $page['page_title'],
+                            $page['menu_title'],
+                            $page['capability'],
+                            $page['menu_slug'],
+                            array($this, 'display_page')
+                        );
+                    }
+
+                    /* only load if not a hidden page */
+                    if ( !isset($page['hidden_page']) ) {
+
+                        /* associate $page_hook with page id */
+                        $this->page_hook[$page['id']] = $page_hook;
+
+                        /* add scripts */
+                        add_action('admin_print_scripts-' . $page_hook, array($this, 'scripts'));
+
+                        /* add styles */
+                        add_action('admin_print_styles-' . $page_hook, array($this, 'styles'));
+
+                        /* add contextual help */
+                        add_action('load-' . $page_hook, array($this, 'help'));
+
+                    }
+
+                }
+
+            }
+
+            return false;
+        }
+
+        /**
+         * Loads the scripts
+         *
+         * @return    void
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function scripts()
+        {
+            ot_admin_scripts();
+        }
+
+        /**
+         * Loads the styles
+         *
+         * @return    void
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function styles()
+        {
+            ot_admin_styles();
+        }
+
+        /**
+         * Loads the contextual help for each page
+         *
+         * @return    void
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function help()
+        {
+            $screen = get_current_screen();
+
+            /* loop through options */
+            foreach ( (array)$this->options as $option ) {
+
+                /* loop through pages */
+                foreach ( (array)$this->get_pages($option) as $page ) {
+
+                    /* verify page */
+                    if ( !isset($page['hidden_page']) && $screen->id == $this->page_hook[$page['id']] ) {
+
+                        /* set up the help tabs */
+                        if ( !empty($page['contextual_help']['content']) ) {
+                            foreach ( $page['contextual_help']['content'] as $contextual_help ) {
+                                $screen->add_help_tab(
+                                    array(
+                                        'id' => esc_attr($contextual_help['id']),
+                                        'title' => esc_attr($contextual_help['title']),
+                                        'content' => htmlspecialchars_decode($contextual_help['content']),
+                                    )
+                                );
+                            }
+                        }
+
+                        /* set up the help sidebar */
+                        if ( !empty($page['contextual_help']['sidebar']) ) {
+                            $screen->set_help_sidebar(htmlspecialchars_decode($page['contextual_help']['sidebar']));
+                        }
+
+                    }
+
+                }
+
+            }
+
+            return false;
+        }
+
+        /**
+         * Loads the content for each page
+         *
+         * @return    string
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function display_page()
+        {
 
-						/* set up the help sidebar */
-						if ( ! empty( $page['contextual_help']['sidebar'] ) ) {
-							$screen->set_help_sidebar( htmlspecialchars_decode( $page['contextual_help']['sidebar'] ) );
-						}
-
-					}
-
-				}
-
-			}
+            $screen = get_current_screen();
+
+            /* loop through settings */
+            foreach ( (array)$this->options as $option ) {
+
+                /* loop through pages */
+                foreach ( (array)$this->get_pages($option) as $page ) {
 
-			return false;
-		}
+                    /* verify page */
+                    if ( !isset($page['hidden_page']) && $screen->id == $this->page_hook[$page['id']] ) {
 
-		/**
-		 * Loads the content for each page
-		 *
-		 * @return    string
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function display_page() {
+                        $show_buttons = isset($page['show_buttons']) && $page['show_buttons'] == false ? false : true;
 
-			$screen = get_current_screen();
+                        /* update active layout content */
+                        if ( isset($_REQUEST['settings-updated']) && $_REQUEST['settings-updated'] == 'true' ) {
 
-			/* loop through settings */
-			foreach( (array) $this->options as $option ) {
+                            $layouts = get_option(ot_layouts_id());
 
-				/* loop through pages */
-				foreach( (array) $this->get_pages( $option ) as $page ) {
+                            /* has active layout */
+                            if ( isset($layouts['active_layout']) ) {
+                                $option_tree = get_option($option['id']);
+                                $layouts[$layouts['active_layout']] = ot_encode(serialize($option_tree));
+                                update_option(ot_layouts_id(), $layouts);
+                            }
 
-					/* verify page */
-					if ( ! isset( $page['hidden_page'] ) && $screen->id == $this->page_hook[$page['id']] ) {
+                        }
 
-						$show_buttons = isset( $page['show_buttons'] ) && $page['show_buttons'] == false ? false : true;
+                        echo '<div class="wrap settings-wrap lerp-wrap" id ="page-' . $page['id'] . '">';
 
-						/* update active layout content */
-						if ( isset( $_REQUEST['settings-updated'] ) && $_REQUEST['settings-updated'] == 'true' ) {
+                        if ( $page['id'] == 'settings' ) {
+                            echo lerp_admin_panel_page_title('utils');
+                        } else {
+                            echo lerp_admin_panel_page_title(true, array(
+                                'page_title' => esc_html__('Theme Options', 'lerp'),
+                                'description' => esc_html__('Theme Options are the backbone of Lerp. They are logically organised and give you full control over your website design and settings.', 'lerp'),
+                            ));
+                        }
 
-							$layouts = get_option( ot_layouts_id() );
+                        if ( $page['id'] != 'settings' ) {
+                            echo ot_alert_message($page);
 
-							/* has active layout */
-							if ( isset( $layouts['active_layout'] ) ) {
-								$option_tree = get_option( $option['id'] );
-								$layouts[$layouts['active_layout']] = ot_encode( serialize( $option_tree ) );
-								update_option( ot_layouts_id(), $layouts );
-							}
+                            settings_errors('option-tree');
 
-						}
+                            /* Header */
+                            // echo '<div id="option-tree-header-wrap">';
 
-						echo '<div class="wrap settings-wrap lerp-wrap" id ="page-' . $page['id'] . '">';
+                            // 	echo '<ul id="option-tree-header">';
 
-							if ( $page[ 'id' ] == 'settings' ) {
-								echo lerp_admin_panel_page_title( 'utils' );
-							} else {
-								echo lerp_admin_panel_page_title( true, array(
-									'page_title'  => esc_html__( 'Theme Options', 'lerp' ),
-									'description' => esc_html__( 'Theme Options are the backbone of Lerp. They are logically organised and give you full control over your website design and settings.', 'lerp' ),
-								) );
-							}
+                            // 		echo '<li id="option-tree-logo">' . apply_filters( 'ot_header_logo_link', '<a href="http://wordpress.org/extend/plugins/option-tree/" target="_blank">OptionTree</a>', $page['id'] ) . '</li>';
 
-							if ( $page[ 'id' ] != 'settings' ) {
-								echo ot_alert_message( $page );
+                            // 		echo '<li id="option-tree-version"><span>' . apply_filters( 'ot_header_version_text', 'OptionTree ' . OT_VERSION, $page['id'] ) . '</span></li>';
 
-								settings_errors( 'option-tree' );
+                            // 		// Add additional theme specific links here.
+                            // 		do_action( 'ot_header_list', $page['id'] );
 
-								/* Header */
-								// echo '<div id="option-tree-header-wrap">';
+                            // 	echo '</ul>';
 
-								// 	echo '<ul id="option-tree-header">';
+                            // echo '</div>';
 
-								// 		echo '<li id="option-tree-logo">' . apply_filters( 'ot_header_logo_link', '<a href="http://wordpress.org/extend/plugins/option-tree/" target="_blank">OptionTree</a>', $page['id'] ) . '</li>';
+                        }
 
-								// 		echo '<li id="option-tree-version"><span>' . apply_filters( 'ot_header_version_text', 'OptionTree ' . OT_VERSION, $page['id'] ) . '</span></li>';
+                        if ( $page['id'] == 'settings' ) {
+                            echo '<div class="lerp-admin-panel">';
+                            //echo lerp_admin_panel_title();
+                            echo lerp_admin_panel_menu('utils');
 
-								// 		// Add additional theme specific links here.
-								// 		do_action( 'ot_header_list', $page['id'] );
+                            echo '<div class="lerp-admin-panel__content">';
 
-								// 	echo '</ul>';
+                            //echo '<h2 class="lerp-admin-panel__heading">' . esc_html__( 'Options Utils', 'lerp' ) . '</h2>';
 
-								// echo '</div>';
+                            echo ot_alert_message($page);
 
-							}
+                            settings_errors('option-tree');
+                        }
 
-							if ( $page[ 'id' ] == 'settings' ) {
-								echo '<div class="lerp-admin-panel">';
-									//echo lerp_admin_panel_title();
-									echo lerp_admin_panel_menu( 'utils' );
+                        /* remove forms on the custom settings pages */
+                        if ( $show_buttons ) {
 
-									echo '<div class="lerp-admin-panel__content">';
+                            // TODO: when AJAX will be definitely enabled, add a filter for debugging purposes
+                            $is_ajax_enabled = get_option('lerp_ajax_theme_panel', false);
+                            $form_class = 'lerp-admin-panel';
+                            $form_class .= $is_ajax_enabled ? ' ajax-enabled' : '';
 
-										//echo '<h2 class="lerp-admin-panel__heading">' . esc_html__( 'Options Utils', 'lerp' ) . '</h2>';
+                            echo '<form action="options.php" method="post" id="option-tree-settings-api" class="' . $form_class . '">';
 
-										echo ot_alert_message( $page );
+                            settings_fields($option['id']);
 
-										settings_errors( 'option-tree' );
-							}
+                        } else {
 
-								/* remove forms on the custom settings pages */
-								if ( $show_buttons ) {
+                            //echo '<div id="option-tree-settings-api">';
 
-									// TODO: when AJAX will be definitely enabled, add a filter for debugging purposes
-									$is_ajax_enabled = get_option( 'lerp_ajax_theme_panel', false );
-									$form_class = 'lerp-admin-panel';
-									$form_class .= $is_ajax_enabled ? ' ajax-enabled' : '';
+                        }
 
-									echo '<form action="options.php" method="post" id="option-tree-settings-api" class="' . $form_class . '">';
+                        $active_theme = wp_get_theme();
+                        $theme_name = $active_theme->Name;
+                        $theme_version = $active_theme->Version;
 
-										settings_fields( $option['id'] );
+                        if ( is_child_theme() ) {
+                            $parent_theme = $active_theme->parent();
+                            $theme_name = $parent_theme->Name;
+                            $theme_version = $parent_theme->Version;
+                        }
 
-								} else {
+                        if ( $show_buttons ) {
 
-									//echo '<div id="option-tree-settings-api">';
+                            echo '<div id="option-tree-header" class="option-tree-header-wrap">';
 
-								}
+                            echo '<span id="option-tree-site-name">' . get_bloginfo('name') . '</span>';
 
-									$active_theme  = wp_get_theme();
-									$theme_name    = $active_theme->Name;
-									$theme_version = $active_theme->Version;
+                            echo '<span id="option-tree-version">' . $theme_name . ' ' . $theme_version . '</span>';
 
-									if ( is_child_theme() ) {
-										$parent_theme  = $active_theme->parent();
-										$theme_name    = $parent_theme->Name;
-										$theme_version = $parent_theme->Version;
-									}
+                            echo '</div>';
 
-									if ( $show_buttons ) {
+                        }
 
-										echo '<div id="option-tree-header" class="option-tree-header-wrap">';
+                        echo '<div class="option-tree-opts-wrap">';
 
-											echo '<span id="option-tree-site-name">' . get_bloginfo('name') . '</span>';
+                        if ( $page['id'] != 'settings' ) {
+                            /* Sub Header */
+                            echo '<div id="option-tree-sub-header">';
 
-											echo '<span id="option-tree-version">' . $theme_name . ' ' . $theme_version . '</span>';
+                            echo '<div id="theme-options-ajax-message"></div>';
 
-										echo '</div>';
+                            if ( $show_buttons ) {
+                                echo '<button class="option-tree-ui-button button button-primary right option-tree-save-button lerp-spinning"><span><span class="lerp-ot-spinner"></span><span class="lerp-ot-ok"></span><span class="lerp-ot-no"></span>' . $page['button_text'] . '</span></button>';
+                            }
 
-									}
+                            echo '</div>'; // <!-- #option-tree-sub-header -->
+                        }
 
-									echo '<div class="option-tree-opts-wrap">';
+                        /* Navigation */
+                        echo '<div class="ui-tabs">';
 
-									if ( $page[ 'id' ] != 'settings' ) {
-										/* Sub Header */
-										echo '<div id="option-tree-sub-header">';
+                        /* check for sections */
+                        if ( isset($page['sections']) && count($page['sections']) > 0 ) {
 
-										echo '<div id="theme-options-ajax-message"></div>';
+                            echo '<ul class="ui-tabs-nav lerp-admin-panel__left">';
 
-										if ( $show_buttons ) {
-											echo '<button class="option-tree-ui-button button button-primary right option-tree-save-button lerp-spinning"><span><span class="lerp-ot-spinner"></span><span class="lerp-ot-ok"></span><span class="lerp-ot-no"></span>' . $page['button_text'] . '</span></button>';
-										}
+                            /* Header */
+                            //echo '<div id="option-tree-header-wrap">';
 
-										echo '</div>'; // <!-- #option-tree-sub-header -->
-									}
+                            if ( $page['id'] == 'settings' ) {
+                                echo '<h2 class="lerp-admin-panel__heading">' . esc_html__('Options', 'lerp') . '</h2>';
+                            }
 
-									/* Navigation */
-									echo '<div class="ui-tabs">';
+                            $group = '';
 
-										/* check for sections */
-										if ( isset( $page['sections'] ) && count( $page['sections'] ) > 0 ) {
+                            $labels = array();
 
-											echo '<ul class="ui-tabs-nav lerp-admin-panel__left">';
+                            /* loop through page sections */
+                            foreach ( $page['sections'] as $section ) {
+                                if ( isset($section['group']) ) {
+                                    if ( isset($section['group_icon']) && $section['group_icon'] != '' )
+                                        $labels[sanitize_title($section['group'])]['icon'] = '<i class="fa ' . $section['group_icon'] . '"></i>';
+                                    $labels[sanitize_title($section['group'])][] = $section;
+                                } else {
+                                    $labels['no-group'][] = $section;
+                                }
+                            }
 
-											/* Header */
-											//echo '<div id="option-tree-header-wrap">';
+                            foreach ( (array)$labels as $key => $label ) {
+                                foreach ( (array)$label as $key2 => $section ) {
+                                    $group_icon = isset($labels[$key]['icon']) && $labels[$key]['icon'] != '' ? $labels[$key]['icon'] : '';
 
-										if ( $page[ 'id' ] == 'settings' ) {
-											echo '<h2 class="lerp-admin-panel__heading">' . esc_html__('Options', 'lerp') . '</h2>';
-										}
+                                    if ( $key2 !== 'icon' ) {
 
-											$group = '';
+                                        if ( isset($section['group']) && $group != $section['group'] ) {
+                                            echo '<li id="group_' . sanitize_title($section['group']) . '" class="ot-section-group-label"><span>' . $group_icon . $section['group'] . '</span></li>';
+                                            $group = $section['group'];
+                                        } elseif ( $key2 == 'no-group' ) {
+                                            echo '<li id="group_no_group" class="ot-section-group-label"></li>';
+                                        }
+                                        echo '<li id="tab_' . sanitize_title($section['id']) . '" class="ot-section-label"><a href="#section_' . sanitize_title($section['id']) . '">' . $section['title'] . '</a></li>';
 
-											$labels = array();
+                                    }
+                                }
+                            }
 
-											/* loop through page sections */
-											foreach( $page['sections'] as $section ) {
-												if ( isset($section['group']) ) {
-													if ( isset($section['group_icon']) && $section['group_icon'] != '' )
-														$labels[sanitize_title($section['group'])]['icon'] = '<i class="fa ' . $section['group_icon'] . '"></i>';
-													$labels[sanitize_title($section['group'])][] = $section;
-												} else {
-													$labels['no-group'][] = $section;
-												}
-											}
+                            echo '</ul>';
 
-											foreach( (array) $labels as $key => $label ) {
-												foreach( (array) $label as $key2 => $section ) {
-													$group_icon = isset($labels[$key]['icon']) && $labels[$key]['icon'] != '' ? $labels[$key]['icon'] : '';
+                        }
 
-													if ( $key2 !== 'icon' ) {
+                        /* sections */
+                        echo '<div id="poststuff" class="metabox-holder lerp-admin-panel__right">';
 
-														if ( isset($section['group']) && $group != $section['group'] ) {
-															echo '<li id="group_' . sanitize_title($section['group']) . '" class="ot-section-group-label"><span>' . $group_icon . $section['group'] . '</span></li>';
-															$group = $section['group'];
-														} elseif ( $key2 == 'no-group' ) {
-															echo '<li id="group_no_group" class="ot-section-group-label"></li>';
-														}
-														echo '<li id="tab_' . sanitize_title($section['id']) . '" class="ot-section-label"><a href="#section_' . sanitize_title($section['id']) . '">' . $section['title'] . '</a></li>';
+                        echo '<div id="post-body">';
 
-													}
-												}
-											}
+                        echo '<div id="post-body-content">';
 
-											echo '</ul>';
+                        $this->do_settings_sections($_GET['page']);
 
-										}
+                        echo '</div>';
 
-										/* sections */
-										echo '<div id="poststuff" class="metabox-holder lerp-admin-panel__right">';
+                        echo '</div>';
 
-											echo '<div id="post-body">';
+                        echo '</div>';
 
-												echo '<div id="post-body-content">';
+                        echo '<div class="clear"></div>';
 
-													$this->do_settings_sections( $_GET['page'] );
+                        echo '</div>'; // <!-- .ui-tabs -->
 
-												echo '</div>';
+                        /* buttons */
+                        // if ( $show_buttons ) {
 
-											echo '</div>';
+                        // 	echo '<div class="option-tree-ui-buttons">';
 
-										echo '</div>';
+                        // 		echo '<button class="option-tree-ui-button button button-primary right option-tree-save-button"><span><span class="lerp-ot-spinner"></span><span class="lerp-ot-ok"></span><span class="lerp-ot-no"></span>' . $page['button_text'] . '</span></button>';
 
-										echo '<div class="clear"></div>';
+                        // 	echo '</div>';
 
-									echo '</div>'; // <!-- .ui-tabs -->
+                        // }
 
-									/* buttons */
-									// if ( $show_buttons ) {
+                        echo '</div>'; // <!-- .option-tree-opts-wrap -->
 
-									// 	echo '<div class="option-tree-ui-buttons">';
+                        if ( $show_buttons ) {
+                            echo '</form>'; // <!-- form#option-tree-settings-api -->
+                        } else {
+                            '</div>'; // <!-- #option-tree-settings-api -->
+                        }
 
-									// 		echo '<button class="option-tree-ui-button button button-primary right option-tree-save-button"><span><span class="lerp-ot-spinner"></span><span class="lerp-ot-ok"></span><span class="lerp-ot-no"></span>' . $page['button_text'] . '</span></button>';
+                        if ( $show_buttons || ($page['id'] == 'ot_theme_options' && OT_SHOW_NEW_LAYOUT == true) )
+                            echo '<div class="lerp-ot-bottom-toolbar">';
 
-									// 	echo '</div>';
+                        /* layouts form */
+                        if ( $page['id'] == 'ot_theme_options' && OT_SHOW_NEW_LAYOUT == true )
+                            ot_theme_options_layouts_form();
 
-									// }
+                        /* reset button */
+                        if ( $show_buttons ) {
 
-									echo '</div>'; // <!-- .option-tree-opts-wrap -->
+                            // Reset theme panel
+                            echo '<form method="post" action="' . str_replace('&settings-updated=true', '', $_SERVER["REQUEST_URI"]) . '" class="option-tree-reset-form">';
 
-								if ($show_buttons) {
-									echo '</form>'; // <!-- form#option-tree-settings-api -->
-								} else {
-									'</div>'; // <!-- #option-tree-settings-api -->
-								}
+                            /* form nonce */
+                            wp_nonce_field('option_tree_reset_form', 'option_tree_reset_nonce');
 
-								if ( $show_buttons || ( $page['id'] == 'ot_theme_options' && OT_SHOW_NEW_LAYOUT == true ) )
-									echo '<div class="lerp-ot-bottom-toolbar">';
+                            echo '<input type="hidden" name="action" value="reset" />';
 
-									/* layouts form */
-									if ( $page['id'] == 'ot_theme_options' && OT_SHOW_NEW_LAYOUT == true )
-										ot_theme_options_layouts_form();
+                            echo '<button type="button" class="option-tree-ui-button button button-secondary left reset-settings" title="' . esc_html__('Reset Options', 'option-tree') . '">' . esc_html__('Reset Options', 'option-tree') . '</button>';
 
-									/* reset button */
-									if ( $show_buttons ) {
+                            echo '</form>'; // <!-- .option-tree-reset-form -->
 
-										// Reset theme panel
-										echo '<form method="post" action="' . str_replace( '&settings-updated=true', '', $_SERVER["REQUEST_URI"] ) . '" class="option-tree-reset-form">';
+                            // Toggle AJAX
+                            echo '<form method="post" class="toggle-ajax-theme-panel">';
 
-											/* form nonce */
-											wp_nonce_field( 'option_tree_reset_form', 'option_tree_reset_nonce' );
+                            /* form nonce */
+                            wp_nonce_field('lerp_toggle_ajax_theme_panel', 'lerp_toggle_ajax_theme_panel_nonce');
 
-											echo '<input type="hidden" name="action" value="reset" />';
+                            $toggle_ajax_text = $is_ajax_enabled ? esc_html__('Disable AJAX Saving', 'lerp') : esc_html__('Enable AJAX Saving', 'lerp');
+                            $toggle_ajax_action = $is_ajax_enabled ? 'disable-ajax' : 'enable-ajax';
 
-											echo '<button type="button" class="option-tree-ui-button button button-secondary left reset-settings" title="' . esc_html__( 'Reset Options', 'option-tree' ) . '">' . esc_html__( 'Reset Options', 'option-tree' ) . '</button>';
+                            echo '<input type="hidden" name="toggle_ajax" value="' . $toggle_ajax_action . '">';
 
-										echo '</form>'; // <!-- .option-tree-reset-form -->
+                            echo '<button type="submit" class="option-tree-ui-button button button-secondary left toggle-ajax" title="' . $toggle_ajax_text . '">' . $toggle_ajax_text . '</button>';
 
-										// Toggle AJAX
-										echo '<form method="post" class="toggle-ajax-theme-panel">';
+                            echo '</form>'; // <!-- .toggle-ajax-theme-panel -->
 
-											/* form nonce */
-											wp_nonce_field( 'lerp_toggle_ajax_theme_panel', 'lerp_toggle_ajax_theme_panel_nonce' );
+                        }
 
-											$toggle_ajax_text   = $is_ajax_enabled ? esc_html__( 'Disable AJAX Saving', 'lerp' ) : esc_html__( 'Enable AJAX Saving', 'lerp' );
-											$toggle_ajax_action = $is_ajax_enabled ? 'disable-ajax' : 'enable-ajax';
+                        if ( $show_buttons || ($page['id'] == 'ot_theme_options' && OT_SHOW_NEW_LAYOUT == true) )
+                            echo '</div>'; // <!-- .lerp-ot-bottom-toolbar -->
 
-											echo '<input type="hidden" name="toggle_ajax" value="' . $toggle_ajax_action . '">';
+                        if ( $page['id'] == 'settings' ) {
+                            echo '</div>'; // <!-- .lerp-admin-panel__content -->
+                            echo '</div>'; // <!-- .lerp-admin-panel -->
+                        }
 
-											echo '<button type="submit" class="option-tree-ui-button button button-secondary left toggle-ajax" title="' . $toggle_ajax_text . '">' . $toggle_ajax_text . '</button>';
+                        echo '</div>'; // <!-- .lerp-wrap -->
+                    }
 
-										echo '</form>'; // <!-- .toggle-ajax-theme-panel -->
+                }
 
-									}
+            }
 
-								if ( $show_buttons || ( $page['id'] == 'ot_theme_options' && OT_SHOW_NEW_LAYOUT == true ) )
-									echo '</div>'; // <!-- .lerp-ot-bottom-toolbar -->
+            return false;
+        }
 
-							if ( $page[ 'id' ] == 'settings' ) {
-									echo '</div>'; // <!-- .lerp-admin-panel__content -->
-								echo '</div>'; // <!-- .lerp-admin-panel -->
-							}
+        /**
+         * Adds sections to the page
+         *
+         * @return    void
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function add_sections()
+        {
 
-						echo '</div>'; // <!-- .lerp-wrap -->
-					}
+            /* loop through options */
+            foreach ( (array)$this->options as $option ) {
 
-				}
+                /* loop through pages */
+                foreach ( (array)$this->get_pages($option) as $page ) {
 
-			}
+                    /* loop through page sections */
+                    foreach ( (array)$this->get_sections($page) as $section ) {
 
-			return false;
-		}
+                        /* add each section */
+                        add_settings_section(
+                            $section['id'],
+                            $section['title'],
+                            array($this, 'display_section'),
+                            $page['menu_slug']
+                        );
 
-		/**
-		 * Adds sections to the page
-		 *
-		 * @return    void
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function add_sections() {
+                    }
 
-			/* loop through options */
-			foreach( (array) $this->options as $option ) {
+                }
 
-				/* loop through pages */
-				foreach( (array) $this->get_pages( $option ) as $page ) {
+            }
 
-					/* loop through page sections */
-					foreach( (array) $this->get_sections( $page ) as $section ) {
+            return false;
+        }
 
-						/* add each section */
-						add_settings_section(
-							$section['id'],
-							$section['title'],
-							array( $this, 'display_section' ),
-							$page['menu_slug']
-						);
+        /**
+         * Callback for add_settings_section()
+         *
+         * @return    string
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function display_section()
+        {
+            /* currently pointless */
+        }
 
-					}
+        /**
+         * Add settings the the page
+         *
+         * @return    void
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function add_settings()
+        {
 
-				}
+            /* loop through options */
+            foreach ( (array)$this->options as $option ) {
 
-			}
+                register_setting($option['id'], $option['id'], array($this, 'sanitize_callback'));
 
-			return false;
-		}
+                /* loop through pages */
+                foreach ( (array)$this->get_pages($option) as $page ) {
 
-		/**
-		 * Callback for add_settings_section()
-		 *
-		 * @return    string
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function display_section() {
-			/* currently pointless */
-		}
+                    /* loop through page settings */
+                    foreach ( (array)$this->get_the_settings($page) as $setting ) {
 
-		/**
-		 * Add settings the the page
-		 *
-		 * @return    void
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function add_settings() {
+                        /* skip if no setting ID */
+                        if ( !isset($setting['id']) )
+                            continue;
 
-			/* loop through options */
-			foreach( (array) $this->options as $option ) {
+                        /* add get_option param to the array */
+                        $setting['get_option'] = $option['id'];
 
-				register_setting( $option['id'], $option['id'], array ( $this, 'sanitize_callback' ) );
+                        /* add each setting */
+                        add_settings_field(
+                            $setting['id'],
+                            $setting['label'],
+                            array($this, 'display_setting'),
+                            $page['menu_slug'],
+                            $setting['section'],
+                            $setting
+                        );
 
-				/* loop through pages */
-				foreach( (array) $this->get_pages( $option ) as $page ) {
+                    }
 
-					/* loop through page settings */
-					foreach( (array) $this->get_the_settings( $page ) as $setting ) {
+                }
 
-						/* skip if no setting ID */
-						if ( ! isset( $setting['id'] ) )
-							continue;
+            }
 
-						/* add get_option param to the array */
-						$setting['get_option']  = $option['id'];
+            return false;
+        }
 
-						/* add each setting */
-						add_settings_field(
-							$setting['id'],
-							$setting['label'],
-							array( $this, 'display_setting' ),
-							$page['menu_slug'],
-							$setting['section'],
-							$setting
-						);
+        /**
+         * Callback for add_settings_field() to build each setting by type
+         *
+         * @param     array     Setting object array
+         * @return    string
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function display_setting($args = array())
+        {
 
-					}
+            extract($args);
 
-				}
+            /* get current saved data */
+            $options = get_option($get_option, false);
 
-			}
+            // Set field value
+            $field_value = isset($options[$id]) ? $options[$id] : '';
 
-			return false;
-		}
+            /* set standard value */
+            if ( isset($std) ) {
+                $field_value = ot_filter_std_value($field_value, $std);
+            }
 
-		/**
-		 * Callback for add_settings_field() to build each setting by type
-		 *
-		 * @param     array     Setting object array
-		 * @return    string
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function display_setting( $args = array() ) {
+            // Allow the descriptions to be filtered before being displayed
+            $desc = apply_filters('ot_filter_description', (isset($desc) ? $desc : ''), $id);
 
-			extract( $args );
+            /* build the arguments array */
+            $_args = array(
+                'type' => $type,
+                'field_id' => $id,
+                'field_name' => $get_option . '[' . $id . ']',
+                'field_value' => $field_value,
+                'field_desc' => $desc,
+                'field_std' => isset($std) ? $std : '',
+                'field_rows' => isset($rows) && !empty($rows) ? $rows : 15,
+                'field_post_type' => isset($post_type) && !empty($post_type) ? $post_type : 'post',
+                'field_taxonomy' => isset($taxonomy) && !empty($taxonomy) ? $taxonomy : 'category',
+                'field_min_max_step' => isset($min_max_step) && !empty($min_max_step) ? $min_max_step : '0,100,1',
+                'field_condition' => isset($condition) && !empty($condition) ? $condition : '',
+                'field_operator' => isset($operator) && !empty($operator) ? $operator : 'and',
+                'field_class' => isset($class) ? $class : '',
+                'field_choices' => isset($choices) && !empty($choices) ? $choices : array(),
+                'field_settings' => isset($settings) && !empty($settings) ? $settings : array(),
+                'post_id' => ot_get_media_post_ID(),
+                'get_option' => $get_option,
+            );
 
-			/* get current saved data */
-			$options = get_option( $get_option, false );
+            // Limit DB queries for Google Fonts.
+            if ( $type == 'google-fonts' ) {
+                ot_fetch_google_fonts();
+                ot_set_google_fonts($id, $field_value);
+            }
 
-			// Set field value
-			$field_value = isset( $options[$id] ) ? $options[$id] : '';
+            /* get the option HTML */
+            echo ot_display_by_type($_args);
+        }
 
-			/* set standard value */
-			if ( isset( $std ) ) {
-				$field_value = ot_filter_std_value( $field_value, $std );
-			}
+        /**
+         * Sets the option standards if nothing yet exists.
+         *
+         * @return    void
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function initialize_settings()
+        {
 
-			// Allow the descriptions to be filtered before being displayed
-			$desc = apply_filters( 'ot_filter_description', ( isset( $desc ) ? $desc : '' ), $id );
+            $default_header_image = get_option('lerp_default_header_image');
 
-			/* build the arguments array */
-			$_args = array(
-				'type'              => $type,
-				'field_id'          => $id,
-				'field_name'        => $get_option . '[' . $id . ']',
-				'field_value'       => $field_value,
-				'field_desc'        => $desc,
-				'field_std'         => isset( $std ) ? $std : '',
-				'field_rows'        => isset( $rows ) && ! empty( $rows ) ? $rows : 15,
-				'field_post_type'   => isset( $post_type ) && ! empty( $post_type ) ? $post_type : 'post',
-				'field_taxonomy'    => isset( $taxonomy ) && ! empty( $taxonomy ) ? $taxonomy : 'category',
-				'field_min_max_step'=> isset( $min_max_step ) && ! empty( $min_max_step ) ? $min_max_step : '0,100,1',
-				'field_condition'   => isset( $condition ) && ! empty( $condition ) ? $condition : '',
-				'field_operator'    => isset( $operator ) && ! empty( $operator ) ? $operator : 'and',
-				'field_class'       => isset( $class ) ? $class : '',
-				'field_choices'     => isset( $choices ) && ! empty( $choices ) ? $choices : array(),
-				'field_settings'    => isset( $settings ) && ! empty( $settings ) ? $settings : array(),
-				'post_id'           => ot_get_media_post_ID(),
-				'get_option'        => $get_option,
-			);
+            /* loop through options */
+            foreach ( (array)$this->options as $option ) {
 
-			// Limit DB queries for Google Fonts.
-			if ( $type == 'google-fonts' ) {
-				ot_fetch_google_fonts();
-				ot_set_google_fonts( $id, $field_value );
-			}
+                /* skip if option is already set */
+                if ( isset($option['id']) && get_option($option['id'], false) ) {
+                    return false;
+                }
 
-			/* get the option HTML */
-			echo ot_display_by_type( $_args );
-		}
+                $defaults = array();
 
-		/**
-		 * Sets the option standards if nothing yet exists.
-		 *
-		 * @return    void
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function initialize_settings() {
+                /* loop through pages */
+                foreach ( (array)$this->get_pages($option) as $page ) {
 
-			$default_header_image = get_option('lerp_default_header_image');
+                    /* loop through page settings */
+                    foreach ( (array)$this->get_the_settings($page) as $setting ) {
 
-			/* loop through options */
-			foreach( (array) $this->options as $option ) {
+                        if ( isset($setting['std']) ) {
 
-				/* skip if option is already set */
-				if ( isset( $option['id'] ) && get_option( $option['id'], false ) ) {
-					return false;
-				}
+                            if ( isset($default_header_image) ) {
+                                $defaults[$setting['id']] = ot_validate_setting($setting['std'], $setting['type'], $setting['id']);
+                                if ( $setting['id'] === '_lerp_post_header_background' ||
+                                    $setting['id'] === '_lerp_page_header_background' ||
+                                    $setting['id'] === '_lerp_portfolio_header_background' ||
+                                    $setting['id'] === '_lerp_404_header_background' ||
+                                    $setting['id'] === '_lerp_search_index_header_background' ||
+                                    $setting['id'] === '_lerp_post_index_header_background' ||
+                                    $setting['id'] === '_lerp_portfolio_index_header_background' ) {
+                                    $defaults[$setting['id']]['background-image'] = $default_header_image;
+                                }
+                            } else {
+                                $defaults[$setting['id']] = ot_validate_setting($setting['std'], $setting['type'], $setting['id']);
+                            }
 
-				$defaults = array();
+                        }
 
-				/* loop through pages */
-				foreach( (array) $this->get_pages( $option ) as $page ) {
+                    }
 
-					/* loop through page settings */
-					foreach( (array) $this->get_the_settings( $page ) as $setting ) {
+                }
 
-						if ( isset( $setting['std'] ) ) {
+                update_option($option['id'], $defaults);
+                lerp_create_dynamic_css();
 
-							if (isset($default_header_image)) {
-								$defaults[$setting['id']] = ot_validate_setting( $setting['std'], $setting['type'], $setting['id'] );
-								if ($setting['id'] === '_lerp_post_header_background' ||
-										$setting['id'] === '_lerp_page_header_background' ||
-										$setting['id'] === '_lerp_portfolio_header_background' ||
-										$setting['id'] === '_lerp_404_header_background' ||
-										$setting['id'] === '_lerp_search_index_header_background' ||
-										$setting['id'] === '_lerp_post_index_header_background' ||
-										$setting['id'] === '_lerp_portfolio_index_header_background')
-								{
-									$defaults[$setting['id']]['background-image'] = $default_header_image;
-								}
-							} else {
-								$defaults[$setting['id']] = ot_validate_setting( $setting['std'], $setting['type'], $setting['id'] );
-							}
+            }
 
-						}
+            return false;
+        }
 
-					}
+        /**
+         * Sanitize callback for register_setting()
+         *
+         * @return    string
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function sanitize_callback($input)
+        {
 
-				}
+            $current_settings = get_option(ot_settings_id());
 
-				update_option( $option['id'], $defaults );
-				lerp_create_dynamic_css();
+            /* loop through options */
+            foreach ( (array)$this->options as $option ) {
 
-			}
+                $current_options = get_option($option['id']);
 
-			return false;
-		}
+                /* loop through pages */
+                foreach ( (array)$this->get_pages($option) as $page ) {
 
-		/**
-		 * Sanitize callback for register_setting()
-		 *
-		 * @return    string
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function sanitize_callback( $input ) {
+                    /* loop through page settings */
+                    foreach ( (array)$this->get_the_settings($page) as $setting ) {
 
-			$current_settings = get_option( ot_settings_id() );
+                        /* verify setting has a type & value */
+                        if ( isset($setting['type']) && isset($input[$setting['id']]) ) {
 
-			/* loop through options */
-			foreach( (array) $this->options as $option ) {
+                            /* validate setting */
+                            if ( is_array($input[$setting['id']]) && in_array($setting['type'], array('list-item', 'slider')) ) {
 
-				$current_options = get_option( $option['id'] );
+                                /* required title setting */
+                                $required_setting = array(
+                                    array(
+                                        'id' => 'title',
+                                        'label' => esc_html__('Title', 'option-tree'),
+                                        'desc' => '',
+                                        'std' => '',
+                                        'type' => 'text',
+                                        'rows' => '',
+                                        'class' => 'option-tree-setting-title',
+                                        'post_type' => '',
+                                        'choices' => array()
+                                    )
+                                );
 
-				/* loop through pages */
-				foreach( (array) $this->get_pages( $option ) as $page ) {
+                                /* get the settings array */
+                                $settings = isset($_POST[$setting['id'] . '_settings_array']) ? unserialize(ot_decode($_POST[$setting['id'] . '_settings_array'])) : array();
 
-					/* loop through page settings */
-					foreach( (array) $this->get_the_settings( $page ) as $setting ) {
+                                /* settings are empty for some odd ass reason get the defaults */
+                                if ( empty($settings) ) {
+                                    $settings = 'slider' == $setting['type'] ?
+                                        ot_slider_settings($setting['id']) :
+                                        ot_list_item_settings($setting['id']);
+                                }
 
-						/* verify setting has a type & value */
-						if ( isset( $setting['type'] ) && isset( $input[$setting['id']] ) ) {
+                                /* merge the two settings array */
+                                $settings = array_merge($required_setting, $settings);
 
-							/* validate setting */
-							if ( is_array( $input[$setting['id']] ) && in_array( $setting['type'], array( 'list-item', 'slider' ) ) ) {
+                                /* create an empty WPML id array */
+                                $wpml_ids = array();
 
-								/* required title setting */
-								$required_setting = array(
-									array(
-										'id'        => 'title',
-										'label'     => esc_html__( 'Title', 'option-tree' ),
-										'desc'      => '',
-										'std'       => '',
-										'type'      => 'text',
-										'rows'      => '',
-										'class'     => 'option-tree-setting-title',
-										'post_type' => '',
-										'choices'   => array()
-									)
-								);
+                                foreach ( $input[$setting['id']] as $k => $setting_array ) {
 
-								/* get the settings array */
-								$settings = isset( $_POST[$setting['id'] . '_settings_array'] ) ? unserialize( ot_decode( $_POST[$setting['id'] . '_settings_array'] ) ) : array();
+                                    foreach ( $settings as $sub_setting ) {
 
-								/* settings are empty for some odd ass reason get the defaults */
-								if ( empty( $settings ) ) {
-									$settings = 'slider' == $setting['type'] ?
-									ot_slider_settings( $setting['id'] ) :
-									ot_list_item_settings( $setting['id'] );
-								}
+                                        /* setup the WPML ID */
+                                        $wpml_id = $setting['id'] . '_' . $sub_setting['id'] . '_' . $k;
 
-								/* merge the two settings array */
-								$settings = array_merge( $required_setting, $settings );
+                                        /* add id to array */
+                                        $wpml_ids[] = $wpml_id;
 
-								/* create an empty WPML id array */
-								$wpml_ids = array();
+                                        /* verify sub setting has a type & value */
+                                        if ( isset($sub_setting['type']) && isset($input[$setting['id']][$k][$sub_setting['id']]) ) {
 
-								foreach( $input[$setting['id']] as $k => $setting_array ) {
+                                            /* validate setting */
+                                            $input[$setting['id']][$k][$sub_setting['id']] = ot_validate_setting($input[$setting['id']][$k][$sub_setting['id']], $sub_setting['type'], $sub_setting['id'], $wpml_id);
 
-									foreach( $settings as $sub_setting ) {
+                                        }
 
-										/* setup the WPML ID */
-										$wpml_id = $setting['id'] . '_' . $sub_setting['id'] . '_' . $k;
+                                    }
 
-										/* add id to array */
-										$wpml_ids[] = $wpml_id;
+                                }
 
-										/* verify sub setting has a type & value */
-										if ( isset( $sub_setting['type'] ) && isset( $input[$setting['id']][$k][$sub_setting['id']] ) ) {
+                            } else if ( is_array($input[$setting['id']]) && $setting['type'] == 'social-links' ) {
 
-											/* validate setting */
-											$input[$setting['id']][$k][$sub_setting['id']] = ot_validate_setting( $input[$setting['id']][$k][$sub_setting['id']], $sub_setting['type'], $sub_setting['id'], $wpml_id );
+                                /* get the settings array */
+                                $settings = isset($_POST[$setting['id'] . '_settings_array']) ? unserialize(ot_decode($_POST[$setting['id'] . '_settings_array'])) : array();
 
-										}
+                                /* settings are empty get the defaults */
+                                if ( empty($settings) ) {
+                                    $settings = ot_social_links_settings($setting['id']);
+                                }
 
-									}
+                                /* create an empty WPML id array */
+                                $wpml_ids = array();
 
-								}
+                                foreach ( $input[$setting['id']] as $k => $setting_array ) {
 
-							} else if ( is_array( $input[$setting['id']] ) && $setting['type'] == 'social-links' ) {
+                                    foreach ( $settings as $sub_setting ) {
 
-								/* get the settings array */
-								$settings = isset( $_POST[$setting['id'] . '_settings_array'] ) ? unserialize( ot_decode( $_POST[$setting['id'] . '_settings_array'] ) ) : array();
+                                        /* setup the WPML ID */
+                                        $wpml_id = $setting['id'] . '_' . $sub_setting['id'] . '_' . $k;
 
-								/* settings are empty get the defaults */
-								if ( empty( $settings ) ) {
-									$settings = ot_social_links_settings( $setting['id'] );
-								}
+                                        /* add id to array */
+                                        $wpml_ids[] = $wpml_id;
 
-								/* create an empty WPML id array */
-								$wpml_ids = array();
+                                        /* verify sub setting has a type & value */
+                                        if ( isset($sub_setting['type']) && isset($input[$setting['id']][$k][$sub_setting['id']]) ) {
 
-								foreach( $input[$setting['id']] as $k => $setting_array ) {
+                                            /* validate setting */
+                                            $input[$setting['id']][$k][$sub_setting['id']] = ot_validate_setting($input[$setting['id']][$k][$sub_setting['id']], $sub_setting['type'], $sub_setting['id'], $wpml_id);
 
-									foreach( $settings as $sub_setting ) {
+                                        }
 
-										/* setup the WPML ID */
-										$wpml_id = $setting['id'] . '_' . $sub_setting['id'] . '_' . $k;
+                                    }
 
-										/* add id to array */
-										$wpml_ids[] = $wpml_id;
+                                }
 
-										/* verify sub setting has a type & value */
-										if ( isset( $sub_setting['type'] ) && isset( $input[$setting['id']][$k][$sub_setting['id']] ) ) {
+                            } else {
 
-											/* validate setting */
-											$input[$setting['id']][$k][$sub_setting['id']] = ot_validate_setting( $input[$setting['id']][$k][$sub_setting['id']], $sub_setting['type'], $sub_setting['id'], $wpml_id );
+                                $input[$setting['id']] = ot_validate_setting($input[$setting['id']], $setting['type'], $setting['id'], $setting['id']);
 
-										}
+                            }
 
-									}
+                        }
 
-								}
+                        /* unregister WPML strings that were deleted from lists and sliders */
+                        if ( isset($current_settings['settings']) && isset($setting['type']) && in_array($setting['type'], array('list-item', 'slider')) ) {
 
-							} else {
+                            if ( !isset($wpml_ids) )
+                                $wpml_ids = array();
 
-								$input[$setting['id']] = ot_validate_setting( $input[$setting['id']], $setting['type'], $setting['id'], $setting['id'] );
+                            foreach ( $current_settings['settings'] as $check_setting ) {
 
-							}
+                                if ( $setting['id'] == $check_setting['id'] && !empty($current_options[$setting['id']]) ) {
 
-						}
+                                    foreach ( $current_options[$setting['id']] as $key => $value ) {
 
-						/* unregister WPML strings that were deleted from lists and sliders */
-						if ( isset( $current_settings['settings'] ) && isset( $setting['type'] ) && in_array( $setting['type'], array( 'list-item', 'slider' ) ) ) {
+                                        foreach ( $value as $ckey => $cvalue ) {
 
-							if ( ! isset( $wpml_ids ) )
-								$wpml_ids = array();
+                                            $id = $setting['id'] . '_' . $ckey . '_' . $key;
 
-							foreach( $current_settings['settings'] as $check_setting ) {
+                                            if ( !in_array($id, $wpml_ids) ) {
 
-								if ( $setting['id'] == $check_setting['id'] && ! empty( $current_options[$setting['id']] ) ) {
+                                                ot_wpml_unregister_string($id);
 
-									foreach( $current_options[$setting['id']] as $key => $value ) {
+                                            }
 
-										foreach( $value as $ckey => $cvalue ) {
+                                        }
 
-											$id = $setting['id'] . '_' . $ckey . '_' . $key;
+                                    }
 
-											if ( ! in_array( $id, $wpml_ids ) ) {
+                                }
 
-												ot_wpml_unregister_string( $id );
+                            }
 
-											}
+                        }
 
-										}
+                        /* unregister WPML strings that were deleted from social links */
+                        if ( isset($current_settings['settings']) && isset($setting['type']) && $setting['type'] == 'social-links' ) {
 
-									}
+                            if ( !isset($wpml_ids) )
+                                $wpml_ids = array();
 
-								}
+                            foreach ( $current_settings['settings'] as $check_setting ) {
 
-							}
+                                if ( $setting['id'] == $check_setting['id'] && !empty($current_options[$setting['id']]) ) {
 
-						}
+                                    foreach ( $current_options[$setting['id']] as $key => $value ) {
 
-						/* unregister WPML strings that were deleted from social links */
-						if ( isset( $current_settings['settings'] ) && isset( $setting['type'] ) && $setting['type'] == 'social-links' ) {
+                                        foreach ( $value as $ckey => $cvalue ) {
 
-							if ( ! isset( $wpml_ids ) )
-								$wpml_ids = array();
+                                            $id = $setting['id'] . '_' . $ckey . '_' . $key;
 
-							foreach( $current_settings['settings'] as $check_setting ) {
+                                            if ( !in_array($id, $wpml_ids) ) {
 
-								if ( $setting['id'] == $check_setting['id'] && ! empty( $current_options[$setting['id']] ) ) {
+                                                ot_wpml_unregister_string($id);
 
-									foreach( $current_options[$setting['id']] as $key => $value ) {
+                                            }
 
-										foreach( $value as $ckey => $cvalue ) {
+                                        }
 
-											$id = $setting['id'] . '_' . $ckey . '_' . $key;
+                                    }
 
-											if ( ! in_array( $id, $wpml_ids ) ) {
+                                }
 
-												ot_wpml_unregister_string( $id );
+                            }
 
-											}
+                        }
 
-										}
+                    }
 
-									}
+                }
 
-								}
+            }
 
-							}
+            return $input;
 
-						}
+        }
 
-					}
+        /**
+         * Helper function to get the pages array for an option
+         *
+         * @param     array     Option array
+         * @return    mixed
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function get_pages($option = array())
+        {
 
-				}
+            if ( empty($option) )
+                return false;
 
-			}
+            /* check for pages */
+            if ( isset($option['pages']) && !empty($option['pages']) ) {
 
-			return $input;
+                /* return pages array */
+                return $option['pages'];
 
-		}
+            }
 
-		/**
-		 * Helper function to get the pages array for an option
-		 *
-		 * @param     array     Option array
-		 * @return    mixed
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function get_pages( $option = array() ) {
+            return false;
+        }
 
-			if ( empty( $option ) )
-				return false;
+        /**
+         * Helper function to get the sections array for a page
+         *
+         * @param     array     Page array
+         * @return    mixed
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function get_sections($page = array())
+        {
 
-			/* check for pages */
-			if ( isset( $option['pages'] ) && ! empty( $option['pages'] ) ) {
+            if ( empty($page) )
+                return false;
 
-				/* return pages array */
-				return $option['pages'];
+            /* check for sections */
+            if ( isset($page['sections']) && !empty($page['sections']) ) {
 
-			}
+                /* return sections array */
+                return $page['sections'];
 
-			return false;
-		}
+            }
 
-		/**
-		 * Helper function to get the sections array for a page
-		 *
-		 * @param     array     Page array
-		 * @return    mixed
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function get_sections( $page = array() ) {
+            return false;
+        }
 
-			if ( empty( $page ) )
-				return false;
+        /**
+         * Helper function to get the settings array for a page
+         *
+         * @param     array     Page array
+         * @return    mixed
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function get_the_settings($page = array())
+        {
 
-			/* check for sections */
-			if ( isset( $page['sections'] ) && ! empty( $page['sections'] ) ) {
+            if ( empty($page) )
+                return false;
 
-				/* return sections array */
-				return $page['sections'];
+            /* check for settings */
+            if ( isset($page['settings']) && !empty($page['settings']) ) {
 
-			}
+                /* return settings array */
+                return $page['settings'];
 
-			return false;
-		}
+            }
 
-		/**
-		 * Helper function to get the settings array for a page
-		 *
-		 * @param     array     Page array
-		 * @return    mixed
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function get_the_settings( $page = array() ) {
+            return false;
+        }
 
-			if ( empty( $page ) )
-				return false;
+        /**
+         * Prints out all settings sections added to a particular settings page
+         *
+         * @global    $wp_settings_sections   Storage array of all settings sections added to admin pages
+         * @global    $wp_settings_fields     Storage array of settings fields and info about their pages/sections
+         *
+         * @param     string    The slug name of the page whos settings sections you want to output
+         * @return    string
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function do_settings_sections($page)
+        {
+            global $wp_settings_sections, $wp_settings_fields;
 
-			/* check for settings */
-			if ( isset( $page['settings'] ) && ! empty( $page['settings'] ) ) {
+            if ( !isset($wp_settings_sections) || !isset($wp_settings_sections[$page]) ) {
+                return false;
+            }
 
-				/* return settings array */
-				return $page['settings'];
+            foreach ( (array)$wp_settings_sections[$page] as $section ) {
 
-			}
+                if ( !isset($section['id']) )
+                    continue;
 
-			return false;
-		}
+                echo '<div id="section_' . $section['id'] . '" class="ui-tabs-panel">';
 
-		/**
-		 * Prints out all settings sections added to a particular settings page
-		 *
-		 * @global    $wp_settings_sections   Storage array of all settings sections added to admin pages
-		 * @global    $wp_settings_fields     Storage array of settings fields and info about their pages/sections
-		 *
-		 * @param     string    The slug name of the page whos settings sections you want to output
-		 * @return    string
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function do_settings_sections( $page ) {
-			global $wp_settings_sections, $wp_settings_fields;
+                call_user_func($section['callback'], $section);
 
-			if ( ! isset( $wp_settings_sections ) || ! isset( $wp_settings_sections[$page] ) ) {
-				return false;
-			}
+                if ( !isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][$section['id']]) )
+                    continue;
 
-			foreach ( (array) $wp_settings_sections[$page] as $section ) {
+                echo '<div class="inside">';
 
-				if ( ! isset( $section['id'] ) )
-					continue;
+                $this->do_settings_fields($page, $section['id']);
 
-				echo '<div id="section_' . $section['id'] . '" class="ui-tabs-panel">';
+                echo '</div>';
 
-					call_user_func( $section['callback'], $section );
+                echo '</div>';
 
-					if ( ! isset( $wp_settings_fields ) || ! isset( $wp_settings_fields[$page] ) || ! isset( $wp_settings_fields[$page][$section['id']] ) )
-						continue;
+            }
 
-					echo '<div class="inside">';
+        }
 
-						$this->do_settings_fields( $page, $section['id'] );
+        /**
+         * Print out the settings fields for a particular settings section
+         *
+         * @global    $wp_settings_fields Storage array of settings fields and their pages/sections
+         *
+         * @param     string $page Slug title of the admin page who's settings fields you want to show.
+         * @param     string $section Slug title of the settings section who's fields you want to show.
+         * @return    string
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function do_settings_fields($page, $section)
+        {
+            global $wp_settings_fields;
 
-					echo '</div>';
+            if ( !isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][$section]) )
+                return;
 
-				echo '</div>';
+            foreach ( (array)$wp_settings_fields[$page][$section] as $field ) {
 
-			}
+                $conditions = '';
 
-		}
+                if ( isset($field['args']['condition']) && !empty($field['args']['condition']) ) {
 
-		/**
-		 * Print out the settings fields for a particular settings section
-		 *
-		 * @global    $wp_settings_fields Storage array of settings fields and their pages/sections
-		 *
-		 * @param     string    $page Slug title of the admin page who's settings fields you want to show.
-		 * @param     string    $section Slug title of the settings section who's fields you want to show.
-		 * @return    string
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function do_settings_fields( $page, $section ) {
-			global $wp_settings_fields;
+                    $conditions = ' data-condition="' . $field['args']['condition'] . '"';
+                    $conditions .= isset($field['args']['operator']) && in_array($field['args']['operator'], array('and', 'AND', 'or', 'OR')) ? ' data-operator="' . $field['args']['operator'] . '"' : '';
 
-			if ( !isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][$section]) )
-				return;
+                }
 
-			foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
+                // Build the setting CSS class
+                if ( isset($field['args']['class']) && !empty($field['args']['class']) ) {
 
-				$conditions = '';
+                    $classes = explode(' ', $field['args']['class']);
 
-				if ( isset( $field['args']['condition'] ) && ! empty( $field['args']['condition'] ) ) {
+                    foreach ( $classes as $key => $value ) {
 
-					$conditions = ' data-condition="' . $field['args']['condition'] . '"';
-					$conditions.= isset( $field['args']['operator'] ) && in_array( $field['args']['operator'], array( 'and', 'AND', 'or', 'OR' ) ) ? ' data-operator="' . $field['args']['operator'] . '"' : '';
+                        $classes[$key] = $value . '-wrap';
 
-				}
+                    }
 
-				// Build the setting CSS class
-				if ( isset( $field['args']['class'] ) && ! empty( $field['args']['class'] ) ) {
+                    $class = 'format-settings ' . implode(' ', $classes);
 
-					$classes = explode( ' ', $field['args']['class'] );
+                } else {
 
-					foreach( $classes as $key => $value ) {
+                    $class = 'format-settings';
 
-						$classes[$key] = $value . '-wrap';
+                }
 
-					}
+                echo '<div id="setting_' . $field['id'] . '" class="' . $class . '"' . $conditions . '>';
 
-					$class = 'format-settings ' . implode( ' ', $classes );
+                echo '<div class="format-setting-wrap">';
 
-				} else {
+                if ( $field['args']['type'] != 'textblock' && !empty($field['title']) ) {
 
-					$class = 'format-settings';
+                    echo '<div class="format-setting-label">';
 
-				}
+                    echo '<h3 class="label">' . $field['title'];
+                    if ( isset($field['args']['desc']) && $field['args']['desc'] !== '' )
+                        echo '<span class="toggle-description"></span>';
+                    echo '</h3>';
+                    if ( isset($field['args']['desc']) && $field['args']['desc'] !== '' )
+                        echo '<small class="description"><span>' . htmlspecialchars_decode($field['args']['desc']) . '</span></small>';
 
-				echo '<div id="setting_' . $field['id'] . '" class="' . $class . '"' . $conditions . '>';
+                    echo '</div>';
 
-					echo '<div class="format-setting-wrap">';
+                }
 
-						if ( $field['args']['type'] != 'textblock' && ! empty( $field['title'] ) ) {
+                call_user_func($field['callback'], $field['args']);
 
-							echo '<div class="format-setting-label">';
+                echo '</div>';
 
-								echo '<h3 class="label">' . $field['title'];
-								if ( isset($field['args']['desc']) && $field['args']['desc'] !== '' )
-									echo '<span class="toggle-description"></span>';
-								echo '</h3>';
-								if ( isset($field['args']['desc']) && $field['args']['desc'] !== '' )
-									echo '<small class="description"><span>' . htmlspecialchars_decode( $field['args']['desc'] ) . '</span></small>';
+                echo '</div>';
 
-							echo '</div>';
+            }
 
-						}
+        }
 
-						call_user_func( $field['callback'], $field['args'] );
+        /**
+         * Resets page options before the screen is displayed
+         *
+         * @return    void
+         *
+         * @access    public
+         * @since     2.0
+         */
+        public function reset_options()
+        {
 
-					echo '</div>';
+            /* check for reset action */
+            if ( isset($_POST['option_tree_reset_nonce']) && wp_verify_nonce($_POST['option_tree_reset_nonce'], 'option_tree_reset_form') ) {
 
-				echo '</div>';
+                /* loop through options */
+                foreach ( (array)$this->options as $option ) {
 
-			}
+                    /* loop through pages */
+                    foreach ( (array)$this->get_pages($option) as $page ) {
 
-		}
+                        /* verify page */
+                        if ( isset($_GET['page']) && $_GET['page'] == $page['menu_slug'] ) {
 
-		/**
-		 * Resets page options before the screen is displayed
-		 *
-		 * @return    void
-		 *
-		 * @access    public
-		 * @since     2.0
-		 */
-		public function reset_options() {
+                            /* reset options */
+                            delete_option($option['id']);
+                            delete_option('lerp_font_options');
 
-			/* check for reset action */
-			if ( isset( $_POST['option_tree_reset_nonce'] ) && wp_verify_nonce( $_POST['option_tree_reset_nonce'], 'option_tree_reset_form' ) ) {
+                        }
 
-				/* loop through options */
-				foreach( (array) $this->options as $option ) {
+                    }
 
-					/* loop through pages */
-					foreach( (array) $this->get_pages( $option ) as $page ) {
+                }
 
-						/* verify page */
-						if ( isset( $_GET['page'] ) && $_GET['page'] == $page['menu_slug'] ) {
+            }
 
-							/* reset options */
-							delete_option( $option['id'] );
-							delete_option( 'lerp_font_options' );
+            return false;
 
-						}
+        }
 
-					}
-
-				}
-
-			}
-
-			return false;
-
-		}
-
-	}
+    }
 
 }
 
@@ -1166,14 +1185,15 @@ if ( ! class_exists( 'OT_Settings' ) ) {
  * @access   public
  * @since    2.0
  */
-if ( ! function_exists( 'ot_register_settings' ) ) {
+if ( !function_exists('ot_register_settings') ) {
 
-	function ot_register_settings( $args ) {
-		if ( ! $args )
-			return;
+    function ot_register_settings($args)
+    {
+        if ( !$args )
+            return;
 
-		$ot_settings = new OT_Settings( $args );
-	}
+        $ot_settings = new OT_Settings($args);
+    }
 
 }
 

@@ -11,20 +11,20 @@ $single_post_width = (isset($vars['single_post_width']) && $vars['single_post_wi
 $item_thumb_id = '';
 
 $stylesArray = array(
-	'light',
-	'dark'
+    'light',
+    'dark'
 );
 $general_style = ot_get_option('_lerp_general_style');
 
-$overlay_style = $stylesArray[!array_search($general_style, $stylesArray) ];
+$overlay_style = $stylesArray[!array_search($general_style, $stylesArray)];
 $overlay_back_color = 'style-' . $overlay_style . '-bg';
 
 $item_thumb_id = get_post_meta($post->ID, '_lerp_featured_media', 1);
-if ($item_thumb_id === '') $item_thumb_id = get_post_thumbnail_id($post->ID);
+if ( $item_thumb_id === '' ) $item_thumb_id = get_post_thumbnail_id($post->ID);
 
 $block_classes = array(
-	'tmb',
-	'tmb-post',
+    'tmb',
+    'tmb-post',
 );
 $block_classes[] = 'tmb-' . $general_style;
 $block_classes[] = 'tmb-overlay-anim';
@@ -44,15 +44,15 @@ $layout = array();
 $title_classes[] = 'h3';
 
 global $lerp_index_map;
-if (!class_exists('lerp_index')) {
-	echo esc_html__('Please activate Lerp Core plugin to version > 1.0.5','lerp');
-	die();
+if ( !class_exists('lerp_index') ) {
+    echo esc_html__('Please activate Lerp Core plugin to version > 1.0.5', 'lerp');
+    die();
 }
 $lerp_index_instance = new lerp_index($lerp_index_map);
-$post_category = $lerp_index_instance->getCategoriesCss( $post->ID);
+$post_category = $lerp_index_instance->getCategoriesCss($post->ID);
 $block_data['content'] = get_the_content();
 $block_data['single_categories_id'] = $post_category['cat_id'];
-$block_data['single_categories'] = $lerp_index_instance->getCategoriesLink( $post->ID );
+$block_data['single_categories'] = $lerp_index_instance->getCategoriesLink($post->ID);
 $block_data['classes'] = $block_classes;
 $block_data['tmb_data'] = $tmb_data;
 $block_data['id'] = $post->ID;
@@ -68,23 +68,23 @@ $block_data['overlay_color'] = $overlay_back_color;
 $block_data['overlay_opacity'] = '50';
 $block_data['title_classes'] = $title_classes;
 $block_data['link'] = get_permalink();
-if (isset($vars['single_text_length'])) $block_data['text_length'] = $vars['single_text_length'];
+if ( isset($vars['single_text_length']) ) $block_data['text_length'] = $vars['single_text_length'];
 
-if ($item_thumb_id !== '') {
-	$layout['media'] = array();
-	$media_items = explode(',', $item_thumb_id);
-	if (count($media_items) > 1) $block_data['poster'] = true;
+if ( $item_thumb_id !== '' ) {
+    $layout['media'] = array();
+    $media_items = explode(',', $item_thumb_id);
+    if ( count($media_items) > 1 ) $block_data['poster'] = true;
 }
 
 $post_format = get_post_format();
 
-if ($post_format !== 'aside' && $post_format !== 'quote') $layout['title'] = array();
-if (($post_format !== 'aside' && $post_format !== 'link' && $post_format !== 'quote') && !is_archive()) $layout['meta'] = array();
+if ( $post_format !== 'aside' && $post_format !== 'quote' ) $layout['title'] = array();
+if ( ($post_format !== 'aside' && $post_format !== 'link' && $post_format !== 'quote') && !is_archive() ) $layout['meta'] = array();
 $layout['text'] = array('full');
-if ($post_format === 'quote' && !is_archive()) $layout['meta'] = array();
-if ($post_format === 'aside' || $post_format === 'link') $layout['date'] = array();
-if ($post_format !== 'aside' && $post_format !== 'link' && $post_format !== 'quote') $layout['sep-one'] = array();
-if ($post_format !== 'aside' && $post_format !== 'link' && $post_format !== 'quote') $layout['author'] = array();
+if ( $post_format === 'quote' && !is_archive() ) $layout['meta'] = array();
+if ( $post_format === 'aside' || $post_format === 'link' ) $layout['date'] = array();
+if ( $post_format !== 'aside' && $post_format !== 'link' && $post_format !== 'quote' ) $layout['sep-one'] = array();
+if ( $post_format !== 'aside' && $post_format !== 'link' && $post_format !== 'quote' ) $layout['author'] = array();
 $layout['icon'] = array();
 
-echo lerp_create_single_block($block_data, rand() , 'masonry', $layout, false, 'no');
+echo lerp_create_single_block($block_data, rand(), 'masonry', $layout, false, 'no');

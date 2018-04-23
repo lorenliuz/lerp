@@ -1,36 +1,36 @@
 <wpml-config>
-  <custom-types>
-    <custom-type translate="1">portfolio</custom-type>
-    <custom-type translate="1">lerpblock</custom-type>
-    <custom-type translate="1">lerp_gallery</custom-type>
-  </custom-types>
-  <taxonomies>
-    <taxonomy translate="1">portfolio_category</taxonomy>
-    <taxonomy translate="1">page_category</taxonomy>
-    <taxonomy translate="1">lerpblock_category</taxonomy>
-    <taxonomy translate="1">lerp_gallery_category</taxonomy>
-  </taxonomies>
-  <custom-fields>
-    <custom-field action="ignore">_lerp_gallery_media</custom-field>
-    <custom-field action="ignore">_lerp_gallery_cover</custom-field>
-    <custom-field action="copy-once">_thumbnail_id</custom-field>
-    <custom-field action="copy-once">_lerp_featured_media</custom-field>
-  </custom-fields>
-  <admin-texts>
-    <key name="lerp">
-      <key name="_lerp_logo"/>
-      <key name="_lerp_menu_bloginfo"/>
-      <key name="_lerp_post_navigation_index_label"/>
-      <key name="_lerp_portfolio_navigation_index_label"/>
-      <key name="_lerp_product_navigation_index_label"/>
-      <key name="_lerp_post_index_content_block"/>
-      <key name="_lerp_page_index_content_block"/>
-      <key name="_lerp_portfolio_index_content_block"/>
-      <key name="_lerp_product_index_content_block"/>
-      <key name="_lerp_footer_text"/>
-    </key>
-  </admin-texts>
-  <shortcodes>
+    <custom-types>
+        <custom-type translate="1">portfolio</custom-type>
+        <custom-type translate="1">lerpblock</custom-type>
+        <custom-type translate="1">lerp_gallery</custom-type>
+    </custom-types>
+    <taxonomies>
+        <taxonomy translate="1">portfolio_category</taxonomy>
+        <taxonomy translate="1">page_category</taxonomy>
+        <taxonomy translate="1">lerpblock_category</taxonomy>
+        <taxonomy translate="1">lerp_gallery_category</taxonomy>
+    </taxonomies>
+    <custom-fields>
+        <custom-field action="ignore">_lerp_gallery_media</custom-field>
+        <custom-field action="ignore">_lerp_gallery_cover</custom-field>
+        <custom-field action="copy-once">_thumbnail_id</custom-field>
+        <custom-field action="copy-once">_lerp_featured_media</custom-field>
+    </custom-fields>
+    <admin-texts>
+        <key name="lerp">
+            <key name="_lerp_logo"/>
+            <key name="_lerp_menu_bloginfo"/>
+            <key name="_lerp_post_navigation_index_label"/>
+            <key name="_lerp_portfolio_navigation_index_label"/>
+            <key name="_lerp_product_navigation_index_label"/>
+            <key name="_lerp_post_index_content_block"/>
+            <key name="_lerp_page_index_content_block"/>
+            <key name="_lerp_portfolio_index_content_block"/>
+            <key name="_lerp_product_index_content_block"/>
+            <key name="_lerp_footer_text"/>
+        </key>
+    </admin-texts>
+    <shortcodes>
         <shortcode>
             <tag>vc_column_text</tag>
         </shortcode>
@@ -229,14 +229,14 @@
         </shortcode>
         <shortcode>
             <tag>vc_wp_rss</tag>
-             <attributes>
+            <attributes>
                 <attribute>items</attribute>
                 <attribute>title</attribute>
                 <attribute>url</attribute>
             </attributes>
         </shortcode>
-		<shortcode>
-		    <tag>lerp_list</tag>
-		</shortcode>
+        <shortcode>
+            <tag>lerp_list</tag>
+        </shortcode>
     </shortcodes>
 </wpml-config>

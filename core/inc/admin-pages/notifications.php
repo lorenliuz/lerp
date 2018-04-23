@@ -3,7 +3,8 @@ require_once get_template_directory() . '/core/inc/LerpAPI.class.php';
 require_once get_template_directory() . '/core/inc/LerpHotfix.class.php';
 
 
-function lerp_add_news_notification() {
+function lerp_add_news_notification()
+{
     global $menu;
 
     $total_count = 0;
@@ -16,16 +17,16 @@ function lerp_add_news_notification() {
     $envato->setAPIKey(ENVATO_KEY);
     $communicator = new LerpCommunicator();
 
-    if (isInstallationLegit() && !requiredDataEmpty()) {
+    if ( isInstallationLegit() && !requiredDataEmpty() ) {
         $patches_count = $hotfix->countCommittedPatches(array(
             'key' => 'merged',
             'value' => false
         ));
         $check_update = $envato->updateExistsForTheme(ITEM_ID);
-        $update_count = !empty($check_update) ? 1: 0;
+        $update_count = !empty($check_update) ? 1 : 0;
     }
 
-    foreach ($communicator->getUnreadItems() as $item) {
+    foreach ( $communicator->getUnreadItems() as $item ) {
         $unread_mess += 1;
     }
 
@@ -35,7 +36,7 @@ function lerp_add_news_notification() {
 
     foreach ( $menu as $key => $value ) {
 
-        if ( $menu[$key][2] == 'lerp-system-status') {
+        if ( $menu[$key][2] == 'lerp-system-status' ) {
             $menu[$key][0] .= ' ' . "<span class='update-plugins count-$total_count'><span class='update-count'>$total_count</span></span>";
             return;
 

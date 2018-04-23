@@ -3,7 +3,7 @@
 global $front_background_colors, $menutype;
 
 /****
-/   Load theme options
+* /   Load theme options
 *****/
 
 if ( is_multisite() ) {
