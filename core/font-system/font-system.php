@@ -58,7 +58,7 @@ class LerpFont
 
     function add_admin_menu()
     {
-        $this->fonts_page_name = add_submenu_page('lerp-system-status', 'Font Stacks', 'Font Stacks', 'edit_theme_options', 'lerp-font-stacks', array(&$this, 'render_options'));
+        $this->fonts_page_name = add_submenu_page('lerp-system-status', '字体库', '字体库', 'edit_theme_options', 'lerp-font-library', array(&$this, 'render_options'));
         add_action('load-' . $this->fonts_page_name, array(&$this, 'add_meta_boxes'));
         add_action('admin_head-' . $this->fonts_page_name, array(&$this, 'print_direct_scripts'));
     }
@@ -112,7 +112,7 @@ class LerpFont
      */
     function print_direct_scripts()
     {
-        if ( (is_admin() && !isset($_GET['page'])) || (is_admin() && isset($_GET['page']) && $_GET['page'] != 'lerp-font-stacks') ) {
+        if ( (is_admin() && !isset($_GET['page'])) || (is_admin() && isset($_GET['page']) && $_GET['page'] != 'lerp-font-library') ) {
             return;
         }
 
@@ -480,7 +480,8 @@ class LerpFont
             <?php echo lerp_admin_panel_page_title('fonts'); ?>
 
             <div class="lerp-admin-panel">
-                <?php //echo lerp_admin_panel_title(); ?>
+                <?php //echo lerp_admin_panel_title(); 
+                ?>
                 <?php echo lerp_admin_panel_menu('fonts'); ?>
 
                 <div class="lerp-admin-panel__content">

@@ -250,7 +250,7 @@ if ( !function_exists('lerp_archive_title') ) :
             if ( is_tax('post_format', 'post-format-aside') ) {
                 $title = esc_html_x('Asides', 'post format archive title', 'lerp');
             } elseif ( is_tax('post_format', 'post-format-gallery') ) {
-                $title = esc_html_x('Galleries', 'post format archive title', 'lerp');
+                $title = esc_html_x('相册', 'post format archive title', 'lerp');
             } elseif ( is_tax('post_format', 'post-format-image') ) {
                 $title = esc_html_x('Images', 'post format archive title', 'lerp');
             } elseif ( is_tax('post_format', 'post-format-video') ) {

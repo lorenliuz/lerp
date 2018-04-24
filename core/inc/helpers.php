@@ -510,7 +510,9 @@ function lerp_get_media_info($media_id)
             $info->id = $media_id;
 
         return $info;
-    } else return;
+    } else {
+        return;
+    }
 }
 
 /**

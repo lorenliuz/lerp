@@ -1582,7 +1582,7 @@ $lerp_index_params_third = array(
             5000,
             10000,
             15000,
-            esc_html__('Disable', 'lerp') => 0
+            esc_html__('禁用', 'lerp') => 0
         ),
         'description' => esc_html__('Specify the automatic timeout between slides in milliseconds.', 'lerp'),
         'dependency' => array(

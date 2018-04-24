@@ -270,7 +270,7 @@ if ( !class_exists('OT_Settings') ) {
                             echo lerp_admin_panel_page_title('utils');
                         } else {
                             echo lerp_admin_panel_page_title(true, array(
-                                'page_title' => esc_html__('Theme Options', 'lerp'),
+                                'page_title' => esc_html__('主题设置', 'lerp'),
                                 'description' => esc_html__('Theme Options are the backbone of Lerp. They are logically organised and give you full control over your website design and settings.', 'lerp'),
                             ));
                         }
@@ -304,8 +304,6 @@ if ( !class_exists('OT_Settings') ) {
                             echo lerp_admin_panel_menu('utils');
 
                             echo '<div class="lerp-admin-panel__content">';
-
-                            //echo '<h2 class="lerp-admin-panel__heading">' . esc_html__( 'Options Utils', 'lerp' ) . '</h2>';
 
                             echo ot_alert_message($page);
 

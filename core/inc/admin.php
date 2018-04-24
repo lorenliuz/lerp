@@ -63,8 +63,8 @@ function lerp_load_admin_script()
         'theme_directory' => get_template_directory_uri(),
         'admin_ajax' => admin_url('admin-ajax.php'),
         'ajax_save_message' => array(
-            'success' => esc_html__('Theme Options saved!', 'lerp'),
-            'error' => esc_html__('Theme Options not saved.', 'lerp'),
+            'success' => esc_html__('主题设置已保存。', 'lerp'),
+            'error' => esc_html__('主题设置未保存。', 'lerp'),
         ),
         'http_errors' => array(
             '400' => esc_html__(' Error: 400 - Request content was invalid.', 'lerp'),
@@ -1397,11 +1397,13 @@ function lerp_upgrader_process_complete($upgrader, $data)
 }
 
 /**
- * Detect js_composer plugin. For use in Admin area only.
+ * Detect page_builder plugin. For use in Admin area only.
  */
 if ( function_exists('is_plugin_active') ) {
-    if ( is_plugin_active('js_composer/js_composer.php') ) {
-        function lerp_js_composer_nag()
+    if ( is_plugin_active('page_builder/page_builder.php') ) {
+        function lerp_page_builder_nag()
+
+
         {
             ?>
             <div class="notice error is-dismissible">
@@ -1414,7 +1416,7 @@ if ( function_exists('is_plugin_active') ) {
             <?php
         }
 
-        add_action('admin_notices', 'lerp_js_composer_nag');
+        add_action('admin_notices', 'lerp_page_builder_nag');
     }
 }
 
@@ -1519,18 +1521,18 @@ function lerp_support_admin_bar_menu($wp_admin_bar)
 add_action('admin_bar_menu', 'lerp_support_admin_bar_menu', 999);
 
 /**
- * Deactivate js_composer.
+ * Deactivate page_builder/
  */
 
-function deactivate_js_composer()
+function deactivate_page_builder()
 {
-    deactivate_plugins(WP_PLUGIN_DIR . '/js_composer/js_composer.php');
+    deactivate_plugins(WP_PLUGIN_DIR . '/page_builder/page_builder.php');
     echo 1;
     die();
 }
 
-add_action('wp_ajax_deactivate_js_composer', 'deactivate_js_composer');
-add_action('wp_ajax_nopriv_deactivate_js_composer', 'deactivate_js_composer');
+add_action('wp_ajax_deactivate_page_builder', 'deactivate_page_builder');
+add_action('wp_ajax_nopriv_deactivate_page_builder', 'deactivate_page_builder');
 
 if ( !function_exists('lerp_get_post_types') ) {
     function lerp_get_post_types($built_in = false)
@@ -1752,7 +1754,9 @@ if ( !function_exists('lerp_change_menu_cap') ):
         global $submenu;
 
         if ( !isset($submenu['lerp-system-status']) )
+        {
             return $menu_ord;
+        }
 
         foreach ( $submenu['lerp-system-status'] as $position => $menu ) {
             if ( isset($menu[2]) && $menu[2] == 'backups' ) {
@@ -1791,7 +1795,7 @@ if ( !function_exists('lerp_change_menu_cap') ):
                 $settings = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
-            if ( isset($menu[2]) && $menu[2] == 'lerp-font-stacks' ) {
+            if ( isset($menu[2]) && $menu[2] == 'lerp-font-library' ) {
                 $fonts = $menu;
                 unset($submenu['lerp-system-status'][$position]);
             }
@@ -1802,11 +1806,12 @@ if ( !function_exists('lerp_change_menu_cap') ):
         }
 
         array_unshift($submenu['lerp-system-status'], $options);
-        if ( ot_get_option('_lerp_admin_help') !== 'off' )
+        if ( ot_get_option('_lerp_admin_help') !== 'off' ) {
             array_unshift($submenu['lerp-system-status'], $support);
+        }
         array_unshift($submenu['lerp-system-status'], $settings);
         array_unshift($submenu['lerp-system-status'], $fonts);
-        array_unshift($submenu['lerp-system-status'], $demo);
+//        array_unshift($submenu['lerp-system-status'], $demo);
         array_unshift($submenu['lerp-system-status'], $plugins);
         array_unshift($submenu['lerp-system-status'], $status);
 

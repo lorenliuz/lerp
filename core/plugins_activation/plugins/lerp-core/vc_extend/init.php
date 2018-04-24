@@ -23,8 +23,8 @@ function lerp_init_front_custom_vc()
      */
     function lerp_dequeue_visual_composer()
     {
-        wp_dequeue_style('js_composer_front');
-        wp_deregister_style('js_composer_front');
+        wp_dequeue_style('page_builder_front');
+        wp_deregister_style('page_builder_front');
         wp_deregister_script('wpb_composer_front_js');
         wp_deregister_script('vc_pie');
         wp_deregister_script('waypoints');
@@ -55,7 +55,7 @@ function lerp_init_custom_js()
     wp_enqueue_script('lerp-admin-fix-inputs', plugins_url('assets/js/fix_inputs.js', __FILE__), false, LerpCore_Plugin::VERSION);
     wp_enqueue_script('lerp-admin-index-items', plugins_url('assets/js/index_items.js', __FILE__), false, LerpCore_Plugin::VERSION);
     wp_enqueue_script('lerp-admin-media-elements', plugins_url('assets/js/media_element.js', __FILE__), false, LerpCore_Plugin::VERSION);
-    wp_enqueue_script('lerp-admin-extend', plugins_url('assets/js/js_composer_extend.js', __FILE__), false, LerpCore_Plugin::VERSION);
+    wp_enqueue_script('lerp-admin-extend', plugins_url('assets/js/page_builder_extend.js', __FILE__), false, LerpCore_Plugin::VERSION);
     global $wp_styles;
     if ( isset($wp_styles->registered['font-awesome']) ) wp_dequeue_style('font-awesome');
 }
@@ -488,15 +488,15 @@ class lerp_row extends WPBakeryShortCode
         foreach ( $vc_row_layouts as $layout ) {
             $controls_layout .= '<a class="vc_control-set-column set_columns ' . $layout['icon_class'] . '" data-cells="' . $layout['cells'] . '" data-cells-mask="' . $layout['mask'] . '" title="' . $layout['title'] . '"></a> ';
         }
-        $controls_layout .= '<a class="vc_control-set-column set_columns custom_columns" data-cells="custom" data-cells-mask="custom" title="' . esc_html__('Custom layout', 'js_composer') . '"><i class="fa fa-magic" /><span>' . esc_html__('Custom', 'js_composer') . '</span></a> ';
+        $controls_layout .= '<a class="vc_control-set-column set_columns custom_columns" data-cells="custom" data-cells-mask="custom" title="' . esc_html__('Custom layout', 'page_builder') . '"><i class="fa fa-magic" /><span>' . esc_html__('Custom', 'page_builder') . '</span></a> ';
         $controls_layout .= '</span>';
 
-        $controls_move = ' <a class="vc_control column_move vc_column-move" href="#" title="' . esc_html__('Drag row to reorder', 'js_composer') . '"><i class="vc-composer-icon vc-c-icon-dragndrop"></i></a>';
+        $controls_move = ' <a class="vc_control column_move vc_column-move" href="#" title="' . esc_html__('Drag row to reorder', 'page_builder') . '"><i class="vc-composer-icon vc-c-icon-dragndrop"></i></a>';
         $controls_back = '';
-        $controls_delete = '<a class="vc_control column_delete vc_column-delete" href="#" title="' . esc_html__('Delete this row', 'js_composer') . '" data-vc-control="delete"><i class="vc-composer-icon vc-c-icon-delete_empty"></i></a>';
-        $controls_edit = ' <a class="vc_control column_edit vc_column-edit" href="#" title="' . esc_html__('Edit this row', 'js_composer') . '" data-vc-control="edit"><i class="vc-composer-icon vc-c-icon-mode_edit"></i></a>';
-        $controls_clone = ' <a class="vc_control column_clone vc_column-clone" href="#" title="' . esc_html__('Clone this row', 'js_composer') . '" data-vc-control="clone"><i class="vc-composer-icon vc-c-icon-content_copy"></i></a>';
-        $controls_toggle = ' <a class="vc_control column_toggle vc_column-toggle" href="#" title="' . esc_html__('Toggle row', 'js_composer') . '" data-vc-control="toggle"><i class="vc-composer-icon vc-c-icon-arrow_drop_down"></i></a>';
+        $controls_delete = '<a class="vc_control column_delete vc_column-delete" href="#" title="' . esc_html__('Delete this row', 'page_builder') . '" data-vc-control="delete"><i class="vc-composer-icon vc-c-icon-delete_empty"></i></a>';
+        $controls_edit = ' <a class="vc_control column_edit vc_column-edit" href="#" title="' . esc_html__('Edit this row', 'page_builder') . '" data-vc-control="edit"><i class="vc-composer-icon vc-c-icon-mode_edit"></i></a>';
+        $controls_clone = ' <a class="vc_control column_clone vc_column-clone" href="#" title="' . esc_html__('Clone this row', 'page_builder') . '" data-vc-control="clone"><i class="vc-composer-icon vc-c-icon-content_copy"></i></a>';
+        $controls_toggle = ' <a class="vc_control column_toggle vc_column-toggle" href="#" title="' . esc_html__('Toggle row', 'page_builder') . '" data-vc-control="toggle"><i class="vc-composer-icon vc-c-icon-arrow_drop_down"></i></a>';
         $controls_center_end = '</span>';
 
         $row_edit_clone_delete = '<span class="vc_row_edit_clone_delete">';

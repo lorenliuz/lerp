@@ -48,8 +48,8 @@ if ( !function_exists('ot_register_theme_options_page') ) {
                             array(
                                 'id' => 'ot_theme_options',
                                 'parent_slug' => apply_filters('ot_theme_options_parent_slug', 'my-menu'),
-                                'page_title' => apply_filters('ot_theme_options_page_title', esc_html__('Theme Options', 'option-tree')),
-                                'menu_title' => apply_filters('ot_theme_options_menu_title', esc_html__('Theme Options', 'option-tree')),
+                                'page_title' => apply_filters('ot_theme_options_page_title', esc_html__('主题设置', 'option-tree')),
+                                'menu_title' => apply_filters('ot_theme_options_menu_title', esc_html__('主题设置', 'option-tree')),
                                 'capability' => $caps = apply_filters('ot_theme_options_capability', 'edit_theme_options'),
                                 'menu_slug' => apply_filters('ot_theme_options_menu_slug', 'ot-theme-options'),
                                 'icon_url' => apply_filters('ot_theme_options_icon_url', null),
@@ -126,86 +126,56 @@ if ( !function_exists('ot_register_settings_page') ) {
                 'menu_slug' => 'lerp-settings',
                 'icon_url' => null,
                 'position' => null,
-                'updated_message' => esc_html__('Theme Options updated.', 'option-tree'),
-                'reset_message' => esc_html__('Theme Options reset.', 'option-tree'),
-                'button_text' => esc_html__('Save Settings', 'option-tree'),
+                'updated_message' => esc_html__('主题设置已更新', 'option-tree'),
+                'reset_message' => esc_html__('主题设置已重置', 'option-tree'),
+                'button_text' => esc_html__('保存设置', 'option-tree'),
                 'show_buttons' => false,
                 'sections' => array(
                     array(
                         'id' => 'create_setting',
-                        'title' => esc_html__('Theme Options UI', 'option-tree')
+                        'title' => esc_html__('主题设置UI', 'option-tree')
                     ),
                     array(
                         'id' => 'export',
-                        'title' => esc_html__('Export', 'option-tree')
+                        'title' => esc_html__('导出', 'option-tree')
                     ),
                     array(
                         'id' => 'import',
-                        'title' => esc_html__('Import', 'option-tree')
+                        'title' => esc_html__('导入', 'option-tree')
                     ),
                     array(
                         'id' => 'layouts',
-                        'title' => esc_html__('Layouts', 'option-tree')
+                        'title' => esc_html__('布局', 'option-tree')
                     )
                 ),
                 'settings' => array(
-                    // array(
-                    // 	'id'          => 'theme_options_ui_text',
-                    // 	'label'       => esc_html__( 'Theme Options UI Builder', 'option-tree' ),
-                    // 	'type'        => 'theme_options_ui',
-                    // 	'section'     => 'create_setting'
-                    // ),
-                    // array(
-                    // 	'id'          => 'import_xml_text',
-                    // 	'label'       => esc_html__( 'Settings XML', 'option-tree' ),
-                    // 	'type'        => 'import-xml',
-                    // 	'section'     => 'import'
-                    // ),
-                    // array(
-                    // 	'id'          => 'import_settings_text',
-                    // 	'label'       => esc_html__( 'Settings', 'option-tree' ),
-                    // 	'type'        => 'import-settings',
-                    // 	'section'     => 'import'
-                    // ),
                     array(
                         'id' => 'import_data_text',
-                        'label' => esc_html__('Theme Options', 'option-tree'),
+                        'label' => esc_html__('主题设置', 'option-tree'),
                         'type' => 'import-data',
                         'section' => 'import'
                     ),
                     array(
                         'id' => 'import_layouts_text',
-                        'label' => esc_html__('Layouts', 'option-tree'),
+                        'label' => esc_html__('布局', 'option-tree'),
                         'type' => 'import-layouts',
                         'section' => 'import'
                     ),
-                    // array(
-                    // 	'id'          => 'export_settings_file_text',
-                    // 	'label'       => esc_html__( 'Settings PHP File', 'option-tree' ),
-                    // 	'type'        => 'export-settings-file',
-                    // 	'section'     => 'export'
-                    // ),
-                    // array(
-                    // 	'id'          => 'export_settings_text',
-                    // 	'label'       => esc_html__( 'Settings', 'option-tree' ),
-                    // 	'type'        => 'export-settings',
-                    // 	'section'     => 'export'
-                    // ),
                     array(
                         'id' => 'export_data_text',
-                        'label' => esc_html__('Theme Options', 'option-tree'),
+                        'label' => esc_html__('主题设置', 'option-tree'),
                         'type' => 'export-data',
                         'section' => 'export'
                     ),
                     array(
                         'id' => 'export_layout_text',
-                        'label' => esc_html__('Layouts', 'option-tree'),
+                        'label' => esc_html__('布局', 'option-tree'),
                         'type' => 'export-layouts',
                         'section' => 'export'
                     ),
                     array(
                         'id' => 'modify_layouts_text',
-                        'label' => esc_html__('Layout Management', 'option-tree'),
+                        'label' => esc_html__('布局管理', 'option-tree'),
                         'type' => 'modify-layouts',
                         'section' => 'layouts'
                     )
@@ -220,86 +190,86 @@ if ( !function_exists('ot_register_settings_page') ) {
                 'menu_slug' => 'ot-documentation',
                 'icon_url' => null,
                 'position' => null,
-                'updated_message' => esc_html__('Theme Options updated.', 'option-tree'),
-                'reset_message' => esc_html__('Theme Options reset.', 'option-tree'),
-                'button_text' => esc_html__('Save Settings', 'option-tree'),
+                'updated_message' => esc_html__('主题设置已更新', 'option-tree'),
+                'reset_message' => esc_html__('主题设置已重置', 'option-tree'),
+                'button_text' => esc_html__('保存设置', 'option-tree'),
                 'show_buttons' => false,
                 'sections' => array(
                     array(
                         'id' => 'creating_options',
-                        'title' => esc_html__('Creating Options', 'option-tree')
+                        'title' => esc_html__('创建设置', 'option-tree')
                     ),
                     array(
                         'id' => 'option_types',
-                        'title' => esc_html__('Option Types', 'option-tree')
+                        'title' => esc_html__('设置类型', 'option-tree')
                     ),
                     array(
                         'id' => 'functions',
-                        'title' => esc_html__('Function References', 'option-tree')
+                        'title' => esc_html__('函数引用', 'option-tree')
                     ),
                     array(
                         'id' => 'theme_mode',
-                        'title' => esc_html__('Theme Mode', 'option-tree')
+                        'title' => esc_html__('主题模式', 'option-tree')
                     ),
                     array(
                         'id' => 'meta_boxes',
-                        'title' => esc_html__('Meta Boxes', 'option-tree')
+                        'title' => esc_html__('元盒', 'option-tree')
                     ),
                     array(
                         'id' => 'examples',
-                        'title' => esc_html__('Code Examples', 'option-tree')
+                        'title' => esc_html__('代码示例', 'option-tree')
                     ),
                     array(
                         'id' => 'layouts_overview',
-                        'title' => esc_html__('Layouts Overview', 'option-tree')
+                        'title' => esc_html__('布局概述', 'option-tree')
                     )
                 ),
                 'settings' => array(
                     array(
                         'id' => 'creating_options_text',
-                        'label' => esc_html__('Overview of available Theme Option fields.', 'option-tree'),
+                        'label' => esc_html__('可用主题选项字段概述。', 'option-tree'),
                         'type' => 'creating-options',
                         'section' => 'creating_options'
                     ),
                     array(
                         'id' => 'option_types_text',
-                        'label' => esc_html__('Option types in alphabetical order & hooks to filter them.', 'option-tree'),
+                        'label' => esc_html__('按字母顺序排列的选项类型和钩子来过滤它们。', 'option-tree'),
                         'type' => 'option-types',
                         'section' => 'option_types'
                     ),
                     array(
                         'id' => 'functions_ot_get_option',
-                        'label' => esc_html__('Function Reference:ot_get_option()', 'option-tree'),
+                        'label' => esc_html__('函数引用:ot_get_option()', 'option-tree'),
                         'type' => 'ot-get-option',
                         'section' => 'functions'
                     ),
                     array(
                         'id' => 'functions_get_option_tree',
-                        'label' => esc_html__('Function Reference:get_option_tree()', 'option-tree'),
+                        'label' => esc_html__('函数引用:get_option_tree()', 'option-tree'),
                         'type' => 'get-option-tree',
                         'section' => 'functions'
                     ),
                     array(
                         'id' => 'theme_mode_text',
-                        'label' => esc_html__('Theme Mode', 'option-tree'),
+                        'label' => esc_html__('主题模式', 'option-tree'),
                         'type' => 'theme-mode',
                         'section' => 'theme_mode'
                     ),
                     array(
                         'id' => 'meta_boxes_text',
-                        'label' => esc_html__('Meta Boxes', 'option-tree'),
+                        'label' => esc_html__('元盒', 'option-tree'),
                         'type' => 'meta-boxes',
                         'section' => 'meta_boxes'
                     ),
                     array(
                         'id' => 'example_text',
-                        'label' => esc_html__('Code examples for front-end development.', 'option-tree'),
+                        'label' => esc_html__('前端开发的代码示例。', 'option-tree'),
                         'type' => 'examples',
                         'section' => 'examples'
                     ),
                     array(
                         'id' => 'layouts_overview_text',
-                        'label' => esc_html__('What\'s a layout anyhow?', 'option-tree'),
+                        'label' => esc_html__('布局到底是什么？', 'option-tree'),
                         'type' => 'layouts-overview',
                         'section' => 'layouts_overview'
                     )
@@ -459,29 +429,17 @@ if ( !function_exists('ot_validate_setting') ) {
 
             /* Allow filtering on the WPML option types */
             $single_string_types = apply_filters('ot_wpml_option_types', array('text', 'textarea', 'textarea-simple'));
-
             if ( in_array($type, $single_string_types) ) {
-
                 if ( !empty($input) ) {
-
                     ot_wpml_register_string($wmpl_id, $input);
-
                 } else {
-
                     ot_wpml_unregister_string($wmpl_id);
-
                 }
-
             }
-
         }
 
         if ( 'background' == $type ) {
-
-            //$input['background-color'] = ot_validate_setting( $input['background-color'], 'colorpicker', $field_id );
-
             $input['background-image'] = ot_validate_setting($input['background-image'], 'upload', $field_id);
-
             // Loop over array and check for values
             foreach ( (array)$input as $key => $value ) {
                 if ( !empty($value) ) {
@@ -501,25 +459,19 @@ if ( !function_exists('ot_validate_setting') ) {
 
                 // Validate width
                 if ( $key == 'width' && !empty($value) && !is_numeric($value) ) {
-
                     $input[$key] = '0';
-
                     add_settings_error('option-tree', 'invalid_border_width', sprintf(wp_kses(__('The %s input field for %s only allows numeric values.', 'option-tree'), array('code' => array())), '<code>width</code>', '<code>' . $field_id . '</code>'), 'error');
-
                 }
 
                 // Validate color
                 if ( $key == 'color' && !empty($value) ) {
-
                     $input[$key] = ot_validate_setting($value, 'colorpicker', $field_id);
-
                 }
 
                 // Unset keys with empty values.
                 if ( empty($value) ) {
                     unset($input[$key]);
                 }
-
             }
 
             if ( empty($input) ) {
@@ -562,20 +514,15 @@ if ( !function_exists('ot_validate_setting') ) {
 
             /* return empty & set error */
             if ( 0 === preg_match('/^#([a-f0-9]{6}|[a-f0-9]{3})$/i', $input) && 0 === preg_match('/^rgba\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9\.]{1,4})\s*\)/i', $input) ) {
-
                 $input = '';
-
                 add_settings_error('option-tree', 'invalid_hex', sprintf(wp_kses(__('The %s Colorpicker only allows valid hexadecimal or rgba values.', 'option-tree'), array('code' => array())), '<code>' . $field_id . '</code>'), 'error');
-
             }
 
         } else if ( 'colorpicker-opacity' == $type ) {
-
             // Not allowed
             if ( is_array($input) ) {
                 $input = '';
             }
-
             // Validate color
             $input = ot_validate_setting($input, 'colorpicker', $field_id);
 
@@ -2503,7 +2450,7 @@ if ( !function_exists('ot_option_types_array') ) {
             'date-picker' => esc_html__('Date Picker', 'option-tree'),
             'date-time-picker' => esc_html__('Date Time Picker', 'option-tree'),
             'dimension' => esc_html__('Dimension', 'option-tree'),
-            'gallery' => esc_html__('Gallery', 'option-tree'),
+            'gallery' => esc_html__('相册', 'option-tree'),
             'google-fonts' => esc_html__('Google Fonts', 'option-tree'),
             'javascript' => esc_html__('JavaScript', 'option-tree'),
             'link-color' => esc_html__('Link Color', 'option-tree'),
@@ -5470,7 +5417,7 @@ function ot_wpml_register_string($id, $value)
 
     if ( function_exists('icl_register_string') ) {
 
-        // icl_register_string( 'Theme Options', $id, $value );
+        // icl_register_string( ' Theme Options', $id, $value );
 
     }
 

@@ -282,31 +282,31 @@ if ( is_plugin_active('envato-wordpress-toolkit-master/index.php') ) {
                         </tr>
                     <?php endif; ?>
                     <tr>
-                        <td data-export-label="Product Registration"><?php echo esc_html__("Product Registration", "lerp"); ?>
+                        <td data-export-label="Product Registration"><?php echo esc_html__("激活状态", "lerp"); ?>
                             <?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__('Please validate your product license as outlined in Envato\'s license terms.', 'lerp') . '</small>'; ?></td>
                         <td>
                             <?php
                             if ( $license_ok && !$license_already_in_use ) {
-                                echo '<mark class="yes">' . esc_html__('Theme registered.', 'lerp') . '</mark>';
+                                echo '<mark class="yes">' . esc_html__('已激活', 'lerp') . '</mark>';
                             } else {
-                                echo '<mark class="error">' . esc_html__('Not registered.', 'lerp') . '</mark>';
+                                echo '<mark class="error">' . esc_html__('未激活', 'lerp') . '</mark>';
                             }
                             ?>
                         </td>
                     </tr>
                     <tr>
                         <td data-export-label="WP Version"><?php esc_html_e('WordPress版本', 'lerp'); ?>
-                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__('The version of WordPress installed on your site.', 'lerp') . '</small>'; ?></td>
+                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__('网站当前安装的WordPress的版本。', 'lerp') . '</small>'; ?></td>
                         <td><?php bloginfo('version'); ?></td>
                     </tr>
                     <tr>
                         <td data-export-label="Language"><?php esc_html_e('语言', 'lerp'); ?>
-                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__('The current language used by WordPress. Default = English.', 'lerp') . '</small>'; ?></td>
+                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__('WordPress使用的当前语言。默认中文', 'lerp') . '</small>'; ?></td>
                         <td><?php echo get_locale() ?></td>
                     </tr>
                     <tr>
-                        <td data-export-label="WP Multisite"><?php esc_html_e('WP Multisite', 'lerp'); ?>
-                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__('Whether or not you have WordPress Multisite enabled.', 'lerp') . '</small>'; ?></td>
+                        <td data-export-label="WP Multisite"><?php esc_html_e('WP多站点', 'lerp'); ?>
+                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__('是否启用WordPress多站点。', 'lerp') . '</small>'; ?></td>
                         <td><?php if ( is_multisite() ) echo '&#10004;'; else echo '&ndash;'; ?></td>
                     </tr>
                     <tr>
@@ -391,12 +391,12 @@ if ( is_plugin_active('envato-wordpress-toolkit-master/index.php') ) {
                     </tr>
                     <tr>
                         <td data-export-label="WP Memory Limit"><?php esc_html_e('WordPress内存限制', 'lerp'); ?>
-                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__('Memory Limits not satisfied may produce possible errors on the frontend of the site as blank pages.', 'lerp') . '</small>'; ?></td>
+                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__('不满足的内存限制可能会在站点的前端产生空白页的可能错误。', 'lerp') . '</small>'; ?></td>
                         <td><?php
                             $memory = lerp_let_to_num(WP_MEMORY_LIMIT);
 
                             if ( $memory < 100663296 ) {
-                                echo '<mark class="error">' . sprintf(esc_html__('%s - We recommend setting memory to at least 96MB. %s.', 'lerp'), size_format($memory), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213459889') . '" target="_blank">' . esc_html__('More info', 'lerp') . '</a>') . '</mark>';
+                                echo '<mark class="error">' . sprintf(esc_html__('%s - 我们建议将内存设置为至少96MB。 %s.', 'lerp'), size_format($memory), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213459889') . '" target="_blank">' . esc_html__('更多', 'lerp') . '</a>') . '</mark>';
                             } else {
                                 echo '<mark class="yes">' . size_format($memory) . '</mark>';
                             }
@@ -404,17 +404,17 @@ if ( is_plugin_active('envato-wordpress-toolkit-master/index.php') ) {
                     </tr>
                     <tr>
                         <td data-export-label="Server Memory Limit"><?php esc_html_e('服务器内存限制', 'lerp'); ?>
-                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__('This is actually the real memory available for your installation despite the WP memory limit.', 'lerp') . '</small>'; ?></td>
+                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__('这实际上是您的安装可用的实际内存，尽管WP内存限制。', 'lerp') . '</small>'; ?></td>
                         <td class="real-memory">
-                            <span class="calculating"><?php esc_html_e('Calculating…', 'lerp'); ?></span>
+                            <span class="calculating"><?php esc_html_e('计算中…', 'lerp'); ?></span>
                             <mark class="yes" style="display: none;">%d% MB</mark>
                             <mark class="error"
-                                  style="display: none;"><?php esc_html_e('You only have %d% MB available and it\'s not enough to run the system. If you have already increased the memory limit please check with your hosting provider for increase it (at least 96MB is required).', 'lerp'); ?></mark>
+                                  style="display: none;"><?php esc_html_e('只有%d%MB可用，而且不足以运行系统。如果您已经增加了内存限制，请与您的主机提供商检查，以增加它（至少96MB是必需的）。', 'lerp'); ?></mark>
                         </td>
                     </tr>
                     <tr>
                         <td data-export-label="PHP Max Input Vars"><?php esc_html_e('PHP Max Input Vars', 'lerp'); ?>
-                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__('Max Input Vars not satisfied may result in loss of Theme Options.', 'lerp') . '</small>'; ?></td>
+                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__('Max Input Vars不足可能导致主题选项的丢失', 'lerp') . '</small>'; ?></td>
                         <td><?php
                             $max_input = ini_get('max_input_vars');
                             if ( $max_input < 3000 ) {
@@ -425,19 +425,19 @@ if ( is_plugin_active('envato-wordpress-toolkit-master/index.php') ) {
                             ?></td>
                     </tr>
                     <tr>
-                        <td data-export-label="PHP Max Input Vars Allowed"><?php esc_html_e('PHP Max Input Vars (allowed)', 'lerp'); ?>
-                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__('The effective maximum number of variables your server can use for a single function to avoid overloads. If this value is lower than max_input_vars your server is applying restrictions on the actual number of vars that can be used.', 'lerp') . '<br>' . esc_attr__('If you modified the server settings refresh the option to test.', 'lerp') . '</small>'; ?></td>
+                        <td data-export-label="PHP Max Input Vars Allowed"><?php esc_html_e('PHP Max Input Vars (允许)', 'lerp'); ?>
+                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__('您的服务器可以为单个函数使用的有效最大变量数，以避免重载。如果这个值低于最大值，则服务器对实际使用的VAR数量施加限制。', 'lerp') . '<br>' . esc_attr__('如果修改了服务器设置，刷新测试选项。', 'lerp') . '</small>'; ?></td>
                         <td class="get-max-input-vars">
                             <?php $lerp_test_max_input_vars = intval(get_option('lerp_test_max_input_vars'));
                             if ( $lerp_test_max_input_vars != '' ) : ?>
                                 <span class="calculating"
-                                      style="display: none"><?php esc_html_e('Calculating…', 'lerp'); ?></span>
+                                      style="display: none"><?php esc_html_e('计算…', 'lerp'); ?></span>
                                 <mark class="yes" <?php if ( $lerp_test_max_input_vars < 3000 ) echo 'style="display: none;"' ?>><?php echo $lerp_test_max_input_vars; ?></mark>
                                 <mark class="error get_data" <?php if ( $lerp_test_max_input_vars >= 3000 ) echo 'style="display: none;"'; ?>><?php echo $lerp_test_max_input_vars;
                                     printf(esc_html__(' - We recommend setting PHP max_input_vars to at least 3000. %s.', 'lerp'), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213459869') . '" target="_blank">' . esc_html__('More info', 'lerp') . '</a>'); ?></mark>
                                 <a href="#" id="max_vars_checker"><i class="fa fa-refresh"></i></a>
                             <?php else : ?>
-                                <span class="calculating"><?php esc_html_e('Calculating…', 'lerp'); ?></span>
+                                <span class="calculating"><?php esc_html_e('计算…', 'lerp'); ?></span>
                                 <mark class="yes" style="display: none;"></mark>
                                 <mark class="error get_data" style="display: none;">
                                     %d%<?php printf(esc_html__(' - We recommend setting PHP max_input_vars to at least 3000. %s.', 'lerp'), '<a href="' . esc_url('//support.undsgn.com/hc/en-us/articles/213459869') . '" target="_blank">' . esc_html__('More info', 'lerp') . '</a>'); ?></mark>
@@ -449,7 +449,7 @@ if ( is_plugin_active('envato-wordpress-toolkit-master/index.php') ) {
                     </tr>
                     <tr>
                         <td data-export-label="WP Debug Mode"><?php esc_html_e('WordPress调试模式', 'lerp'); ?>
-                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__('Displays whether or not WordPress is in Debug Mode.', 'lerp') . '</small>'; ?></td>
+                            <?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__('显示WordPress是否处于调试模式。', 'lerp') . '</small>'; ?></td>
                         <td><?php if ( defined('WP_DEBUG') && WP_DEBUG ) echo '<mark class="yes">' . '&#10004;' . '</mark>'; else echo '&ndash;'; ?></td>
                     </tr>
                     </tbody>

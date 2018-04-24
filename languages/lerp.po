@@ -574,7 +574,7 @@ msgstr ""
 
 #: core/inc/admin-pages/lerp-panel-functions.php:36
 #: core/inc/admin-pages/lerp-panel-functions.php:37
-msgid "Font Stacks"
+msgid "Font Library"
 msgstr ""
 
 #: core/inc/admin-pages/lerp-panel-functions.php:38

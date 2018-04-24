@@ -179,8 +179,8 @@ function lerp_custom_post_type()
     );
 
     $gallery_base = 'lerp_gallery';
-    $gallery_label_singular = esc_html__('Gallery', 'lerp');
-    $gallery_label_plural = esc_html__('Galleries', 'lerp');
+    $gallery_label_singular = esc_html__('相册', 'lerp');
+    $gallery_label_plural = esc_html__('相册', 'lerp');
 
     // creating (registering) the custom type
     register_post_type($gallery_base,

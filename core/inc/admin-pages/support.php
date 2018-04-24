@@ -64,7 +64,7 @@ if ( !class_exists('Lerp_Menu_Support_Page') ) :
                     'url' => '//support.undsgn.com/hc/en-us/articles/214002625',
                 ),
                 array(
-                    'id' => 'page-builder',
+                    'id' => 'page_builder',
                     'title' => esc_html__('页面生成器', 'lerp'),
                     'description' => esc_html__('Learn how to create beautiful pages quickly with the powerful Lerp’s Page Builder.', 'lerp'),
                     'url' => '//support.undsgn.com/hc/en-us/articles/213456589',

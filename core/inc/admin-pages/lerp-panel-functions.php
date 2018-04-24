@@ -18,25 +18,25 @@ function lerp_get_admin_panel_menu_pages()
         'welcome' => array(
             'title' => esc_html__('欢迎', 'lerp'),
             'page_title' => esc_html__('欢迎使用Lerp', 'lerp'),
-            'description' => sprintf(esc_html__("%s is installed! Please register your purchase, make sure that you've fulfilled all of the requirements below, and look for a green success message.", "lerp"), UNCODE_NAME),
+            'description' => sprintf(esc_html__("%s 已经安装好了！请注册您的购买，确保您已经满足了下面的所有要求，并寻找一个绿色的成功信息。", "lerp"), UNCODE_NAME),
             'url' => admin_url('admin.php?page=lerp-system-status')
         ),
         'plugins' => array(
             'title' => esc_html__('插件', 'lerp'),
             'page_title' => esc_html__('插件', 'lerp'),
-            'description' => esc_html__('Lerp Core and Lerp Visual Composer (WPBakery Page Builder) are the only required plugins. Any other plugins are optional.', 'lerp'),
+            'description' => esc_html__('Lerp Core 和 Lerp Page Builder 是唯一需要的插件。任何其他插件都是可选的。', 'lerp'),
             'url' => admin_url('admin.php?page=lerp-plugins')
         ),
         'fonts' => array(
             'title' => esc_html__('字体库', 'lerp'),
             'page_title' => esc_html__('字体库', 'lerp'),
             'description' => esc_html__('从最流行的字体库导入字体并创建字体堆栈。', 'lerp'),
-            'url' => admin_url('admin.php?page=lerp-font-stacks')
+            'url' => admin_url('admin.php?page=lerp-font-library')
         ),
         'utils' => array(
             'title' => esc_html__('设置工具', 'lerp'),
             'page_title' => esc_html__('设置工具', 'lerp'),
-            'description' => esc_html__('Find useful tools to save as manual backup or to export/import your Theme Options.', 'lerp'),
+            'description' => esc_html__('找到有用的工具来保存手动备份或导出/导入主题选项。', 'lerp'),
             'url' => admin_url('admin.php?page=lerp-settings')
         ),
     );
@@ -167,7 +167,8 @@ function lerp_open_tgmpa_form()
     <?php echo lerp_admin_panel_page_title('plugins'); ?>
 
     <div class="lerp-admin-panel">
-    <?php //echo lerp_admin_panel_title(); ?>
+    <?php //echo lerp_admin_panel_title(); 
+    ?>
     <?php echo lerp_admin_panel_menu('plugins'); ?>
 
     <div class="lerp-admin-panel__content">

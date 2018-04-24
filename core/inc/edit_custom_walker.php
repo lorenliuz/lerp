@@ -210,7 +210,8 @@ class Walker_Nav_Menu_Edit_Custom extends Walker_Nav_Menu
                     <?php esc_html_e('Description', 'lerp'); ?><br/>
                     <textarea id="edit-menu-item-description-<?php echo esc_attr($item_id); ?>"
                               class="widefat edit-menu-item-description" rows="3" cols="20"
-                              name="menu-item-description[<?php echo esc_attr($item_id); ?>]"><?php echo esc_html($item->description); // textarea_escaped ?></textarea>
+                              name="menu-item-description[<?php echo esc_attr($item_id); ?>]"><?php echo esc_html($item->description); // textarea_escaped 
+                        ?></textarea>
                     <span class="description"><?php esc_html_e('The description will be displayed in the menu if the current theme supports it.', 'lerp'); ?></span>
                 </label>
             </p>

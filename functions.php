@@ -49,15 +49,12 @@ if ( !$ok_php && !is_admin() ) {
 }
 
 
+//require_once get_template_directory() . '/lib/includes/page_builder/page_builder.php';
+
 /**
  * Load the main functions.
  */
 require_once get_template_directory() . '/core/inc/main.php';
-
-/**
- * Load envato-toolkit
- */
-//require_once get_template_directory() . '/core/inc/envato-toolkit/init.php';
 
 /**
  * Load the admin functions.

@@ -135,7 +135,7 @@
             type: 'post',
             dataType: "json",
             data: {
-                action: 'deactivate_js_composer',
+                action: 'deactivate_page_builder',
             },
             url: ajaxurl,
             success: function (data) {

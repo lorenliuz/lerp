@@ -58,9 +58,9 @@ function lerp_register_required_plugins()
             'is_callable' => '', // If set, this callable will be be checked for availability to determine if a plugin is active.
         ),
         array(
-            'name' => 'Lerp Page Builder (Visual Composer)', // The plugin name.
-            'slug' => 'lerp-js_composer', // The plugin slug (typically the folder name).
-            'source' => get_template_directory() . '/core/plugins_activation/plugins/lerp-js_composer.zip', // The plugin source.
+            'name' => 'Lerp Page Builder', // The plugin name.
+            'slug' => 'lerp_page_builder', // The plugin slug (typically the folder name).
+            'source' => get_template_directory() . '/core/plugins_activation/plugins/lerp_page_builder.zip', // The plugin source.
             'required' => true, // If false, the plugin is only 'recommended' instead of required.
             'version' => '5.4.5', // E.g. 1.0.0. If set, the active plugin must be this version or higher. If the plugin version is higher than the plugin version installed, the user will be notified to update the plugin.
             'force_activation' => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
@@ -68,48 +68,7 @@ function lerp_register_required_plugins()
             'external_url' => '', // If set, overrides default API URL and points to an external URL.
             'is_callable' => '', // If set, this callable will be be checked for availability to determine if a plugin is active.
         ),
-        array(
-            'name' => 'Lerp Dave\'s WordPress Live Search', // The plugin name.
-            'slug' => 'lerp-daves-wordpress-live-search', // The plugin slug (typically the folder name).
-            'source' => get_template_directory() . '/core/plugins_activation/plugins/lerp-daves-wordpress-live-search.zip', // The plugin source.
-            'required' => false, // If false, the plugin is only 'recommended' instead of required.
-            'version' => '1.0.3', // E.g. 1.0.0. If set, the active plugin must be this version or higher. If the plugin version is higher than the plugin version installed, the user will be notified to update the plugin.
-            'force_activation' => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
-            'force_deactivation' => false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins.
-            'external_url' => '', // If set, overrides default API URL and points to an external URL.
-            'is_callable' => '', // If set, this callable will be be checked for availability to determine if a plugin is active.
-        ),
-        array(
-            'name' => 'Visual Composer Clipboard', // The plugin name.
-            'slug' => 'vc_clipboard', // The plugin slug (typically the folder name).
-            'source' => get_template_directory() . '/core/plugins_activation/plugins/vc_clipboard.zip', // The plugin source.
-            'required' => false, // If false, the plugin is only 'recommended' instead of required.
-            'version' => '4.1.1', // E.g. 1.0.0. If set, the active plugin must be this version or higher. If the plugin version is higher than the plugin version installed, the user will be notified to update the plugin.
-            'force_activation' => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
-            'force_deactivation' => false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins.
-            'external_url' => '', // If set, overrides default API URL and points to an external URL.
-            'is_callable' => '', // If set, this callable will be be checked for availability to determine if a plugin is active.
-        ),
-        array(
-            'name' => 'VC Particles Background', // The plugin name.
-            'slug' => 'vcparticlesbackground', // The plugin slug (typically the folder name).
-            'source' => get_template_directory() . '/core/plugins_activation/plugins/vcparticlesbackground.zip', // The plugin source.
-            'required' => false, // If false, the plugin is only 'recommended' instead of required.
-            'version' => '1.3', // E.g. 1.0.0. If set, the active plugin must be this version or higher. If the plugin version is higher than the plugin version installed, the user will be notified to update the plugin.
-            'force_activation' => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
-            'force_deactivation' => false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins.
-            'external_url' => '', // If set, overrides default API URL and points to an external URL.
-            'is_callable' => '', // If set, this callable will be be checked for availability to determine if a plugin is active.
-        )
     );
-
-    if ( !is_plugin_active('lerp-related-posts-for-wp/lerp-related-posts-for-wp.php') ) {
-        $plugins[] = array(
-            'name' => 'Related Posts for WordPress',
-            'slug' => 'related-posts-for-wp',
-            'required' => false,
-        );
-    }
 
     /*
      * Array of configuration settings. Amend each line as needed.
@@ -174,8 +133,8 @@ add_filter('site_transient_update_plugins', 'remove_update_notifications');
 function remove_update_notifications($value)
 {
     if ( isset($value) && is_object($value) ) {
-        unset($value->response['js_composer/js_composer.php']);
-        unset($value->response['js_composer_theme/js_composer.php']);
+        unset($value->response['page_builder/page_builder.php']);
+        unset($value->response['page_builder_theme/page_builder.php']);
     }
     return $value;
 }

@@ -76,7 +76,7 @@ add_filter('ot_theme_options_parent_slug', 'lerp_admin_slug');
 
 function lerp_to_title()
 {
-    return esc_html__('Theme Options', 'lerp');
+    return esc_html__('主题设置', 'lerp');
 }
 
 add_filter('ot_theme_options_menu_title', 'lerp_to_title');
@@ -87,7 +87,7 @@ function custom_register_pages_array($array)
     unset($array[0]);
     $array[1]['parent_slug'] = 'lerp-system-status';
     $array[1]['page_title'] = esc_html__('Options Import/Export', 'lerp');
-    $array[1]['menu_title'] = esc_html__('Options Utils', 'lerp');
+    $array[1]['menu_title'] = esc_html__('工具', 'lerp');
     return $array;
 }
 

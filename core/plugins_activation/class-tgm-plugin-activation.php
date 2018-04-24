@@ -337,80 +337,65 @@ if ( !class_exists('TGM_Plugin_Activation') ) {
             // Load class strings.
             $this->strings = array(
                 // EDITED by UNCODE
-                //'page_title'                      => __( 'Install Required Plugins', 'tgmpa' ),
-                'page_title' => __('Install or Update Plugins', 'tgmpa'),
-                'menu_title' => __('Install Plugins', 'tgmpa'),
+                'page_title' => __('安装或更新插件', 'lerp'),
+                'menu_title' => __('安装插件', 'lerp'),
                 /* translators: %s: plugin name. */
-                'installing' => __('Installing Plugin: %s', 'tgmpa'),
+                'installing' => __('插件安装中: %s', 'lerp'),
                 /* translators: %s: plugin name. */
-                'updating' => __('Updating Plugin: %s', 'tgmpa'),
-                'oops' => __('Something went wrong with the plugin API.', 'tgmpa'),
+                'updating' => __('插件更新中: %s', 'lerp'),
+                'oops' => __('Something went wrong with the plugin API.', 'lerp'),
                 'notice_can_install_required' => _n_noop(
                 /* translators: 1: plugin name(s). */
                     'This theme requires the following plugin: %1$s.',
                     'This theme requires the following plugins: %1$s.',
-                    'tgmpa'
+                    'lerp'
                 ),
-                // Edited by UNCODE
-                // 'notice_can_install_recommended'  => _n_noop(
-                // 	/* translators: 1: plugin name(s). */
-                // 	'This theme recommends the following plugin: %1$s.',
-                // 	'This theme recommends the following plugins: %1$s.',
-                // 	'tgmpa'
-                // ),
                 'notice_ask_to_update' => _n_noop(
                 /* translators: 1: plugin name(s). */
                     'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.',
                     'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.',
-                    'tgmpa'
+                    'lerp'
                 ),
                 'notice_ask_to_update_maybe' => _n_noop(
                 /* translators: 1: plugin name(s). */
                     'There is an update available for: %1$s.',
                     'There are updates available for the following plugins: %1$s.',
-                    'tgmpa'
+                    'lerp'
                 ),
                 'notice_can_activate_required' => _n_noop(
                 /* translators: 1: plugin name(s). */
                     'The following required plugin is currently inactive: %1$s.',
                     'The following required plugins are currently inactive: %1$s.',
-                    'tgmpa'
+                    'lerp'
                 ),
-                // Edited by UNCODE
-                // 'notice_can_activate_recommended' => _n_noop(
-                // 	/* translators: 1: plugin name(s). */
-                // 	'The following recommended plugin is currently inactive: %1$s.',
-                // 	'The following recommended plugins are currently inactive: %1$s.',
-                // 	'tgmpa'
-                // ),
                 'install_link' => _n_noop(
                     'Begin installing plugin',
                     'Begin installing plugins',
-                    'tgmpa'
+                    'lerp'
                 ),
                 'update_link' => _n_noop(
                     'Begin updating plugin',
                     'Begin updating plugins',
-                    'tgmpa'
+                    'lerp'
                 ),
                 'activate_link' => _n_noop(
                     'Begin activating plugin',
                     'Begin activating plugins',
-                    'tgmpa'
+                    'lerp'
                 ),
-                'return' => __('Return to Required Plugins Installer', 'tgmpa'),
-                'dashboard' => __('Return to the Dashboard', 'tgmpa'),
-                'plugin_activated' => __('Plugin activated successfully.', 'tgmpa'),
-                'activated_successfully' => __('The following plugin was activated successfully:', 'tgmpa'),
+                'return' => __('返回所需的插件安装程序', 'lerp'),
+                'dashboard' => __('返回仪表盘', 'tgmpa'),
+                'plugin_activated' => __('插件启用成功。', 'lerp'),
+                'activated_successfully' => __('下列插件成功启用：', 'lerp'),
                 /* translators: 1: plugin name. */
-                'plugin_already_active' => __('No action taken. Plugin %1$s was already active.', 'tgmpa'),
+                'plugin_already_active' => __('没有任何行为。插件 %1$s 已经激活。', 'lerp'),
                 /* translators: 1: plugin name. */
-                'plugin_needs_higher_version' => __('Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin.', 'tgmpa'),
+                'plugin_needs_higher_version' => __('插件未激活。这个主题需要一个更高版本的 %s 。请更新插件。', 'lerp'),
                 /* translators: 1: dashboard link. */
-                'complete' => __('All plugins installed and activated successfully. %1$s', 'tgmpa'),
-                'dismiss' => __('Dismiss this notice', 'tgmpa'),
-                'notice_cannot_install_activate' => __('There are one or more required or recommended plugins to install, update or activate.', 'tgmpa'),
-                'contact_admin' => __('Please contact the administrator of this site for help.', 'tgmpa'),
+                'complete' => __('所有插件都已成功安装和激活。 %1$s', 'lerp'),
+                'dismiss' => __('关闭通知', 'lerp'),
+                'notice_cannot_install_activate' => __('有一个或多个需要或推荐的插件来安装、更新或激活。', 'lerp'),
+                'contact_admin' => __('请联系本网站管理员寻求帮助。', 'lerp'),
             );
 
             do_action('tgmpa_register');
@@ -2468,10 +2453,10 @@ if ( !class_exists('TGMPA_List_Table') ) {
         protected function get_plugin_advise_type_text($required)
         {
             if ( true === $required ) {
-                return __('Required', 'tgmpa');
+                return __('必需', 'tgmpa');
             }
 
-            return __('Recommended', 'tgmpa');
+            return __('建议', 'tgmpa');
         }
 
         /**
@@ -2512,25 +2497,25 @@ if ( !class_exists('TGMPA_List_Table') ) {
         protected function get_plugin_status_text($slug)
         {
             if ( !$this->tgmpa->is_plugin_installed($slug) ) {
-                return __('Not Installed', 'tgmpa');
+                return __('未安装', 'tgmpa');
             }
 
             if ( !$this->tgmpa->is_plugin_active($slug) ) {
-                $install_status = __('Installed But Not Activated', 'tgmpa');
+                $install_status = __('安装未激活', 'tgmpa');
             } else {
-                $install_status = __('Active', 'tgmpa');
+                $install_status = __('激活', 'tgmpa');
             }
 
             $update_status = '';
 
             if ( $this->tgmpa->does_plugin_require_update($slug) && false === $this->tgmpa->does_plugin_have_update($slug) ) {
-                $update_status = __('Required Update not Available', 'tgmpa');
+                $update_status = __('所需更新不可用', 'tgmpa');
 
             } elseif ( $this->tgmpa->does_plugin_require_update($slug) ) {
-                $update_status = __('Requires Update', 'tgmpa');
+                $update_status = __('需要更新', 'tgmpa');
 
             } elseif ( false !== $this->tgmpa->does_plugin_have_update($slug) ) {
-                $update_status = __('Update recommended', 'tgmpa');
+                $update_status = __('建议更新', 'tgmpa');
             }
 
             if ( '' === $update_status ) {
@@ -2539,7 +2524,7 @@ if ( !class_exists('TGMPA_List_Table') ) {
 
             return sprintf(
             /* translators: 1: install status, 2: update status */
-                _x('%1$s, %2$s', 'Install/Update Status', 'tgmpa'),
+                _x('%1$s, %2$s', '安装/更新 状态', 'tgmpa'),
                 $install_status,
                 $update_status
             );
@@ -2587,19 +2572,19 @@ if ( !class_exists('TGMPA_List_Table') ) {
                 switch ( $type ) {
                     case 'all':
                         /* translators: 1: number of plugins. */
-                        $text = _nx('All <span class="count">(%s)</span>', 'All <span class="count">(%s)</span>', $count, 'plugins', 'tgmpa');
+                        $text = _nx('全部 <span class="count">(%s)</span>', '全部 <span class="count">(%s)</span>', $count, 'plugins', 'tgmpa');
                         break;
                     case 'install':
                         /* translators: 1: number of plugins. */
-                        $text = _n('To Install <span class="count">(%s)</span>', 'To Install <span class="count">(%s)</span>', $count, 'tgmpa');
+                        $text = _n('未安装 <span class="count">(%s)</span>', '未安装 <span class="count">(%s)</span>', $count, 'tgmpa');
                         break;
                     case 'update':
                         /* translators: 1: number of plugins. */
-                        $text = _n('Update Available <span class="count">(%s)</span>', 'Update Available <span class="count">(%s)</span>', $count, 'tgmpa');
+                        $text = _n('可用更新 <span class="count">(%s)</span>', '可用更新 <span class="count">(%s)</span>', $count, 'tgmpa');
                         break;
                     case 'activate':
                         /* translators: 1: number of plugins. */
-                        $text = _n('To Activate <span class="count">(%s)</span>', 'To Activate <span class="count">(%s)</span>', $count, 'tgmpa');
+                        $text = _n('未启用 <span class="count">(%s)</span>', '未启用 <span class="count">(%s)</span>', $count, 'tgmpa');
                         break;
                     default:
                         $text = '';
@@ -2740,7 +2725,7 @@ if ( !class_exists('TGMPA_List_Table') ) {
          */
         public function no_items()
         {
-            echo esc_html__('No plugins to install, update or activate.', 'tgmpa') . ' <a href="' . esc_url(self_admin_url()) . '"> ' . esc_html__('Return to the Dashboard', 'tgmpa') . '</a>';
+            echo esc_html__('没有插件安装，更新或激活。', 'tgmpa') . ' <a href="' . esc_url(self_admin_url()) . '"> ' . esc_html__('返回仪表盘', 'tgmpa') . '</a>';
             // EDITED by UNCODE
             // To display submenu link always
             //echo '<style type="text/css">#adminmenu .wp-submenu li.current { display: none !important; }</style>';
@@ -2757,15 +2742,15 @@ if ( !class_exists('TGMPA_List_Table') ) {
         {
             $columns = array(
                 'cb' => '<input type="checkbox" />',
-                'plugin' => __('Plugin', 'tgmpa'),
+                'plugin' => __('插件', 'tgmpa'),
                 // EDITED by UNCODE (switched position between type and source)
-                'type' => __('Type', 'tgmpa'),
-                'source' => __('Source', 'tgmpa'),
+                'type' => __('类型', 'tgmpa'),
+                'source' => __('来源', 'tgmpa'),
             );
 
             if ( 'all' === $this->view_context || 'update' === $this->view_context ) {
-                $columns['version'] = __('Version', 'tgmpa');
-                $columns['status'] = __('Status', 'tgmpa');
+                $columns['version'] = __('版本', 'tgmpa');
+                $columns['status'] = __('状态', 'tgmpa');
             }
 
             return apply_filters('tgmpa_table_columns', $columns);
@@ -2817,18 +2802,18 @@ if ( !class_exists('TGMPA_List_Table') ) {
             // Display the 'Install' action link if the plugin is not yet available.
             if ( !$this->tgmpa->is_plugin_installed($item['slug']) ) {
                 /* translators: %2$s: plugin name in screen reader markup */
-                $actions['install'] = __('Install %2$s', 'tgmpa');
+                $actions['install'] = __('安装 %2$s', 'tgmpa');
             } else {
                 // Display the 'Update' action link if an update is available and WP complies with plugin minimum.
                 if ( false !== $this->tgmpa->does_plugin_have_update($item['slug']) && $this->tgmpa->can_plugin_update($item['slug']) ) {
                     /* translators: %2$s: plugin name in screen reader markup */
-                    $actions['update'] = __('Update %2$s', 'tgmpa');
+                    $actions['update'] = __('更新 %2$s', 'tgmpa');
                 }
 
                 // Display the 'Activate' action link, but only if the plugin meets the minimum version.
                 if ( $this->tgmpa->can_plugin_activate($item['slug']) ) {
                     /* translators: %2$s: plugin name in screen reader markup */
-                    $actions['activate'] = __('Activate %2$s', 'tgmpa');
+                    $actions['activate'] = __('启用 %2$s', 'tgmpa');
                 }
             }
 

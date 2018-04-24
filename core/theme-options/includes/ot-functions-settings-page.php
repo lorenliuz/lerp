@@ -172,7 +172,7 @@ if ( !function_exists('ot_type_import_xml') ) {
         echo '<p>' . sprintf(esc_html__('If you were given a Theme Options XML file with a premium or free theme, locate it on your hard drive and upload that file by clicking the upload button. A popup window will appear, upload the XML file and click "%s". The file URL should be in the upload input, if it is click "Import XML".', 'option-tree'), apply_filters('ot_upload_text', esc_html__('Send to OptionTree', 'option-tree'))) . '</p>';
 
         /* button */
-        echo '<button class="option-tree-ui-button button button-primary right hug-right">' . esc_html__('Import XML', 'option-tree') . '</button>';
+        echo '<button class="option-tree-ui-button button button-primary right hug-right">' . esc_html__('导入XML', 'option-tree') . '</button>';
 
         echo '</div>';
 
@@ -188,7 +188,7 @@ if ( !function_exists('ot_type_import_xml') ) {
         $post_id = ($id = ot_get_media_post_ID()) ? (int)$id : 0;
 
         /* add xml button */
-        echo '<a href="javascript:void(0);" class="ot_upload_media option-tree-ui-button button button-primary light" rel="' . $post_id . '" title="' . esc_html__('Add XML', 'option-tree') . '"><span class="icon ot-icon-plus-circle"></span>' . esc_html__('Add XML', 'option-tree') . '</a>';
+        echo '<a href="javascript:void(0);" class="ot_upload_media option-tree-ui-button button button-primary light" rel="' . $post_id . '" title="' . esc_html__('添加XML', 'option-tree') . '"><span class="icon ot-icon-plus-circle"></span>' . esc_html__('Add XML', 'option-tree') . '</a>';
 
         echo '</div>';
 
@@ -229,7 +229,7 @@ if ( !function_exists('ot_type_import_settings') ) {
         echo '<p>' . esc_html__('To import your Settings copy and paste what appears to be a random string of alpha numeric characters into this textarea and press the "Import Settings" button.', 'option-tree') . '</p>';
 
         /* button */
-        echo '<button class="option-tree-ui-button button button-primary right hug-right">' . esc_html__('Import Settings', 'option-tree') . '</button>';
+        echo '<button class="option-tree-ui-button button button-primary right hug-right">' . esc_html__('导入设置', 'option-tree') . '</button>';
 
         echo '</div>';
 
@@ -277,7 +277,7 @@ if ( !function_exists('ot_type_import_data') ) {
         echo '<p>' . esc_html__('To import your Theme Options copy and paste what appears to be a random string of alpha numeric characters into this textarea and press the "Import Theme Options" button.', 'option-tree') . '</p>';
 
         /* button */
-        echo '<button class="option-tree-ui-button button button-primary right hug-right">' . esc_html__('Import Theme Options', 'option-tree') . '</button>';
+        echo '<button class="option-tree-ui-button button button-primary right hug-right">' . esc_html__('导入主题设置', 'option-tree') . '</button>';
 
         echo '</div>';
 
@@ -322,10 +322,10 @@ if ( !function_exists('ot_type_import_layouts') ) {
 
         if ( OT_SHOW_SETTINGS_IMPORT ) echo '<p>' . esc_html__('Only after you\'ve imported the Settings should you try and update your Layouts.', 'option-tree') . '</p>';
 
-        echo '<p>' . esc_html__('To import your Layouts copy and paste what appears to be a random string of alpha numeric characters into this textarea and press the "Import Layouts" button. Keep in mind that when you import your layouts, the active layout\'s saved data will write over the current data set for your Theme Options.', 'option-tree') . '</p>';
+        echo '<p>' . esc_html__('To import your Layouts copy and paste what appears to be a random string of alpha numeric characters into this textarea and press the "导入布局" button. Keep in mind that when you import your layouts, the active layout\'s saved data will write over the current data set for your Theme Options.', 'option-tree') . '</p>';
 
         /* button */
-        echo '<button class="option-tree-ui-button button button-primary right hug-right">' . esc_html__('Import Layouts', 'option-tree') . '</button>';
+        echo '<button class="option-tree-ui-button button button-primary right hug-right">' . esc_html__('导入布局', 'option-tree') . '</button>';
 
         echo '</div>';
 
@@ -566,7 +566,7 @@ if ( !function_exists('ot_type_modify_layouts') ) {
 
         echo '</ul>';
 
-        echo '<button class="option-tree-ui-button button button-primary right hug-right">' . esc_html__('Save Layouts', 'option-tree') . '</button>';
+        echo '<button class="option-tree-ui-button button button-primary right hug-right">' . esc_html__('保存布局', 'option-tree') . '</button>';
 
         echo '</div>';
 
