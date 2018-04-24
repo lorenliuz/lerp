@@ -752,42 +752,6 @@ CONTENT;
 
 vc_add_default_templates( $data );
 
-/** Post portfolio */
-$data = array();
-$data['name'] = __( 'Post portfolio', 'page_builder' );
-$data['disabled'] = true;
-$data['content'] = <<<CONTENT
-[vc_row][vc_column][vc_basic_grid max_items="" style="pagination" items_per_page="8" element_width="3" gap="0" item="mediaGrid_ScaleWithRotation" grid_id="vc_gid:1436801351792-834976e6-1ef2-5" paging_animation_in="none"][/vc_column][/vc_row][vc_row][vc_column width="1/3"][vc_custom_heading text="CUSTOM HEADING TITLE GOES HERE" font_container="tag:h2|font_size:40|text_align:left|line_height:1" use_theme_fonts="yes" css=".vc_custom_1435235172377{margin-top: 0px !important;}"][vc_separator align="align_left" border_width="3" el_width="50"][/vc_column][vc_column width="1/3"][vc_column_text]Ut elit nisl, efficitur sit amet augue ut, venenatis lobortis est. Nullam luctus sapien eu enim tristique porta. Nulla quis libero magna. Morbi ultrices nunc lacus, eu ultricies urna suscipit non. Aliquam rutrum sem eu sapien bibendum efficitur. Donec nisl nunc, suscipit et sollicitudin sed, vulputate at urna. Proin tincidunt iaculis maximus. Praesent aliquam orci sed augue euismod, eu tincidunt quam convallis. Sed eget erat scelerisque, scelerisque odio eu, sodales dui. Sed sed enim sed enim rhoncus commodo. Nunc vehicula faucibus elit ac tempus. Nullam quis orci rhoncus, dignissim mi eget, placerat massa.[/vc_column_text][/vc_column][vc_column width="1/3"][vc_column_text]Aliquam rutrum sem eu sapien bibendum efficitur. Donec nisl nunc, suscipit et sollicitudin sed, vulputate at urna. Proin tincidunt iaculis maximus. Praesent aliquam orci sed augue euismod, eu tincidunt quam convallis. Sed eget erat scelerisque, scelerisque odio eu, sodales dui. Sed sed enim sed enim rhoncus commodo. Nunc vehicula faucibus elit ac tempus. Nullam quis orci rhoncus, dignissim mi eget, placerat massa.[/vc_column_text][/vc_column][/vc_row]
-CONTENT;
-
-vc_add_default_templates( $data );
-
-/** Product introduction */
-$data = array();
-$data['name'] = __( 'Product introduction', 'page_builder' );
-$data['disabled'] = true;
-$data['content'] = <<<CONTENT
-[vc_row full_width="stretch_row" parallax="content-moving" css=".vc_custom_1436530001615{padding-top: 100px !important;padding-bottom: 50px !important;background-color: #499b7a !important;}"][vc_column width="1/2"][vc_custom_heading text="Custom Heading with Theme Font" font_container="tag:h2|text_align:left|color:%23ffffff" use_theme_fonts="yes" css=".vc_custom_1436530166522{padding-bottom: 10px !important;}"][vc_column_text]
-
-This section is a perfect place to display introduction description for your products and services with an option to access more information by clicking "Read More" button.
-
-[/vc_column_text][vc_btn title="Read More" style="outline" shape="square" color="white" align="left"][/vc_column][vc_column width="1/2"][vc_single_image img_size="medium" alignment="center" style="vc_box_rounded"][/vc_column][/vc_row][vc_row][vc_column width="1/3"][vc_custom_heading text="Heading with Theme Font" font_container="tag:h3|text_align:left" use_theme_fonts="yes" css=".vc_custom_1436530550784{margin-top: 0px !important;}"][vc_column_text css=".vc_custom_1436530603605{margin-bottom: 15px !important;}"]
-
-This is a block where you can quickly describe less important services or side services which do not require lot of attention or maybe are the part of the main product or service.
-
-[/vc_column_text][/vc_column][vc_column width="1/3"][vc_custom_heading text="Heading with Theme Font" font_container="tag:h3|text_align:left" use_theme_fonts="yes" css=".vc_custom_1436530550784{margin-top: 0px !important;}"][vc_column_text css=".vc_custom_1436530603605{margin-bottom: 15px !important;}"]
-
-This is a block where you can quickly describe less important services or side services which do not require lot of attention or maybe are the part of the main product or service.
-
-[/vc_column_text][/vc_column][vc_column width="1/3"][vc_custom_heading text="Heading with Theme Font" font_container="tag:h3|text_align:left" use_theme_fonts="yes" css=".vc_custom_1436530550784{margin-top: 0px !important;}"][vc_column_text css=".vc_custom_1436530603605{margin-bottom: 15px !important;}"]
-
-This is a block where you can quickly describe less important services or side services which do not require lot of attention or maybe are the part of the main product or service.
-
-[/vc_column_text][/vc_column][/vc_row]
-CONTENT;
-
-vc_add_default_templates( $data );
-
 /** Services with block buttons */
 $data = array();
 $data['name'] = __( 'Services with block buttons', 'page_builder' );

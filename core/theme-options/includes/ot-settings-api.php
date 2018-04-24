@@ -271,7 +271,7 @@ if ( !class_exists('OT_Settings') ) {
                         } else {
                             echo lerp_admin_panel_page_title(true, array(
                                 'page_title' => esc_html__('主题设置', 'lerp'),
-                                'description' => esc_html__('Theme Options are the backbone of Lerp. They are logically organised and give you full control over your website design and settings.', 'lerp'),
+                                'description' => esc_html__('Lerp主题选项 是Lerp的核心。它们在逻辑上有组织，并给予你对网站设计和设置的完全控制。', 'lerp'),
                             ));
                         }
 
@@ -704,11 +704,9 @@ if ( !class_exists('OT_Settings') ) {
                                 $defaults[$setting['id']] = ot_validate_setting($setting['std'], $setting['type'], $setting['id']);
                                 if ( $setting['id'] === '_lerp_post_header_background' ||
                                     $setting['id'] === '_lerp_page_header_background' ||
-                                    $setting['id'] === '_lerp_portfolio_header_background' ||
                                     $setting['id'] === '_lerp_404_header_background' ||
                                     $setting['id'] === '_lerp_search_index_header_background' ||
-                                    $setting['id'] === '_lerp_post_index_header_background' ||
-                                    $setting['id'] === '_lerp_portfolio_index_header_background' ) {
+                                    $setting['id'] === '_lerp_post_index_header_background' ) {
                                     $defaults[$setting['id']]['background-image'] = $default_header_image;
                                 }
                             } else {

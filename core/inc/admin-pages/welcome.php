@@ -295,7 +295,7 @@ if ( is_plugin_active('envato-wordpress-toolkit-master/index.php') ) {
                         </td>
                     </tr>
                     <tr>
-                        <td data-export-label="WP Version"><?php esc_html_e('WordPress版本', 'lerp'); ?>
+                        <td data-export-label="WP Version"><?php esc_html_e('WP 版本', 'lerp'); ?>
                             <?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__('网站当前安装的WordPress的版本。', 'lerp') . '</small>'; ?></td>
                         <td><?php bloginfo('version'); ?></td>
                     </tr>
@@ -305,7 +305,7 @@ if ( is_plugin_active('envato-wordpress-toolkit-master/index.php') ) {
                         <td><?php echo get_locale() ?></td>
                     </tr>
                     <tr>
-                        <td data-export-label="WP Multisite"><?php esc_html_e('WP多站点', 'lerp'); ?>
+                        <td data-export-label="WP Multisite"><?php esc_html_e('WP 多站点', 'lerp'); ?>
                             <?php echo '<span class="toggle-description"></span><small class="description">' . esc_html__('是否启用WordPress多站点。', 'lerp') . '</small>'; ?></td>
                         <td><?php if ( is_multisite() ) echo '&#10004;'; else echo '&ndash;'; ?></td>
                     </tr>
@@ -390,7 +390,7 @@ if ( is_plugin_active('envato-wordpress-toolkit-master/index.php') ) {
                             ?></td>
                     </tr>
                     <tr>
-                        <td data-export-label="WP Memory Limit"><?php esc_html_e('WordPress内存限制', 'lerp'); ?>
+                        <td data-export-label="WP Memory Limit"><?php esc_html_e('WP 内存限制', 'lerp'); ?>
                             <?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__('不满足的内存限制可能会在站点的前端产生空白页的可能错误。', 'lerp') . '</small>'; ?></td>
                         <td><?php
                             $memory = lerp_let_to_num(WP_MEMORY_LIMIT);
@@ -448,7 +448,7 @@ if ( is_plugin_active('envato-wordpress-toolkit-master/index.php') ) {
                         </td>
                     </tr>
                     <tr>
-                        <td data-export-label="WP Debug Mode"><?php esc_html_e('WordPress调试模式', 'lerp'); ?>
+                        <td data-export-label="WP Debug Mode"><?php esc_html_e('WP 调试模式', 'lerp'); ?>
                             <?php echo '<span class="toggle-description"></span><small class="description">' . esc_attr__('显示WordPress是否处于调试模式。', 'lerp') . '</small>'; ?></td>
                         <td><?php if ( defined('WP_DEBUG') && WP_DEBUG ) echo '<mark class="yes">' . '&#10004;' . '</mark>'; else echo '&ndash;'; ?></td>
                     </tr>

@@ -197,7 +197,6 @@ if ( !function_exists('lerp_hide_gallery_attachments_grid_view') ) :
                 'page',
                 'post',
                 'lerpblock',
-                'portfolio',
             );
 
             $post_object = get_post($post_id);

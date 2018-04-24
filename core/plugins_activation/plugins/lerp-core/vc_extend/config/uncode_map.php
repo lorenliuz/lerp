@@ -904,7 +904,7 @@ $lerp_index_params_first = array(
         'param_name' => 'title',
         'admin_label' => true,
         'description' => esc_html__('Enter text which will be used as widget title. Leave blank if no title is needed.', 'lerp'),
-        'group' => esc_html__('General', 'lerp')
+        'group' => esc_html__('基本', 'lerp')
     ),
     array(
         'type' => 'textfield',
@@ -912,7 +912,7 @@ $lerp_index_params_first = array(
         'param_name' => 'el_id',
         'value' => (function_exists('big_rand')) ? big_rand() : rand(),
         'description' => esc_html__('This value has to be unique. Change it in case it\'s needed.', 'lerp'),
-        'group' => esc_html__('General', 'lerp')
+        'group' => esc_html__('基本', 'lerp')
     ),
     array(
         "type" => 'dropdown',
@@ -924,7 +924,7 @@ $lerp_index_params_first = array(
             esc_html__('Isotope', 'lerp') => 'isotope',
             esc_html__('Carousel', 'lerp') => 'carousel',
         ),
-        'group' => esc_html__('General', 'lerp')
+        'group' => esc_html__('基本', 'lerp')
     ),
     array(
         'type' => 'dropdown',
@@ -938,7 +938,7 @@ $lerp_index_params_first = array(
             esc_html__('Vertical', 'lerp') => 'vertical',
             esc_html__('Packery', 'lerp') => 'packery',
         ),
-        'group' => esc_html__('General', 'lerp'),
+        'group' => esc_html__('基本', 'lerp'),
         'dependency' => array(
             'element' => 'index_type',
             'value' => 'isotope',
@@ -960,7 +960,7 @@ $lerp_index_params_first = array(
         ),
         'value' => 'size:10|order_by:date|post_type:post',
         'description' => esc_html__('Create WordPress loop, to populate content from your site.', 'lerp'),
-        'group' => esc_html__('General', 'lerp')
+        'group' => esc_html__('基本', 'lerp')
     ),
     array(
         'type' => 'textfield',
@@ -968,14 +968,14 @@ $lerp_index_params_first = array(
         'param_name' => 'offset',
         'admin_label' => true,
         'description' => esc_html__('Enter the amount of posts that should be skipped in the beginning of the query.', 'lerp'),
-        'group' => esc_html__('General', 'lerp')
+        'group' => esc_html__('基本', 'lerp')
     ),
     array(
         "type" => 'checkbox',
         "heading" => esc_html__("Automatic query", 'lerp'),
         "param_name" => "auto_query",
         "description" => esc_html__("Activate this to pull automatic query when used as Content Block for categories.", 'lerp'),
-        'group' => esc_html__('General', 'lerp'),
+        'group' => esc_html__('基本', 'lerp'),
         "value" => Array(
             esc_html__("Yes, please", 'lerp') => 'yes'
         ),

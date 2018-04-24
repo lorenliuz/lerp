@@ -153,7 +153,6 @@ if ( !class_exists('unheader') ) {
                             }
                             $get_post_type = get_post_type();
                             if ( $get_post_type === 'post' && is_single() ) $content_html .= lerp_post_info();
-                            if ( $get_post_type === 'portfolio' && is_single() ) $content_html .= lerp_portfolio_info();
 
                             $content_html .= apply_filters('lerp_after_header_title', '');
 

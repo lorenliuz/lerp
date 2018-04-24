@@ -809,10 +809,6 @@ if ( !function_exists('lerp_create_single_block') ) {
 
                 case 'type':
                     $get_the_post_type = get_post_type($block_data['id']);
-                    if ( $get_the_post_type === 'portfolio' ) {
-                        $portfolio_cpt_name = ot_get_option('_lerp_portfolio_cpt');
-                        if ( $portfolio_cpt_name !== '' ) $get_the_post_type = $portfolio_cpt_name;
-                    }
                     $get_the_post_type = get_post_type_object($get_the_post_type);
                     $get_the_post_type = $get_the_post_type->labels->singular_name;
                     $inner_entry .= '<p class="t-entry-type"><span>' . $get_the_post_type . '</span></p>';
@@ -878,7 +874,7 @@ if ( !function_exists('lerp_create_single_block') ) {
                                 }
                             } else {
                                 $cat_link = $block_data['single_categories'][$t_key];
-                                if ( isset($block_data['single_tags']) && $key === 'category' && (isset($block_data['taxonomy_type']) && isset($block_data['taxonomy_type'][$t_key]) && $block_data['taxonomy_type'][$t_key] !== 'category' && $block_data['taxonomy_type'][$t_key] !== 'portfolio_category') ) continue;
+                                if ( isset($block_data['single_tags']) && $key === 'category' && (isset($block_data['taxonomy_type']) && isset($block_data['taxonomy_type'][$t_key]) && $block_data['taxonomy_type'][$t_key] !== 'category' ) ) continue;
                                 if ( isset($block_data['single_tags']) && $key === 'post_tag' && (isset($block_data['taxonomy_type']) && isset($block_data['taxonomy_type'][$t_key]) && $block_data['taxonomy_type'][$t_key] !== 'post_tag') ) continue;
                             }
 
@@ -1432,28 +1428,6 @@ if ( !function_exists('lerp_post_info') ) {
 
         $output[] = '<div class="author-info"><span>|</span>' . esc_html__('By', 'lerp') . ' ' . '<a href="' . get_author_posts_url(get_the_author_meta('ID')) . '">' . get_the_author() . '</a></div>';
 
-        return '<div class="post-info">' . implode('', $output) . '</div>';
-    }
-}
-
-/**
- * Create portfolio info HTML
- */
-if ( !function_exists('lerp_portfolio_info') ) {
-    function lerp_portfolio_info()
-    {
-        $categories = wp_get_object_terms(get_the_id(), 'portfolio_category');
-        $separator = ', ';
-        $output = array();
-        $cat_output = '';
-
-        if ( $categories ) {
-
-            foreach ( $categories as $cat ) {
-                $cat_output .= '<a href="' . get_term_link($cat->term_id, $cat->taxonomy) . '" title="' . esc_attr(sprintf(esc_html__("View all posts in %s", 'lerp'), $cat->name)) . '">' . $cat->name . '</a>' . $separator;
-            }
-            $output[] = '<div class="category-info">' . esc_html__('In', 'lerp') . ' ' . trim($cat_output, $separator) . '</div>';
-        }
         return '<div class="post-info">' . implode('', $output) . '</div>';
     }
 }

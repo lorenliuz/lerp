@@ -13,10 +13,7 @@ function lerp_page_options()
 
     global $wpdb;
 
-    $portfolio_cpt_name = ot_get_option('_lerp_portfolio_cpt');
-    if ( $portfolio_cpt_name == '' ) $portfolio_cpt_name = 'portfolio';
-
-    $fp_post_types = apply_filters('lerp_fullpage_post_types', array('page', 'portfolio', 'post'));
+    $fp_post_types = apply_filters('lerp_fullpage_post_types', array('page', 'post'));
 
     $post_type = lerp_get_current_post_type();
     $lerp_post_types = lerp_get_post_types(true);
@@ -45,7 +42,7 @@ function lerp_page_options()
 
     $general_fields = array(
         array(
-            'label' => '<i class="fa fa-globe3 fa-fw"></i> ' . esc_html__('General', 'lerp'),
+            'label' => '<i class="fa fa-globe3 fa-fw"></i> ' . esc_html__('基本', 'lerp'),
             'id' => '_lerp_general_tab',
             'type' => 'tab',
         ),
@@ -73,7 +70,7 @@ function lerp_page_options()
 
     $specific_menu = array(
         'id' => '_lerp_specific_menu',
-        'label' => esc_html__('Menu', 'lerp'),
+        'label' => esc_html__('菜单', 'lerp'),
         'desc' => esc_html__('Override the menu.', 'lerp'),
         'type' => 'select',
         'choices' => $menus_array
@@ -81,7 +78,7 @@ function lerp_page_options()
 
     $specific_menu_width = array(
         'id' => '_lerp_specific_menu_width',
-        'label' => esc_html__('Menu width', 'lerp'),
+        'label' => esc_html__('菜单宽度', 'lerp'),
         'desc' => esc_html__('Override the menu width.', 'lerp'),
         'type' => 'select',
         'choices' => array(
@@ -134,7 +131,7 @@ function lerp_page_options()
 
     $menu_fields = array(
         array(
-            'label' => '<i class="fa fa-menu fa-fw"></i> ' . esc_html__('Menu', 'lerp'),
+            'label' => '<i class="fa fa-menu fa-fw"></i> ' . esc_html__('菜单', 'lerp'),
             'id' => '_lerp_menu_tab',
             'type' => 'tab',
         ),
@@ -190,56 +187,6 @@ function lerp_page_options()
         $lerpblocks_extended = '';
     }
 
-    if ( is_plugin_active('revslider/revslider.php') ) {
-
-        $revslider = array(
-            'value' => 'header_revslider',
-            'label' => esc_html__('Revolution Slider', 'lerp'),
-        );
-
-        $rs = $wpdb->get_results("SELECT id, title, alias FROM " . $wpdb->prefix . "revslider_sliders WHERE type != 'template' ORDER BY id ASC LIMIT 999");
-        $revsliders = array();
-        if ( $rs ) {
-            foreach ( $rs as $slider ) {
-                $revsliders[] = array(
-                    'value' => $slider->alias,
-                    'label' => $slider->title,
-                    'postlink' => admin_url('admin.php?page=revslider&view=slider&id=' . $slider->id),
-                );
-            }
-        } else {
-            $revsliders[] = array(
-                'value' => '',
-                'label' => esc_html__('No sliders found', 'lerp')
-            );
-        }
-    } else $revslider = $revsliders = '';
-
-    if ( is_plugin_active('LayerSlider/layerslider.php') ) {
-
-        $layerslider = array(
-            'value' => 'header_layerslider',
-            'label' => esc_html__('LayerSlider', 'lerp'),
-        );
-
-        $ls = $wpdb->get_results("SELECT id, name FROM " . $wpdb->prefix . "layerslider WHERE flag_deleted != '1' ORDER BY id ASC LIMIT 999");
-        $layersliders = array();
-        if ( $ls ) {
-            foreach ( $ls as $slider ) {
-                $layersliders[] = array(
-                    'value' => $slider->id,
-                    'label' => $slider->name,
-                    'postlink' => admin_url('admin.php?page=layerslider&action=edit&id=' . $slider->id),
-                );
-            }
-        } else {
-            $layersliders[] = array(
-                'value' => '',
-                'label' => esc_html__('No sliders found', 'lerp')
-            );
-        }
-    } else $layerslider = $layersliders = '';
-
     $header_type = array(
         'id' => '_lerp_header_type',
         'label' => esc_html__('Type', 'lerp'),
@@ -256,8 +203,6 @@ function lerp_page_options()
                 'label' => esc_html__('Basic', 'lerp'),
             ),
             $lerpblock,
-            $revslider,
-            $layerslider,
             array(
                 'value' => 'none',
                 'label' => esc_html__('None', 'lerp'),
@@ -279,24 +224,6 @@ function lerp_page_options()
     } else {
         $header_blocks_list = null;
     }
-
-    $header_revslider_list = array(
-        'id' => '_lerp_revslider_list',
-        'label' => esc_html__('Revslider', 'lerp'),
-        'desc' => esc_html__('Specify the Revolution Slider.', 'lerp'),
-        'type' => 'select',
-        'operator' => 'or',
-        'choices' => $revsliders
-    );
-
-    $header_layerslider_list = array(
-        'id' => '_lerp_layerslider_list',
-        'label' => esc_html__('LayerSlider', 'lerp'),
-        'desc' => esc_html__('Specify the LayerSlider.', 'lerp'),
-        'type' => 'select',
-        'operator' => 'or',
-        'choices' => $layersliders
-    );
 
     $header_full_width = array(
         'id' => '_lerp_header_full_width',
@@ -966,8 +893,6 @@ function lerp_page_options()
         ),
         run_array_mb($header_type),
         run_array_mb($header_blocks_list, '_lerp_header_type:is(header_lerpblock)'),
-        run_array_mb($header_revslider_list, '_lerp_header_type:is(header_revslider)'),
-        run_array_mb($header_layerslider_list, '_lerp_header_type:is(header_layerslider)'),
         run_array_mb($header_full_width, '_lerp_header_type:is(header_basic)'),
         run_array_mb($header_height, '_lerp_header_type:is(header_basic)'),
         run_array_mb($header_min_height, '_lerp_header_type:is(header_basic)'),
@@ -1264,111 +1189,6 @@ function lerp_page_options()
         'operator' => 'and',
     );
 
-    $specific_enable_sticky_desc = array(
-        'id' => '_lerp_product_sticky_desc',
-        'label' => esc_html__('Sticky content', 'lerp'),
-        'desc' => esc_html__('Activate to enable sticky effect for product description. It works with stack layout only', 'lerp'),
-        'std' => '',
-        'type' => 'select',
-        'choices' => array(
-            array(
-                'value' => '',
-                'label' => esc_html__('Inherit', 'lerp'),
-            ),
-            array(
-                'value' => 'on',
-                'label' => esc_html__('on', 'lerp'),
-            ),
-            array(
-                'value' => 'off',
-                'label' => esc_html__('off', 'lerp'),
-            ),
-        ),
-        'operator' => 'or',
-    );
-
-    $specific_enable_woo_zoom = array(
-        'id' => '_lerp_product_enable_zoom',
-        'label' => esc_html__('Zoom', 'lerp'),
-        'desc' => esc_html__('Activate to enable drag zoom effect on product image.', 'lerp'),
-        'std' => '',
-        'type' => 'select',
-        'choices' => array(
-            array(
-                'value' => '',
-                'label' => esc_html__('Inherit', 'lerp'),
-            ),
-            array(
-                'value' => 'on',
-                'label' => esc_html__('on', 'lerp'),
-            ),
-            array(
-                'value' => 'off',
-                'label' => esc_html__('off', 'lerp'),
-            ),
-        ),
-    );
-
-    $specific_thumb_cols = array(
-        'id' => '_lerp_thumb_cols',
-        'label' => esc_html__('Thumbnails columns', 'lerp'),
-        'desc' => esc_html__('Specify how many columns to display for your product gallery thumbs.', 'lerp'),
-        'std' => '',
-        'type' => 'select',
-        'choices' => array(
-            array(
-                'value' => '',
-                'label' => esc_html__('Inherit', 'lerp'),
-            ),
-            array(
-                'value' => '2',
-                'label' => '2',
-            ),
-            array(
-                'value' => '3',
-                'label' => '3',
-            ),
-            array(
-                'value' => '4',
-                'label' => '4',
-            ),
-            array(
-                'value' => '5',
-                'label' => '5',
-            ),
-            array(
-                'value' => '6',
-                'label' => '6',
-            ),
-        ),
-        'operator' => 'or',
-        'condition' => '_lerp_product_image_layout:is()',
-    );
-
-    $specific_enable_woo_slider = array(
-        'id' => '_lerp_product_enable_slider',
-        'label' => esc_html__('Thumbnails carousel', 'lerp'),
-        'desc' => esc_html__('Activate to enable carousel slider when you click gallery thumbs.', 'lerp'),
-        'std' => '',
-        'type' => 'select',
-        'choices' => array(
-            array(
-                'value' => '',
-                'label' => esc_html__('Inherit', 'lerp'),
-            ),
-            array(
-                'value' => 'on',
-                'label' => esc_html__('on', 'lerp'),
-            ),
-            array(
-                'value' => 'off',
-                'label' => esc_html__('off', 'lerp'),
-            ),
-        ),
-        'operator' => 'or',
-        'condition' => '_lerp_product_image_layout:is()',
-    );
-
     $specific_content_block_before = array(
         'id' => '_lerp_specific_content_block_before',
         'label' => esc_html__('Content Block - Before Content', 'lerp'),
@@ -1425,20 +1245,9 @@ function lerp_page_options()
         $body_fields[] = run_array_mb($specific_content_block_after_pre);
     }
 
-    if ( $post_type === 'product' ) {
-        $body_fields[] = run_array_mb($specific_image_layout);
-        $body_fields[] = run_array_mb($specific_media_size);
-        $body_fields[] = run_array_mb($specific_enable_sticky_desc, '_lerp_product_image_layout:is(),_lerp_product_image_layout:is(stack)');
-        $body_fields[] = run_array_mb($specific_enable_woo_zoom);
-        $body_fields[] = run_array_mb($specific_thumb_cols, '_lerp_product_image_layout:is(),_lerp_product_image_layout:is(std)');
-        $body_fields[] = run_array_mb($specific_enable_woo_slider, '_lerp_product_image_layout:is(),_lerp_product_image_layout:is(std)');
-    }
-
     $body_fields[] = run_array_mb($specific_content_block_after);
 
     $fields = array_merge($fields, $body_fields);
-
-    if ( $post_type !== 'product' && $post_type !== 'portfolio' ) {
 
         //////////////////////////
         //  Sidebar specific   ///
@@ -1567,142 +1376,6 @@ function lerp_page_options()
 
         $fields = array_merge($fields, $sidebar_fields);
 
-    }
-
-    if ( $post_type === 'portfolio' ) {
-
-        ////////////////////////////
-        //  Portfolio specific   ///
-        ////////////////////////////
-
-        $portfolio_details = ot_get_option('_lerp_portfolio_details');
-
-        if ( isset($portfolio_details) && !empty($portfolio_details) ) {
-            foreach ( $portfolio_details as $key => $value ) {
-                $portfolio_details[$key]['id'] = $value['_lerp_portfolio_detail_unique_id'];
-                $portfolio_details[$key]['label'] = $value['title'];
-                $portfolio_details[$key]['type'] = 'text';
-                $portfolio_details[$key]['condition'] = '_lerp_portfolio_active:not(off)';
-            }
-        }
-
-        $portfolio_fields = array(
-            array(
-                'label' => '<i class="fa fa-briefcase3 fa-fw"></i> ' . esc_html__('Details', 'lerp'),
-                'id' => '_lerp_portfolio_tab',
-                'type' => 'tab',
-            ),
-            array(
-                'id' => '_lerp_portfolio_active',
-                'label' => ucfirst($portfolio_cpt_name) . ' ' . esc_html__('details', 'lerp'),
-                'desc' => sprintf(esc_html__('Override the %s visibility.', 'lerp'), $portfolio_cpt_name),
-                'type' => 'select',
-                'choices' => array(
-                    array(
-                        'value' => '',
-                        'label' => esc_html__('Inherit', 'lerp'),
-                    ),
-                    array(
-                        'value' => 'on',
-                        'label' => esc_html__('Yes', 'lerp'),
-                    ),
-                    array(
-                        'value' => 'off',
-                        'label' => esc_html__('No', 'lerp'),
-                    ),
-                ),
-            ),
-            array(
-                'id' => '_lerp_portfolio_position',
-                'label' => ucfirst($portfolio_cpt_name) . ' ' . esc_html__('details layout', 'lerp'),
-                'desc' => sprintf(esc_html__('Specify the layout template for all the %s posts.', 'lerp'), $portfolio_cpt_name),
-                'type' => 'select',
-                'choices' => array(
-                    array(
-                        'value' => 'portfolio_top',
-                        'label' => esc_html__('Details on the top', 'lerp'),
-                    ),
-                    array(
-                        'value' => 'sidebar_right',
-                        'label' => esc_html__('Details on the right', 'lerp'),
-                    ),
-                    array(
-                        'value' => 'portfolio_bottom',
-                        'label' => esc_html__('Details on the bottom', 'lerp'),
-                    ),
-                    array(
-                        'value' => 'sidebar_left',
-                        'label' => esc_html__('Details on the left', 'lerp'),
-                    ),
-                ),
-                'operator' => 'or',
-                'condition' => '_lerp_portfolio_active:is(on)',
-            ),
-            array(
-                'id' => '_lerp_portfolio_sidebar_size',
-                'label' => esc_html__('Sidebar size', 'lerp'),
-                'desc' => esc_html__('Set the sidebar size.', 'lerp'),
-                'std' => '4',
-                'min_max_step' => '1,12,1',
-                'type' => 'numeric-slider',
-                'operator' => 'and',
-                'condition' => '_lerp_portfolio_position:contains(sidebar),_lerp_portfolio_active:is(on)',
-            ),
-            array(
-                'id' => '_lerp_portfolio_sidebar_sticky',
-                'label' => esc_html__('Sticky sidebar', 'lerp'),
-                'desc' => esc_html__('Activate to have a sticky sidebar.', 'lerp'),
-                'type' => 'on-off',
-                'std' => 'off',
-                'operator' => 'and',
-                'condition' => '_lerp_portfolio_position:contains(sidebar),_lerp_portfolio_active:is(on)',
-            ),
-            array(
-                'id' => '_lerp_portfolio_style',
-                'label' => esc_html__('Skin', 'lerp'),
-                'desc' => esc_html__('Override the sidebar text skin color.', 'lerp'),
-                'type' => 'select',
-                'choices' => array(
-                    array(
-                        'value' => '',
-                        'label' => esc_html__('Inherit', "lerp"),
-                    ),
-                    array(
-                        'value' => 'light',
-                        'label' => esc_html__('Light', "lerp"),
-                    ),
-                    array(
-                        'value' => 'dark',
-                        'label' => esc_html__('Dark', "lerp"),
-                    )
-                ),
-                'operator' => 'or',
-                'condition' => '_lerp_portfolio_active:is(on)',
-            ),
-            array(
-                'id' => '_lerp_portfolio_bgcolor',
-                'label' => esc_html__('Background color', 'lerp'),
-                'desc' => esc_html__('Specify the background color.', 'lerp'),
-                'type' => 'lerp_color',
-                'operator' => 'or',
-                'condition' => '_lerp_portfolio_active:is(on)',
-            ),
-            array(
-                'id' => '_lerp_portfolio_sidebar_fill',
-                'label' => esc_html__('Sidebar filling space', 'lerp'),
-                'desc' => esc_html__('Activate to remove padding around the sidebar and fill the height.', 'lerp'),
-                'type' => 'on-off',
-                'std' => 'off',
-                'operator' => 'and',
-                'condition' => '_lerp_portfolio_position:contains(sidebar),_lerp_portfolio_bgcolor:not(),_lerp_portfolio_active:is(on)',
-            ),
-        );
-
-        if ( !empty($portfolio_details) ) $portfolio_fields = array_merge($portfolio_fields, $portfolio_details);
-
-        $fields = array_merge($fields, $portfolio_fields);
-
-    }
 
     if ( $post_type !== 'page' ) {
 
@@ -1971,7 +1644,7 @@ function lerp_page_options()
 
     $lerp_page_array = array(
         'id' => '_lerp_page_options',
-        'title' => esc_html__('Page Options', 'lerp'),
+        'title' => esc_html__('页面选项', 'lerp'),
         'desc' => '',
         'pages' => $lerp_post_types,
         'context' => 'normal',

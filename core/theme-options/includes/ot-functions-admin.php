@@ -2435,7 +2435,7 @@ if ( !function_exists('ot_option_types_array') ) {
     {
 
         return apply_filters('ot_option_types_array', array(
-            'background' => esc_html__('Background', 'option-tree'),
+            'background' => esc_html__('背景', 'option-tree'),
             'border' => esc_html__('Border', 'option-tree'),
             'box-shadow' => esc_html__('Box Shadow', 'option-tree'),
             'category-checkbox' => esc_html__('Category Checkbox', 'option-tree'),

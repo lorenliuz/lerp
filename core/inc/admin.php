@@ -599,9 +599,6 @@ function lerp_taxonomy_add_meta_field()
 
 add_action('category_add_form_fields', 'lerp_taxonomy_add_meta_field', 10, 2);
 add_action('post_tag_add_form_fields', 'lerp_taxonomy_add_meta_field', 10, 2);
-add_action('product_cat_add_form_fields', 'lerp_taxonomy_add_meta_field', 10, 2);
-add_action('product_tag_add_form_fields', 'lerp_taxonomy_add_meta_field', 10, 2);
-add_action('portfolio_category_add_form_fields', 'lerp_taxonomy_add_meta_field', 10, 2);
 
 // Edit term page
 function lerp_taxonomy_edit_meta_field($term)
@@ -697,9 +694,6 @@ function lerp_taxonomy_edit_meta_field($term)
 
 add_action('category_edit_form_fields', 'lerp_taxonomy_edit_meta_field', 10, 2);
 add_action('post_tag_edit_form_fields', 'lerp_taxonomy_edit_meta_field', 10, 2);
-add_action('product_cat_edit_form_fields', 'lerp_taxonomy_edit_meta_field', 10, 2);
-add_action('product_tag_edit_form_fields', 'lerp_taxonomy_edit_meta_field', 10, 2);
-add_action('portfolio_category_edit_form_fields', 'lerp_taxonomy_edit_meta_field', 10, 2);
 
 // Save extra taxonomy fields callback function.
 function lerp_save_taxonomy_custom_meta($term_id)
@@ -722,12 +716,6 @@ add_action('edited_category', 'lerp_save_taxonomy_custom_meta', 10, 2);
 add_action('create_category', 'lerp_save_taxonomy_custom_meta', 10, 2);
 add_action('edited_post_tag', 'lerp_save_taxonomy_custom_meta', 10, 2);
 add_action('create_post_tag', 'lerp_save_taxonomy_custom_meta', 10, 2);
-add_action('edited_product_cat', 'lerp_save_taxonomy_custom_meta', 10, 2);
-add_action('create_product_cat', 'lerp_save_taxonomy_custom_meta', 10, 2);
-add_action('edited_product_tag', 'lerp_save_taxonomy_custom_meta', 10, 2);
-add_action('create_product_tag', 'lerp_save_taxonomy_custom_meta', 10, 2);
-add_action('edited_portfolio_category', 'lerp_save_taxonomy_custom_meta', 10, 2);
-add_action('create_portfolio_category', 'lerp_save_taxonomy_custom_meta', 10, 2);
 
 
 ///////////////
@@ -783,7 +771,7 @@ function lerp_display_metabox()
 
     global $post;
 
-    wp_enqueue_script('media_items_js', plugins_url('WPBakery Page Builderlerp-core/vc_extend/assets/js/media_items.js'), array('jquery'));
+    wp_enqueue_script('media_items_js', plugins_url('/lerp-core/vc_extend/assets/js/media_items.js'), array('jquery'));
 
     $ids = get_post_meta($post->ID, '_lerp_featured_media', 1);
 
@@ -851,7 +839,7 @@ function lerp_register_metabox()
     $lerp_post_types[] = 'lerp_gallery';
 
     foreach ( $lerp_post_types as $post_type ) {
-        add_meta_box('lerp_gallery_div', esc_html__('Medias', 'lerp'), 'lerp_display_metabox', $post_type, 'normal', 'default');
+        add_meta_box('lerp_gallery_div', esc_html__('媒体', 'lerp'), 'lerp_display_metabox', $post_type, 'normal', 'default');
     }
 }
 

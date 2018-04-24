@@ -1978,36 +1978,36 @@ vc_map(array(
     'params' => array(
         array(
             'type' => 'textfield',
-            'heading' => esc_html__('Widget title', 'lerp'),
+            'heading' => esc_html__('小工具标题', 'lerp'),
             'param_name' => 'title',
-            'description' => esc_html__('Enter text which will be used as widget title. Leave blank if no title is needed.', 'lerp'),
-            'group' => esc_html__('General', 'lerp'),
+            'description' => esc_html__('输入将用作小工具标题的文本。 如果不需要标题，请留空。', 'lerp'),
+            'group' => esc_html__('基本', 'lerp'),
             'admin_label' => true,
         ),
         array(
             'type' => 'textfield',
-            'heading' => esc_html__('Widget ID', 'lerp'),
+            'heading' => esc_html__('小工具 ID', 'lerp'),
             'param_name' => 'el_id',
             'value' => (function_exists('big_rand')) ? big_rand() : rand(),
-            'description' => esc_html__('This value has to be unique. Change it in case it\'s needed.', 'lerp'),
-            'group' => esc_html__('General', 'lerp')
+            'description' => esc_html__('这个值必须是唯一的。 在需要时更改它。', 'lerp'),
+            'group' => esc_html__('基本', 'lerp')
         ),
         array(
             'type' => 'dropdown',
             'heading' => esc_html__('Gallery module', 'lerp'),
             'param_name' => 'type',
             'value' => array(
-                esc_html__('Isotope', 'lerp') => 'isotope',
-                esc_html__('Carousel', 'lerp') => 'carousel',
-                esc_html__('Justified gallery', 'lerp') => 'justified',
+                esc_html__('同位素', 'lerp') => 'isotope',
+                esc_html__('旋转木马', 'lerp') => 'carousel',
+                esc_html__('对齐的相册', 'lerp') => 'justified',
             ),
             'admin_label' => true,
-            'description' => esc_html__('Specify gallery module type.', 'lerp'),
-            'group' => esc_html__('General', 'lerp')
+            'description' => esc_html__('指定相册模块类型。', 'lerp'),
+            'group' => esc_html__('基本', 'lerp')
         ),
         array(
             'type' => 'dropdown',
-            'heading' => esc_html__('Layout modes', 'lerp'),
+            'heading' => esc_html__('布局模式', 'lerp'),
             'param_name' => 'isotope_mode',
             'admin_label' => true,
             "description" => wp_kses(__("Specify the isotpe layout mode. <a href='http://isotope.metafizzy.co/layout-modes.html' target='_blank'>Check this for reference</a>", 'lerp'), array('a' => array('href' => array(), 'target' => array()))),
@@ -2015,10 +2015,10 @@ vc_map(array(
                 esc_html__('Masonry', 'lerp') => 'masonry',
                 esc_html__('Fit rows', 'lerp') => 'fitRows',
                 esc_html__('Cells by row', 'lerp') => 'cellsByRow',
-                esc_html__('Vertical', 'lerp') => 'vertical',
+                esc_html__('垂直', 'lerp') => 'vertical',
                 esc_html__('Packery', 'lerp') => 'packery',
             ),
-            'group' => esc_html__('General', 'lerp'),
+            'group' => esc_html__('基本', 'lerp'),
             'dependency' => array(
                 'element' => 'type',
                 'value' => 'isotope',
@@ -2026,13 +2026,13 @@ vc_map(array(
         ),
         array(
             "type" => 'checkbox',
-            "heading" => esc_html__("Random order", 'lerp'),
+            "heading" => esc_html__("随机顺序", 'lerp'),
             "param_name" => "random",
-            "description" => esc_html__("Activate this to have a media random order.", 'lerp'),
+            "description" => esc_html__("激活它以获得媒体随机订单。", 'lerp'),
             "value" => Array(
                 esc_html__("Yes, please", 'lerp') => 'yes'
             ),
-            "group" => esc_html__("General", 'lerp'),
+            "group" => esc_html__("基本", 'lerp'),
         ),
         array(
             'type' => 'media_element',
@@ -2042,7 +2042,7 @@ vc_map(array(
             "edit_field_class" => 'vc_col-sm-12 vc_column lerp_gallery',
             'value' => '',
             'description' => esc_html__('Specify images from Media Library.', 'lerp'),
-            'group' => esc_html__('General', 'lerp'),
+            'group' => esc_html__('基本', 'lerp'),
         ),
         array(
             "type" => 'checkbox',
@@ -2052,7 +2052,7 @@ vc_map(array(
             "value" => Array(
                 esc_html__("Yes, please", 'lerp') => 'yes'
             ),
-            'group' => esc_html__('General', 'lerp'),
+            'group' => esc_html__('基本', 'lerp'),
         ),
         array(
             "type" => 'dropdown',
@@ -6299,14 +6299,14 @@ vc_map(array(
             'admin_label' => true,
             'value' => esc_html__('This is a custom heading element.', 'lerp'),
             //'description' => esc_html__('Enter your content. If you are using non-latin characters be sure to activate them under Settings/Visual Composer/General Settings.', 'lerp') ,
-            'group' => esc_html__('General', 'lerp')
+            'group' => esc_html__('基本', 'lerp')
         ),
         array(
             "type" => 'checkbox',
             "heading" => esc_html__("Automatic heading text", 'lerp'),
             "param_name" => "auto_text",
             "description" => esc_html__("Activate this to pull automatic text content when used as heading for categories.", 'lerp'),
-            'group' => esc_html__('General', 'lerp'),
+            'group' => esc_html__('基本', 'lerp'),
             "value" => Array(
                 '' => 'yes'
             ),
@@ -6318,7 +6318,7 @@ vc_map(array(
             "description" => esc_html__("Specify element tag.", 'lerp'),
             "value" => $heading_semantic,
             'std' => 'h2',
-            'group' => esc_html__('General', 'lerp')
+            'group' => esc_html__('基本', 'lerp')
         ),
         array(
             "type" => 'dropdown',
@@ -6327,7 +6327,7 @@ vc_map(array(
             "description" => esc_html__("Specify text size.", 'lerp'),
             'std' => 'h2',
             "value" => $heading_size,
-            'group' => esc_html__('General', 'lerp')
+            'group' => esc_html__('基本', 'lerp')
         ),
         array(
             "type" => 'dropdown',
@@ -6335,7 +6335,7 @@ vc_map(array(
             "param_name" => "text_height",
             "description" => esc_html__("Specify text line height.", 'lerp'),
             "value" => $heading_height,
-            'group' => esc_html__('General', 'lerp')
+            'group' => esc_html__('基本', 'lerp')
         ),
         array(
             "type" => 'dropdown',
@@ -6343,7 +6343,7 @@ vc_map(array(
             "param_name" => "text_space",
             "description" => esc_html__("Specify letter spacing.", 'lerp'),
             "value" => $heading_space,
-            'group' => esc_html__('General', 'lerp')
+            'group' => esc_html__('基本', 'lerp')
         ),
         array(
             "type" => 'dropdown',
@@ -6352,7 +6352,7 @@ vc_map(array(
             "description" => esc_html__("Specify text font family.", 'lerp'),
             "value" => $heading_font,
             'std' => '',
-            "group" => esc_html__("General", 'lerp'),
+            "group" => esc_html__("基本", 'lerp'),
         ),
         array(
             "type" => 'dropdown',
@@ -6361,7 +6361,7 @@ vc_map(array(
             "description" => esc_html__("Specify text weight.", 'lerp'),
             "value" => $heading_weight,
             'std' => '',
-            'group' => esc_html__('General', 'lerp')
+            'group' => esc_html__('基本', 'lerp')
         ),
         array(
             "type" => 'dropdown',
@@ -6374,7 +6374,7 @@ vc_map(array(
                 esc_html__('Lowercase', 'lerp') => 'lowercase',
                 esc_html__('Capitalize', 'lerp') => 'capitalize'
             ),
-            "group" => esc_html__("General", 'lerp')
+            "group" => esc_html__("基本", 'lerp')
         ),
         array(
             "type" => 'checkbox',
@@ -6384,7 +6384,7 @@ vc_map(array(
             "value" => Array(
                 '' => 'yes'
             ),
-            "group" => esc_html__("General", 'lerp')
+            "group" => esc_html__("基本", 'lerp')
         ),
         array(
             "type" => "dropdown",
@@ -6392,7 +6392,7 @@ vc_map(array(
             "param_name" => "text_color",
             "description" => esc_html__("Specify text color.", 'lerp'),
             "value" => $lerp_colors,
-            'group' => esc_html__('General', 'lerp')
+            'group' => esc_html__('基本', 'lerp')
         ),
         array(
             "type" => "dropdown",
@@ -6405,7 +6405,7 @@ vc_map(array(
                 esc_html__('Under subheading', 'lerp') => 'under',
                 esc_html__('Over heading', 'lerp') => 'over'
             ),
-            "group" => esc_html__("General", 'lerp')
+            "group" => esc_html__("基本", 'lerp')
         ),
         array(
             "type" => 'checkbox',
@@ -6419,7 +6419,7 @@ vc_map(array(
                 'element' => 'separator',
                 'not_empty' => true,
             ),
-            "group" => esc_html__("General", 'lerp')
+            "group" => esc_html__("基本", 'lerp')
         ),
         array(
             "type" => 'checkbox',
@@ -6433,14 +6433,14 @@ vc_map(array(
                 'element' => 'separator',
                 'not_empty' => true,
             ),
-            "group" => esc_html__("General", 'lerp')
+            "group" => esc_html__("基本", 'lerp')
         ),
         array(
             'type' => 'textarea',
             'heading' => esc_html__('Subheading', 'lerp'),
             "param_name" => "subheading",
             "description" => esc_html__("Add a subheading text.", 'lerp'),
-            "group" => esc_html__("General", 'lerp'),
+            "group" => esc_html__("基本", 'lerp'),
             'admin_label' => true,
         ),
         array(
@@ -6451,7 +6451,7 @@ vc_map(array(
             "value" => Array(
                 '' => 'yes'
             ),
-            "group" => esc_html__("General", 'lerp')
+            "group" => esc_html__("基本", 'lerp')
         ),
         array(
             "type" => 'checkbox',
@@ -6461,7 +6461,7 @@ vc_map(array(
             "value" => Array(
                 esc_html__("Yes, please", 'lerp') => 'yes'
             ),
-            "group" => esc_html__("General", 'lerp'),
+            "group" => esc_html__("基本", 'lerp'),
         ),
         array(
             "type" => 'checkbox',

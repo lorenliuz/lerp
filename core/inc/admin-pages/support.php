@@ -60,7 +60,7 @@ if ( !class_exists('Lerp_Menu_Support_Page') ) :
                 array(
                     'id' => 'pages-posts',
                     'title' => esc_html__('页面 & 文章', 'lerp'),
-                    'description' => esc_html__('Discover how to create, customise and manage pages, blog posts and portfolio items.', 'lerp'),
+                    'description' => esc_html__('Discover how to create, customise and manage pages and blog posts.', 'lerp'),
                     'url' => '//support.undsgn.com/hc/en-us/articles/214002625',
                 ),
                 array(
